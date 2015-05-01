@@ -36,7 +36,7 @@ namespace VoltageDropCalculatorApplication
         List<int> mfNodeList = new List<int>(); //intlist that stores the nodes in the main feeder
 
 
-        Dictionary<int, string> mfNodeDictionary = new Dictionary<int, string>(); //Dictionarylist that stores the node number and name
+        //Dictionary<int, string> mfNodeDictionary = new Dictionary<int, string>(); //Dictionarylist that stores the node number and name
 
         DataTable tempTable = new DataTable();//temporary table that stores the node data to put in the main feederdataset
         DataSet libraryDataSet = new DataSet();
@@ -56,7 +56,7 @@ namespace VoltageDropCalculatorApplication
             cableSelectCombo.DataSource = cableString;
 
             mfNodeList.Add(1); //adds the first node to the main feeder node list            
-            mfNodeDictionary.Add(1, "node1");
+            //mfNodeDictionary.Add(1, "node1");
             loadCount = 0;
             genCount = 0;
 
@@ -416,7 +416,7 @@ namespace VoltageDropCalculatorApplication
             }
 
             mfNodeList.Clear();//Clears the main feeder node list
-            mfNodeDictionary.Clear();
+            //mfNodeDictionary.Clear();
             
             if (selectEndNodeCombo.Text != "")
             {
@@ -696,7 +696,7 @@ namespace VoltageDropCalculatorApplication
             if (mfNodeList.Count == 0)
             {
                 mfNodeList.Add(lastNode); //adds the end node to the list
-                mfNodeDictionary.Add(lastNode, "node" + lastNode.ToString());
+               // mfNodeDictionary.Add(lastNode, "node" + lastNode.ToString());
             }
 
             if (lastNode != 1)
@@ -801,7 +801,7 @@ namespace VoltageDropCalculatorApplication
         private void selectEndNodeCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             mfNodeList.Clear();//Clears the main feeder node list
-            mfNodeDictionary.Clear();
+            //mfNodeDictionary.Clear();
             drawArea.Clear(Color.White);
             getMainFeederNodes(Convert.ToInt32(selectEndNodeCombo.Text), mfNodeList);
             drawPoints(mfNodeList);
