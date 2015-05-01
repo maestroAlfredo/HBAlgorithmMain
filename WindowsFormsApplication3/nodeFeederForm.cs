@@ -828,31 +828,8 @@ namespace VoltageDropCalculatorApplication
             {
                 e.Handled = true;
             }
-        }
-
-        private void rpLabel_TextChanged(object sender, EventArgs e)
-        {
-            //if (nodeDataSet.Tables.Contains("node" + nodeNumCombo.Text))
-            //{
-            //    for (int i = 0; i < nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows.Count; i++)
-            //    {
-            //        nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows[i][11] = calculateRp(rpLabel.Text, calculateLengths(lengthNumericUpDown.Value, 0), calculateLengths(lengthNumericUpDown.Value, i), i);
-            //    }
-
-            //}
-        }
-
-        private void rnLabel_TextChanged(object sender, EventArgs e)
-        {
-            //if (nodeDataSet.Tables.Contains("node" + nodeNumCombo.Text))
-            //{
-            //    for (int i = 0; i < nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows.Count; i++)
-            //    {
-            //        nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows[i][12] = calculateRn(rnLabel.Text, calculateLengths(lengthNumericUpDown.Value, 0), calculateLengths(lengthNumericUpDown.Value, i), i); ;
-            //    }
-            //}
-
-        }
+        }            
+        
 
         private void nodeNameTextBox_Validating(object sender, CancelEventArgs e)
         {
