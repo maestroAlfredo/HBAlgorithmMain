@@ -780,8 +780,7 @@ namespace VoltageDropCalculatorApplication
 
         private void selectEndNodeCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            mfNodeList.Clear();//Clears the main feeder node list
-            //mfNodeDictionary.Clear();
+            mfNodeList.Clear();//Clears the main feeder node list           
             drawArea.Clear(Color.White);
             getMainFeederNodes(Convert.ToInt32(selectEndNodeCombo.Text), mfNodeList);
             drawPoints(mfNodeList);
