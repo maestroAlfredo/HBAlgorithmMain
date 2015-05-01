@@ -126,9 +126,8 @@ namespace VoltageDropCalculatorApplication
                 drawArea.Clear(Color.White);
                 drawArea.FillEllipse(sb, 20, drawingPanel.Height / 2, 10, 10);
                 drawPoints(mfNodeList);
-            }
-                        
-            //nodeDataSet.WriteXml(projectName);
+            }                        
+            
             nodeDataGridView.DataSource = nodeDataSet.Tables["node"+nodeNumCombo.Text];
             nodeDataGridView.Columns[0].Visible = false;
             nodeDataGridView.Columns[9].Visible = false;
@@ -290,6 +289,7 @@ namespace VoltageDropCalculatorApplication
                 }
             }
 
+            //if all the tables have valid data proceed
             if (finished)
             {
                 tempNodeDataSet.Tables.Clear();
