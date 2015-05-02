@@ -28,15 +28,18 @@ namespace VoltageDropCalculatorApplication
 
         DataSet nodeVecDataSet = new DataSet();
 
-        public voltageCalculationForm(string projectName, double risk, int loadCount, int genCount, List<int> mfNodeList)
+        public voltageCalculationForm(string projectName, double risk, double temperature, double sourceVoltage, int loadCount, int genCount, List<int> mfNodeList)
         {
-            InitializeComponent();
+            InitializeComponent();           
             nodeVecDataSet.ReadXml(projectName);
             nodeNum = nodeVecDataSet.Tables[nodeVecDataSet.Tables.Count - 1].Rows.Count / (loadCount + genCount);
             projName = projectName;
-            Vs = 230;
-            t_old = 40.0;
+            Vs = sourceVoltage;
+            t_old = temperature;
             p = risk;
+            numericUpDownRisk.Value = (decimal)p;
+            numericUpDownVoltage.Value = (decimal)Vs;
+            temperatureTextBox.Text = t_old.ToString();
             errorProvider1 = new ErrorProvider();
             voltageProfileArray = new double[nodeNum + 1, 6];
             //customerArray = new int[3];

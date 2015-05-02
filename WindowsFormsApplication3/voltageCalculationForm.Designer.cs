@@ -44,7 +44,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -53,7 +52,6 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.voltageProfileChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.cancelButton = new System.Windows.Forms.Button();
             this.numericUpDownRisk = new System.Windows.Forms.NumericUpDown();
             this.temperatureTextBox = new System.Windows.Forms.TextBox();
             this.bluePhaseVoltageText = new System.Windows.Forms.RichTextBox();
@@ -190,15 +188,13 @@
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.BackColor = System.Drawing.Color.SteelBlue;
-            this.tableLayoutPanel4.ColumnCount = 7;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.75343F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.24657F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 105F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 152F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 67F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
-            this.tableLayoutPanel4.Controls.Add(this.cancelButton, 6, 1);
+            this.tableLayoutPanel4.ColumnCount = 6;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.35714F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.45238F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.02381F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.38095F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.26191F));
             this.tableLayoutPanel4.Controls.Add(this.numericUpDownRisk, 5, 1);
             this.tableLayoutPanel4.Controls.Add(this.temperatureTextBox, 4, 1);
             this.tableLayoutPanel4.Controls.Add(this.bluePhaseVoltageText, 2, 1);
@@ -215,29 +211,17 @@
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 620);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(840, 122);
             this.tableLayoutPanel4.TabIndex = 1;
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelButton.Location = new System.Drawing.Point(714, 78);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(122, 25);
-            this.cancelButton.TabIndex = 0;
-            this.cancelButton.Text = "Back To Feeder Design";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // numericUpDownRisk
             // 
             this.numericUpDownRisk.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.numericUpDownRisk.DecimalPlaces = 1;
             this.numericUpDownRisk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownRisk.Location = new System.Drawing.Point(646, 78);
+            this.numericUpDownRisk.Location = new System.Drawing.Point(715, 78);
             this.numericUpDownRisk.Name = "numericUpDownRisk";
             this.numericUpDownRisk.ReadOnly = true;
             this.numericUpDownRisk.Size = new System.Drawing.Size(61, 26);
@@ -253,11 +237,10 @@
             // 
             this.temperatureTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.temperatureTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.temperatureTextBox.Location = new System.Drawing.Point(529, 78);
+            this.temperatureTextBox.Location = new System.Drawing.Point(539, 78);
             this.temperatureTextBox.Name = "temperatureTextBox";
             this.temperatureTextBox.Size = new System.Drawing.Size(80, 26);
-            this.temperatureTextBox.TabIndex = 5;
-            this.temperatureTextBox.Text = "40";
+            this.temperatureTextBox.TabIndex = 5;            
             this.temperatureTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.temperatureTextBox_KeyPress);
             this.temperatureTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.temperatureTextBox_Validating);
             this.temperatureTextBox.Validated += new System.EventHandler(this.temperatureTextBox_Validated);
@@ -267,7 +250,7 @@
             this.bluePhaseVoltageText.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.bluePhaseVoltageText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bluePhaseVoltageText.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.bluePhaseVoltageText.Location = new System.Drawing.Point(251, 78);
+            this.bluePhaseVoltageText.Location = new System.Drawing.Point(262, 78);
             this.bluePhaseVoltageText.Name = "bluePhaseVoltageText";
             this.bluePhaseVoltageText.Size = new System.Drawing.Size(80, 25);
             this.bluePhaseVoltageText.TabIndex = 1;
@@ -283,7 +266,7 @@
             0,
             0,
             0});
-            this.numericUpDownVoltage.Location = new System.Drawing.Point(380, 78);
+            this.numericUpDownVoltage.Location = new System.Drawing.Point(396, 78);
             this.numericUpDownVoltage.Maximum = new decimal(new int[] {
             500,
             0,
@@ -310,7 +293,7 @@
             this.whitePhaseVoltageText.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.whitePhaseVoltageText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.whitePhaseVoltageText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.whitePhaseVoltageText.Location = new System.Drawing.Point(128, 78);
+            this.whitePhaseVoltageText.Location = new System.Drawing.Point(144, 78);
             this.whitePhaseVoltageText.Name = "whitePhaseVoltageText";
             this.whitePhaseVoltageText.Size = new System.Drawing.Size(80, 25);
             this.whitePhaseVoltageText.TabIndex = 1;
@@ -322,7 +305,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(15, 14);
+            this.label1.Location = new System.Drawing.Point(46, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 32);
             this.label1.TabIndex = 0;
@@ -334,7 +317,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(140, 12);
+            this.label2.Location = new System.Drawing.Point(141, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(96, 36);
             this.label2.TabIndex = 0;
@@ -346,7 +329,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(254, 12);
+            this.label3.Location = new System.Drawing.Point(275, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(87, 36);
             this.label3.TabIndex = 0;
@@ -358,7 +341,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(363, 21);
+            this.label4.Location = new System.Drawing.Point(374, 21);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(130, 18);
             this.label4.TabIndex = 2;
@@ -370,7 +353,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(519, 21);
+            this.label5.Location = new System.Drawing.Point(528, 21);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(121, 18);
             this.label5.TabIndex = 3;
@@ -382,9 +365,9 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(665, 12);
+            this.label6.Location = new System.Drawing.Point(774, 21);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(42, 36);
+            this.label6.Size = new System.Drawing.Size(63, 18);
             this.label6.TabIndex = 4;
             this.label6.Text = "Risk [%]";
             // 
@@ -393,7 +376,7 @@
             this.redPhaseVoltageText.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.redPhaseVoltageText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.redPhaseVoltageText.ForeColor = System.Drawing.Color.Red;
-            this.redPhaseVoltageText.Location = new System.Drawing.Point(8, 78);
+            this.redPhaseVoltageText.Location = new System.Drawing.Point(24, 78);
             this.redPhaseVoltageText.Name = "redPhaseVoltageText";
             this.redPhaseVoltageText.Size = new System.Drawing.Size(80, 25);
             this.redPhaseVoltageText.TabIndex = 1;
@@ -484,29 +467,21 @@
             this.nodeSummaryDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.nodeSummaryDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.nodeSummaryDataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.nodeSummaryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.SteelBlue;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.nodeSummaryDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.nodeSummaryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.nodeSummaryDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            this.nodeSummaryDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.nodeSummaryDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.nodeSummaryDataGridView.Location = new System.Drawing.Point(3, 312);
             this.nodeSummaryDataGridView.Name = "nodeSummaryDataGridView";
             this.nodeSummaryDataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nodeSummaryDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nodeSummaryDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.nodeSummaryDataGridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nodeSummaryDataGridView.Size = new System.Drawing.Size(482, 196);
             this.nodeSummaryDataGridView.TabIndex = 1;
@@ -586,7 +561,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox temperatureTextBox;
-        private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.DataVisualization.Charting.Chart voltageProfileChart;
         private System.Windows.Forms.NumericUpDown numericUpDownVoltage;
         private System.Windows.Forms.NumericUpDown numericUpDownRisk;

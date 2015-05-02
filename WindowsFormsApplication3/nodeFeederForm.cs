@@ -18,6 +18,7 @@ namespace VoltageDropCalculatorApplication
         double t2;
         double rT2;
         double k1;
+        double Vs;
         Graphics drawArea;
         int k; //k is the number of nodes in the main feeder
         ErrorProvider errorProvider1 = new ErrorProvider();
@@ -62,6 +63,7 @@ namespace VoltageDropCalculatorApplication
 
             p = 10;
             t2 = 40.0;
+            Vs = 230.0;
 
         }
 
@@ -178,8 +180,8 @@ namespace VoltageDropCalculatorApplication
             selectEndNodeCombo.DataSource = nodeNumList;
             nodeNumList.Add(1);
             nodeNameList.Add(nodeNameTextBox.Text);
-            activeRadio.Enabled = false;
-            passiveRadio.Enabled = false;
+            //activeRadio.Enabled = false;
+            //passiveRadio.Enabled = false;
             nodeNumCombo.Enabled = true;
             nodeNumCombo.DataSource = nodeNumList;
             nodeNameCombo.DataSource = nodeNameList;
@@ -216,7 +218,8 @@ namespace VoltageDropCalculatorApplication
                 genCount = resultGens.Rows.Count;
             }
 
-            if (genCount != 0) p = 90;
+            if (activeRadio.Checked == true) p = 90.0;
+
             foreach (DataRow dr in resultGens.Rows)
             {
                 if (table.AsEnumerable().Any()) resultLoads.Rows.Add(dr.ItemArray);
@@ -329,7 +332,7 @@ namespace VoltageDropCalculatorApplication
 
                 tempNodeDataSet.WriteXml(projectName);
 
-                voltageCalculationForm frm = new voltageCalculationForm(projectName, p, loadCount, genCount, mfNodeList);
+                voltageCalculationForm frm = new voltageCalculationForm(projectName, p, t2, Vs,  loadCount, genCount, mfNodeList);
                 frm.ShowDialog();
             }
             else
@@ -1091,6 +1094,88 @@ namespace VoltageDropCalculatorApplication
             //    .FindIndex(col => col == "G"); // returns 2
 
             ////if (dt.Rows[e.RowIndex][e.ColumnIndex].ToString() != nodeVecDataSet.Tables[0].Rows[e.RowIndex][e.ColumnIndex].ToString())
+        }
+
+        private void passiveRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (passiveRadio.Checked == true) p = 10.0;
+            else p = 90.0;
+        }
+
+        private void activeRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (activeRadio.Checked == true) p = 90.0;
+            else p = 10.0;
+        }
+
+        private void operatingTemperatureText_Validating(object sender, CancelEventArgs e)
+        {
+            if (operatingTemperatureText.Text == "")
+            {
+                e.Cancel = true;
+                this.errorProvider1.SetError(operatingTemperatureText, "temperature cannot be null");
+            }            
+        }
+
+        private void operatingTemperatureText_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(operatingTemperatureText, "");
+            double t_new = Convert.ToDouble(operatingTemperatureText.Text);
+            DataSet ds = new DataSet();
+            ds.ReadXml("Libraries.xml");
+
+
+
+            if(nodeDataSet.Tables.Count!=0)
+            {
+                for (int i = 0; i < nodeCountInt; i++)
+                {
+                    for (int rows = 0; rows < nodeDataSet.Tables[i].Rows.Count; rows++)
+                    {
+                        string cable = nodeDataSet.Tables[i].Rows[rows][10].ToString();
+                        DataRow dr = ds.Tables[2].AsEnumerable().SingleOrDefault(r => r.Field<string>("Code") == cable);
+                        double T = Convert.ToDouble(dr["T"]);
+
+                        nodeDataSet.Tables[i].Rows[rows][11] = Convert.ToDouble(nodeDataSet.Tables[i].Rows[rows][11]) * (T + t_new) / (T + t2);
+                        nodeDataSet.Tables[i].Rows[rows][12] = Convert.ToDouble(nodeDataSet.Tables[i].Rows[rows][12]) * (T + t_new) / (T + t2);
+                    }
+                }
+            }
+            
+
+            t2 = t_new;
+        }
+
+        private void operatingTemperatureText_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void sourceVoltageTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            if (sourceVoltageTextBox.Text == "")
+            {
+                e.Cancel = true;
+                this.errorProvider1.SetError(sourceVoltageTextBox, "voltage cannot be null");
+            }  
+        }
+
+        private void sourceVoltageTextBox_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(sourceVoltageTextBox, "");
+            Vs = Convert.ToDouble(sourceVoltageTextBox.Text);
+
+        }
+
+        private void sourceVoltageTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
 
