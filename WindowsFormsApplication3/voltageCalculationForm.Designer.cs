@@ -36,17 +36,9 @@
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(voltageCalculationForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -65,12 +57,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.redPhaseVoltageText = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.customerChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.nodeSummaryDataGridView = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -81,9 +71,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRisk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVoltage)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.customerChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nodeSummaryDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -240,7 +228,7 @@
             this.temperatureTextBox.Location = new System.Drawing.Point(539, 78);
             this.temperatureTextBox.Name = "temperatureTextBox";
             this.temperatureTextBox.Size = new System.Drawing.Size(80, 26);
-            this.temperatureTextBox.TabIndex = 5;            
+            this.temperatureTextBox.TabIndex = 5;
             this.temperatureTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.temperatureTextBox_KeyPress);
             this.temperatureTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.temperatureTextBox_Validating);
             this.temperatureTextBox.Validated += new System.EventHandler(this.temperatureTextBox_Validated);
@@ -387,12 +375,10 @@
             this.tableLayoutPanel3.BackColor = System.Drawing.Color.SteelBlue;
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.customerChart, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.label7, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.label8, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.nodeSummaryDataGridView, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.label9, 0, 4);
-            this.tableLayoutPanel3.Controls.Add(this.chart1, 0, 5);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -405,30 +391,6 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(488, 745);
             this.tableLayoutPanel3.TabIndex = 1;
-            // 
-            // customerChart
-            // 
-            chartArea2.Name = "ChartArea1";
-            this.customerChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.customerChart.Legends.Add(legend2);
-            this.customerChart.Location = new System.Drawing.Point(3, 31);
-            this.customerChart.Name = "customerChart";
-            series6.ChartArea = "ChartArea1";
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            series7.ChartArea = "ChartArea1";
-            series7.Legend = "Legend1";
-            series7.Name = "Series2";
-            series8.ChartArea = "ChartArea1";
-            series8.Legend = "Legend1";
-            series8.Name = "Series3";
-            this.customerChart.Series.Add(series6);
-            this.customerChart.Series.Add(series7);
-            this.customerChart.Series.Add(series8);
-            this.customerChart.Size = new System.Drawing.Size(482, 237);
-            this.customerChart.TabIndex = 3;
-            this.customerChart.Text = "chart1";
             // 
             // label7
             // 
@@ -501,22 +463,6 @@
             this.label9.Text = "Load and Generator Distribution";
             this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
-            // chart1
-            // 
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart1.Legends.Add(legend3);
-            this.chart1.Location = new System.Drawing.Point(3, 550);
-            this.chart1.Name = "chart1";
-            series9.ChartArea = "ChartArea1";
-            series9.Legend = "Legend1";
-            series9.Name = "Series1";
-            this.chart1.Series.Add(series9);
-            this.chart1.Size = new System.Drawing.Size(482, 192);
-            this.chart1.TabIndex = 4;
-            this.chart1.Text = "chart1";
-            // 
             // voltageCalculationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -541,9 +487,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVoltage)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.customerChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nodeSummaryDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -570,8 +514,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.DataVisualization.Charting.Chart customerChart;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
