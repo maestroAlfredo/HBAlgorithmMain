@@ -227,7 +227,7 @@ namespace VoltageDropCalculatorApplication
                         voltageVector[rows, 8] = voltageVector[z, 8] + (Math.Sqrt(3.0) / 2.0) * ki * Rp * c * (mb * 1.0 - mc * 1.0);
                         double Vi_max = voltageVector[rows, 8];
                         voltageVector[rows, 9] = Math.Sqrt(Math.Pow(Vs - Vr_max, 2) + Math.Pow(Vi_max, 2));
-                        if ((genCountInt == 0) && (Vr_min > Vs)) voltageVector[rows, 10] = -1.0 * Math.Sqrt(((Math.Pow((Vs - Vr_min), 2)) + (Math.Pow(Vi_min, 2))));
+                        if ( (Vr_min > Vs)) voltageVector[rows, 10] = -1.0 * Math.Sqrt(((Math.Pow((Vs - Vr_min), 2)) + (Math.Pow(Vi_min, 2))));
                         else
                         {
                             voltageVector[rows, 10] = Math.Sqrt(((Math.Pow((Vs - Vr_min), 2)) + (Math.Pow(Vi_min, 2))));
@@ -345,7 +345,7 @@ namespace VoltageDropCalculatorApplication
                     voltageVector[rows, 8] = voltageVector[z, 8] + (Math.Sqrt(3.0) / 2.0) * ki * Rp * c * (mb * 0.0 - mc * 0.0);
                     double Vi_max = voltageVector[rows, 8];
                     voltageVector[rows, 9] = Math.Sqrt(Math.Pow(Vs - Vr_max, 2) + Math.Pow(Vi_max, 2));
-                    if ((genCountInt == 0) && (Vr_min > Vs)) voltageVector[rows, 10] = -1.0 * Math.Sqrt(((Math.Pow((Vs - Vr_min), 2)) + (Math.Pow(Vi_min, 2))));
+                    if ( (Vr_min > Vs)) voltageVector[rows, 10] = -1.0 * Math.Sqrt(((Math.Pow((Vs - Vr_min), 2)) + (Math.Pow(Vi_min, 2))));
                     else
                     {
                         voltageVector[rows, 10] = Math.Sqrt(((Math.Pow((Vs - Vr_min), 2)) + (Math.Pow(Vi_min, 2))));
@@ -617,12 +617,12 @@ namespace VoltageDropCalculatorApplication
             voltageProfileChart.Series["Series5"].LegendText = "Upper Limit";
             voltageProfileChart.Series["Series5"].XValueMember = "Distance";
 
-            customerChart.Series["Series1"].YValueMembers = "RedCustomer";
-            customerChart.Series["Series2"].YValueMembers = "WhiteCustomer";
-            customerChart.Series["Series3"].YValueMembers = "BlueCustomer";
+            //customerChart.Series["Series1"].YValueMembers = "RedCustomer";
+            //customerChart.Series["Series2"].YValueMembers = "WhiteCustomer";
+            //customerChart.Series["Series3"].YValueMembers = "BlueCustomer";
 
-            customerChart.DataSource = customerChartTable;
-            customerChart.DataBind();
+            //customerChart.DataSource = customerChartTable;
+            //customerChart.DataBind();
 
             voltageProfileChart.DataSource = feederProfileDataTable;
             voltageProfileChart.ChartAreas[0].AxisY.Minimum = 180;
