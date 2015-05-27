@@ -51,8 +51,8 @@ namespace VoltageDropCalculatorApplication
             InitializeComponent();
             sb = new SolidBrush(Color.SteelBlue);
 
-            libraryDataSet.ReadXml("Libraries.xml"); //read the  library xml     
-            List<string> cableString = libraryDataSet.Tables["Conductor Table"].AsEnumerable().Select(x => x[0].ToString()).ToList();
+            libraryDataSet.ReadXml("Libraries.xml"); //read the  library xml  
+            List<string> cableString = libraryDataSet.Tables["Conductors"].AsEnumerable().Select(x => x[0].ToString()).ToList();
             cableSelectCombo.DataSource = cableString;
 
             mfNodeList.Add(1); //adds the first node to the main feeder node list            
@@ -203,7 +203,7 @@ namespace VoltageDropCalculatorApplication
 
             //querires the datatables for the loads and gens where the user has selected
             DataTable resultLoads = new DataTable();
-            var table = libraryDataSet.Tables["Load Types"].Select("Selected = true");
+            var table = libraryDataSet.Tables["Loads"].Select("Selected = true");
             if (table.AsEnumerable().Any())
             {
                 resultLoads = table.CopyToDataTable();
@@ -211,7 +211,7 @@ namespace VoltageDropCalculatorApplication
             }
 
             DataTable resultGens = new DataTable();
-            var table1 = libraryDataSet.Tables["Gen Types"].Select("Selected = true");
+            var table1 = libraryDataSet.Tables["Generators"].Select("Selected = true");
             if (table1.AsEnumerable().Any())
             {
                 resultGens = table1.CopyToDataTable();
@@ -343,12 +343,12 @@ namespace VoltageDropCalculatorApplication
         private void cableSelectCombo_TextChanged(object sender, EventArgs e)
         {
             //goes through the conductor library first column to see if the combobox text matches the library conductor column text
-            for (int i = 0; i < libraryDataSet.Tables["Conductor Table"].Rows.Count; i++)
+            for (int i = 0; i < libraryDataSet.Tables["Conductors"].Rows.Count; i++)
             {
-                if (Convert.ToString(libraryDataSet.Tables["Conductor Table"].Rows[i][0]) == cableSelectCombo.Text)
+                if (Convert.ToString(libraryDataSet.Tables["Conductors"].Rows[i][0]) == cableSelectCombo.Text)
                 {
-                    rT2 = Convert.ToDouble(libraryDataSet.Tables["Conductor Table"].Rows[i][1]) * (Convert.ToDouble(libraryDataSet.Tables["Conductor Table"].Rows[i][2]) + t2) / (Convert.ToDouble(libraryDataSet.Tables["Conductor Table"].Rows[i][2]) + 20.0);
-                    k1 = Convert.ToDouble(libraryDataSet.Tables["Conductor Table"].Rows[i][3]);
+                    rT2 = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][1]) * (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][2]) + t2) / (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][2]) + 20.0);
+                    k1 = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][3]);
                     break;    
 
                 }
@@ -431,7 +431,7 @@ namespace VoltageDropCalculatorApplication
 
             //querires the datatables for the loads and gens where the user has selected
             DataTable resultLoads = new DataTable();
-            var table = libraryDataSet.Tables["Load Types"].Select("Selected = true");
+            var table = libraryDataSet.Tables["Loads"].Select("Selected = true");
             if (table.AsEnumerable().Any())
             {
                 resultLoads = table.CopyToDataTable();
@@ -439,7 +439,7 @@ namespace VoltageDropCalculatorApplication
             }
 
             DataTable resultGens = new DataTable();
-            var table1 = libraryDataSet.Tables["Gen Types"].Select("Selected = true");
+            var table1 = libraryDataSet.Tables["Generators"].Select("Selected = true");
             if (table1.AsEnumerable().Any())
             {
                 resultGens = table1.CopyToDataTable();

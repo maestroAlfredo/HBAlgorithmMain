@@ -47,9 +47,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.newConductorLibraryButton = new System.Windows.Forms.Button();
-            this.newLoadLibraryButton = new System.Windows.Forms.Button();
             this.editLibraryButton = new System.Windows.Forms.Button();
-            this.newGeneratorLibraryButton = new System.Windows.Forms.Button();
             this.toolTipEdit = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -254,9 +252,7 @@
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Controls.Add(this.newConductorLibraryButton, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.newLoadLibraryButton, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.editLibraryButton, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.newGeneratorLibraryButton, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.editLibraryButton, 0, 2);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(329, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 4;
@@ -271,33 +267,16 @@
             // 
             this.newConductorLibraryButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.newConductorLibraryButton.BackColor = System.Drawing.Color.Transparent;
-            this.newConductorLibraryButton.Enabled = false;
             this.newConductorLibraryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newConductorLibraryButton.ForeColor = System.Drawing.Color.SteelBlue;
             this.newConductorLibraryButton.Location = new System.Drawing.Point(20, 200);
             this.newConductorLibraryButton.Name = "newConductorLibraryButton";
             this.newConductorLibraryButton.Size = new System.Drawing.Size(280, 64);
             this.newConductorLibraryButton.TabIndex = 0;
-            this.newConductorLibraryButton.Text = "New Conductor Library";
+            this.newConductorLibraryButton.Text = "Create New Libraries";
             this.newConductorLibraryButton.UseVisualStyleBackColor = false;
             this.newConductorLibraryButton.Click += new System.EventHandler(this.newConductorLibraryButton_Click);
             this.newConductorLibraryButton.MouseHover += new System.EventHandler(this.newConductorLibraryButton_MouseHover);
-            // 
-            // newLoadLibraryButton
-            // 
-            this.newLoadLibraryButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.newLoadLibraryButton.BackColor = System.Drawing.Color.Transparent;
-            this.newLoadLibraryButton.Enabled = false;
-            this.newLoadLibraryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newLoadLibraryButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.newLoadLibraryButton.Location = new System.Drawing.Point(20, 355);
-            this.newLoadLibraryButton.Name = "newLoadLibraryButton";
-            this.newLoadLibraryButton.Size = new System.Drawing.Size(280, 64);
-            this.newLoadLibraryButton.TabIndex = 0;
-            this.newLoadLibraryButton.Text = "New Load Library";
-            this.newLoadLibraryButton.UseVisualStyleBackColor = false;
-            this.newLoadLibraryButton.Click += new System.EventHandler(this.button6_Click);
-            this.newLoadLibraryButton.MouseHover += new System.EventHandler(this.newLoadLibraryButton_MouseHover);
             // 
             // editLibraryButton
             // 
@@ -305,7 +284,7 @@
             this.editLibraryButton.BackColor = System.Drawing.Color.Transparent;
             this.editLibraryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editLibraryButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.editLibraryButton.Location = new System.Drawing.Point(20, 46);
+            this.editLibraryButton.Location = new System.Drawing.Point(20, 355);
             this.editLibraryButton.Name = "editLibraryButton";
             this.editLibraryButton.Size = new System.Drawing.Size(280, 64);
             this.editLibraryButton.TabIndex = 0;
@@ -313,22 +292,6 @@
             this.editLibraryButton.UseVisualStyleBackColor = false;
             this.editLibraryButton.Click += new System.EventHandler(this.editLibraryButton_Click);
             this.editLibraryButton.MouseHover += new System.EventHandler(this.editLibraryButton_MouseHover);
-            // 
-            // newGeneratorLibraryButton
-            // 
-            this.newGeneratorLibraryButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.newGeneratorLibraryButton.BackColor = System.Drawing.Color.Transparent;
-            this.newGeneratorLibraryButton.Enabled = false;
-            this.newGeneratorLibraryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newGeneratorLibraryButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.newGeneratorLibraryButton.Location = new System.Drawing.Point(20, 512);
-            this.newGeneratorLibraryButton.Name = "newGeneratorLibraryButton";
-            this.newGeneratorLibraryButton.Size = new System.Drawing.Size(280, 64);
-            this.newGeneratorLibraryButton.TabIndex = 0;
-            this.newGeneratorLibraryButton.Text = "New Generator Library";
-            this.newGeneratorLibraryButton.UseVisualStyleBackColor = false;
-            this.newGeneratorLibraryButton.Click += new System.EventHandler(this.button7_Click);
-            this.newGeneratorLibraryButton.MouseHover += new System.EventHandler(this.newGeneratorLibraryButton_MouseHover);
             // 
             // mainForm
             // 
@@ -376,8 +339,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button newConductorLibraryButton;
-        private System.Windows.Forms.Button newLoadLibraryButton;
-        private System.Windows.Forms.Button newGeneratorLibraryButton;
         private System.Windows.Forms.Button editLibraryButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.PictureBox pictureBox1;

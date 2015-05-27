@@ -33,21 +33,28 @@ namespace VoltageDropCalculatorApplication
             InitializeComponent();
             loadTypeCombo.Text = selectedloadtype; //constructor to load library form depending on whether load or generator is selected
             loadTypeCombo.Enabled = enabled;
-
             libraryDataSet.ReadXml("Libraries.xml");
+            List<string> LoadType = new List<string>();
+            foreach (DataTable dt in libraryDataSet.Tables)
+            {
+                LoadType.Add(dt.TableName);
+            }
+            loadTypeCombo.DataSource = LoadType;
+
+            
 
             if (loadTypeCombo.Text == "Loads")
             {
-                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Load Types"];
+                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Loads"];
 
             }
             else if (loadTypeCombo.Text == "Generators")
             {
-                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Gen Types"];
+                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Generators"];
             }
             else
             {
-                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Conductor Table"];
+                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Conductors"];
             }
 
             foreach (DataGridViewColumn column in dataGridViewLoadsDGs.Columns)
@@ -77,21 +84,31 @@ namespace VoltageDropCalculatorApplication
         private void loadTypeCombo_TextChanged(object sender, EventArgs e)
         {
             addCableButton.Visible = false;
+            
             //libraryDataSet1.ReadXml("Libraries.xml");
             if (loadTypeCombo.Text == "Loads")
             {
-                
-                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Load Types"];                
+
+                //if (!libraryDataSet.Tables.Contains("Load types"))
+                //{
+                //    string message = "Click \"Reset Libraries\" to continue";
+                //    string caption = "No loads available";
+                //    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                //    DialogResult result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
+                //}
+
+                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Loads"];                
 
             }
+
             else if (loadTypeCombo.Text == "Generators")
             {
-                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Gen Types"]; 
+                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Generators"]; 
             }
             else
             {
                 addCableButton.Visible = true;
-                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Conductor Table"]; 
+                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Conductors"]; 
             }
         }
 
@@ -269,7 +286,7 @@ namespace VoltageDropCalculatorApplication
 
         private void doneLoadDG_Click(object sender, EventArgs e)
         {
-            //DataTable result = libraryDataSet.Tables["Conductor Table"].Select("Selected = true").CopyToDataTable();
+            //DataTable result = libraryDataSet.Tables["Conductors"].Select("Selected = true").CopyToDataTable();
             this.Close();
         }
 
@@ -286,7 +303,7 @@ namespace VoltageDropCalculatorApplication
             {
                 DataTable conductorTable = new DataTable(); //creates a new Datatable object for the loads        
 
-                conductorTable.TableName = "Conductor Table";
+                conductorTable.TableName = "Conductors";
 
                 DataColumn dc1 = new DataColumn("Code", typeof(string)); //dreates the new datacolumn objects;
                 DataColumn dc2 = new DataColumn("R/km@T1", typeof(string));
@@ -317,20 +334,20 @@ namespace VoltageDropCalculatorApplication
                 conductorTable.Rows.Add("70mmCu", 0.268, 241, 1, "70 mm2 Copper", false);
                 conductorTable.Rows.Add("95mmCu", 0.193, 241, 1, "95 mm2 Copper", false);
 
-                if (libraryDataSet.Tables.Contains("Conductor Table")) libraryDataSet.Tables.Remove("Conductor Table");//remove any previously existing table from the dataset
+                if (libraryDataSet.Tables.Contains("Conductors")) libraryDataSet.Tables.Remove("Conductors");//remove any previously existing table from the dataset
 
                 libraryDataSet.Tables.Add(conductorTable);
                 libraryDataSet.WriteXml("Libraries.xml", XmlWriteMode.WriteSchema);
-                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Conductor Table"];
+                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Conductors"];
 
             }
             else if(loadTypeCombo.Text=="Loads")
             {
-                if (libraryDataSet.Tables.Contains("Load Types")) libraryDataSet.Tables.Remove("Load Types");//remove any previously existing table from the dataset
+                if (libraryDataSet.Tables.Contains("Loads")) libraryDataSet.Tables.Remove("Loads");//remove any previously existing table from the dataset
 
                 DataTable dtLoads = new DataTable(); //creates a new Datatable object for the loads
 
-                dtLoads.TableName = "Load Types";
+                dtLoads.TableName = "Loads";
 
                 DataColumn dc1 = new DataColumn("Load", typeof(string)); //dreates the new datacolumn objects;
                 DataColumn dc2 = new DataColumn("alpha", typeof(double));
@@ -358,7 +375,7 @@ namespace VoltageDropCalculatorApplication
 
                 libraryDataSet.Tables.Add(dtLoads);
                 libraryDataSet.WriteXml("Libraries.xml", XmlWriteMode.WriteSchema);
-                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Load Types"];
+                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Loads"];
 
                 
             }
@@ -366,7 +383,7 @@ namespace VoltageDropCalculatorApplication
             {
                 DataTable dtGens = new DataTable(); //creates a new Datatable object for the loads
 
-                dtGens.TableName = "Gen Types";
+                dtGens.TableName = "Generators";
 
                 DataColumn dc1 = new DataColumn("Generator"); //dreates the new datacolumn objects;
                 DataColumn dc2 = new DataColumn("alpha");
@@ -392,17 +409,12 @@ namespace VoltageDropCalculatorApplication
                 }
 
 
-                if (libraryDataSet.Tables.Contains("Gen Types")) libraryDataSet.Tables.Remove("Gen Types");//remove any previously existing table from the dataset
+                if (libraryDataSet.Tables.Contains("Generators")) libraryDataSet.Tables.Remove("Generators");//remove any previously existing table from the dataset
                 libraryDataSet.Tables.Add(dtGens);
                 libraryDataSet.WriteXml("Libraries.xml", XmlWriteMode.WriteSchema);
-                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Gen Types"];
+                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Generators"];
             }
 
-            
-        }
-
-        private void loadTypeCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
         }
 
@@ -420,7 +432,7 @@ namespace VoltageDropCalculatorApplication
 
         private void addCableButton_Click(object sender, EventArgs e)
         {
-            if (!libraryDataSet.Tables.Contains("Conductor Table"))
+            if (!libraryDataSet.Tables.Contains("Conductors"))
             {
                 saveLibraryButton.Enabled = false;
                 return;
@@ -429,7 +441,7 @@ namespace VoltageDropCalculatorApplication
             addCableInt = dataGridViewLoadsDGs.Rows.Count;
             addCableInt++;          
             
-            libraryDataSet.Tables["Conductor Table"].Rows.Add("Cable " + addCableInt.ToString(), 0.0, 0.0, 0.0, "description", false);          
+            libraryDataSet.Tables["Conductors"].Rows.Add("Cable " + addCableInt.ToString(), 0.0, 0.0, 0.0, "description", false);          
             
         }
                

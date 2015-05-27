@@ -617,13 +617,7 @@ namespace VoltageDropCalculatorApplication
             voltageProfileChart.Series["Series5"].LegendText = "Upper Limit";
             voltageProfileChart.Series["Series5"].XValueMember = "Distance";
 
-            customerChart.Series["Series1"].YValueMembers = "RedCustomer";
-            customerChart.Series["Series2"].YValueMembers = "WhiteCustomer";
-            customerChart.Series["Series3"].YValueMembers = "BlueCustomer";
-
-            customerChart.DataSource = customerChartTable;
-            customerChart.DataBind();
-
+            
             voltageProfileChart.DataSource = feederProfileDataTable;
             voltageProfileChart.ChartAreas[0].AxisY.Minimum = 180;
             voltageProfileChart.ChartAreas[0].AxisX.Minimum = 0;
