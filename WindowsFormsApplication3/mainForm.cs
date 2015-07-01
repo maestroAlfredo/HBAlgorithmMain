@@ -192,7 +192,7 @@ namespace VoltageDropCalculatorApplication
                 ds.ReadXml("Libraries.xml");
                 bool enabled = true;
                 libraryForm frm = new libraryForm("Loads", enabled);
-                
+
                 if (!ds.Tables.Contains("Loads"))
                 {
                     //string message = "Click \"reset libraries\" to continue.";
@@ -207,10 +207,16 @@ namespace VoltageDropCalculatorApplication
 
             else
             {
-                string message = "You do not have a libary defined! Go to \"Libaries\" to create new libraries";
-                string caption = "No library availableppp!";
-                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                string message = "There's no library defined. Would you like to create a new one?";
+                string caption = "No library available!";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 DialogResult result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
+
+                if (result == System.Windows.Forms.DialogResult.Yes) newConductorLibraryButton.PerformClick();
+                else
+                {
+                    // do nothing.
+                }
             }
         }
 
@@ -282,7 +288,7 @@ namespace VoltageDropCalculatorApplication
                 libraryForm frm = new libraryForm("Conductors", enabled);
                 frm.ShowDialog();
 
-    
+
 
             }
 
