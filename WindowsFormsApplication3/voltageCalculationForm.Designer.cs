@@ -211,7 +211,6 @@
             this.numericUpDownRisk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDownRisk.Location = new System.Drawing.Point(715, 78);
             this.numericUpDownRisk.Name = "numericUpDownRisk";
-            this.numericUpDownRisk.ReadOnly = true;
             this.numericUpDownRisk.Size = new System.Drawing.Size(61, 26);
             this.numericUpDownRisk.TabIndex = 6;
             this.numericUpDownRisk.Value = new decimal(new int[] {
