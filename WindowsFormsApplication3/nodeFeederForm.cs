@@ -183,6 +183,9 @@ namespace VoltageDropCalculatorApplication
             InitializeComponent();
             sb = new SolidBrush(Color.SteelBlue);
 
+            string projhba = Path.ChangeExtension(projectFileName, ".hba");
+                        
+            System.IO.File.Move(projhba, projectFileName);
             projectDataSet.ReadXml(projectFileName); //read the  projectXML 
             List<string> cableString = projectDataSet.Tables["Conductors"].AsEnumerable().Select(x => x[0].ToString()).ToList();
             cableSelectCombo.DataSource = cableString;
@@ -232,11 +235,14 @@ namespace VoltageDropCalculatorApplication
             
             //initialize the nodeNumlist based on the number of nodes in the project
             nodeCountInt = 0;
+            nodeDataSet.Tables.Clear();
             for(int i = 0; i< projectDataSet.Tables.Count-4; i++)
             {
                 nodeNumList.Add(i + 1);
                 nodeNameList.Add(Convert.ToString(projectDataSet.Tables[i + 4].Rows[0]["Name"]));
-                nodeDataSet.Tables.Add(Convert.ToString(projectDataSet.Tables[i + 4]));
+                DataTable dtCopy = new DataTable();
+                dtCopy = projectDataSet.Tables[i + 4].Copy();
+                nodeDataSet.Tables.Add(dtCopy);
                 nodeCountInt++;
             }            
            
@@ -380,16 +386,34 @@ namespace VoltageDropCalculatorApplication
         private void cableSelectCombo_TextChanged(object sender, EventArgs e)
         {
             //goes through the conductor library first column to see if the combobox text matches the library conductor column text
-            for (int i = 0; i < libraryDataSet.Tables["Conductors"].Rows.Count; i++)
+            if(!projectDataSet.Tables.Contains("Conductors"))
             {
-                if (Convert.ToString(libraryDataSet.Tables["Conductors"].Rows[i][0]) == cableSelectCombo.Text)
+                for (int i = 0; i < libraryDataSet.Tables["Conductors"].Rows.Count; i++)
                 {
-                    rT2 = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][1]) * (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][2]) + t2) / (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][2]) + 20.0);
-                    k1 = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][3]);
-                    break;    
+                    if (Convert.ToString(libraryDataSet.Tables["Conductors"].Rows[i][0]) == cableSelectCombo.Text)
+                    {
+                        rT2 = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][1]) * (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][2]) + t2) / (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][2]) + 20.0);
+                        k1 = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][3]);
+                        break;
 
+                    }
+                }
+
+            }
+            else
+            {
+                for (int i = 0; i < projectDataSet.Tables["Conductors"].Rows.Count; i++)
+                {
+                    if (Convert.ToString(projectDataSet.Tables["Conductors"].Rows[i][0]) == cableSelectCombo.Text)
+                    {
+                        rT2 = Convert.ToDouble(projectDataSet.Tables["Conductors"].Rows[i][1]) * (Convert.ToDouble(projectDataSet.Tables["Conductors"].Rows[i][2]) + t2) / (Convert.ToDouble(projectDataSet.Tables["Conductors"].Rows[i][2]) + 20.0);
+                        k1 = Convert.ToDouble(projectDataSet.Tables["Conductors"].Rows[i][3]);
+                        break;
+
+                    }
                 }
             }
+            
             if (nodeDataSet.Tables.Contains("node" + nodeNumCombo.Text))
             {
                 for (int i = 0; i < nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows.Count; i++)
@@ -416,20 +440,19 @@ namespace VoltageDropCalculatorApplication
             }
             else
             {
-                libraryConductorDataSet.Merge(projectDataSet.Tables[2]);
-                libraryConductorDataSet.Merge(projectDataSet.Tables[1]);
-                libraryConductorDataSet.Merge(projectDataSet.Tables[0]);
+                libraryConductorDataSet.Merge(projectDataSet.Tables["Conductors"]);
+
             }
             
 
 
             //goes through the conductor library first column to see if the combobox text matches the library conductor column text
-            for (int i = 0; i < libraryConductorDataSet.Tables[2].Rows.Count; i++)
+            for (int i = 0; i < libraryConductorDataSet.Tables["Conductors"].Rows.Count; i++)
             {
-                if (Convert.ToString(libraryConductorDataSet.Tables[2].Rows[i][0]) == cableSelectCombo.Text)
+                if (Convert.ToString(libraryConductorDataSet.Tables["Conductors"].Rows[i][0]) == cableSelectCombo.Text)
                 {
-                    rT2 = Convert.ToDouble(libraryConductorDataSet.Tables[2].Rows[i][1]) * (Convert.ToDouble(libraryConductorDataSet.Tables[2].Rows[i][2]) + t2) / (Convert.ToDouble(libraryConductorDataSet.Tables[2].Rows[i][2]) + 20.0);
-                    k1 = Convert.ToDouble(libraryDataSet.Tables[2].Rows[i][3]);
+                    rT2 = Convert.ToDouble(libraryConductorDataSet.Tables["Conductors"].Rows[i][1]) * (Convert.ToDouble(libraryConductorDataSet.Tables["Conductors"].Rows[i][2]) + t2) / (Convert.ToDouble(libraryConductorDataSet.Tables["Conductors"].Rows[i][2]) + 20.0);
+                    k1 = Convert.ToDouble(libraryConductorDataSet.Tables["Conductors"].Rows[i][3]);
 
                 }
             }
@@ -1214,9 +1237,7 @@ namespace VoltageDropCalculatorApplication
             }
             else
             {
-                ds.Merge(projectDataSet.Tables[2]);
-                ds.Merge(projectDataSet.Tables[1]);
-                ds.Merge(projectDataSet.Tables[0]);
+                ds.Merge(projectDataSet.Tables["Conductors"]);
             }
             
 
@@ -1229,7 +1250,7 @@ namespace VoltageDropCalculatorApplication
                     for (int rows = 0; rows < nodeDataSet.Tables[i].Rows.Count; rows++)
                     {
                         string cable = nodeDataSet.Tables[i].Rows[rows][10].ToString();
-                        DataRow dr = ds.Tables[2].AsEnumerable().SingleOrDefault(r => r.Field<string>("Code") == cable);
+                        DataRow dr = ds.Tables["Conductors"].AsEnumerable().SingleOrDefault(r => r.Field<string>("Code") == cable);
                         double T = Convert.ToDouble(dr["T"]);
 
                         nodeDataSet.Tables[i].Rows[rows][11] = Convert.ToDouble(nodeDataSet.Tables[i].Rows[rows][11]) * (T + t_new) / (T + t2);
@@ -1292,42 +1313,38 @@ namespace VoltageDropCalculatorApplication
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "HBA file(*.hba)|*.hba";
-            if(sfd.ShowDialog() == DialogResult.OK)
+            sfd.Filter = "HBA file(*.hba)|*.hba";           
+            if (sfd.ShowDialog() == DialogResult.OK)
             {
                 projectDataSet.Tables.Clear();
-            }
-            //if(sfd.ShowDialog() == DialogResult.OK)
-            //{
-            //    projectDataSet.Tables.Clear();
-            //    string path = sfd.FileName;
-            //    this.Text = path;
-            //    string fileName = Path.ChangeExtension(sfd.FileName, ".xml");
-            //    projectDataSet.Merge(libraryDataSet);
-            //    projectDataSet.Tables.Add(paramDataTable);
-            //    projectDataSet.Merge(nodeDataSet);               
-            //    projectDataSet.Tables["Parameter Table"].Rows[0]["Current Node"] = "node" + nodeNumCombo.Text;
-            //    if(activeRadio.Checked)
-            //    {
-            //        projectDataSet.Tables["Parameter Table"].Rows[0]["active"] = true;
-            //        projectDataSet.Tables["Parameter Table"].Rows[0]["passive"] = false;
-            //    }
-            //    else
-            //    {
-            //        projectDataSet.Tables["Parameter Table"].Rows[0]["active"] = false;
-            //        projectDataSet.Tables["Parameter Table"].Rows[0]["passive"] = true;
-            //    }
-            //    projectDataSet.Tables["Parameter Table"].Rows[0]["temp"] = Convert.ToDouble(operatingTemperatureText.Text);
-            //    projectDataSet.Tables["Parameter Table"].Rows[0]["sourceVoltage"] = Convert.ToDouble(sourceVoltageTextBox.Text);
-                
-            //    //projectDataSet.WriteXml(fileName, XmlWriteMode.WriteSchema);
+                string path = sfd.FileName;
+                this.Text = path;
+                string fileName = Path.ChangeExtension(sfd.FileName, ".xml");
+                projectDataSet.Merge(libraryDataSet);
+                projectDataSet.Tables.Add(paramDataTable);
+                projectDataSet.Merge(nodeDataSet);
+                projectDataSet.Tables["Parameter Table"].Rows[0]["Current Node"] = "node" + nodeNumCombo.Text;
+                if (activeRadio.Checked)
+                {
+                    projectDataSet.Tables["Parameter Table"].Rows[0]["active"] = true;
+                    projectDataSet.Tables["Parameter Table"].Rows[0]["passive"] = false;
+                }
+                else
+                {
+                    projectDataSet.Tables["Parameter Table"].Rows[0]["active"] = false;
+                    projectDataSet.Tables["Parameter Table"].Rows[0]["passive"] = true;
+                }
+                projectDataSet.Tables["Parameter Table"].Rows[0]["temp"] = Convert.ToDouble(operatingTemperatureText.Text);
+                projectDataSet.Tables["Parameter Table"].Rows[0]["sourceVoltage"] = Convert.ToDouble(sourceVoltageTextBox.Text);
 
-            //    //if (File.Exists(path))
-            //    //{
-            //    //    System.IO.File.Delete(path);
-            //    //}
-            //    //System.IO.File.Move(fileName, path);
-            //}            
+                projectDataSet.WriteXml(fileName, XmlWriteMode.WriteSchema);
+
+                if (File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+                System.IO.File.Move(fileName, path);
+            }            
         }
 
 
