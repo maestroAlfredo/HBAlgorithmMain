@@ -31,15 +31,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(nodeFeederForm));
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.projectNameTextBox = new System.Windows.Forms.TextBox();
-            this.createNewProjectButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.continueButton = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.passiveRadio = new System.Windows.Forms.RadioButton();
             this.activeRadio = new System.Windows.Forms.RadioButton();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.sourceVoltageTextBox = new System.Windows.Forms.TextBox();
+            this.operatingTemperatureText = new System.Windows.Forms.TextBox();
             this.lengthNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -71,155 +70,141 @@
             this.detailsCheckBox = new System.Windows.Forms.CheckBox();
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.sourceVoltageTextBox = new System.Windows.Forms.TextBox();
-            this.operatingTemperatureText = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.label1 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lengthNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nodeDataGridView)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 586F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.projectNameTextBox, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.createNewProjectButton, 2, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 34);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(896, 44);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(9, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Project Name";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // projectNameTextBox
-            // 
-            this.projectNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.projectNameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.projectNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.projectNameTextBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.projectNameTextBox.Location = new System.Drawing.Point(86, 11);
-            this.projectNameTextBox.Name = "projectNameTextBox";
-            this.projectNameTextBox.Size = new System.Drawing.Size(102, 22);
-            this.projectNameTextBox.TabIndex = 1;
-            this.projectNameTextBox.Text = "myProj";
-            this.projectNameTextBox.TextChanged += new System.EventHandler(this.projectNameTextBox_TextChanged);
-            // 
-            // createNewProjectButton
-            // 
-            this.createNewProjectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.createNewProjectButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.createNewProjectButton.Location = new System.Drawing.Point(672, 3);
-            this.createNewProjectButton.Name = "createNewProjectButton";
-            this.createNewProjectButton.Size = new System.Drawing.Size(219, 38);
-            this.createNewProjectButton.TabIndex = 0;
-            this.createNewProjectButton.Text = "Create Project";
-            this.createNewProjectButton.UseVisualStyleBackColor = true;
-            this.createNewProjectButton.Click += new System.EventHandler(this.createNewProjectButton_Click);
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 8;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 104F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 122F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
+            this.tableLayoutPanel2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tableLayoutPanel2.ColumnCount = 6;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 119F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 137F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 193F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 266F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableLayoutPanel2.Controls.Add(this.label9, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.passiveRadio, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.activeRadio, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.sourceVoltageTextBox, 3, 1);
             this.tableLayoutPanel2.Controls.Add(this.label6, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label10, 5, 0);
-            this.tableLayoutPanel2.Controls.Add(this.continueButton, 7, 0);
-            this.tableLayoutPanel2.Controls.Add(this.sourceVoltageTextBox, 4, 0);
-            this.tableLayoutPanel2.Controls.Add(this.operatingTemperatureText, 6, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 81);
+            this.tableLayoutPanel2.Controls.Add(this.label10, 4, 0);
+            this.tableLayoutPanel2.Controls.Add(this.operatingTemperatureText, 4, 1);
+            this.tableLayoutPanel2.Controls.Add(this.passiveRadio, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.activeRadio, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label9, 1, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 51);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(896, 42);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(896, 75);
             this.tableLayoutPanel2.TabIndex = 1;
-            // 
-            // continueButton
-            // 
-            this.continueButton.Enabled = false;
-            this.continueButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.continueButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.continueButton.Location = new System.Drawing.Point(673, 3);
-            this.continueButton.Name = "continueButton";
-            this.continueButton.Size = new System.Drawing.Size(218, 36);
-            this.continueButton.TabIndex = 0;
-            this.continueButton.Text = "Continue";
-            this.continueButton.UseVisualStyleBackColor = true;
-            this.continueButton.Click += new System.EventHandler(this.continueButton_Click);
             // 
             // label9
             // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(13, 14);
+            this.label9.Location = new System.Drawing.Point(108, 12);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(67, 13);
+            this.label9.Size = new System.Drawing.Size(73, 13);
             this.label9.TabIndex = 2;
-            this.label9.Text = "Feeder Type";
+            this.label9.Text = "Active Feeder";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // passiveRadio
             // 
-            this.passiveRadio.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.passiveRadio.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.passiveRadio.AutoSize = true;
             this.passiveRadio.Checked = true;
             this.passiveRadio.ForeColor = System.Drawing.Color.White;
-            this.passiveRadio.Location = new System.Drawing.Point(86, 12);
+            this.passiveRadio.Location = new System.Drawing.Point(137, 50);
             this.passiveRadio.Name = "passiveRadio";
-            this.passiveRadio.Size = new System.Drawing.Size(62, 17);
+            this.passiveRadio.Size = new System.Drawing.Size(14, 13);
             this.passiveRadio.TabIndex = 3;
             this.passiveRadio.TabStop = true;
-            this.passiveRadio.Text = "Passive";
             this.passiveRadio.UseVisualStyleBackColor = true;
             this.passiveRadio.CheckedChanged += new System.EventHandler(this.passiveRadio_CheckedChanged);
             // 
             // activeRadio
             // 
-            this.activeRadio.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.activeRadio.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.activeRadio.AutoSize = true;
             this.activeRadio.ForeColor = System.Drawing.Color.White;
-            this.activeRadio.Location = new System.Drawing.Point(190, 12);
+            this.activeRadio.Location = new System.Drawing.Point(265, 50);
             this.activeRadio.Name = "activeRadio";
-            this.activeRadio.Size = new System.Drawing.Size(55, 17);
+            this.activeRadio.Size = new System.Drawing.Size(14, 13);
             this.activeRadio.TabIndex = 3;
-            this.activeRadio.Text = "Active";
             this.activeRadio.UseVisualStyleBackColor = true;
             this.activeRadio.CheckedChanged += new System.EventHandler(this.activeRadio_CheckedChanged);
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(389, 12);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(96, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Source Voltage [V]";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // label10
+            // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(625, 12);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(84, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Temperature[°C]";
+            // 
+            // sourceVoltageTextBox
+            // 
+            this.sourceVoltageTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.sourceVoltageTextBox.Location = new System.Drawing.Point(387, 46);
+            this.sourceVoltageTextBox.Name = "sourceVoltageTextBox";
+            this.sourceVoltageTextBox.Size = new System.Drawing.Size(100, 20);
+            this.sourceVoltageTextBox.TabIndex = 4;
+            this.sourceVoltageTextBox.Text = "230";
+            this.sourceVoltageTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sourceVoltageTextBox_KeyPress);
+            this.sourceVoltageTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.sourceVoltageTextBox_Validating);
+            this.sourceVoltageTextBox.Validated += new System.EventHandler(this.sourceVoltageTextBox_Validated);
+            // 
+            // operatingTemperatureText
+            // 
+            this.operatingTemperatureText.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.operatingTemperatureText.Location = new System.Drawing.Point(627, 46);
+            this.operatingTemperatureText.Name = "operatingTemperatureText";
+            this.operatingTemperatureText.Size = new System.Drawing.Size(80, 20);
+            this.operatingTemperatureText.TabIndex = 4;
+            this.operatingTemperatureText.Text = "40";
+            this.operatingTemperatureText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.operatingTemperatureText_KeyPress);
+            this.operatingTemperatureText.Validating += new System.ComponentModel.CancelEventHandler(this.operatingTemperatureText_Validating);
+            this.operatingTemperatureText.Validated += new System.EventHandler(this.operatingTemperatureText_Validated);
             // 
             // lengthNumericUpDown
             // 
             this.lengthNumericUpDown.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lengthNumericUpDown.ForeColor = System.Drawing.Color.SteelBlue;
-            this.lengthNumericUpDown.Location = new System.Drawing.Point(522, 34);
+            this.lengthNumericUpDown.Location = new System.Drawing.Point(520, 34);
             this.lengthNumericUpDown.Minimum = new decimal(new int[] {
             2,
             0,
@@ -253,7 +238,7 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label3.Location = new System.Drawing.Point(273, 8);
+            this.label3.Location = new System.Drawing.Point(272, 8);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 1;
@@ -278,7 +263,7 @@
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label7.Location = new System.Drawing.Point(528, 2);
+            this.label7.Location = new System.Drawing.Point(526, 2);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(93, 26);
             this.label7.TabIndex = 1;
@@ -290,9 +275,9 @@
             this.cableSelectCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cableSelectCombo.ForeColor = System.Drawing.Color.SteelBlue;
             this.cableSelectCombo.FormattingEnabled = true;
-            this.cableSelectCombo.Location = new System.Drawing.Point(635, 33);
+            this.cableSelectCombo.Location = new System.Drawing.Point(633, 33);
             this.cableSelectCombo.Name = "cableSelectCombo";
-            this.cableSelectCombo.Size = new System.Drawing.Size(99, 21);
+            this.cableSelectCombo.Size = new System.Drawing.Size(98, 21);
             this.cableSelectCombo.TabIndex = 2;
             this.cableSelectCombo.TextChanged += new System.EventHandler(this.cableSelectCombo_TextChanged);
             // 
@@ -301,7 +286,7 @@
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label8.Location = new System.Drawing.Point(635, 8);
+            this.label8.Location = new System.Drawing.Point(633, 8);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(34, 13);
             this.label8.TabIndex = 1;
@@ -342,7 +327,7 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.45647F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 169F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 228F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 229F));
             this.tableLayoutPanel5.Controls.Add(this.cancelButton, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.proceedToVCalcButton, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.selectEndNodeCombo, 1, 0);
@@ -370,7 +355,7 @@
             // 
             this.proceedToVCalcButton.Enabled = false;
             this.proceedToVCalcButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.proceedToVCalcButton.Location = new System.Drawing.Point(670, 3);
+            this.proceedToVCalcButton.Location = new System.Drawing.Point(669, 3);
             this.proceedToVCalcButton.Name = "proceedToVCalcButton";
             this.proceedToVCalcButton.Size = new System.Drawing.Size(214, 30);
             this.proceedToVCalcButton.TabIndex = 0;
@@ -398,7 +383,7 @@
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(447, 11);
+            this.label18.Location = new System.Drawing.Point(446, 11);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(88, 13);
             this.label18.TabIndex = 5;
@@ -413,7 +398,7 @@
             this.endNodeCombo.ForeColor = System.Drawing.Color.SteelBlue;
             this.endNodeCombo.FormattingEnabled = true;
             this.endNodeCombo.ItemHeight = 20;
-            this.endNodeCombo.Location = new System.Drawing.Point(541, 4);
+            this.endNodeCombo.Location = new System.Drawing.Point(540, 4);
             this.endNodeCombo.Name = "endNodeCombo";
             this.endNodeCombo.Size = new System.Drawing.Size(123, 28);
             this.endNodeCombo.TabIndex = 6;
@@ -431,7 +416,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.79793F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.30743F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.05686F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 154F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 158F));
             this.tableLayoutPanel4.Controls.Add(this.lengthNumericUpDown, 5, 1);
             this.tableLayoutPanel4.Controls.Add(this.label7, 5, 0);
             this.tableLayoutPanel4.Controls.Add(this.nodeNameTextBox, 0, 1);
@@ -461,7 +446,7 @@
             this.nodeNameTextBox.Location = new System.Drawing.Point(4, 33);
             this.nodeNameTextBox.MaxLength = 8;
             this.nodeNameTextBox.Name = "nodeNameTextBox";
-            this.nodeNameTextBox.Size = new System.Drawing.Size(127, 20);
+            this.nodeNameTextBox.Size = new System.Drawing.Size(126, 20);
             this.nodeNameTextBox.TabIndex = 6;
             this.nodeNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nodeNameTextBox_KeyPress);
             this.nodeNameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.nodeNameTextBox_Validating);
@@ -483,7 +468,7 @@
             this.deleteNodeButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.deleteNodeButton.Enabled = false;
             this.deleteNodeButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.deleteNodeButton.Location = new System.Drawing.Point(138, 33);
+            this.deleteNodeButton.Location = new System.Drawing.Point(137, 33);
             this.deleteNodeButton.Name = "deleteNodeButton";
             this.deleteNodeButton.Size = new System.Drawing.Size(116, 22);
             this.deleteNodeButton.TabIndex = 4;
@@ -496,7 +481,7 @@
             this.label16.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label16.AutoSize = true;
             this.label16.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label16.Location = new System.Drawing.Point(162, 8);
+            this.label16.Location = new System.Drawing.Point(161, 8);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(67, 13);
             this.label16.TabIndex = 1;
@@ -508,7 +493,7 @@
             this.label22.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label22.AutoSize = true;
             this.label22.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label22.Location = new System.Drawing.Point(381, 8);
+            this.label22.Location = new System.Drawing.Point(380, 8);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(66, 13);
             this.label22.TabIndex = 1;
@@ -518,7 +503,7 @@
             // 
             this.nodeNameCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nodeNameCombo.FormattingEnabled = true;
-            this.nodeNameCombo.Location = new System.Drawing.Point(381, 33);
+            this.nodeNameCombo.Location = new System.Drawing.Point(380, 33);
             this.nodeNameCombo.Name = "nodeNameCombo";
             this.nodeNameCombo.Size = new System.Drawing.Size(116, 21);
             this.nodeNameCombo.TabIndex = 7;
@@ -529,7 +514,7 @@
             this.addNodeButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.addNodeButton.Enabled = false;
             this.addNodeButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.addNodeButton.Location = new System.Drawing.Point(262, 33);
+            this.addNodeButton.Location = new System.Drawing.Point(261, 33);
             this.addNodeButton.Name = "addNodeButton";
             this.addNodeButton.Size = new System.Drawing.Size(78, 22);
             this.addNodeButton.TabIndex = 4;
@@ -542,7 +527,7 @@
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label5.Location = new System.Drawing.Point(351, 37);
+            this.label5.Location = new System.Drawing.Point(350, 37);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(23, 13);
             this.label5.TabIndex = 1;
@@ -553,7 +538,7 @@
             this.label17.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label17.AutoSize = true;
             this.label17.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label17.Location = new System.Drawing.Point(741, 8);
+            this.label17.Location = new System.Drawing.Point(738, 8);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(117, 13);
             this.label17.TabIndex = 5;
@@ -564,7 +549,7 @@
             this.nodeCount.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nodeCount.AutoSize = true;
             this.nodeCount.ForeColor = System.Drawing.Color.SteelBlue;
-            this.nodeCount.Location = new System.Drawing.Point(741, 37);
+            this.nodeCount.Location = new System.Drawing.Point(738, 37);
             this.nodeCount.Name = "nodeCount";
             this.nodeCount.Size = new System.Drawing.Size(13, 13);
             this.nodeCount.TabIndex = 5;
@@ -638,51 +623,82 @@
             this.label4.TabIndex = 13;
             this.label4.Text = "Search Load/DG";
             // 
-            // label6
+            // label1
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(285, 8);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 26);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Source Voltage [V]";
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(232, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Passive Feeder";
+            this.label1.Click += new System.EventHandler(this.label9_Click);
             // 
-            // label10
+            // menuStrip1
             // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label10.AutoSize = true;
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(497, 14);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(84, 13);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "Temperature[°C]";
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(902, 24);
+            this.menuStrip1.TabIndex = 14;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // sourceVoltageTextBox
+            // fileToolStripMenuItem
             // 
-            this.sourceVoltageTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.sourceVoltageTextBox.Location = new System.Drawing.Point(379, 11);
-            this.sourceVoltageTextBox.Name = "sourceVoltageTextBox";
-            this.sourceVoltageTextBox.Size = new System.Drawing.Size(100, 20);
-            this.sourceVoltageTextBox.TabIndex = 4;
-            this.sourceVoltageTextBox.Text = "230";
-            this.sourceVoltageTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sourceVoltageTextBox_KeyPress);
-            this.sourceVoltageTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.sourceVoltageTextBox_Validating);
-            this.sourceVoltageTextBox.Validated += new System.EventHandler(this.sourceVoltageTextBox_Validated);
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.saveToolStripMenuItem,
+            this.saveAsToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
             // 
-            // operatingTemperatureText
+            // openToolStripMenuItem
             // 
-            this.operatingTemperatureText.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.operatingTemperatureText.Location = new System.Drawing.Point(587, 11);
-            this.operatingTemperatureText.Name = "operatingTemperatureText";
-            this.operatingTemperatureText.Size = new System.Drawing.Size(80, 20);
-            this.operatingTemperatureText.TabIndex = 4;
-            this.operatingTemperatureText.Text = "40";
-            this.operatingTemperatureText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.operatingTemperatureText_KeyPress);
-            this.operatingTemperatureText.Validating += new System.ComponentModel.CancelEventHandler(this.operatingTemperatureText_Validating);
-            this.operatingTemperatureText.Validated += new System.EventHandler(this.operatingTemperatureText_Validated);
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Text = "Save As";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
             // 
             // nodeFeederForm
             // 
@@ -698,16 +714,16 @@
             this.Controls.Add(this.tableLayoutPanel5);
             this.Controls.Add(this.nodeDataGridView);
             this.Controls.Add(this.tableLayoutPanel2);
-            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.nodeNumCombo);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "nodeFeederForm";
             this.Text = "New Feeder Design";
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.Load += new System.EventHandler(this.nodeFeederForm_Load);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lengthNumericUpDown)).EndInit();
@@ -718,6 +734,8 @@
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -725,9 +743,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox projectNameTextBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.NumericUpDown lengthNumericUpDown;
         private System.Windows.Forms.Label label2;
@@ -740,8 +755,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Button proceedToVCalcButton;
         private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button continueButton;
-        private System.Windows.Forms.Button createNewProjectButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.RadioButton passiveRadio;
         private System.Windows.Forms.RadioButton activeRadio;
@@ -769,6 +782,16 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox sourceVoltageTextBox;
         private System.Windows.Forms.TextBox operatingTemperatureText;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
 
     }
 }
