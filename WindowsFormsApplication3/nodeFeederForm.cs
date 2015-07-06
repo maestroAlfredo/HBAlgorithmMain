@@ -35,7 +35,10 @@ namespace VoltageDropCalculatorApplication
         DataSet nodeDataSet = new DataSet();
         DataSet tempNodeDataSet = new DataSet(); //Dataset that stores the tables that are only in the main feeder
         List<int> mfNodeList = new List<int>(); //intlist that stores the nodes in the main feeder
-
+        DataSet projectDataSet = new DataSet();
+        DataSet loadedDataSet = new DataSet(); //loaded dataset that will contain the tables from the saved .hba file
+        DataSet parameters = new DataSet();
+        DataTable paramDataTable = new DataTable("Parameter Table");
 
        
         DataTable tempTable = new DataTable();//temporary table that stores the node data to put in the main feederdataset
@@ -65,38 +68,41 @@ namespace VoltageDropCalculatorApplication
             t2 = 40.0;
             Vs = 230.0;
 
-        }
+            
+            DataColumn dc1 = new DataColumn("active", typeof(bool));
+            DataColumn dc2 = new DataColumn("passive", typeof(bool));
+            DataColumn dc3 = new DataColumn("sourceVoltage", typeof(double));
+            DataColumn dc4 = new DataColumn("temp", typeof(double));
+            DataColumn dc5 = new DataColumn("Current Node", typeof(string));
 
-        //constructor within constructor... helps to load the same form with the relevant objects initialized 
-        public nodeFeederForm(string projectFileName) : this()
-        {
+            paramDataTable.Columns.Add(dc1); //associates the columns to the parameter datatable
+            paramDataTable.Columns.Add(dc2);
+            paramDataTable.Columns.Add(dc3);
+            paramDataTable.Columns.Add(dc4);
+            paramDataTable.Columns.Add(dc5);
 
-            nodeDataSet.ReadXml(projectFileName);
-            string projectText = Path.GetFileName(projectFileName);
-            projectText = projectText.Remove(projectText.Length - 4);
+            paramDataTable.Rows.Add(false, true, Vs, t2, "node1");
 
-          
-
-            //projectNameTextBox.Text = projectText;
-
-            //this.createNewProjectButton.Enabled = false;
-            nodeNameTextBox.Text = nodeDataSet.Tables["node1"].Rows[0][1].ToString();
+            //newProjectClicked = 0;
+            projectName = "Untitled" + ".xml"; //creates a string in projectName that will contain the reference to the xml file
+            this.Text = "Untitled.hba";
+            //createNewProjectButton.Enabled = false;
+            //projectNameTextBox.Enabled = false;
+            //SolidBrush sb = new SolidBrush(Color.SteelBlue);
+            nodeNameTextBox.Text = "node 1";
             tableLayoutPanel4.Enabled = true;
             proceedToVCalcButton.Enabled = true;
             drawArea.FillEllipse(sb, 20, drawingPanel.Height / 2, 10, 10);
             detailsCheckBox.Enabled = true;
-            nodeCountInt = nodeDataSet.Tables.Count;
 
-         
+            //totalNodeNumberNumericUpDown.Enabled = false;
             //continueButton.Enabled = false;
-            for (int i = 0; i < nodeDataSet.Tables.Count; i++)
-            {
-                nodeNumList.Add(i + 1);
-                nodeNameList.Add(nodeDataSet.Tables[i].Rows[0][1].ToString());
-            }
-            
-            activeRadio.Enabled = false;
-            passiveRadio.Enabled = false;
+            selectEndNodeCombo.Enabled = true;
+            selectEndNodeCombo.DataSource = nodeNumList;
+            nodeNumList.Add(1);
+            nodeNameList.Add(nodeNameTextBox.Text);
+            //activeRadio.Enabled = false;
+            //passiveRadio.Enabled = false;
             nodeNumCombo.Enabled = true;
             nodeNumCombo.DataSource = nodeNumList;
             nodeNameCombo.DataSource = nodeNameList;
@@ -108,29 +114,145 @@ namespace VoltageDropCalculatorApplication
             addNodeButton.Enabled = true;
 
 
-            for (int i = 0; i < nodeDataSet.Tables[0].Rows.Count; i++)
+
+            DataTable nodeDataTable = new DataTable();
+            List<string> headings = new List<string> { "Node", "Name", "Load/DG", "Red", "White", "Blue", "Alpha", "Beta", "Cb", "Length", "Cable", "Rp", "Rn", "Parent", "Children" };
+            for (int i = 0; i < headings.Count; i++)
             {
-                if (nodeDataSet.Tables[0].Rows[i][2].ToString().ElementAt(0) == 'L')
-                {
-                    loadCount++;
-                }
-                else
-                {
-                    genCount++;
-                }
+                nodeDataTable.Columns.Add(headings[i]); //adds the headings to the nodeDataTable 
             }
 
-            if (genCount != 0) p = 90;
-
-            if ((mfNodeList.Count != 0) && (selectEndNodeCombo.Text != ""))
+            //querires the datatables for the loads and gens where the user has selected
+            DataTable resultLoads = new DataTable();
+            var table = libraryDataSet.Tables["Loads"].Select("Selected = true");
+            if (table.AsEnumerable().Any())
             {
-                getMainFeederNodes(Convert.ToInt32(selectEndNodeCombo.Text), mfNodeList);
-                drawArea.Clear(Color.White);
-                drawArea.FillEllipse(sb, 20, drawingPanel.Height / 2, 10, 10);
-                drawPoints(mfNodeList);
-            }                        
+                resultLoads = table.CopyToDataTable();
+                loadCount = resultLoads.Rows.Count;
+            }
+
+            DataTable resultGens = new DataTable();
+            var table1 = libraryDataSet.Tables["Generators"].Select("Selected = true");
+            if (table1.AsEnumerable().Any())
+            {
+                resultGens = table1.CopyToDataTable();
+                genCount = resultGens.Rows.Count;
+            }
+
+            if (activeRadio.Checked == true) p = 90.0;
+
+            foreach (DataRow dr in resultGens.Rows)
+            {
+                if (table.AsEnumerable().Any()) resultLoads.Rows.Add(dr.ItemArray);
+                else
+                {
+                    resultLoads = resultGens.Copy();
+                    break;
+                }
+
+            }
+
+            for (int i = 0; i < resultLoads.Rows.Count; i++)
+            {
+
+                nodeDataTable.Rows.Add("1", nodeNameTextBox.Text, resultLoads.Rows[i][0], 0.0, 0.0, 0.0, resultLoads.Rows[i]["alpha"], resultLoads.Rows[i]["beta"], resultLoads.Rows[i]["circuit breaker"], calculateLengths(lengthNumericUpDown.Value, i), cableSelectCombo.Text, calculateRp(rT2, calculateLengths(lengthNumericUpDown.Value, i)), calculateRn(rT2, calculateLengths(lengthNumericUpDown.Value, i), k1), 0, 0);
+
+            }
+            nodeDataTable.TableName = "node1";
+            tempTable = nodeDataTable.Copy();
+            tempTable.Rows[0][0] = "0"; //makes the first entry zero .
+            nodeDataSet.Tables.Add(nodeDataTable);
+
+
+            nodeDataSet.WriteXml(projectName);
+            nodeDataGridView.DataSource = nodeDataSet.Tables[0];
+            nodeDataGridView.Columns[0].Visible = false;
+            nodeDataGridView.Columns[9].Visible = false;
+            nodeDataGridView.Columns[10].Visible = false;
+            nodeDataGridView.Columns[11].Visible = false;
+            nodeDataGridView.Columns[12].Visible = false;
+            nodeDataGridView.Columns[13].Visible = false;
+            nodeDataGridView.Columns[14].Visible = false;
+            closeTableEdits();                   
+
+        }
+
+        //constructor within constructor... helps to load the same form with the relevant objects initialized 
+        public nodeFeederForm(string projectFileName)
+        {
+            InitializeComponent();
+            sb = new SolidBrush(Color.SteelBlue);
+
+            projectDataSet.ReadXml(projectFileName); //read the  projectXML 
+            List<string> cableString = projectDataSet.Tables["Conductors"].AsEnumerable().Select(x => x[0].ToString()).ToList();
+            cableSelectCombo.DataSource = cableString;
+
+            mfNodeList.Add(1); //adds the first node to the main feeder node list            
+            loadCount = 0;
+            genCount = 0;
+
+            drawArea = drawingPanel.CreateGraphics();
+
+            p = 10;
+            if ((bool)projectDataSet.Tables["Parameter Table"].Rows[0]["active"])
+            {
+                p = 90;
+                activeRadio.Checked = true;
+                passiveRadio.Checked = false;
+            }
+            else
+            {
+                activeRadio.Checked = false;
+                passiveRadio.Checked = true;
+            }
+
+            t2 = Convert.ToDouble(projectDataSet.Tables["Parameter Table"].Rows[0]["temp"]);
+            Vs = Convert.ToDouble(projectDataSet.Tables["Parameter Table"].Rows[0]["sourceVoltage"]);
+
+
             
-            nodeDataGridView.DataSource = nodeDataSet.Tables["node"+nodeNumCombo.Text];
+
+            //newProjectClicked = 0;
+            projectName = projectFileName;
+            this.Text = Path.ChangeExtension(projectFileName, ".hba");          
+            //createNewProjectButton.Enabled = false;
+            //projectNameTextBox.Enabled = false;
+            //SolidBrush sb = new SolidBrush(Color.SteelBlue);
+            string tableName = Convert.ToString(projectDataSet.Tables["Parameter Table"].Rows[0]["Current Node"]); //string that has the tablename of the last node that was selected
+            nodeNameTextBox.Text = Convert.ToString(projectDataSet.Tables[tableName].Rows[0]["Name"]);
+            tableLayoutPanel4.Enabled = true;
+            proceedToVCalcButton.Enabled = true;
+            drawArea.FillEllipse(sb, 20, drawingPanel.Height / 2, 10, 10);
+            detailsCheckBox.Enabled = true;
+
+            //totalNodeNumberNumericUpDown.Enabled = false;
+            //continueButton.Enabled = false;
+            selectEndNodeCombo.Enabled = true;
+            selectEndNodeCombo.DataSource = nodeNumList;
+            
+            //initialize the nodeNumlist based on the number of nodes in the project
+            nodeCountInt = 0;
+            for(int i = 0; i< projectDataSet.Tables.Count-4; i++)
+            {
+                nodeNumList.Add(i + 1);
+                nodeNameList.Add(Convert.ToString(projectDataSet.Tables[i + 4].Rows[0]["Name"]));
+                nodeDataSet.Tables.Add(Convert.ToString(projectDataSet.Tables[i + 4]));
+                nodeCountInt++;
+            }            
+           
+            //activeRadio.Enabled = false;
+            //passiveRadio.Enabled = false;
+            nodeNumCombo.Enabled = true;
+            nodeNumCombo.DataSource = nodeNumList;
+            nodeNameCombo.DataSource = nodeNameList;
+
+            selectEndNodeCombo.Enabled = true;
+            selectEndNodeCombo.DataSource = nodeNumList;
+            endNodeCombo.Enabled = true;
+            endNodeCombo.DataSource = nodeNameList;
+            addNodeButton.Enabled = true;
+
+            nodeDataGridView.DataSource = nodeDataSet.Tables[Convert.ToString(projectDataSet.Tables["Parameter Table"].Rows[0]["Current Node"])];
             nodeDataGridView.Columns[0].Visible = false;
             nodeDataGridView.Columns[9].Visible = false;
             nodeDataGridView.Columns[10].Visible = false;
@@ -140,7 +262,6 @@ namespace VoltageDropCalculatorApplication
             nodeDataGridView.Columns[14].Visible = false;
             closeTableEdits();
 
-            nodeNameCombo.Text = nodeDataSet.Tables[nodeDataSet.Tables.Count - 1].Rows[0][1].ToString();
         }
 
         private void projectNameTextBox_TextChanged(object sender, EventArgs e)
@@ -177,6 +298,7 @@ namespace VoltageDropCalculatorApplication
                 nodeNameTextBox.Text = nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows[0][1].ToString();
                 lengthNumericUpDown.Value = Convert.ToDecimal(Convert.ToDouble(nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows[0][9]) + ((loadCount == 0) ? (genCount - 1.0) * lengthTol : (loadCount - 1.0) * lengthTol));
                 cableSelectCombo.Text = nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows[0][10].ToString();
+                
             }
 
 
@@ -288,7 +410,17 @@ namespace VoltageDropCalculatorApplication
 
             DataSet libraryConductorDataSet = new DataSet();
 
-            libraryConductorDataSet.ReadXml("Libraries.xml");
+            if(!projectDataSet.Tables.Contains("Conductors"))
+            {
+                libraryConductorDataSet.ReadXml("Libraries.xml");
+            }
+            else
+            {
+                libraryConductorDataSet.Merge(projectDataSet.Tables[2]);
+                libraryConductorDataSet.Merge(projectDataSet.Tables[1]);
+                libraryConductorDataSet.Merge(projectDataSet.Tables[0]);
+            }
+            
 
 
             //goes through the conductor library first column to see if the combobox text matches the library conductor column text
@@ -345,35 +477,71 @@ namespace VoltageDropCalculatorApplication
             }
 
             //querires the datatables for the loads and gens where the user has selected
+
             DataTable resultLoads = new DataTable();
-            var table = libraryDataSet.Tables["Loads"].Select("Selected = true");
-            if (table.AsEnumerable().Any())
+            if(!projectDataSet.Tables.Contains("Loads"))
             {
-                resultLoads = table.CopyToDataTable();
-                loadCount = resultLoads.Rows.Count;
-            }
-
-            DataTable resultGens = new DataTable();
-            var table1 = libraryDataSet.Tables["Generators"].Select("Selected = true");
-            if (table1.AsEnumerable().Any())
-            {
-                resultGens = table1.CopyToDataTable();
-                genCount = resultGens.Rows.Count;
-            }
-
-
-            //adds the selected Gens to the selected loads table
-            foreach (DataRow dr in resultGens.Rows)
-            {
-                if (table.AsEnumerable().Any()) resultLoads.Rows.Add(dr.ItemArray);
-                else
+                var table = libraryDataSet.Tables["Loads"].Select("Selected = true");
+                if (table.AsEnumerable().Any())
                 {
-                    resultLoads = resultGens.Copy();
-                    break;
+                    resultLoads = table.CopyToDataTable();
+                    loadCount = resultLoads.Rows.Count;
                 }
-            }
 
-            //adds the loads and gens to the datatable
+                DataTable resultGens = new DataTable();
+                var table1 = libraryDataSet.Tables["Generators"].Select("Selected = true");
+                if (table1.AsEnumerable().Any())
+                {
+                    resultGens = table1.CopyToDataTable();
+                    genCount = resultGens.Rows.Count;
+                }
+
+
+                //adds the selected Gens to the selected loads table
+                foreach (DataRow dr in resultGens.Rows)
+                {
+                    if (table.AsEnumerable().Any()) resultLoads.Rows.Add(dr.ItemArray);
+                    else
+                    {
+                        resultLoads = resultGens.Copy();
+                        break;
+                    }
+                }
+
+                //adds the loads and gens to the datatable
+            }
+            else
+            {
+                var table = projectDataSet.Tables["Loads"].Select("Selected = true");
+                if (table.AsEnumerable().Any())
+                {
+                    resultLoads = table.CopyToDataTable();
+                    loadCount = resultLoads.Rows.Count;
+                }
+
+                DataTable resultGens = new DataTable();
+                var table1 = projectDataSet.Tables["Generators"].Select("Selected = true");
+                if (table1.AsEnumerable().Any())
+                {
+                    resultGens = table1.CopyToDataTable();
+                    genCount = resultGens.Rows.Count;
+                }
+
+
+                //adds the selected Gens to the selected loads table
+                foreach (DataRow dr in resultGens.Rows)
+                {
+                    if (table.AsEnumerable().Any()) resultLoads.Rows.Add(dr.ItemArray);
+                    else
+                    {
+                        resultLoads = resultGens.Copy();
+                        break;
+                    }
+                }
+
+                //adds the loads and gens to the datatable
+            }
+            
             for (int i = 0; i < resultLoads.Rows.Count; i++)
             {
 
@@ -1013,7 +1181,10 @@ namespace VoltageDropCalculatorApplication
 
         private void passiveRadio_CheckedChanged(object sender, EventArgs e)
         {
-            if (passiveRadio.Checked == true) p = 10.0;
+            if (passiveRadio.Checked == true)
+            {
+                p = 10.0;
+            }
             else p = 90.0;
         }
 
@@ -1037,7 +1208,17 @@ namespace VoltageDropCalculatorApplication
             errorProvider1.SetError(operatingTemperatureText, "");
             double t_new = Convert.ToDouble(operatingTemperatureText.Text);
             DataSet ds = new DataSet();
-            ds.ReadXml("Libraries.xml");
+            if (!projectDataSet.Tables.Contains("Conductors"))
+            {
+                ds.ReadXml("Libraries.xml");
+            }
+            else
+            {
+                ds.Merge(projectDataSet.Tables[2]);
+                ds.Merge(projectDataSet.Tables[1]);
+                ds.Merge(projectDataSet.Tables[0]);
+            }
+            
 
 
 
@@ -1095,97 +1276,7 @@ namespace VoltageDropCalculatorApplication
 
         private void nodeFeederForm_Load(object sender, EventArgs e)
         {
-            //newProjectClicked = 0;
-            projectName = "Untitled" + ".xml"; //creates a string in projectName that will contain the reference to the xml file
-            this.Text  = "Untitled.hba";
-            //createNewProjectButton.Enabled = false;
-            //projectNameTextBox.Enabled = false;
-            //SolidBrush sb = new SolidBrush(Color.SteelBlue);
-            nodeNameTextBox.Text = "node 1";
-            tableLayoutPanel4.Enabled = true;
-            proceedToVCalcButton.Enabled = true;
-            drawArea.FillEllipse(sb, 20, drawingPanel.Height / 2, 10, 10);
-            detailsCheckBox.Enabled = true;
-
-            //totalNodeNumberNumericUpDown.Enabled = false;
-            //continueButton.Enabled = false;
-            selectEndNodeCombo.Enabled = true;
-            selectEndNodeCombo.DataSource = nodeNumList;
-            nodeNumList.Add(1);
-            nodeNameList.Add(nodeNameTextBox.Text);
-            //activeRadio.Enabled = false;
-            //passiveRadio.Enabled = false;
-            nodeNumCombo.Enabled = true;
-            nodeNumCombo.DataSource = nodeNumList;
-            nodeNameCombo.DataSource = nodeNameList;
-
-            selectEndNodeCombo.Enabled = true;
-            selectEndNodeCombo.DataSource = nodeNumList;
-            endNodeCombo.Enabled = true;
-            endNodeCombo.DataSource = nodeNameList;
-            addNodeButton.Enabled = true;
-
-
-
-            DataTable nodeDataTable = new DataTable();
-            List<string> headings = new List<string> { "Node", "Name", "Load/DG", "Red", "White", "Blue", "Alpha", "Beta", "Cb", "Length", "Cable", "Rp", "Rn", "Parent", "Children" };
-            for (int i = 0; i < headings.Count; i++)
-            {
-                nodeDataTable.Columns.Add(headings[i]); //adds the headings to the nodeDataTable 
-            }
-
-            //querires the datatables for the loads and gens where the user has selected
-            DataTable resultLoads = new DataTable();
-            var table = libraryDataSet.Tables["Loads"].Select("Selected = true");
-            if (table.AsEnumerable().Any())
-            {
-                resultLoads = table.CopyToDataTable();
-                loadCount = resultLoads.Rows.Count;
-            }
-
-            DataTable resultGens = new DataTable();
-            var table1 = libraryDataSet.Tables["Generators"].Select("Selected = true");
-            if (table1.AsEnumerable().Any())
-            {
-                resultGens = table1.CopyToDataTable();
-                genCount = resultGens.Rows.Count;
-            }
-
-            if (activeRadio.Checked == true) p = 90.0;
-
-            foreach (DataRow dr in resultGens.Rows)
-            {
-                if (table.AsEnumerable().Any()) resultLoads.Rows.Add(dr.ItemArray);
-                else
-                {
-                    resultLoads = resultGens.Copy();
-                    break;
-                }
-
-            }
-
-            for (int i = 0; i < resultLoads.Rows.Count; i++)
-            {
-
-                nodeDataTable.Rows.Add("1", nodeNameTextBox.Text, resultLoads.Rows[i][0], 0.0, 0.0, 0.0, resultLoads.Rows[i]["alpha"], resultLoads.Rows[i]["beta"], resultLoads.Rows[i]["circuit breaker"], calculateLengths(lengthNumericUpDown.Value, i), cableSelectCombo.Text, calculateRp(rT2, calculateLengths(lengthNumericUpDown.Value, i)), calculateRn(rT2, calculateLengths(lengthNumericUpDown.Value, i), k1), 0, 0);
-
-            }
-            nodeDataTable.TableName = "node1";
-            tempTable = nodeDataTable.Copy();
-            tempTable.Rows[0][0] = "0"; //makes the first entry zero .
-            nodeDataSet.Tables.Add(nodeDataTable);
-
-
-            nodeDataSet.WriteXml(projectName);
-            nodeDataGridView.DataSource = nodeDataSet.Tables[0];
-            nodeDataGridView.Columns[0].Visible = false;
-            nodeDataGridView.Columns[9].Visible = false;
-            nodeDataGridView.Columns[10].Visible = false;
-            nodeDataGridView.Columns[11].Visible = false;
-            nodeDataGridView.Columns[12].Visible = false;
-            nodeDataGridView.Columns[13].Visible = false;
-            nodeDataGridView.Columns[14].Visible = false;
-            closeTableEdits();
+           
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -1201,12 +1292,42 @@ namespace VoltageDropCalculatorApplication
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "HBA file(*.hba)|*.hba";
             if(sfd.ShowDialog() == DialogResult.OK)
             {
-                string path = sfd.FileName;
-                
+                projectDataSet.Tables.Clear();
             }
-            
+            //if(sfd.ShowDialog() == DialogResult.OK)
+            //{
+            //    projectDataSet.Tables.Clear();
+            //    string path = sfd.FileName;
+            //    this.Text = path;
+            //    string fileName = Path.ChangeExtension(sfd.FileName, ".xml");
+            //    projectDataSet.Merge(libraryDataSet);
+            //    projectDataSet.Tables.Add(paramDataTable);
+            //    projectDataSet.Merge(nodeDataSet);               
+            //    projectDataSet.Tables["Parameter Table"].Rows[0]["Current Node"] = "node" + nodeNumCombo.Text;
+            //    if(activeRadio.Checked)
+            //    {
+            //        projectDataSet.Tables["Parameter Table"].Rows[0]["active"] = true;
+            //        projectDataSet.Tables["Parameter Table"].Rows[0]["passive"] = false;
+            //    }
+            //    else
+            //    {
+            //        projectDataSet.Tables["Parameter Table"].Rows[0]["active"] = false;
+            //        projectDataSet.Tables["Parameter Table"].Rows[0]["passive"] = true;
+            //    }
+            //    projectDataSet.Tables["Parameter Table"].Rows[0]["temp"] = Convert.ToDouble(operatingTemperatureText.Text);
+            //    projectDataSet.Tables["Parameter Table"].Rows[0]["sourceVoltage"] = Convert.ToDouble(sourceVoltageTextBox.Text);
+                
+            //    //projectDataSet.WriteXml(fileName, XmlWriteMode.WriteSchema);
+
+            //    //if (File.Exists(path))
+            //    //{
+            //    //    System.IO.File.Delete(path);
+            //    //}
+            //    //System.IO.File.Move(fileName, path);
+            //}            
         }
 
 
