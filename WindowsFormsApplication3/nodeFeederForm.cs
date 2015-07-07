@@ -40,7 +40,7 @@ namespace VoltageDropCalculatorApplication
         DataSet parameters = new DataSet();
         DataTable paramDataTable = new DataTable("Parameter Table");
 
-       
+
         DataTable tempTable = new DataTable();//temporary table that stores the node data to put in the main feederdataset
         DataSet libraryDataSet = new DataSet();
         BindingList<int> nodeNumList = new BindingList<int>();
@@ -68,7 +68,7 @@ namespace VoltageDropCalculatorApplication
             t2 = 40.0;
             Vs = 230.0;
 
-            
+
             DataColumn dc1 = new DataColumn("active", typeof(bool));
             DataColumn dc2 = new DataColumn("passive", typeof(bool));
             DataColumn dc3 = new DataColumn("sourceVoltage", typeof(double));
@@ -173,7 +173,7 @@ namespace VoltageDropCalculatorApplication
             nodeDataGridView.Columns[12].Visible = false;
             nodeDataGridView.Columns[13].Visible = false;
             nodeDataGridView.Columns[14].Visible = false;
-            closeTableEdits();                   
+            closeTableEdits();
 
         }
 
@@ -184,15 +184,35 @@ namespace VoltageDropCalculatorApplication
             sb = new SolidBrush(Color.SteelBlue);
 
             string projhba = Path.ChangeExtension(projectFileName, ".hba");
-                        
+
             System.IO.File.Move(projhba, projectFileName);
             projectDataSet.ReadXml(projectFileName); //read the  projectXML 
-            List<string> cableString = projectDataSet.Tables["Conductors"].AsEnumerable().Select(x => x[0].ToString()).ToList();
+            libraryDataSet.Merge(projectDataSet.Tables["Conductors"]);
+            libraryDataSet.Merge(projectDataSet.Tables["Loads"]);
+            if (projectDataSet.Tables.Contains("Generators")) libraryDataSet.Merge(projectDataSet.Tables["Generators"]);
+            List<string> cableString = libraryDataSet.Tables["Conductors"].AsEnumerable().Select(x => x[0].ToString()).ToList();
             cableSelectCombo.DataSource = cableString;
 
             mfNodeList.Add(1); //adds the first node to the main feeder node list            
             loadCount = 0;
             genCount = 0;
+
+            //querires the datatables for the loads and gens where the user has selected
+            DataTable resultLoads = new DataTable();
+            var table = libraryDataSet.Tables["Loads"].Select("Selected = true");
+            if (table.AsEnumerable().Any())
+            {
+                resultLoads = table.CopyToDataTable();
+                loadCount = resultLoads.Rows.Count;
+            }
+
+            DataTable resultGens = new DataTable();
+            var table1 = libraryDataSet.Tables["Generators"].Select("Selected = true");
+            if (table1.AsEnumerable().Any())
+            {
+                resultGens = table1.CopyToDataTable();
+                genCount = resultGens.Rows.Count;
+            }
 
             drawArea = drawingPanel.CreateGraphics();
 
@@ -213,11 +233,12 @@ namespace VoltageDropCalculatorApplication
             Vs = Convert.ToDouble(projectDataSet.Tables["Parameter Table"].Rows[0]["sourceVoltage"]);
 
 
-            
+
 
             //newProjectClicked = 0;
             projectName = projectFileName;
-            this.Text = Path.ChangeExtension(projectFileName, ".hba");          
+            this.Text = Path.ChangeExtension(projectFileName, ".hba");
+            System.IO.File.Move(projectFileName, this.Text);
             //createNewProjectButton.Enabled = false;
             //projectNameTextBox.Enabled = false;
             //SolidBrush sb = new SolidBrush(Color.SteelBlue);
@@ -232,11 +253,11 @@ namespace VoltageDropCalculatorApplication
             //continueButton.Enabled = false;
             selectEndNodeCombo.Enabled = true;
             selectEndNodeCombo.DataSource = nodeNumList;
-            
+
             //initialize the nodeNumlist based on the number of nodes in the project
             nodeCountInt = 0;
             nodeDataSet.Tables.Clear();
-            for(int i = 0; i< projectDataSet.Tables.Count-4; i++)
+            for (int i = 0; i < projectDataSet.Tables.Count - 4; i++)
             {
                 nodeNumList.Add(i + 1);
                 nodeNameList.Add(Convert.ToString(projectDataSet.Tables[i + 4].Rows[0]["Name"]));
@@ -244,8 +265,8 @@ namespace VoltageDropCalculatorApplication
                 dtCopy = projectDataSet.Tables[i + 4].Copy();
                 nodeDataSet.Tables.Add(dtCopy);
                 nodeCountInt++;
-            }            
-           
+            }
+
             //activeRadio.Enabled = false;
             //passiveRadio.Enabled = false;
             nodeNumCombo.Enabled = true;
@@ -258,6 +279,7 @@ namespace VoltageDropCalculatorApplication
             endNodeCombo.DataSource = nodeNameList;
             addNodeButton.Enabled = true;
 
+            nodeNameCombo.Text = Convert.ToString(nodeDataSet.Tables[Convert.ToString(projectDataSet.Tables["Parameter Table"].Rows[0]["Current Node"])].Rows[0]["Name"]);
             nodeDataGridView.DataSource = nodeDataSet.Tables[Convert.ToString(projectDataSet.Tables["Parameter Table"].Rows[0]["Current Node"])];
             nodeDataGridView.Columns[0].Visible = false;
             nodeDataGridView.Columns[9].Visible = false;
@@ -304,7 +326,7 @@ namespace VoltageDropCalculatorApplication
                 nodeNameTextBox.Text = nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows[0][1].ToString();
                 lengthNumericUpDown.Value = Convert.ToDecimal(Convert.ToDouble(nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows[0][9]) + ((loadCount == 0) ? (genCount - 1.0) * lengthTol : (loadCount - 1.0) * lengthTol));
                 cableSelectCombo.Text = nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows[0][10].ToString();
-                
+
             }
 
 
@@ -320,7 +342,7 @@ namespace VoltageDropCalculatorApplication
                     nodeDataGridView.DataSource = nodeDataSet.Tables[i];
 
                 }
-            }           
+            }
         }
 
         private void proceedToVCalcButton_Click(object sender, EventArgs e)
@@ -375,7 +397,7 @@ namespace VoltageDropCalculatorApplication
 
                 tempNodeDataSet.WriteXml(projectName);
 
-                voltageCalculationForm frm = new voltageCalculationForm(projectName, p, t2, Vs,  loadCount, genCount, mfNodeList);
+                voltageCalculationForm frm = new voltageCalculationForm(projectName, p, t2, Vs, loadCount, genCount, mfNodeList);
                 frm.ShowDialog();
             }
             else
@@ -386,34 +408,19 @@ namespace VoltageDropCalculatorApplication
         private void cableSelectCombo_TextChanged(object sender, EventArgs e)
         {
             //goes through the conductor library first column to see if the combobox text matches the library conductor column text
-            if(!projectDataSet.Tables.Contains("Conductors"))
+            for (int i = 0; i < libraryDataSet.Tables["Conductors"].Rows.Count; i++)
             {
-                for (int i = 0; i < libraryDataSet.Tables["Conductors"].Rows.Count; i++)
+                if (Convert.ToString(libraryDataSet.Tables["Conductors"].Rows[i][0]) == cableSelectCombo.Text)
                 {
-                    if (Convert.ToString(libraryDataSet.Tables["Conductors"].Rows[i][0]) == cableSelectCombo.Text)
-                    {
-                        rT2 = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][1]) * (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][2]) + t2) / (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][2]) + 20.0);
-                        k1 = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][3]);
-                        break;
+                    rT2 = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][1]) * (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][2]) + t2) / (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][2]) + 20.0);
+                    k1 = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][3]);
+                    break;
 
-                    }
-                }
-
-            }
-            else
-            {
-                for (int i = 0; i < projectDataSet.Tables["Conductors"].Rows.Count; i++)
-                {
-                    if (Convert.ToString(projectDataSet.Tables["Conductors"].Rows[i][0]) == cableSelectCombo.Text)
-                    {
-                        rT2 = Convert.ToDouble(projectDataSet.Tables["Conductors"].Rows[i][1]) * (Convert.ToDouble(projectDataSet.Tables["Conductors"].Rows[i][2]) + t2) / (Convert.ToDouble(projectDataSet.Tables["Conductors"].Rows[i][2]) + 20.0);
-                        k1 = Convert.ToDouble(projectDataSet.Tables["Conductors"].Rows[i][3]);
-                        break;
-
-                    }
                 }
             }
-            
+
+
+
             if (nodeDataSet.Tables.Contains("node" + nodeNumCombo.Text))
             {
                 for (int i = 0; i < nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows.Count; i++)
@@ -430,29 +437,13 @@ namespace VoltageDropCalculatorApplication
 
         private void lengthNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-
-
-            DataSet libraryConductorDataSet = new DataSet();
-
-            if(!projectDataSet.Tables.Contains("Conductors"))
-            {
-                libraryConductorDataSet.ReadXml("Libraries.xml");
-            }
-            else
-            {
-                libraryConductorDataSet.Merge(projectDataSet.Tables["Conductors"]);
-
-            }
-            
-
-
             //goes through the conductor library first column to see if the combobox text matches the library conductor column text
-            for (int i = 0; i < libraryConductorDataSet.Tables["Conductors"].Rows.Count; i++)
+            for (int i = 0; i < libraryDataSet.Tables["Conductors"].Rows.Count; i++)
             {
-                if (Convert.ToString(libraryConductorDataSet.Tables["Conductors"].Rows[i][0]) == cableSelectCombo.Text)
+                if (Convert.ToString(libraryDataSet.Tables["Conductors"].Rows[i][0]) == cableSelectCombo.Text)
                 {
-                    rT2 = Convert.ToDouble(libraryConductorDataSet.Tables["Conductors"].Rows[i][1]) * (Convert.ToDouble(libraryConductorDataSet.Tables["Conductors"].Rows[i][2]) + t2) / (Convert.ToDouble(libraryConductorDataSet.Tables["Conductors"].Rows[i][2]) + 20.0);
-                    k1 = Convert.ToDouble(libraryConductorDataSet.Tables["Conductors"].Rows[i][3]);
+                    rT2 = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][1]) * (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][2]) + t2) / (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][2]) + 20.0);
+                    k1 = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][3]);
 
                 }
             }
@@ -470,14 +461,14 @@ namespace VoltageDropCalculatorApplication
 
             mfNodeList.Clear();//Clears the main feeder node list
             //mfNodeDictionary.Clear();
-            
+
             if (selectEndNodeCombo.Text != "")
             {
                 drawArea.Clear(Color.White);
                 getMainFeederNodes(Convert.ToInt32(selectEndNodeCombo.Text), mfNodeList);
                 drawPoints(mfNodeList);
-            }           
-                                      
+            }
+
 
         }
 
@@ -502,8 +493,7 @@ namespace VoltageDropCalculatorApplication
             //querires the datatables for the loads and gens where the user has selected
 
             DataTable resultLoads = new DataTable();
-            if(!projectDataSet.Tables.Contains("Loads"))
-            {
+            
                 var table = libraryDataSet.Tables["Loads"].Select("Selected = true");
                 if (table.AsEnumerable().Any())
                 {
@@ -529,42 +519,11 @@ namespace VoltageDropCalculatorApplication
                         resultLoads = resultGens.Copy();
                         break;
                     }
-                }
-
-                //adds the loads and gens to the datatable
-            }
-            else
-            {
-                var table = projectDataSet.Tables["Loads"].Select("Selected = true");
-                if (table.AsEnumerable().Any())
-                {
-                    resultLoads = table.CopyToDataTable();
-                    loadCount = resultLoads.Rows.Count;
-                }
-
-                DataTable resultGens = new DataTable();
-                var table1 = projectDataSet.Tables["Generators"].Select("Selected = true");
-                if (table1.AsEnumerable().Any())
-                {
-                    resultGens = table1.CopyToDataTable();
-                    genCount = resultGens.Rows.Count;
-                }
-
-
-                //adds the selected Gens to the selected loads table
-                foreach (DataRow dr in resultGens.Rows)
-                {
-                    if (table.AsEnumerable().Any()) resultLoads.Rows.Add(dr.ItemArray);
-                    else
-                    {
-                        resultLoads = resultGens.Copy();
-                        break;
-                    }
-                }
-
-                //adds the loads and gens to the datatable
-            }
+                }         
             
+            
+                
+
             for (int i = 0; i < resultLoads.Rows.Count; i++)
             {
 
@@ -785,14 +744,14 @@ namespace VoltageDropCalculatorApplication
             if (mfNodeList.Count == 0)
             {
                 mfNodeList.Add(lastNode); //adds the end node to the list
-               // mfNodeDictionary.Add(lastNode, "node" + lastNode.ToString());
+                // mfNodeDictionary.Add(lastNode, "node" + lastNode.ToString());
             }
 
             if (lastNode != 1)
             {
 
                 mfNodeList.Add(Convert.ToInt16(nodeDataSet.Tables["node" + lastNode.ToString()].Rows[0][13])); //adds the parent node to the list
-               // mfNodeDictionary.Add(Convert.ToInt16(nodeDataSet.Tables["node" + lastNode.ToString()].Rows[0][13]), "node" + lastNode.ToString());
+                // mfNodeDictionary.Add(Convert.ToInt16(nodeDataSet.Tables["node" + lastNode.ToString()].Rows[0][13]), "node" + lastNode.ToString());
 
                 getMainFeederNodes(Convert.ToInt16(nodeDataSet.Tables["node" + lastNode.ToString()].Rows[0][13]), mfNodeList);
             }
@@ -831,7 +790,7 @@ namespace VoltageDropCalculatorApplication
                 string childNodes = Convert.ToString(nodeDataSet.Tables["node" + nodeNumber.ToString()].Rows[0][14]);
                 List<string> nodesToAddTemp = new List<string>();
                 List<string> nodesToAdd = new List<string>();
-                
+
                 nodesToAddTemp = ConvertStringsToStringList(childNodes, ';');
 
                 List<string> mfeederList = mfNodeList.ConvertAll<string>(delegate(int k) { return k.ToString(); }); //converts the mainfeeder nodelist which is an int list to a stringlist for later comparison
@@ -936,8 +895,8 @@ namespace VoltageDropCalculatorApplication
             {
                 e.Handled = true;
             }
-        }            
-        
+        }
+
 
         private void nodeNameTextBox_Validating(object sender, CancelEventArgs e)
         {
@@ -991,6 +950,8 @@ namespace VoltageDropCalculatorApplication
         private void nodeNameCombo_TextChanged(object sender, EventArgs e)
         {
             nodeNumCombo.Text = Convert.ToString(nodeNameList.IndexOf(nodeNameCombo.Text) + 1);
+            int a = 6;
+            int b = a + 1;
         }
 
         //recursive method that reutrns the autogenerated node name. It also caters for a scenario where the node already exists and will simply increse the number.
@@ -1119,7 +1080,7 @@ namespace VoltageDropCalculatorApplication
                                     nodeVecDataTables[j].Rows[loadStartInt - 1][1] = Convert.ToString(tempNodeDataSet.Tables[i].Rows[rows][2]);
                                     nodeVecDataTables[j].Rows[loadStartInt - 1][cols - 1] = Convert.ToDouble(tempNodeDataSet.Tables[i].Rows[rows][cols]);
                                 }
-                                if(cols == 10)
+                                if (cols == 10)
                                 {
                                     nodeVecDataTables[j].Rows[loadStartInt - 1][cols - 1] = tempNodeDataSet.Tables[i].Rows[rows][cols].ToString();
                                 }
@@ -1223,7 +1184,7 @@ namespace VoltageDropCalculatorApplication
             {
                 e.Cancel = true;
                 this.errorProvider1.SetError(operatingTemperatureText, "temperature cannot be null");
-            }            
+            }
         }
 
         private void operatingTemperatureText_Validated(object sender, EventArgs e)
@@ -1239,11 +1200,11 @@ namespace VoltageDropCalculatorApplication
             {
                 ds.Merge(projectDataSet.Tables["Conductors"]);
             }
-            
 
 
 
-            if(nodeDataSet.Tables.Count!=0)
+
+            if (nodeDataSet.Tables.Count != 0)
             {
                 for (int i = 0; i < nodeCountInt; i++)
                 {
@@ -1258,7 +1219,7 @@ namespace VoltageDropCalculatorApplication
                     }
                 }
             }
-            
+
 
             t2 = t_new;
         }
@@ -1277,7 +1238,7 @@ namespace VoltageDropCalculatorApplication
             {
                 e.Cancel = true;
                 this.errorProvider1.SetError(sourceVoltageTextBox, "voltage cannot be null");
-            }  
+            }
         }
 
         private void sourceVoltageTextBox_Validated(object sender, EventArgs e)
@@ -1297,7 +1258,7 @@ namespace VoltageDropCalculatorApplication
 
         private void nodeFeederForm_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -1313,7 +1274,7 @@ namespace VoltageDropCalculatorApplication
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "HBA file(*.hba)|*.hba";           
+            sfd.Filter = "HBA file(*.hba)|*.hba";
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 projectDataSet.Tables.Clear();
@@ -1321,7 +1282,7 @@ namespace VoltageDropCalculatorApplication
                 this.Text = path;
                 string fileName = Path.ChangeExtension(sfd.FileName, ".xml");
                 projectDataSet.Merge(libraryDataSet);
-                projectDataSet.Tables.Add(paramDataTable);
+                projectDataSet.Merge(paramDataTable);
                 projectDataSet.Merge(nodeDataSet);
                 projectDataSet.Tables["Parameter Table"].Rows[0]["Current Node"] = "node" + nodeNumCombo.Text;
                 if (activeRadio.Checked)
@@ -1344,7 +1305,7 @@ namespace VoltageDropCalculatorApplication
                     System.IO.File.Delete(path);
                 }
                 System.IO.File.Move(fileName, path);
-            }            
+            }
         }
 
 

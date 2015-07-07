@@ -32,13 +32,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(nodeFeederForm));
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label9 = new System.Windows.Forms.Label();
-            this.passiveRadio = new System.Windows.Forms.RadioButton();
-            this.activeRadio = new System.Windows.Forms.RadioButton();
+            this.sourceVoltageTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.sourceVoltageTextBox = new System.Windows.Forms.TextBox();
             this.operatingTemperatureText = new System.Windows.Forms.TextBox();
+            this.passiveRadio = new System.Windows.Forms.RadioButton();
+            this.activeRadio = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.lengthNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -70,16 +71,15 @@
             this.detailsCheckBox = new System.Windows.Forms.CheckBox();
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lengthNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nodeDataGridView)).BeginInit();
@@ -98,7 +98,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 137F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 193F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 266F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 8F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 96F));
             this.tableLayoutPanel2.Controls.Add(this.sourceVoltageTextBox, 3, 1);
             this.tableLayoutPanel2.Controls.Add(this.label6, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.label10, 4, 0);
@@ -115,17 +115,52 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(896, 75);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
-            // label9
+            // sourceVoltageTextBox
             // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label9.AutoSize = true;
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(108, 12);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(73, 13);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "Active Feeder";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
+            this.sourceVoltageTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.sourceVoltageTextBox.Location = new System.Drawing.Point(387, 46);
+            this.sourceVoltageTextBox.Name = "sourceVoltageTextBox";
+            this.sourceVoltageTextBox.Size = new System.Drawing.Size(100, 20);
+            this.sourceVoltageTextBox.TabIndex = 4;
+            this.sourceVoltageTextBox.Text = "230";
+            this.sourceVoltageTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sourceVoltageTextBox_KeyPress);
+            this.sourceVoltageTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.sourceVoltageTextBox_Validating);
+            this.sourceVoltageTextBox.Validated += new System.EventHandler(this.sourceVoltageTextBox_Validated);
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(389, 12);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(96, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Source Voltage [V]";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // label10
+            // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(625, 12);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(84, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Temperature[°C]";
+            // 
+            // operatingTemperatureText
+            // 
+            this.operatingTemperatureText.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.operatingTemperatureText.Location = new System.Drawing.Point(627, 46);
+            this.operatingTemperatureText.Name = "operatingTemperatureText";
+            this.operatingTemperatureText.Size = new System.Drawing.Size(80, 20);
+            this.operatingTemperatureText.TabIndex = 4;
+            this.operatingTemperatureText.Text = "40";
+            this.operatingTemperatureText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.operatingTemperatureText_KeyPress);
+            this.operatingTemperatureText.Validating += new System.ComponentModel.CancelEventHandler(this.operatingTemperatureText_Validating);
+            this.operatingTemperatureText.Validated += new System.EventHandler(this.operatingTemperatureText_Validated);
             // 
             // passiveRadio
             // 
@@ -153,58 +188,35 @@
             this.activeRadio.UseVisualStyleBackColor = true;
             this.activeRadio.CheckedChanged += new System.EventHandler(this.activeRadio_CheckedChanged);
             // 
-            // label6
+            // label1
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(389, 12);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(96, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Source Voltage [V]";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(232, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Passive Feeder";
+            this.label1.Click += new System.EventHandler(this.label9_Click);
             // 
-            // label10
+            // label9
             // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label10.AutoSize = true;
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(625, 12);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(84, 13);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "Temperature[°C]";
-            // 
-            // sourceVoltageTextBox
-            // 
-            this.sourceVoltageTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.sourceVoltageTextBox.Location = new System.Drawing.Point(387, 46);
-            this.sourceVoltageTextBox.Name = "sourceVoltageTextBox";
-            this.sourceVoltageTextBox.Size = new System.Drawing.Size(100, 20);
-            this.sourceVoltageTextBox.TabIndex = 4;
-            this.sourceVoltageTextBox.Text = "230";
-            this.sourceVoltageTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sourceVoltageTextBox_KeyPress);
-            this.sourceVoltageTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.sourceVoltageTextBox_Validating);
-            this.sourceVoltageTextBox.Validated += new System.EventHandler(this.sourceVoltageTextBox_Validated);
-            // 
-            // operatingTemperatureText
-            // 
-            this.operatingTemperatureText.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.operatingTemperatureText.Location = new System.Drawing.Point(627, 46);
-            this.operatingTemperatureText.Name = "operatingTemperatureText";
-            this.operatingTemperatureText.Size = new System.Drawing.Size(80, 20);
-            this.operatingTemperatureText.TabIndex = 4;
-            this.operatingTemperatureText.Text = "40";
-            this.operatingTemperatureText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.operatingTemperatureText_KeyPress);
-            this.operatingTemperatureText.Validating += new System.ComponentModel.CancelEventHandler(this.operatingTemperatureText_Validating);
-            this.operatingTemperatureText.Validated += new System.EventHandler(this.operatingTemperatureText_Validated);
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(108, 12);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(73, 13);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "Active Feeder";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // lengthNumericUpDown
             // 
             this.lengthNumericUpDown.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lengthNumericUpDown.ForeColor = System.Drawing.Color.SteelBlue;
-            this.lengthNumericUpDown.Location = new System.Drawing.Point(520, 34);
+            this.lengthNumericUpDown.Location = new System.Drawing.Point(518, 34);
             this.lengthNumericUpDown.Minimum = new decimal(new int[] {
             2,
             0,
@@ -238,7 +250,7 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label3.Location = new System.Drawing.Point(272, 8);
+            this.label3.Location = new System.Drawing.Point(271, 8);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 1;
@@ -255,7 +267,6 @@
             this.nodeNumCombo.Name = "nodeNumCombo";
             this.nodeNumCombo.Size = new System.Drawing.Size(96, 21);
             this.nodeNumCombo.TabIndex = 2;
-            this.nodeNumCombo.Visible = false;
             this.nodeNumCombo.TextChanged += new System.EventHandler(this.nodeNumCombo_TextChanged);
             // 
             // label7
@@ -263,7 +274,7 @@
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label7.Location = new System.Drawing.Point(526, 2);
+            this.label7.Location = new System.Drawing.Point(524, 2);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(93, 26);
             this.label7.TabIndex = 1;
@@ -275,9 +286,9 @@
             this.cableSelectCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cableSelectCombo.ForeColor = System.Drawing.Color.SteelBlue;
             this.cableSelectCombo.FormattingEnabled = true;
-            this.cableSelectCombo.Location = new System.Drawing.Point(633, 33);
+            this.cableSelectCombo.Location = new System.Drawing.Point(630, 33);
             this.cableSelectCombo.Name = "cableSelectCombo";
-            this.cableSelectCombo.Size = new System.Drawing.Size(98, 21);
+            this.cableSelectCombo.Size = new System.Drawing.Size(97, 21);
             this.cableSelectCombo.TabIndex = 2;
             this.cableSelectCombo.TextChanged += new System.EventHandler(this.cableSelectCombo_TextChanged);
             // 
@@ -286,7 +297,7 @@
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label8.Location = new System.Drawing.Point(633, 8);
+            this.label8.Location = new System.Drawing.Point(630, 8);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(34, 13);
             this.label8.TabIndex = 1;
@@ -327,7 +338,7 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.45647F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 169F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 229F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 230F));
             this.tableLayoutPanel5.Controls.Add(this.cancelButton, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.proceedToVCalcButton, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.selectEndNodeCombo, 1, 0);
@@ -355,7 +366,7 @@
             // 
             this.proceedToVCalcButton.Enabled = false;
             this.proceedToVCalcButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.proceedToVCalcButton.Location = new System.Drawing.Point(669, 3);
+            this.proceedToVCalcButton.Location = new System.Drawing.Point(668, 3);
             this.proceedToVCalcButton.Name = "proceedToVCalcButton";
             this.proceedToVCalcButton.Size = new System.Drawing.Size(214, 30);
             this.proceedToVCalcButton.TabIndex = 0;
@@ -371,7 +382,7 @@
             this.selectEndNodeCombo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectEndNodeCombo.ForeColor = System.Drawing.Color.SteelBlue;
             this.selectEndNodeCombo.FormattingEnabled = true;
-            this.selectEndNodeCombo.Location = new System.Drawing.Point(241, 5);
+            this.selectEndNodeCombo.Location = new System.Drawing.Point(240, 5);
             this.selectEndNodeCombo.Name = "selectEndNodeCombo";
             this.selectEndNodeCombo.Size = new System.Drawing.Size(71, 26);
             this.selectEndNodeCombo.TabIndex = 6;
@@ -383,7 +394,7 @@
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(446, 11);
+            this.label18.Location = new System.Drawing.Point(445, 11);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(88, 13);
             this.label18.TabIndex = 5;
@@ -398,7 +409,7 @@
             this.endNodeCombo.ForeColor = System.Drawing.Color.SteelBlue;
             this.endNodeCombo.FormattingEnabled = true;
             this.endNodeCombo.ItemHeight = 20;
-            this.endNodeCombo.Location = new System.Drawing.Point(540, 4);
+            this.endNodeCombo.Location = new System.Drawing.Point(539, 4);
             this.endNodeCombo.Name = "endNodeCombo";
             this.endNodeCombo.Size = new System.Drawing.Size(123, 28);
             this.endNodeCombo.TabIndex = 6;
@@ -416,7 +427,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.79793F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.30743F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.05686F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 158F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 161F));
             this.tableLayoutPanel4.Controls.Add(this.lengthNumericUpDown, 5, 1);
             this.tableLayoutPanel4.Controls.Add(this.label7, 5, 0);
             this.tableLayoutPanel4.Controls.Add(this.nodeNameTextBox, 0, 1);
@@ -470,7 +481,7 @@
             this.deleteNodeButton.ForeColor = System.Drawing.Color.SteelBlue;
             this.deleteNodeButton.Location = new System.Drawing.Point(137, 33);
             this.deleteNodeButton.Name = "deleteNodeButton";
-            this.deleteNodeButton.Size = new System.Drawing.Size(116, 22);
+            this.deleteNodeButton.Size = new System.Drawing.Size(115, 22);
             this.deleteNodeButton.TabIndex = 4;
             this.deleteNodeButton.Text = "Delete Current Node";
             this.deleteNodeButton.UseVisualStyleBackColor = true;
@@ -493,7 +504,7 @@
             this.label22.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label22.AutoSize = true;
             this.label22.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label22.Location = new System.Drawing.Point(380, 8);
+            this.label22.Location = new System.Drawing.Point(379, 8);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(66, 13);
             this.label22.TabIndex = 1;
@@ -503,7 +514,7 @@
             // 
             this.nodeNameCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nodeNameCombo.FormattingEnabled = true;
-            this.nodeNameCombo.Location = new System.Drawing.Point(380, 33);
+            this.nodeNameCombo.Location = new System.Drawing.Point(379, 33);
             this.nodeNameCombo.Name = "nodeNameCombo";
             this.nodeNameCombo.Size = new System.Drawing.Size(116, 21);
             this.nodeNameCombo.TabIndex = 7;
@@ -514,7 +525,7 @@
             this.addNodeButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.addNodeButton.Enabled = false;
             this.addNodeButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.addNodeButton.Location = new System.Drawing.Point(261, 33);
+            this.addNodeButton.Location = new System.Drawing.Point(260, 33);
             this.addNodeButton.Name = "addNodeButton";
             this.addNodeButton.Size = new System.Drawing.Size(78, 22);
             this.addNodeButton.TabIndex = 4;
@@ -527,7 +538,7 @@
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label5.Location = new System.Drawing.Point(350, 37);
+            this.label5.Location = new System.Drawing.Point(349, 37);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(23, 13);
             this.label5.TabIndex = 1;
@@ -538,7 +549,7 @@
             this.label17.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label17.AutoSize = true;
             this.label17.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label17.Location = new System.Drawing.Point(738, 8);
+            this.label17.Location = new System.Drawing.Point(734, 8);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(117, 13);
             this.label17.TabIndex = 5;
@@ -549,7 +560,7 @@
             this.nodeCount.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nodeCount.AutoSize = true;
             this.nodeCount.ForeColor = System.Drawing.Color.SteelBlue;
-            this.nodeCount.Location = new System.Drawing.Point(738, 37);
+            this.nodeCount.Location = new System.Drawing.Point(734, 37);
             this.nodeCount.Name = "nodeCount";
             this.nodeCount.Size = new System.Drawing.Size(13, 13);
             this.nodeCount.TabIndex = 5;
@@ -623,18 +634,6 @@
             this.label4.TabIndex = 13;
             this.label4.Text = "Search Load/DG";
             // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(232, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Passive Feeder";
-            this.label1.Click += new System.EventHandler(this.label9_Click);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -662,43 +661,43 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.openToolStripMenuItem.Text = "Open";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(111, 6);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(111, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
             // 
             // nodeFeederForm
             // 
