@@ -54,7 +54,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.78723F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.21277F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 176F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 185F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 186F));
             this.tableLayoutPanel1.Controls.Add(this.selectLibraryLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.loadTypeCombo, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.resetLibrary, 3, 0);
@@ -99,7 +99,7 @@
             // 
             // addCableButton
             // 
-            this.addCableButton.Location = new System.Drawing.Point(498, 3);
+            this.addCableButton.Location = new System.Drawing.Point(497, 3);
             this.addCableButton.Name = "addCableButton";
             this.addCableButton.Size = new System.Drawing.Size(170, 23);
             this.addCableButton.TabIndex = 3;

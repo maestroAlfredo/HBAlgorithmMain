@@ -1308,6 +1308,17 @@ namespace VoltageDropCalculatorApplication
             }
         }
 
+        private void loadsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            libraryForm frm = new libraryForm("Loads", true, libraryDataSet);
+            frm.ShowDialog();
+        }
+
+        private void generatorsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
     }
 }

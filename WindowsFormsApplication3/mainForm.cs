@@ -122,7 +122,7 @@ namespace VoltageDropCalculatorApplication
                 libraryDataSet.WriteXml("Libraries.xml", XmlWriteMode.WriteSchema);
                 loadclick = 0;
                 bool enabled = false;
-                libraryForm frm = new libraryForm("Loads", enabled);
+                libraryForm frm = new libraryForm("Loads", enabled, libraryDataSet);
                 frm.ShowDialog();
             }
 
@@ -173,7 +173,7 @@ namespace VoltageDropCalculatorApplication
                 libraryDataSet.WriteXml("Libraries.xml", XmlWriteMode.WriteSchema);
                 //genclick = 0;
                 bool enabled = false;
-                libraryForm frm = new libraryForm("Generators", enabled);
+                libraryForm frm = new libraryForm("Generators", enabled, libraryDataSet);
                 frm.ShowDialog();
             }
 
@@ -191,7 +191,7 @@ namespace VoltageDropCalculatorApplication
                 DataSet ds = new DataSet();
                 ds.ReadXml("Libraries.xml");
                 bool enabled = true;
-                libraryForm frm = new libraryForm("Loads", enabled);
+                libraryForm frm = new libraryForm("Loads", enabled, ds);
 
                 if (!ds.Tables.Contains("Loads"))
                 {
@@ -285,7 +285,7 @@ namespace VoltageDropCalculatorApplication
                 resetLoadsGens(libraryDataSet);
 
                 bool enabled = true;
-                libraryForm frm = new libraryForm("Conductors", enabled);
+                libraryForm frm = new libraryForm("Conductors", enabled, libraryDataSet);
                 frm.ShowDialog();
 
 

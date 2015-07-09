@@ -28,13 +28,15 @@ namespace VoltageDropCalculatorApplication
             }
         }
 
-        public libraryForm(string selectedloadtype, bool enabled)
+        public libraryForm(string selectedloadtype, bool enabled, DataSet libraryDataSet)
         {
             InitializeComponent();
+            this.libraryDataSet = libraryDataSet;
             loadTypeCombo.Text = selectedloadtype; //constructor to load library form depending on whether load or generator is selected
             loadTypeCombo.Enabled = enabled;
-            libraryDataSet.ReadXml("Libraries.xml");
+            //libraryDataSet.ReadXml("Libraries.xml");
             List<string> LoadType = new List<string>();
+           
             foreach (DataTable dt in libraryDataSet.Tables)
             {
                 LoadType.Add(dt.TableName);
