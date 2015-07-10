@@ -173,6 +173,8 @@ namespace VoltageDropCalculatorApplication
             nodeDataGridView.Columns[12].Visible = false;
             nodeDataGridView.Columns[13].Visible = false;
             nodeDataGridView.Columns[14].Visible = false;
+            nodeDataGridView.Columns[11].DefaultCellStyle.Format = "N3";
+            nodeDataGridView.Columns[12].DefaultCellStyle.Format = "N3";
             closeTableEdits();
 
         }
@@ -288,6 +290,8 @@ namespace VoltageDropCalculatorApplication
             nodeDataGridView.Columns[12].Visible = false;
             nodeDataGridView.Columns[13].Visible = false;
             nodeDataGridView.Columns[14].Visible = false;
+            nodeDataGridView.Columns[11].DefaultCellStyle.Format = "N3";
+            nodeDataGridView.Columns[12].DefaultCellStyle.Format = "N3";
             closeTableEdits();
 
         }
@@ -1124,6 +1128,9 @@ namespace VoltageDropCalculatorApplication
                 nodeDataGridView.Columns[12].Visible = !false;
                 nodeDataGridView.Columns[13].Visible = !false;
                 nodeDataGridView.Columns[14].Visible = !false;
+                nodeDataGridView.Columns[11].DefaultCellStyle.Format = "N3";
+                nodeDataGridView.Columns[12].DefaultCellStyle.Format = "N3";
+
             }
             else
             {
@@ -1176,60 +1183,6 @@ namespace VoltageDropCalculatorApplication
         {
             if (activeRadio.Checked == true) p = 90.0;
             else p = 10.0;
-        }
-
-        private void operatingTemperatureText_Validating(object sender, CancelEventArgs e)
-        {
-            if (operatingTemperatureText.Text == "")
-            {
-                e.Cancel = true;
-                this.errorProvider1.SetError(operatingTemperatureText, "temperature cannot be null");
-            }
-        }
-
-        private void operatingTemperatureText_Validated(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(operatingTemperatureText, "");
-            double t_new = Convert.ToDouble(operatingTemperatureText.Text);
-            DataSet ds = new DataSet();
-            if (!projectDataSet.Tables.Contains("Conductors"))
-            {
-                ds.ReadXml("Libraries.xml");
-            }
-            else
-            {
-                ds.Merge(projectDataSet.Tables["Conductors"]);
-            }
-
-
-
-
-            if (nodeDataSet.Tables.Count != 0)
-            {
-                for (int i = 0; i < nodeCountInt; i++)
-                {
-                    for (int rows = 0; rows < nodeDataSet.Tables[i].Rows.Count; rows++)
-                    {
-                        string cable = nodeDataSet.Tables[i].Rows[rows][10].ToString();
-                        DataRow dr = ds.Tables["Conductors"].AsEnumerable().SingleOrDefault(r => r.Field<string>("Code") == cable);
-                        double T = Convert.ToDouble(dr["T"]);
-
-                        nodeDataSet.Tables[i].Rows[rows][11] = Convert.ToDouble(nodeDataSet.Tables[i].Rows[rows][11]) * (T + t_new) / (T + t2);
-                        nodeDataSet.Tables[i].Rows[rows][12] = Convert.ToDouble(nodeDataSet.Tables[i].Rows[rows][12]) * (T + t_new) / (T + t2);
-                    }
-                }
-            }
-
-
-            t2 = t_new;
-        }
-
-        private void operatingTemperatureText_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
         }
 
         private void sourceVoltageTextBox_Validating(object sender, CancelEventArgs e)
@@ -1295,7 +1248,7 @@ namespace VoltageDropCalculatorApplication
                     projectDataSet.Tables["Parameter Table"].Rows[0]["active"] = false;
                     projectDataSet.Tables["Parameter Table"].Rows[0]["passive"] = true;
                 }
-                projectDataSet.Tables["Parameter Table"].Rows[0]["temp"] = Convert.ToDouble(operatingTemperatureText.Text);
+                projectDataSet.Tables["Parameter Table"].Rows[0]["temp"] = Convert.ToDouble(operatingTempNumUpDown.Value);
                 projectDataSet.Tables["Parameter Table"].Rows[0]["sourceVoltage"] = Convert.ToDouble(sourceVoltageTextBox.Text);
 
                 projectDataSet.WriteXml(fileName, XmlWriteMode.WriteSchema);
@@ -1317,6 +1270,57 @@ namespace VoltageDropCalculatorApplication
         private void generatorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void nodeDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if ((e.ColumnIndex == 11||e.ColumnIndex == 12) && e.RowIndex != this.nodeDataGridView.NewRowIndex)
+            {                
+                double d = double.Parse(e.Value.ToString());
+                e.Value = d.ToString("N2");
+            }
+        }
+
+        private void operatingTemperatureText_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void operatingTempNumUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            
+            double t_new = Convert.ToDouble(operatingTempNumUpDown.Value);
+            DataSet ds = new DataSet();
+            if (!projectDataSet.Tables.Contains("Conductors"))
+            {
+                ds.ReadXml("Libraries.xml");
+            }
+            else
+            {
+                ds.Merge(projectDataSet.Tables["Conductors"]);
+            }
+
+
+
+
+            if (nodeDataSet.Tables.Count != 0)
+            {
+                for (int i = 0; i < nodeCountInt; i++)
+                {
+                    for (int rows = 0; rows < nodeDataSet.Tables[i].Rows.Count; rows++)
+                    {
+                        string cable = nodeDataSet.Tables[i].Rows[rows][10].ToString();
+                        DataRow dr = ds.Tables["Conductors"].AsEnumerable().SingleOrDefault(r => r.Field<string>("Code") == cable);
+                        double T = Convert.ToDouble(dr["T"]);
+
+                        nodeDataSet.Tables[i].Rows[rows][11] = Convert.ToDouble(nodeDataSet.Tables[i].Rows[rows][11]) * (T + t_new) / (T + t2);
+                        nodeDataSet.Tables[i].Rows[rows][12] = Convert.ToDouble(nodeDataSet.Tables[i].Rows[rows][12]) * (T + t_new) / (T + t2);
+                    }
+                }
+            }
+
+
+            t2 = t_new;
         }
 
 

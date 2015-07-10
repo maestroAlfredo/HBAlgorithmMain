@@ -207,7 +207,7 @@
             // numericUpDownRisk
             // 
             this.numericUpDownRisk.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.numericUpDownRisk.DecimalPlaces = 1;
+            this.numericUpDownRisk.DecimalPlaces = 2;
             this.numericUpDownRisk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDownRisk.Location = new System.Drawing.Point(715, 78);
             this.numericUpDownRisk.Name = "numericUpDownRisk";

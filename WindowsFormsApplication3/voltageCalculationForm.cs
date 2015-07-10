@@ -57,7 +57,7 @@ namespace VoltageDropCalculatorApplication
             nodeSummaryDataGridView.Columns[8].Visible = false;
             nodeSummaryDataGridView.Columns[9].Visible = false;
             nodeSummaryDataGridView.Columns[10].Visible = false;
-            nodeSummaryDataGridView.Columns[11].Visible = false;
+            nodeSummaryDataGridView.Columns[11].Visible = false;            
             closeTableEdits();
             voltCalculation();
         }
@@ -856,7 +856,7 @@ namespace VoltageDropCalculatorApplication
                 for (int rows = 0; rows < nodeVecDataSet.Tables[i].Rows.Count; rows++)
                 {
                     string cable = nodeVecDataSet.Tables[i].Rows[rows][9].ToString();
-                    DataRow dr = ds.Tables[2].AsEnumerable().SingleOrDefault(r => r.Field<string>("Code") == cable);
+                    DataRow dr = ds.Tables["Conductors"].AsEnumerable().SingleOrDefault(r => r.Field<string>("Code") == cable);
                     double T = Convert.ToDouble(dr["T"]);
 
                     nodeVecDataSet.Tables[i].Rows[rows][10] = Convert.ToDouble(nodeVecDataSet.Tables[i].Rows[rows][10]) * (T + t_new) / (T + t_old);
