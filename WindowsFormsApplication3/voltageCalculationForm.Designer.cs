@@ -45,7 +45,6 @@
             this.voltageProfileChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.numericUpDownRisk = new System.Windows.Forms.NumericUpDown();
-            this.temperatureTextBox = new System.Windows.Forms.TextBox();
             this.bluePhaseVoltageText = new System.Windows.Forms.RichTextBox();
             this.numericUpDownVoltage = new System.Windows.Forms.NumericUpDown();
             this.whitePhaseVoltageText = new System.Windows.Forms.RichTextBox();
@@ -61,6 +60,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.nodeSummaryDataGridView = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
+            this.tempNumUpDown = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -72,6 +72,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVoltage)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nodeSummaryDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tempNumUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -181,20 +182,20 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.45238F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.02381F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.38095F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.26191F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.42857F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.21428F));
             this.tableLayoutPanel4.Controls.Add(this.numericUpDownRisk, 5, 1);
-            this.tableLayoutPanel4.Controls.Add(this.temperatureTextBox, 4, 1);
             this.tableLayoutPanel4.Controls.Add(this.bluePhaseVoltageText, 2, 1);
             this.tableLayoutPanel4.Controls.Add(this.numericUpDownVoltage, 3, 1);
             this.tableLayoutPanel4.Controls.Add(this.whitePhaseVoltageText, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.label6, 5, 0);
             this.tableLayoutPanel4.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.label2, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.label3, 2, 0);
             this.tableLayoutPanel4.Controls.Add(this.label4, 3, 0);
             this.tableLayoutPanel4.Controls.Add(this.label5, 4, 0);
-            this.tableLayoutPanel4.Controls.Add(this.label6, 5, 0);
             this.tableLayoutPanel4.Controls.Add(this.redPhaseVoltageText, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.tempNumUpDown, 4, 1);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 620);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -209,7 +210,7 @@
             this.numericUpDownRisk.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.numericUpDownRisk.DecimalPlaces = 2;
             this.numericUpDownRisk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownRisk.Location = new System.Drawing.Point(715, 78);
+            this.numericUpDownRisk.Location = new System.Drawing.Point(711, 78);
             this.numericUpDownRisk.Name = "numericUpDownRisk";
             this.numericUpDownRisk.Size = new System.Drawing.Size(61, 26);
             this.numericUpDownRisk.TabIndex = 6;
@@ -219,18 +220,6 @@
             0,
             0});
             this.numericUpDownRisk.ValueChanged += new System.EventHandler(this.numericUpDownRisk_ValueChanged);
-            // 
-            // temperatureTextBox
-            // 
-            this.temperatureTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.temperatureTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.temperatureTextBox.Location = new System.Drawing.Point(539, 78);
-            this.temperatureTextBox.Name = "temperatureTextBox";
-            this.temperatureTextBox.Size = new System.Drawing.Size(80, 26);
-            this.temperatureTextBox.TabIndex = 5;
-            this.temperatureTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.temperatureTextBox_KeyPress);
-            this.temperatureTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.temperatureTextBox_Validating);
-            this.temperatureTextBox.Validated += new System.EventHandler(this.temperatureTextBox_Validated);
             // 
             // bluePhaseVoltageText
             // 
@@ -340,7 +329,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(528, 21);
+            this.label5.Location = new System.Drawing.Point(520, 21);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(121, 18);
             this.label5.TabIndex = 3;
@@ -348,11 +337,11 @@
             // 
             // label6
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(774, 21);
+            this.label6.Location = new System.Drawing.Point(710, 21);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(63, 18);
             this.label6.TabIndex = 4;
@@ -462,6 +451,22 @@
             this.label9.Text = "Load and Generator Distribution";
             this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
+            // tempNumUpDown
+            // 
+            this.tempNumUpDown.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tempNumUpDown.DecimalPlaces = 2;
+            this.tempNumUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tempNumUpDown.Location = new System.Drawing.Point(532, 78);
+            this.tempNumUpDown.Name = "tempNumUpDown";
+            this.tempNumUpDown.Size = new System.Drawing.Size(86, 26);
+            this.tempNumUpDown.TabIndex = 3;
+            this.tempNumUpDown.Value = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            this.tempNumUpDown.ValueChanged += new System.EventHandler(this.tempNumUpDown_ValueChanged);
+            // 
             // voltageCalculationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -487,6 +492,7 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nodeSummaryDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tempNumUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -503,7 +509,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox temperatureTextBox;
         private System.Windows.Forms.DataVisualization.Charting.Chart voltageProfileChart;
         private System.Windows.Forms.NumericUpDown numericUpDownVoltage;
         private System.Windows.Forms.NumericUpDown numericUpDownRisk;
@@ -514,5 +519,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown tempNumUpDown;
     }
 }

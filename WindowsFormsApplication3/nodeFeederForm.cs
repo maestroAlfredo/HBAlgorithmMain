@@ -1185,29 +1185,29 @@ namespace VoltageDropCalculatorApplication
             else p = 10.0;
         }
 
-        private void sourceVoltageTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            if (sourceVoltageTextBox.Text == "")
-            {
-                e.Cancel = true;
-                this.errorProvider1.SetError(sourceVoltageTextBox, "voltage cannot be null");
-            }
-        }
+        //private void sourceVoltageTextBox_Validating(object sender, CancelEventArgs e)
+        //{
+        //    if (sourceVoltageTextBox.Text == "")
+        //    {
+        //        e.Cancel = true;
+        //        this.errorProvider1.SetError(sourceVoltageTextBox, "voltage cannot be null");
+        //    }
+        //}
 
-        private void sourceVoltageTextBox_Validated(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(sourceVoltageTextBox, "");
-            Vs = Convert.ToDouble(sourceVoltageTextBox.Text);
+        //private void sourceVoltageTextBox_Validated(object sender, EventArgs e)
+        //{
+        //    errorProvider1.SetError(sourceVoltageTextBox, "");
+        //    Vs = Convert.ToDouble(sourceVoltageTextBox.Text);
 
-        }
+        //}
 
-        private void sourceVoltageTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
+        //private void sourceVoltageTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+        //    {
+        //        e.Handled = true;
+        //    }
+        //}
 
         private void nodeFeederForm_Load(object sender, EventArgs e)
         {
@@ -1249,7 +1249,7 @@ namespace VoltageDropCalculatorApplication
                     projectDataSet.Tables["Parameter Table"].Rows[0]["passive"] = true;
                 }
                 projectDataSet.Tables["Parameter Table"].Rows[0]["temp"] = Convert.ToDouble(operatingTempNumUpDown.Value);
-                projectDataSet.Tables["Parameter Table"].Rows[0]["sourceVoltage"] = Convert.ToDouble(sourceVoltageTextBox.Text);
+                projectDataSet.Tables["Parameter Table"].Rows[0]["sourceVoltage"] = Convert.ToDouble(sourceVoltageNumUpDown.Value);
 
                 projectDataSet.WriteXml(fileName, XmlWriteMode.WriteSchema);
 
@@ -1265,6 +1265,35 @@ namespace VoltageDropCalculatorApplication
         {
             libraryForm frm = new libraryForm("Loads", true, libraryDataSet);
             frm.ShowDialog();
+            //Code picks up any changes to the loads database and loads them
+            DataTable resultLoads = new DataTable();
+
+            var table = libraryDataSet.Tables["Loads"].Select("Selected = true");
+            if (table.AsEnumerable().Any())
+            {
+                resultLoads = table.CopyToDataTable();
+                loadCount = resultLoads.Rows.Count;
+            }
+
+            DataTable resultGens = new DataTable();
+            var table1 = libraryDataSet.Tables["Generators"].Select("Selected = true");
+            if (table1.AsEnumerable().Any())
+            {
+                resultGens = table1.CopyToDataTable();
+                genCount = resultGens.Rows.Count;
+            }
+
+
+            //adds the selected Gens to the selected loads table
+            foreach (DataRow dr in resultGens.Rows)
+            {
+                if (table.AsEnumerable().Any()) resultLoads.Rows.Add(dr.ItemArray);
+                else
+                {
+                    resultLoads = resultGens.Copy();
+                    break;
+                }
+            }         
         }
 
         private void generatorsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1321,6 +1350,11 @@ namespace VoltageDropCalculatorApplication
 
 
             t2 = t_new;
+        }
+
+        private void sourceVoltageNumUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            Vs = Convert.ToDouble(sourceVoltageNumUpDown.Value);
         }
 
 

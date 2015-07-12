@@ -39,7 +39,7 @@ namespace VoltageDropCalculatorApplication
             p = risk;
             numericUpDownRisk.Value = (decimal)p;
             numericUpDownVoltage.Value = (decimal)Vs;
-            temperatureTextBox.Text = t_old.ToString();
+            tempNumUpDown.Value = Convert.ToDecimal(t_old);
             errorProvider1 = new ErrorProvider();
             voltageProfileArray = new double[nodeNum + 1, 6];
             //customerArray = new int[3];
@@ -821,35 +821,40 @@ namespace VoltageDropCalculatorApplication
 
         }
 
-        private void temperatureTextBox_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        //private void temperatureTextBox_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        //{
+        //    if (temperatureTextBox.Text == "")
+        //    {
+        //        e.Cancel = true;
+        //        this.errorProvider1.SetError(temperatureTextBox, "temperature cannot be null");
+        //    }            
+        //}
+
+
+
+        //private void temperatureTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+        //    {
+        //        e.Handled = true;
+        //    }
+
+        //}
+
+        //private void temperatureTextBox_Validated(object sender, EventArgs e)
+        //{
+        //    errorProvider1.SetError(temperatureTextBox, "");
+
+        //}
+
+        private void tempNumUpDown_ValueChanged(object sender, EventArgs e)
         {
-            if (temperatureTextBox.Text == "")
-            {
-                e.Cancel = true;
-                this.errorProvider1.SetError(temperatureTextBox, "temperature cannot be null");
-            }            
-        }
-
-
-
-        private void temperatureTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-
-        }
-
-        private void temperatureTextBox_Validated(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(temperatureTextBox, "");
-            double t_new = Convert.ToDouble(temperatureTextBox.Text);
+            double t_new = Convert.ToDouble(tempNumUpDown.Value);
             DataSet ds = new DataSet();
             ds.ReadXml("Libraries.xml");
 
-            
-           
+
+
 
             for (int i = 0; i < nodeNum; i++)
             {
