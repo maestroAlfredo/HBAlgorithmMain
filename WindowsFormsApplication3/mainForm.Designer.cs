@@ -37,14 +37,15 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.editLibraryButton = new System.Windows.Forms.Button();
+            this.newConductorLibraryButton = new System.Windows.Forms.Button();
             this.newFeederButton = new System.Windows.Forms.Button();
             this.loadProjectButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.newConductorLibraryButton = new System.Windows.Forms.Button();
-            this.editLibraryButton = new System.Windows.Forms.Button();
+            this.labelMainFormText = new System.Windows.Forms.Label();
             this.toolTipEdit = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -136,11 +137,43 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(300, 590);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
+            // editLibraryButton
+            // 
+            this.editLibraryButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.editLibraryButton.BackColor = System.Drawing.Color.Transparent;
+            this.editLibraryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editLibraryButton.ForeColor = System.Drawing.Color.SteelBlue;
+            this.editLibraryButton.Location = new System.Drawing.Point(10, 483);
+            this.editLibraryButton.Name = "editLibraryButton";
+            this.editLibraryButton.Size = new System.Drawing.Size(280, 64);
+            this.editLibraryButton.TabIndex = 0;
+            this.editLibraryButton.Text = "Edit Existing Libraries";
+            this.editLibraryButton.UseVisualStyleBackColor = false;
+            this.editLibraryButton.Click += new System.EventHandler(this.editLibraryButton_Click);
+            this.editLibraryButton.MouseLeave += new System.EventHandler(this.editLibraryButton_MouseLeave);
+            this.editLibraryButton.MouseHover += new System.EventHandler(this.editLibraryButton_MouseHover);
+            // 
+            // newConductorLibraryButton
+            // 
+            this.newConductorLibraryButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.newConductorLibraryButton.BackColor = System.Drawing.Color.Transparent;
+            this.newConductorLibraryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newConductorLibraryButton.ForeColor = System.Drawing.Color.SteelBlue;
+            this.newConductorLibraryButton.Location = new System.Drawing.Point(10, 336);
+            this.newConductorLibraryButton.Name = "newConductorLibraryButton";
+            this.newConductorLibraryButton.Size = new System.Drawing.Size(280, 64);
+            this.newConductorLibraryButton.TabIndex = 0;
+            this.newConductorLibraryButton.Text = "Create New Libraries";
+            this.newConductorLibraryButton.UseVisualStyleBackColor = false;
+            this.newConductorLibraryButton.Click += new System.EventHandler(this.newConductorLibraryButton_Click);
+            this.newConductorLibraryButton.MouseLeave += new System.EventHandler(this.newConductorLibraryButton_MouseLeave);
+            this.newConductorLibraryButton.MouseHover += new System.EventHandler(this.newConductorLibraryButton_MouseHover_1);
+            // 
             // newFeederButton
             // 
             this.newFeederButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.newFeederButton.BackColor = System.Drawing.Color.Transparent;
-            this.newFeederButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newFeederButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newFeederButton.ForeColor = System.Drawing.Color.SteelBlue;
             this.newFeederButton.Location = new System.Drawing.Point(10, 42);
             this.newFeederButton.Name = "newFeederButton";
@@ -149,11 +182,13 @@
             this.newFeederButton.Text = "New Feeder Design";
             this.newFeederButton.UseVisualStyleBackColor = false;
             this.newFeederButton.Click += new System.EventHandler(this.button2_Click);
+            this.newFeederButton.MouseLeave += new System.EventHandler(this.newFeederButton_MouseLeave);
+            this.newFeederButton.MouseHover += new System.EventHandler(this.newFeederButton_MouseHover);
             // 
             // loadProjectButton
             // 
             this.loadProjectButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.loadProjectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadProjectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loadProjectButton.ForeColor = System.Drawing.Color.SteelBlue;
             this.loadProjectButton.Location = new System.Drawing.Point(10, 189);
             this.loadProjectButton.Name = "loadProjectButton";
@@ -162,6 +197,8 @@
             this.loadProjectButton.Text = "Load Previous Project";
             this.loadProjectButton.UseVisualStyleBackColor = true;
             this.loadProjectButton.Click += new System.EventHandler(this.loadProjectButton_Click);
+            this.loadProjectButton.MouseLeave += new System.EventHandler(this.loadProjectButton_MouseLeave);
+            this.loadProjectButton.MouseHover += new System.EventHandler(this.loadProjectButton_MouseHover);
             // 
             // tableLayoutPanel2
             // 
@@ -185,15 +222,16 @@
             this.tableLayoutPanel4.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset;
             this.tableLayoutPanel4.ColumnCount = 1;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Controls.Add(this.pictureBox1, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.pictureBox1, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.labelMainFormText, 0, 2);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 3;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(592, 584);
             this.tableLayoutPanel4.TabIndex = 2;
             this.tableLayoutPanel4.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel4_Paint);
@@ -204,7 +242,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label1.Location = new System.Drawing.Point(22, 70);
+            this.label1.Location = new System.Drawing.Point(22, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(547, 55);
             this.label1.TabIndex = 3;
@@ -216,42 +254,26 @@
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Location = new System.Drawing.Point(5, 198);
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(5, 93);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(582, 185);
+            this.pictureBox1.Size = new System.Drawing.Size(582, 397);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // newConductorLibraryButton
+            // labelMainFormText
             // 
-            this.newConductorLibraryButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.newConductorLibraryButton.BackColor = System.Drawing.Color.Transparent;
-            this.newConductorLibraryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newConductorLibraryButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.newConductorLibraryButton.Location = new System.Drawing.Point(10, 336);
-            this.newConductorLibraryButton.Name = "newConductorLibraryButton";
-            this.newConductorLibraryButton.Size = new System.Drawing.Size(280, 64);
-            this.newConductorLibraryButton.TabIndex = 0;
-            this.newConductorLibraryButton.Text = "Create New Libraries";
-            this.newConductorLibraryButton.UseVisualStyleBackColor = false;
-            this.newConductorLibraryButton.Click += new System.EventHandler(this.newConductorLibraryButton_Click);
-            this.newConductorLibraryButton.MouseHover += new System.EventHandler(this.newConductorLibraryButton_MouseHover);
-            // 
-            // editLibraryButton
-            // 
-            this.editLibraryButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.editLibraryButton.BackColor = System.Drawing.Color.Transparent;
-            this.editLibraryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editLibraryButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.editLibraryButton.Location = new System.Drawing.Point(10, 483);
-            this.editLibraryButton.Name = "editLibraryButton";
-            this.editLibraryButton.Size = new System.Drawing.Size(280, 64);
-            this.editLibraryButton.TabIndex = 0;
-            this.editLibraryButton.Text = "Edit Existing Libraries";
-            this.editLibraryButton.UseVisualStyleBackColor = false;
-            this.editLibraryButton.Click += new System.EventHandler(this.editLibraryButton_Click);
-            this.editLibraryButton.MouseHover += new System.EventHandler(this.editLibraryButton_MouseHover);
+            this.labelMainFormText.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelMainFormText.AutoSize = true;
+            this.labelMainFormText.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelMainFormText.ForeColor = System.Drawing.Color.SteelBlue;
+            this.labelMainFormText.Location = new System.Drawing.Point(258, 524);
+            this.labelMainFormText.Name = "labelMainFormText";
+            this.labelMainFormText.Size = new System.Drawing.Size(76, 29);
+            this.labelMainFormText.TabIndex = 4;
+            this.labelMainFormText.Text = "Hello!";
             // 
             // mainForm
             // 
@@ -295,11 +317,12 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button newConductorLibraryButton;
         private System.Windows.Forms.Button editLibraryButton;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTipEdit;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label labelMainFormText;
     }
 }
 

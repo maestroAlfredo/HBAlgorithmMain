@@ -223,6 +223,13 @@ namespace VoltageDropCalculatorApplication
         private void editLibraryButton_MouseHover(object sender, EventArgs e)
         {
             //infoLabel.Text = "Click this button to edit the libraries that you may have predefined from previous projects";
+            labelMainFormText.Text = "Edit existing libraries";
+            labelMainFormText.Font = new Font(labelMainFormText.Font, FontStyle.Italic);
+
+            // Make the text on the label bold
+            var font = editLibraryButton.Font;
+            editLibraryButton.Font = new Font(font, FontStyle.Bold);
+            font.Dispose();
         }
 
         private void newLoadLibraryButton_MouseHover(object sender, EventArgs e)
@@ -410,6 +417,82 @@ namespace VoltageDropCalculatorApplication
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void newFeederButton_MouseHover(object sender, EventArgs e)
+        {
+            labelMainFormText.Text = "Create a new feeder profile";
+            labelMainFormText.Font = new Font(labelMainFormText.Font, FontStyle.Italic);
+
+            // Make the text on the label bold
+            var font = newFeederButton.Font;
+            newFeederButton.Font = new Font(font, FontStyle.Bold);
+            font.Dispose();
+
+        }
+
+        private void newFeederButton_MouseLeave(object sender, EventArgs e)
+        {
+            labelMainFormText.Text = "";
+
+            // Make the text on the label regular
+            var font = newFeederButton.Font;
+            newFeederButton.Font = new Font(font, FontStyle.Regular);
+            font.Dispose();
+        }
+
+        private void loadProjectButton_MouseHover(object sender, EventArgs e)
+        {
+            labelMainFormText.Text = "Work on a previously saved project";
+            labelMainFormText.Font = new Font(labelMainFormText.Font, FontStyle.Italic);
+
+            // Make the text on the label bold
+            var font = loadProjectButton.Font;
+            loadProjectButton.Font = new Font(font, FontStyle.Bold);
+            font.Dispose();
+        }
+
+        private void loadProjectButton_MouseLeave(object sender, EventArgs e)
+        {
+            labelMainFormText.Text = "";
+
+            // Make the text on the label regular
+            var font = loadProjectButton.Font;
+            loadProjectButton.Font = new Font(font, FontStyle.Regular);
+            font.Dispose();
+        }
+
+        private void newConductorLibraryButton_MouseHover_1(object sender, EventArgs e)
+        {
+            labelMainFormText.Text = "Work on a previously saved project";
+            labelMainFormText.Font = new Font(labelMainFormText.Font, FontStyle.Italic);
+
+            // Make the text on the label bold
+            var font = newConductorLibraryButton.Font;
+            newConductorLibraryButton.Font = new Font(font, FontStyle.Bold);
+            font.Dispose();
+        }
+
+        private void newConductorLibraryButton_MouseLeave(object sender, EventArgs e)
+        {
+            labelMainFormText.Text = "";
+            labelMainFormText.Font = new Font(labelMainFormText.Font, FontStyle.Italic);
+
+            // Make the text on the label bold
+            var font = newConductorLibraryButton.Font;
+            newConductorLibraryButton.Font = new Font(font, FontStyle.Regular);
+            font.Dispose();
+        }
+
+        private void editLibraryButton_MouseLeave(object sender, EventArgs e)
+        {
+            labelMainFormText.Text = "Work on a previously saved project";
+            labelMainFormText.Font = new Font(labelMainFormText.Font, FontStyle.Italic);
+
+            // Make the text on the label bold
+            var font = editLibraryButton.Font;
+            editLibraryButton.Font = new Font(font, FontStyle.Regular);
+            font.Dispose();
         }
     }
 }
