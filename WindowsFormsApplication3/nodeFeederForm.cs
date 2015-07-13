@@ -1335,6 +1335,18 @@ namespace VoltageDropCalculatorApplication
                     break;
                 }
             }
+
+            DataSet nodeDataHolder = new DataSet(); //dataset that keeps the current datatables.
+            foreach (DataTable dt in nodeDataSet.Tables)
+            {
+                nodeDataHolder.Tables.Add(dt.Copy());
+            }
+
+            nodeDataSet.Tables.Clear();
+
+
+
+            
         }
 
         private void generatorsToolStripMenuItem_Click(object sender, EventArgs e)
