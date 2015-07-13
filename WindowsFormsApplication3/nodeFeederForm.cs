@@ -14,11 +14,13 @@ namespace VoltageDropCalculatorApplication
 
         public static int newProjectClicked = 1; //tracks if the user has clicked the create new project button
         public string projectName;
+        public string projectSavedName = "";
         double p;
         double t2;
         double rT2;
         double k1;
         double Vs;
+        bool ShownForm = false;
         Graphics drawArea;
         int k; //k is the number of nodes in the main feeder
         ErrorProvider errorProvider1 = new ErrorProvider();
@@ -52,6 +54,7 @@ namespace VoltageDropCalculatorApplication
         public nodeFeederForm()
         {
             InitializeComponent();
+            addHandlers();
             sb = new SolidBrush(Color.SteelBlue);
 
             libraryDataSet.ReadXml("Libraries.xml"); //read the  library xml  
@@ -85,7 +88,7 @@ namespace VoltageDropCalculatorApplication
 
             //newProjectClicked = 0;
             projectName = "Untitled" + ".xml"; //creates a string in projectName that will contain the reference to the xml file
-            this.Text = "Untitled.hba";
+            this.Text = "Untitled";
             //createNewProjectButton.Enabled = false;
             //projectNameTextBox.Enabled = false;
             //SolidBrush sb = new SolidBrush(Color.SteelBlue);
@@ -183,15 +186,23 @@ namespace VoltageDropCalculatorApplication
         public nodeFeederForm(string projectFileName)
         {
             InitializeComponent();
+            addHandlers();
             sb = new SolidBrush(Color.SteelBlue);
 
             string projhba = Path.ChangeExtension(projectFileName, ".hba");
+            projectSavedName = projhba;
 
+            if (File.Exists(projectFileName))
+            {
+                System.IO.File.Delete(projectFileName);
+            }
             System.IO.File.Move(projhba, projectFileName);
             projectDataSet.ReadXml(projectFileName); //read the  projectXML 
+            libraryDataSet.Tables.Clear();
             libraryDataSet.Merge(projectDataSet.Tables["Conductors"]);
             libraryDataSet.Merge(projectDataSet.Tables["Loads"]);
             if (projectDataSet.Tables.Contains("Generators")) libraryDataSet.Merge(projectDataSet.Tables["Generators"]);
+            paramDataTable = projectDataSet.Tables["Parameter Table"];
             List<string> cableString = libraryDataSet.Tables["Conductors"].AsEnumerable().Select(x => x[0].ToString()).ToList();
             cableSelectCombo.DataSource = cableString;
 
@@ -239,8 +250,14 @@ namespace VoltageDropCalculatorApplication
 
             //newProjectClicked = 0;
             projectName = projectFileName;
-            this.Text = Path.ChangeExtension(projectFileName, ".hba");
-            System.IO.File.Move(projectFileName, this.Text);
+            string fullpath;
+            fullpath = Path.ChangeExtension(projectFileName, ".hba");
+            this.Text = Path.GetFileNameWithoutExtension(fullpath);
+            if (File.Exists(fullpath))
+            {
+                System.IO.File.Delete(fullpath);
+            }
+            System.IO.File.Move(projectFileName, fullpath);
             //createNewProjectButton.Enabled = false;
             //projectNameTextBox.Enabled = false;
             //SolidBrush sb = new SolidBrush(Color.SteelBlue);
@@ -271,6 +288,7 @@ namespace VoltageDropCalculatorApplication
 
             //activeRadio.Enabled = false;
             //passiveRadio.Enabled = false;
+            nodeCount.Text = nodeCountInt.ToString();
             nodeNumCombo.Enabled = true;
             nodeNumCombo.DataSource = nodeNumList;
             nodeNameCombo.DataSource = nodeNameList;
@@ -411,6 +429,7 @@ namespace VoltageDropCalculatorApplication
         }
         private void cableSelectCombo_TextChanged(object sender, EventArgs e)
         {
+            if (ShownForm) changeFormTitle();
             //goes through the conductor library first column to see if the combobox text matches the library conductor column text
             for (int i = 0; i < libraryDataSet.Tables["Conductors"].Rows.Count; i++)
             {
@@ -441,6 +460,7 @@ namespace VoltageDropCalculatorApplication
 
         private void lengthNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
+            if (ShownForm) changeFormTitle();
             //goes through the conductor library first column to see if the combobox text matches the library conductor column text
             for (int i = 0; i < libraryDataSet.Tables["Conductors"].Rows.Count; i++)
             {
@@ -478,8 +498,8 @@ namespace VoltageDropCalculatorApplication
 
         private void addNodeButton_Click(object sender, EventArgs e)
         {
-            nodeNameTextBox.Focus();
             editTable();
+            if (ShownForm) changeFormTitle();
             //totalNodeNumberNumericUpDown.Value = totalNodeNumberNumericUpDown.Value + 1;
             nodeCountInt++;
             TreeNode thisNode = new TreeNode();
@@ -497,36 +517,36 @@ namespace VoltageDropCalculatorApplication
             //querires the datatables for the loads and gens where the user has selected
 
             DataTable resultLoads = new DataTable();
-            
-                var table = libraryDataSet.Tables["Loads"].Select("Selected = true");
-                if (table.AsEnumerable().Any())
+
+            var table = libraryDataSet.Tables["Loads"].Select("Selected = true");
+            if (table.AsEnumerable().Any())
+            {
+                resultLoads = table.CopyToDataTable();
+                loadCount = resultLoads.Rows.Count;
+            }
+
+            DataTable resultGens = new DataTable();
+            var table1 = libraryDataSet.Tables["Generators"].Select("Selected = true");
+            if (table1.AsEnumerable().Any())
+            {
+                resultGens = table1.CopyToDataTable();
+                genCount = resultGens.Rows.Count;
+            }
+
+
+            //adds the selected Gens to the selected loads table
+            foreach (DataRow dr in resultGens.Rows)
+            {
+                if (table.AsEnumerable().Any()) resultLoads.Rows.Add(dr.ItemArray);
+                else
                 {
-                    resultLoads = table.CopyToDataTable();
-                    loadCount = resultLoads.Rows.Count;
+                    resultLoads = resultGens.Copy();
+                    break;
                 }
-
-                DataTable resultGens = new DataTable();
-                var table1 = libraryDataSet.Tables["Generators"].Select("Selected = true");
-                if (table1.AsEnumerable().Any())
-                {
-                    resultGens = table1.CopyToDataTable();
-                    genCount = resultGens.Rows.Count;
-                }
+            }
 
 
-                //adds the selected Gens to the selected loads table
-                foreach (DataRow dr in resultGens.Rows)
-                {
-                    if (table.AsEnumerable().Any()) resultLoads.Rows.Add(dr.ItemArray);
-                    else
-                    {
-                        resultLoads = resultGens.Copy();
-                        break;
-                    }
-                }         
-            
-            
-                
+
 
             for (int i = 0; i < resultLoads.Rows.Count; i++)
             {
@@ -587,6 +607,7 @@ namespace VoltageDropCalculatorApplication
 
         private void deleteNodeButton_Click(object sender, EventArgs e)
         {
+            if (ShownForm) changeFormTitle();
             editTable();
             //removes the node from the children of the parent node by setting the children field to zero or null
             string parentNode = Convert.ToString(nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows[0][13]);
@@ -899,6 +920,9 @@ namespace VoltageDropCalculatorApplication
             {
                 e.Handled = true;
             }
+
+
+
         }
 
 
@@ -943,16 +967,17 @@ namespace VoltageDropCalculatorApplication
         private void nodeNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Space) e.Handled = true; ;
-            if (e.KeyChar == (char)Keys.Enter) lengthNumericUpDown.Focus();
+            //if (e.KeyChar == (char)Keys.Enter) lengthNumericUpDown.Focus();
         }
 
         private void lengthNumericUpDown_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter) addNodeButton.Focus();
+            //if (e.KeyChar == (char)Keys.Enter) addNodeButton.Focus();
         }
 
         private void nodeNameCombo_TextChanged(object sender, EventArgs e)
         {
+            if (ShownForm) changeFormTitle();
             nodeNumCombo.Text = Convert.ToString(nodeNameList.IndexOf(nodeNameCombo.Text) + 1);
             int a = 6;
             int b = a + 1;
@@ -977,6 +1002,7 @@ namespace VoltageDropCalculatorApplication
 
         private void endNodeCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (ShownForm) changeFormTitle();
             selectEndNodeCombo.SelectedIndex = nodeNameList.IndexOf(endNodeCombo.Text);
         }
 
@@ -1154,6 +1180,7 @@ namespace VoltageDropCalculatorApplication
 
         private void nodeDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            //nodeDataSet.AcceptChanges();
             //DataTable dt = new DataTable();
             //dt = (DataTable)nodeDataGridView.DataSource;
 
@@ -1177,12 +1204,14 @@ namespace VoltageDropCalculatorApplication
                 p = 10.0;
             }
             else p = 90.0;
+            if (ShownForm) changeFormTitle();
         }
 
         private void activeRadio_CheckedChanged(object sender, EventArgs e)
         {
             if (activeRadio.Checked == true) p = 90.0;
             else p = 10.0;
+            if (ShownForm) changeFormTitle();
         }
 
         //private void sourceVoltageTextBox_Validating(object sender, CancelEventArgs e)
@@ -1226,17 +1255,25 @@ namespace VoltageDropCalculatorApplication
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "HBA file(*.hba)|*.hba";
-            if (sfd.ShowDialog() == DialogResult.OK)
+            if(projectSavedName!="")
             {
                 projectDataSet.Tables.Clear();
-                string path = sfd.FileName;
-                this.Text = path;
-                string fileName = Path.ChangeExtension(sfd.FileName, ".xml");
-                projectDataSet.Merge(libraryDataSet);
-                projectDataSet.Merge(paramDataTable);
-                projectDataSet.Merge(nodeDataSet);
+                this.Text = Path.GetFileNameWithoutExtension(projectSavedName);
+                string fileName = Path.ChangeExtension(projectSavedName, ".xml");
+                
+                foreach (DataTable dt in libraryDataSet.Tables)
+                {
+                    projectDataSet.Tables.Add(dt.Copy());
+                }
+
+
+                projectDataSet.Tables.Add(paramDataTable);
+                nodeDataSet.AcceptChanges();
+                foreach (DataTable dt in nodeDataSet.Tables)
+                {
+                    projectDataSet.Tables.Add(dt.Copy());
+                }
+
                 projectDataSet.Tables["Parameter Table"].Rows[0]["Current Node"] = "node" + nodeNumCombo.Text;
                 if (activeRadio.Checked)
                 {
@@ -1253,11 +1290,15 @@ namespace VoltageDropCalculatorApplication
 
                 projectDataSet.WriteXml(fileName, XmlWriteMode.WriteSchema);
 
-                if (File.Exists(path))
+                if (File.Exists(projectSavedName))
                 {
-                    System.IO.File.Delete(path);
+                    System.IO.File.Delete(projectSavedName);
                 }
-                System.IO.File.Move(fileName, path);
+                System.IO.File.Move(fileName, projectSavedName);
+            }
+            else
+            {
+                saveAsToolStripMenuItem_Click(sender, e);
             }
         }
 
@@ -1293,7 +1334,7 @@ namespace VoltageDropCalculatorApplication
                     resultLoads = resultGens.Copy();
                     break;
                 }
-            }         
+            }
         }
 
         private void generatorsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1303,8 +1344,8 @@ namespace VoltageDropCalculatorApplication
 
         private void nodeDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if ((e.ColumnIndex == 11||e.ColumnIndex == 12) && e.RowIndex != this.nodeDataGridView.NewRowIndex)
-            {                
+            if ((e.ColumnIndex == 11 || e.ColumnIndex == 12) && e.RowIndex != this.nodeDataGridView.NewRowIndex)
+            {
                 double d = double.Parse(e.Value.ToString());
                 e.Value = d.ToString("N2");
             }
@@ -1317,7 +1358,7 @@ namespace VoltageDropCalculatorApplication
 
         private void operatingTempNumUpDown_ValueChanged(object sender, EventArgs e)
         {
-            
+            if (ShownForm) changeFormTitle();
             double t_new = Convert.ToDouble(operatingTempNumUpDown.Value);
             DataSet ds = new DataSet();
             if (!projectDataSet.Tables.Contains("Conductors"))
@@ -1355,6 +1396,194 @@ namespace VoltageDropCalculatorApplication
         private void sourceVoltageNumUpDown_ValueChanged(object sender, EventArgs e)
         {
             Vs = Convert.ToDouble(sourceVoltageNumUpDown.Value);
+            if (ShownForm) changeFormTitle();
+            
+        }
+
+        private void nodeFeederForm_Shown(object sender, EventArgs e)
+        {
+            drawArea.Clear(Color.White);
+            this.ShownForm = true;
+           
+            drawPoints(mfNodeList);
+        }
+
+        private void nodeDataGridView_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void nodeDataGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "HBA file(*.hba)|*.hba";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                projectDataSet.Tables.Clear();
+                string path = sfd.FileName;
+
+                this.Text = Path.GetFileNameWithoutExtension(path);
+                string fileName = Path.ChangeExtension(sfd.FileName, ".xml");
+                projectSavedName = sfd.FileName;
+                foreach (DataTable dt in libraryDataSet.Tables)
+                {
+                    projectDataSet.Tables.Add(dt.Copy());
+                }
+
+
+                projectDataSet.Tables.Add(paramDataTable);
+                nodeDataSet.AcceptChanges();
+                foreach (DataTable dt in nodeDataSet.Tables)
+                {
+                    projectDataSet.Tables.Add(dt.Copy());
+                }
+
+                projectDataSet.Tables["Parameter Table"].Rows[0]["Current Node"] = "node" + nodeNumCombo.Text;
+                if (activeRadio.Checked)
+                {
+                    projectDataSet.Tables["Parameter Table"].Rows[0]["active"] = true;
+                    projectDataSet.Tables["Parameter Table"].Rows[0]["passive"] = false;
+                }
+                else
+                {
+                    projectDataSet.Tables["Parameter Table"].Rows[0]["active"] = false;
+                    projectDataSet.Tables["Parameter Table"].Rows[0]["passive"] = true;
+                }
+                projectDataSet.Tables["Parameter Table"].Rows[0]["temp"] = Convert.ToDouble(operatingTempNumUpDown.Value);
+                projectDataSet.Tables["Parameter Table"].Rows[0]["sourceVoltage"] = Convert.ToDouble(sourceVoltageNumUpDown.Value);
+
+                projectDataSet.WriteXml(fileName, XmlWriteMode.WriteSchema);
+
+                if (File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+                System.IO.File.Move(fileName, path);
+            }
+
+        }
+
+        private void nodeFeederForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (this.Text[this.Text.Length - 1] == '*')
+            {
+
+                const string message = "Are you sure that you would like to close the project with unsaved changes?";
+                const string caption = "HBAlgorithm";
+                var result = MessageBox.Show(message, caption,
+                                             MessageBoxButtons.YesNoCancel,
+                                             MessageBoxIcon.Exclamation);
+
+                // If the no button was pressed ... 
+                if (result == DialogResult.No)
+                {
+                    // cancel the closure of the form.
+                    saveToolStripMenuItem_Click(sender, e);
+                    
+                }
+
+                else if (result == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+
+                else { }
+                
+            }
+            
+
+            
+
+            
+
+            
+        }
+
+        private void addHandlers()
+        {
+            foreach (TextBox control in Controls.OfType<TextBox>())
+            {
+                control.TextChanged += new EventHandler(OnContentChanged);
+            }
+            foreach (ComboBox control in Controls.OfType<ComboBox>())
+            {
+                control.SelectedIndexChanged += new EventHandler(OnContentChanged);
+            }
+            foreach (CheckBox control in Controls.OfType<CheckBox>())
+            {
+                control.CheckedChanged += new EventHandler(OnContentChanged);
+            }
+        }
+
+        protected void OnContentChanged(object sender, EventArgs e)
+        {
+            if (ContentChanged != null)
+                ContentChanged(this, new EventArgs());
+            
+            
+        }
+
+        private void nodeNameText_OnContentChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        public event EventHandler ContentChanged;
+
+
+        private void nodeDataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            changeFormTitle();
+        }
+
+        private void changeFormTitle()
+        {
+            string b = this.Text;
+            if (b[b.Length - 1] == '*')
+            {
+
+            }
+            else
+            {
+                this.Text = this.Text + "*";
+            }
+
+        }
+
+        private void sourceVoltageNumUpDown_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void sourceVoltageNumUpDown_Validated(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sourceVoltageNumUpDown_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nominalVoltageUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (ShownForm) changeFormTitle();
+        }
+
+        private void nodeNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (ShownForm) changeFormTitle();
+        }
+
+        private void nodeNameCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
 

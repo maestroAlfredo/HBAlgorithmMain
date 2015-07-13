@@ -41,6 +41,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.operatingTempNumUpDown = new System.Windows.Forms.NumericUpDown();
             this.sourceVoltageNumUpDown = new System.Windows.Forms.NumericUpDown();
+            this.nominalVoltageUpDown = new System.Windows.Forms.NumericUpDown();
             this.lengthNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -84,17 +85,16 @@
             this.loadsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nominalVoltageUpDown = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.operatingTempNumUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sourceVoltageNumUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nominalVoltageUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lengthNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nodeDataGridView)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nominalVoltageUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel2
@@ -249,12 +249,35 @@
             0,
             0});
             this.sourceVoltageNumUpDown.ValueChanged += new System.EventHandler(this.sourceVoltageNumUpDown_ValueChanged);
+            this.sourceVoltageNumUpDown.Enter += new System.EventHandler(this.sourceVoltageNumUpDown_Enter);
+            this.sourceVoltageNumUpDown.MouseClick += new System.Windows.Forms.MouseEventHandler(this.sourceVoltageNumUpDown_MouseClick);
+            this.sourceVoltageNumUpDown.Validated += new System.EventHandler(this.sourceVoltageNumUpDown_Validated);
+            // 
+            // nominalVoltageUpDown
+            // 
+            this.nominalVoltageUpDown.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.nominalVoltageUpDown.DecimalPlaces = 2;
+            this.nominalVoltageUpDown.Location = new System.Drawing.Point(735, 46);
+            this.nominalVoltageUpDown.Maximum = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
+            this.nominalVoltageUpDown.Name = "nominalVoltageUpDown";
+            this.nominalVoltageUpDown.Size = new System.Drawing.Size(110, 20);
+            this.nominalVoltageUpDown.TabIndex = 7;
+            this.nominalVoltageUpDown.Value = new decimal(new int[] {
+            230,
+            0,
+            0,
+            0});
+            this.nominalVoltageUpDown.ValueChanged += new System.EventHandler(this.nominalVoltageUpDown_ValueChanged);
             // 
             // lengthNumericUpDown
             // 
             this.lengthNumericUpDown.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lengthNumericUpDown.ForeColor = System.Drawing.Color.SteelBlue;
-            this.lengthNumericUpDown.Location = new System.Drawing.Point(504, 34);
+            this.lengthNumericUpDown.Location = new System.Drawing.Point(502, 34);
             this.lengthNumericUpDown.Minimum = new decimal(new int[] {
             2,
             0,
@@ -288,7 +311,7 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label3.Location = new System.Drawing.Point(262, 8);
+            this.label3.Location = new System.Drawing.Point(260, 8);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 1;
@@ -305,6 +328,7 @@
             this.nodeNumCombo.Name = "nodeNumCombo";
             this.nodeNumCombo.Size = new System.Drawing.Size(96, 21);
             this.nodeNumCombo.TabIndex = 2;
+            this.nodeNumCombo.Visible = false;
             this.nodeNumCombo.TextChanged += new System.EventHandler(this.nodeNumCombo_TextChanged);
             // 
             // label7
@@ -312,7 +336,7 @@
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label7.Location = new System.Drawing.Point(508, 2);
+            this.label7.Location = new System.Drawing.Point(505, 2);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(93, 26);
             this.label7.TabIndex = 1;
@@ -324,9 +348,9 @@
             this.cableSelectCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cableSelectCombo.ForeColor = System.Drawing.Color.SteelBlue;
             this.cableSelectCombo.FormattingEnabled = true;
-            this.cableSelectCombo.Location = new System.Drawing.Point(612, 33);
+            this.cableSelectCombo.Location = new System.Drawing.Point(609, 33);
             this.cableSelectCombo.Name = "cableSelectCombo";
-            this.cableSelectCombo.Size = new System.Drawing.Size(94, 21);
+            this.cableSelectCombo.Size = new System.Drawing.Size(93, 21);
             this.cableSelectCombo.TabIndex = 2;
             this.cableSelectCombo.TextChanged += new System.EventHandler(this.cableSelectCombo_TextChanged);
             // 
@@ -335,7 +359,7 @@
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label8.Location = new System.Drawing.Point(612, 8);
+            this.label8.Location = new System.Drawing.Point(609, 8);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(34, 13);
             this.label8.TabIndex = 1;
@@ -366,8 +390,11 @@
             this.nodeDataGridView.RowHeadersVisible = false;
             this.nodeDataGridView.Size = new System.Drawing.Size(896, 200);
             this.nodeDataGridView.TabIndex = 4;
+            this.nodeDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.nodeDataGridView_CellBeginEdit);
             this.nodeDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeDataGridView_CellEndEdit);
             this.nodeDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.nodeDataGridView_CellFormatting);
+            this.nodeDataGridView.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeDataGridView_CellLeave);
+            this.nodeDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeDataGridView_CellValidated);
             this.nodeDataGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.nodeDataGridView_EditingControlShowing);
             // 
             // tableLayoutPanel5
@@ -377,7 +404,7 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.45647F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 169F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 236F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 237F));
             this.tableLayoutPanel5.Controls.Add(this.cancelButton, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.proceedToVCalcButton, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.selectEndNodeCombo, 1, 0);
@@ -405,7 +432,7 @@
             // 
             this.proceedToVCalcButton.Enabled = false;
             this.proceedToVCalcButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.proceedToVCalcButton.Location = new System.Drawing.Point(662, 3);
+            this.proceedToVCalcButton.Location = new System.Drawing.Point(661, 3);
             this.proceedToVCalcButton.Name = "proceedToVCalcButton";
             this.proceedToVCalcButton.Size = new System.Drawing.Size(214, 30);
             this.proceedToVCalcButton.TabIndex = 0;
@@ -433,7 +460,7 @@
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(439, 11);
+            this.label18.Location = new System.Drawing.Point(438, 11);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(88, 13);
             this.label18.TabIndex = 5;
@@ -448,7 +475,7 @@
             this.endNodeCombo.ForeColor = System.Drawing.Color.SteelBlue;
             this.endNodeCombo.FormattingEnabled = true;
             this.endNodeCombo.ItemHeight = 20;
-            this.endNodeCombo.Location = new System.Drawing.Point(533, 4);
+            this.endNodeCombo.Location = new System.Drawing.Point(532, 4);
             this.endNodeCombo.Name = "endNodeCombo";
             this.endNodeCombo.Size = new System.Drawing.Size(123, 28);
             this.endNodeCombo.TabIndex = 6;
@@ -466,7 +493,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.79793F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.30743F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.05686F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 183F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 186F));
             this.tableLayoutPanel4.Controls.Add(this.lengthNumericUpDown, 5, 1);
             this.tableLayoutPanel4.Controls.Add(this.label7, 5, 0);
             this.tableLayoutPanel4.Controls.Add(this.nodeNameTextBox, 0, 1);
@@ -496,8 +523,9 @@
             this.nodeNameTextBox.Location = new System.Drawing.Point(4, 33);
             this.nodeNameTextBox.MaxLength = 8;
             this.nodeNameTextBox.Name = "nodeNameTextBox";
-            this.nodeNameTextBox.Size = new System.Drawing.Size(121, 20);
+            this.nodeNameTextBox.Size = new System.Drawing.Size(120, 20);
             this.nodeNameTextBox.TabIndex = 6;
+            this.nodeNameTextBox.TextChanged += new System.EventHandler(this.nodeNameTextBox_TextChanged);
             this.nodeNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nodeNameTextBox_KeyPress);
             this.nodeNameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.nodeNameTextBox_Validating);
             this.nodeNameTextBox.Validated += new System.EventHandler(this.nodeNameTextBox_Validated);
@@ -518,9 +546,9 @@
             this.deleteNodeButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.deleteNodeButton.Enabled = false;
             this.deleteNodeButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.deleteNodeButton.Location = new System.Drawing.Point(132, 33);
+            this.deleteNodeButton.Location = new System.Drawing.Point(131, 33);
             this.deleteNodeButton.Name = "deleteNodeButton";
-            this.deleteNodeButton.Size = new System.Drawing.Size(111, 22);
+            this.deleteNodeButton.Size = new System.Drawing.Size(110, 22);
             this.deleteNodeButton.TabIndex = 4;
             this.deleteNodeButton.Text = "Delete Current Node";
             this.deleteNodeButton.UseVisualStyleBackColor = true;
@@ -531,7 +559,7 @@
             this.label16.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label16.AutoSize = true;
             this.label16.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label16.Location = new System.Drawing.Point(154, 8);
+            this.label16.Location = new System.Drawing.Point(152, 8);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(67, 13);
             this.label16.TabIndex = 1;
@@ -543,7 +571,7 @@
             this.label22.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label22.AutoSize = true;
             this.label22.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label22.Location = new System.Drawing.Point(370, 8);
+            this.label22.Location = new System.Drawing.Point(368, 8);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(66, 13);
             this.label22.TabIndex = 1;
@@ -553,10 +581,11 @@
             // 
             this.nodeNameCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nodeNameCombo.FormattingEnabled = true;
-            this.nodeNameCombo.Location = new System.Drawing.Point(370, 33);
+            this.nodeNameCombo.Location = new System.Drawing.Point(368, 33);
             this.nodeNameCombo.Name = "nodeNameCombo";
             this.nodeNameCombo.Size = new System.Drawing.Size(116, 21);
             this.nodeNameCombo.TabIndex = 7;
+            this.nodeNameCombo.SelectedIndexChanged += new System.EventHandler(this.nodeNameCombo_SelectedIndexChanged);
             this.nodeNameCombo.TextChanged += new System.EventHandler(this.nodeNameCombo_TextChanged);
             // 
             // addNodeButton
@@ -564,7 +593,7 @@
             this.addNodeButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.addNodeButton.Enabled = false;
             this.addNodeButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.addNodeButton.Location = new System.Drawing.Point(251, 33);
+            this.addNodeButton.Location = new System.Drawing.Point(249, 33);
             this.addNodeButton.Name = "addNodeButton";
             this.addNodeButton.Size = new System.Drawing.Size(78, 22);
             this.addNodeButton.TabIndex = 4;
@@ -577,7 +606,7 @@
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label5.Location = new System.Drawing.Point(340, 37);
+            this.label5.Location = new System.Drawing.Point(338, 37);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(23, 13);
             this.label5.TabIndex = 1;
@@ -588,7 +617,7 @@
             this.label17.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label17.AutoSize = true;
             this.label17.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label17.Location = new System.Drawing.Point(713, 8);
+            this.label17.Location = new System.Drawing.Point(709, 8);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(117, 13);
             this.label17.TabIndex = 5;
@@ -599,7 +628,7 @@
             this.nodeCount.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nodeCount.AutoSize = true;
             this.nodeCount.ForeColor = System.Drawing.Color.SteelBlue;
-            this.nodeCount.Location = new System.Drawing.Point(713, 37);
+            this.nodeCount.Location = new System.Drawing.Point(709, 37);
             this.nodeCount.Name = "nodeCount";
             this.nodeCount.Size = new System.Drawing.Size(13, 13);
             this.nodeCount.TabIndex = 5;
@@ -701,36 +730,37 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(111, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(111, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // helpToolStripMenuItem
@@ -762,25 +792,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // nominalVoltageUpDown
-            // 
-            this.nominalVoltageUpDown.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.nominalVoltageUpDown.DecimalPlaces = 2;
-            this.nominalVoltageUpDown.Location = new System.Drawing.Point(735, 46);
-            this.nominalVoltageUpDown.Maximum = new decimal(new int[] {
-            400,
-            0,
-            0,
-            0});
-            this.nominalVoltageUpDown.Name = "nominalVoltageUpDown";
-            this.nominalVoltageUpDown.Size = new System.Drawing.Size(110, 20);
-            this.nominalVoltageUpDown.TabIndex = 7;
-            this.nominalVoltageUpDown.Value = new decimal(new int[] {
-            230,
-            0,
-            0,
-            0});
-            // 
             // nodeFeederForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -804,11 +815,14 @@
             this.MaximizeBox = false;
             this.Name = "nodeFeederForm";
             this.Text = "New Feeder Design";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.nodeFeederForm_FormClosing);
             this.Load += new System.EventHandler(this.nodeFeederForm_Load);
+            this.Shown += new System.EventHandler(this.nodeFeederForm_Shown);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.operatingTempNumUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sourceVoltageNumUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nominalVoltageUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lengthNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nodeDataGridView)).EndInit();
             this.tableLayoutPanel5.ResumeLayout(false);
@@ -819,7 +833,6 @@
             this.tableLayoutPanel3.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nominalVoltageUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
