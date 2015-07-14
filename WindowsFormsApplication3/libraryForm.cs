@@ -16,7 +16,6 @@ namespace VoltageDropCalculatorApplication
         //private int addDGInt = 0; //int that tracks the number of DGs
         //private int addLoadInt = 0; //int that tracks the number of loads
         private int addCableInt = 0; //int that tracks the number of Cables
-        public bool cancel = false;
 
         DataSet libraryDataSet = new DataSet();
 
@@ -290,7 +289,6 @@ namespace VoltageDropCalculatorApplication
         private void doneLoadDG_Click(object sender, EventArgs e)
         {
             //DataTable result = libraryDataSet.Tables["Conductors"].Select("Selected = true").CopyToDataTable();
-            this.cancel = true;
             this.Close();
         }
 
@@ -436,28 +434,6 @@ namespace VoltageDropCalculatorApplication
 
         private void saveLibraryButton_Click(object sender, EventArgs e)
         {
-            if(saveLibraryButton.Text !="Save")
-            {
-                const string message = "Deselecting loads and generators that are used in the current project will cause you to lose their corresponding customer information. Would you like to Continue?";
-                const string caption = "HBAlgorithm";
-                var result = MessageBox.Show(message, caption,
-                                             MessageBoxButtons.YesNo,
-                                             MessageBoxIcon.Exclamation);
-
-                // If the no button was pressed ... 
-                if (result == DialogResult.No)
-                {
-                    this.saveLibraryButton.Enabled = true;
-                    this.cancel = true;
-                }
-
-                else
-                {
-                    this.cancel = false;
-                    this.Close();
-                }
-            }
-            
             libraryDataSet.WriteXml("Libraries.xml",XmlWriteMode.WriteSchema);
             saveLibraryButton.Enabled = false;
             
@@ -487,7 +463,7 @@ namespace VoltageDropCalculatorApplication
 
         private void dataGridViewLoadsDGs_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            saveLibraryButton.Enabled = true;            
+            saveLibraryButton.Enabled = true;
             if((e.ColumnIndex == 0)&&(loadTypeCombo.Text == "Conductors"))
             {
                 dataGridViewLoadsDGs.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "CableCode";
@@ -513,7 +489,10 @@ namespace VoltageDropCalculatorApplication
       
 
         private void dataGridViewLoadsDGs_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {       
+        {
+            
+
+            
             // Clear the row error in case the user presses ESC.   
             dataGridViewLoadsDGs.Rows[e.RowIndex].ErrorText = String.Empty;
         }
@@ -540,45 +519,6 @@ namespace VoltageDropCalculatorApplication
         private void dataGridViewLoadsDGs_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-        }
-
-        private void saveToProject_Click(object sender, EventArgs e)
-        {
-            
-            const string message = "Deselecting loads and generators that are used in the current project will cause you to lose their corresponding customer information. Would you like to Continue?";
-            const string caption = "HBAlgorithm";
-            var result = MessageBox.Show(message, caption,
-                                         MessageBoxButtons.YesNo,
-                                         MessageBoxIcon.Exclamation);
-
-            // If the no button was pressed ... 
-            if (result == DialogResult.No)
-            {
-                // cancel the closure of the form.
-                this.cancel = true;
-                this.saveLibraryButton.Enabled = true;
-
-            }
-
-            else
-            {
-                this.cancel = false;
-                this.Close();
-            }
-
-            
-            
-        }
-
-        private void saveLibraryButton_EnabledChanged(object sender, EventArgs e)
-        {
-            if (saveLibraryButton.Text != "Save")
-            {
-                saveToProject.Enabled = saveLibraryButton.Enabled;
-            }
-            
-            
-            
         }
 
     }
