@@ -192,6 +192,7 @@ namespace VoltageDropCalculatorApplication
                 ds.ReadXml("Libraries.xml");
                 bool enabled = true;
                 libraryForm frm = new libraryForm("Loads", enabled, ds);
+                frm.saveLibraryButton.Text = "Save";
 
                 if (!ds.Tables.Contains("Loads"))
                 {
