@@ -27,6 +27,8 @@ namespace VoltageDropCalculatorApplication
 
 
         DataSet nodeVecDataSet = new DataSet();
+        DataSet nodeDataSet = new DataSet(); //DataSet tempNodeDataSet = new DataSet();
+        DataGridView nodeDataGridView = new DataGridView();
 
         public voltageCalculationForm(string projectName, double risk, double temperature, double sourceVoltage, int loadCount, int genCount, List<int> mfNodeList)
         {
@@ -58,6 +60,42 @@ namespace VoltageDropCalculatorApplication
             nodeSummaryDataGridView.Columns[9].Visible = false;
             nodeSummaryDataGridView.Columns[10].Visible = false;
             nodeSummaryDataGridView.Columns[11].Visible = false;            
+            closeTableEdits();
+            voltCalculation();
+        }
+
+        public voltageCalculationForm(double risk, double temperature, double sourceVoltage, int loadCount, int genCount, List<int> mfNodeList, DataSet nodeDataSet, DataSet tempNodeDataSet, DataGridView nodeDataGridView)
+        {
+            InitializeComponent();
+            //nodeVecDataSet.ReadXml(projectName);
+            nodeVecDataSet = tempNodeDataSet; this.nodeDataGridView = nodeDataGridView;
+            nodeNum = nodeVecDataSet.Tables[nodeVecDataSet.Tables.Count - 1].Rows.Count / (loadCount + genCount);
+            //projName = projectName;
+            Vs = sourceVoltage;
+            t_old = temperature;
+            p = risk;
+            numericUpDownRisk.Value = (decimal)p;
+            numericUpDownVoltage.Value = (decimal)Vs;
+            tempNumUpDown.Value = Convert.ToDecimal(t_old);
+            errorProvider1 = new ErrorProvider();
+            voltageProfileArray = new double[nodeNum + 1, 6];
+            //customerArray = new int[3];
+            numericUpDownVoltage.Value = Convert.ToDecimal(Vs);
+            numericUpDownRisk.Value = Convert.ToDecimal(p);
+            loadCountInt = loadCount;
+            genCountInt = genCount;
+            totalLoadsGens = loadCount + genCount;
+            this.nodeDataSet = nodeDataSet;
+            nodeOverallDataTable = nodeVecDataSet.Tables[0].Copy();
+            editTable();
+            nodeSummaryDataGridView.DataSource = nodeOverallDataTable;
+            nodeSummaryDataGridView.Columns[5].Visible = false;
+            nodeSummaryDataGridView.Columns[6].Visible = false;
+            nodeSummaryDataGridView.Columns[7].Visible = false;
+            //nodeSummaryDataGridView.Columns[8].Visible = false;
+            //nodeSummaryDataGridView.Columns[9].Visible = false;
+            nodeSummaryDataGridView.Columns[10].Visible = false;
+            nodeSummaryDataGridView.Columns[11].Visible = false;
             closeTableEdits();
             voltCalculation();
         }
@@ -654,19 +692,21 @@ namespace VoltageDropCalculatorApplication
         }
 
 
-        //deletes all tables from the projectxml file if the user decides to close the form
         private void voltageCalculationForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DataSet ds = new DataSet();
-            ds.ReadXml(projName);
+            //DataSet ds = new DataSet();
+            //ds.ReadXml(projName);
 
 
-            for (int i = ds.Tables.Count - 1; i >= 0; i--)
-            {
-                ds.Tables.Remove(ds.Tables[i]);
-            }
+            //for (int i = ds.Tables.Count - 1; i >= 0; i--)
+            //{
+            //    ds.Tables.Remove(ds.Tables[i]);
+            //}
 
-            ds.WriteXml(projName);
+            //ds.WriteXml(projName);
+
+            nodeDataGridView.Update();
+            nodeDataGridView.Refresh();
         }
 
         //creates an array of a nodevector given a nodevector datatable
@@ -728,9 +768,7 @@ namespace VoltageDropCalculatorApplication
                                 nodeVecDataSet.Tables[i].Rows[rows][e.ColumnIndex] = Convert.ToDouble(nodeVecDataSet.Tables[i].Rows[rows][e.ColumnIndex]) - diff;
                                 break;
                             }
-
                         }
-
                     }
                     //update the last node customer which has
                     else
@@ -742,12 +780,8 @@ namespace VoltageDropCalculatorApplication
                                 nodeVecDataSet.Tables[i].Rows[rows][e.ColumnIndex] = Convert.ToDouble(nodeVecDataSet.Tables[i].Rows[rows][e.ColumnIndex]) - diff;
                                 break;
                             }
-
                         }
-
                     }
-
-
                 }
             }
             //redo the calculation
@@ -821,40 +855,11 @@ namespace VoltageDropCalculatorApplication
 
         }
 
-        //private void temperatureTextBox_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        //{
-        //    if (temperatureTextBox.Text == "")
-        //    {
-        //        e.Cancel = true;
-        //        this.errorProvider1.SetError(temperatureTextBox, "temperature cannot be null");
-        //    }            
-        //}
-
-
-
-        //private void temperatureTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        //{
-        //    if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-        //    {
-        //        e.Handled = true;
-        //    }
-
-        //}
-
-        //private void temperatureTextBox_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider1.SetError(temperatureTextBox, "");
-
-        //}
-
         private void tempNumUpDown_ValueChanged(object sender, EventArgs e)
         {
             double t_new = Convert.ToDouble(tempNumUpDown.Value);
             DataSet ds = new DataSet();
             ds.ReadXml("Libraries.xml");
-
-
-
 
             for (int i = 0; i < nodeNum; i++)
             {
@@ -871,6 +876,20 @@ namespace VoltageDropCalculatorApplication
 
             t_old = t_new;
             voltCalculation();
+        }
+
+        private void buttonUpdateNodeSumm_Click(object sender, EventArgs e)
+        {
+            int loadsGensNum = nodeDataSet.Tables[0].Rows.Count; int xx = 0;
+            for (int i = 0; i < nodeNum; i++)
+            {
+                for (int x = 0; x < loadsGensNum; x++)
+                {
+                    nodeDataSet.Tables[i].Rows[x][3+1] = nodeVecDataSet.Tables[0].Rows[xx][3]; 
+                    nodeDataSet.Tables[i].Rows[x][4+1] = nodeVecDataSet.Tables[0].Rows[xx][4]; 
+                    nodeDataSet.Tables[i].Rows[x][5+1] = nodeVecDataSet.Tables[0].Rows[xx][5]; xx++;
+                }
+            }
         }
     }
 }
