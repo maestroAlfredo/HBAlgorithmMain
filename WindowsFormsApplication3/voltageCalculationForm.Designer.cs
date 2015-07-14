@@ -48,19 +48,19 @@
             this.bluePhaseVoltageText = new System.Windows.Forms.RichTextBox();
             this.numericUpDownVoltage = new System.Windows.Forms.NumericUpDown();
             this.whitePhaseVoltageText = new System.Windows.Forms.RichTextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.redPhaseVoltageText = new System.Windows.Forms.RichTextBox();
-            this.tempNumUpDown = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.nodeSummaryDataGridView = new System.Windows.Forms.DataGridView();
-            this.buttonUpdateNodeSumm = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tempNumUpDown = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -70,9 +70,9 @@
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRisk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVoltage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tempNumUpDown)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nodeSummaryDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tempNumUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -275,18 +275,6 @@
             this.whitePhaseVoltageText.TabIndex = 1;
             this.whitePhaseVoltageText.Text = "230";
             // 
-            // label6
-            // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(710, 21);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(63, 18);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Risk [%]";
-            // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -347,6 +335,18 @@
             this.label5.TabIndex = 3;
             this.label5.Text = "Temperature [°C]";
             // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(710, 21);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(63, 18);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "Risk [%]";
+            // 
             // redPhaseVoltageText
             // 
             this.redPhaseVoltageText.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -358,22 +358,6 @@
             this.redPhaseVoltageText.TabIndex = 1;
             this.redPhaseVoltageText.Text = "230";
             // 
-            // tempNumUpDown
-            // 
-            this.tempNumUpDown.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tempNumUpDown.DecimalPlaces = 2;
-            this.tempNumUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tempNumUpDown.Location = new System.Drawing.Point(532, 78);
-            this.tempNumUpDown.Name = "tempNumUpDown";
-            this.tempNumUpDown.Size = new System.Drawing.Size(86, 26);
-            this.tempNumUpDown.TabIndex = 3;
-            this.tempNumUpDown.Value = new decimal(new int[] {
-            40,
-            0,
-            0,
-            0});
-            this.tempNumUpDown.ValueChanged += new System.EventHandler(this.tempNumUpDown_ValueChanged);
-            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.BackColor = System.Drawing.Color.SteelBlue;
@@ -382,7 +366,7 @@
             this.tableLayoutPanel3.Controls.Add(this.label7, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.label8, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.nodeSummaryDataGridView, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.buttonUpdateNodeSumm, 0, 4);
+            this.tableLayoutPanel3.Controls.Add(this.label9, 0, 4);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -454,17 +438,34 @@
             this.nodeSummaryDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeSummaryDataGridView_CellEndEdit);
             this.nodeSummaryDataGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.nodeSummaryDataGridView_EditingControlShowing);
             // 
-            // buttonUpdateNodeSumm
+            // label9
             // 
-            this.buttonUpdateNodeSumm.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonUpdateNodeSumm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonUpdateNodeSumm.Location = new System.Drawing.Point(206, 514);
-            this.buttonUpdateNodeSumm.Name = "buttonUpdateNodeSumm";
-            this.buttonUpdateNodeSumm.Size = new System.Drawing.Size(75, 30);
-            this.buttonUpdateNodeSumm.TabIndex = 3;
-            this.buttonUpdateNodeSumm.Text = "Update";
-            this.buttonUpdateNodeSumm.UseVisualStyleBackColor = true;
-            this.buttonUpdateNodeSumm.Click += new System.EventHandler(this.buttonUpdateNodeSumm_Click);
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(91, 517);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(306, 24);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "Load and Generator Distribution";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
+            // 
+            // tempNumUpDown
+            // 
+            this.tempNumUpDown.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tempNumUpDown.DecimalPlaces = 2;
+            this.tempNumUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tempNumUpDown.Location = new System.Drawing.Point(532, 78);
+            this.tempNumUpDown.Name = "tempNumUpDown";
+            this.tempNumUpDown.Size = new System.Drawing.Size(86, 26);
+            this.tempNumUpDown.TabIndex = 3;
+            this.tempNumUpDown.Value = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            this.tempNumUpDown.ValueChanged += new System.EventHandler(this.tempNumUpDown_ValueChanged);
             // 
             // voltageCalculationForm
             // 
@@ -488,10 +489,10 @@
             this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRisk)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVoltage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tempNumUpDown)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nodeSummaryDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tempNumUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -517,7 +518,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown tempNumUpDown;
-        private System.Windows.Forms.Button buttonUpdateNodeSumm;
     }
 }

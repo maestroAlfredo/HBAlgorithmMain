@@ -42,12 +42,14 @@ namespace VoltageDropCalculatorApplication
         DataSet parameters = new DataSet();
         DataTable paramDataTable = new DataTable("Parameter Table");
 
+
         DataTable tempTable = new DataTable();//temporary table that stores the node data to put in the main feederdataset
         DataSet libraryDataSet = new DataSet();
         BindingList<int> nodeNumList = new BindingList<int>();
         BindingList<string> nodeNameList = new BindingList<string>();
         TreeNode rootNode = new TreeNode();
         List<string> addList;
+
 
         public nodeFeederForm()
         {
@@ -415,18 +417,16 @@ namespace VoltageDropCalculatorApplication
                 }
                 //double[] voltageRowDouble = new double[35];
 
-                //tempNodeDataSet.WriteXml(projectName);
+                tempNodeDataSet.WriteXml(projectName);
 
-                //voltageCalculationForm frm = new voltageCalculationForm(projectName, p, t2, Vs, loadCount, genCount, mfNodeList, nodeDataSet);
-                voltageCalculationForm frm2 = new voltageCalculationForm(p, t2, Vs, loadCount, genCount, mfNodeList, nodeDataSet, tempNodeDataSet, nodeDataGridView);
-                frm2.ShowDialog();
+                voltageCalculationForm frm = new voltageCalculationForm(projectName, p, t2, Vs, loadCount, genCount, mfNodeList);
+                frm.ShowDialog();
             }
             else
             {
                 MessageBox.Show("Cannot Proceed without specifying Loads or DGs for each individual node! Please check that all nodes have at least one Load or Generator");
             }
         }
-
         private void cableSelectCombo_TextChanged(object sender, EventArgs e)
         {
             if (ShownForm) changeFormTitle();
@@ -442,6 +442,8 @@ namespace VoltageDropCalculatorApplication
                 }
             }
 
+
+
             if (nodeDataSet.Tables.Contains("node" + nodeNumCombo.Text))
             {
                 for (int i = 0; i < nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows.Count; i++)
@@ -452,6 +454,8 @@ namespace VoltageDropCalculatorApplication
                 }
 
             }
+
+
         }
 
         private void lengthNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -754,6 +758,7 @@ namespace VoltageDropCalculatorApplication
                     drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[mainfeederList[i]].Rows[0][9]))) + "m", drawFont1, sb, (30 + (i * (float)nodespacing) + 30 + ((i + 1) * (float)nodespacing)) / 2, (float)y - 20); //draws the label
                 }
                 drawArea.DrawString(label, drawFont, sb, 30 + (i * (float)nodespacing), (float)y - 20); //draws the label
+
             }
 
         }
