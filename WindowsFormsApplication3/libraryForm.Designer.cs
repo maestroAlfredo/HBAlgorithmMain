@@ -40,7 +40,6 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.doneLoadDG = new System.Windows.Forms.Button();
             this.saveLibraryButton = new System.Windows.Forms.Button();
-            this.saveToProject = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
@@ -55,7 +54,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.78723F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.21277F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 176F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 188F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 186F));
             this.tableLayoutPanel1.Controls.Add(this.selectLibraryLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.loadTypeCombo, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.resetLibrary, 3, 0);
@@ -81,7 +80,7 @@
             // 
             this.loadTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.loadTypeCombo.FormattingEnabled = true;
-            this.loadTypeCombo.Location = new System.Drawing.Point(149, 3);
+            this.loadTypeCombo.Location = new System.Drawing.Point(150, 3);
             this.loadTypeCombo.Name = "loadTypeCombo";
             this.loadTypeCombo.Size = new System.Drawing.Size(176, 21);
             this.loadTypeCombo.TabIndex = 0;
@@ -100,7 +99,7 @@
             // 
             // addCableButton
             // 
-            this.addCableButton.Location = new System.Drawing.Point(495, 3);
+            this.addCableButton.Location = new System.Drawing.Point(497, 3);
             this.addCableButton.Name = "addCableButton";
             this.addCableButton.Size = new System.Drawing.Size(170, 23);
             this.addCableButton.TabIndex = 3;
@@ -141,27 +140,25 @@
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel3.ColumnCount = 3;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel3.Controls.Add(this.doneLoadDG, 2, 0);
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 81.56359F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.43641F));
+            this.tableLayoutPanel3.Controls.Add(this.doneLoadDG, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.saveLibraryButton, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.saveToProject, 1, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(25, 590);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(857, 33);
             this.tableLayoutPanel3.TabIndex = 3;
             // 
             // doneLoadDG
             // 
-            this.doneLoadDG.Location = new System.Drawing.Point(687, 4);
+            this.doneLoadDG.Location = new System.Drawing.Point(701, 4);
             this.doneLoadDG.Name = "doneLoadDG";
             this.doneLoadDG.Size = new System.Drawing.Size(152, 25);
             this.doneLoadDG.TabIndex = 3;
-            this.doneLoadDG.Text = "Cancel";
+            this.doneLoadDG.Text = "Done";
             this.doneLoadDG.UseVisualStyleBackColor = true;
             this.doneLoadDG.Click += new System.EventHandler(this.doneLoadDG_Click);
             // 
@@ -169,25 +166,13 @@
             // 
             this.saveLibraryButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.saveLibraryButton.Enabled = false;
-            this.saveLibraryButton.Location = new System.Drawing.Point(301, 4);
+            this.saveLibraryButton.Location = new System.Drawing.Point(542, 4);
             this.saveLibraryButton.Name = "saveLibraryButton";
-            this.saveLibraryButton.Size = new System.Drawing.Size(208, 25);
+            this.saveLibraryButton.Size = new System.Drawing.Size(152, 25);
             this.saveLibraryButton.TabIndex = 4;
-            this.saveLibraryButton.Text = "Save and Overite Existing Libraries";
+            this.saveLibraryButton.Text = "Save";
             this.saveLibraryButton.UseVisualStyleBackColor = true;
-            this.saveLibraryButton.EnabledChanged += new System.EventHandler(this.saveLibraryButton_EnabledChanged);
             this.saveLibraryButton.Click += new System.EventHandler(this.saveLibraryButton_Click);
-            // 
-            // saveToProject
-            // 
-            this.saveToProject.Enabled = false;
-            this.saveToProject.Location = new System.Drawing.Point(516, 4);
-            this.saveToProject.Name = "saveToProject";
-            this.saveToProject.Size = new System.Drawing.Size(164, 25);
-            this.saveToProject.TabIndex = 5;
-            this.saveToProject.Text = "Save and use in Project only";
-            this.saveToProject.UseVisualStyleBackColor = true;
-            this.saveToProject.Click += new System.EventHandler(this.saveToProject_Click);
             // 
             // contextMenuStrip1
             // 
@@ -237,8 +222,7 @@
         private System.Windows.Forms.ToolStripMenuItem deleteRowToolStripMenuItem;
         private System.Windows.Forms.Label selectLibraryLabel;
         private System.Windows.Forms.Button resetLibrary;
-        public System.Windows.Forms.Button saveLibraryButton;
+        private System.Windows.Forms.Button saveLibraryButton;
         private System.Windows.Forms.Button addCableButton;
-        public System.Windows.Forms.Button saveToProject;
     }
 }

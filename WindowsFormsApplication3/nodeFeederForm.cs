@@ -1299,28 +1299,10 @@ namespace VoltageDropCalculatorApplication
 
         private void loadsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DataSet originalLibraryDataSet = new DataSet();
-            
-            foreach (DataTable dt in libraryDataSet.Tables)
-            {
-                originalLibraryDataSet.Tables.Add(dt.Copy());
-            }
             libraryForm frm = new libraryForm("Loads", true, libraryDataSet);
-            frm.saveToProject.Enabled = false;            
             frm.ShowDialog();
-
-            if (frm.cancel)
-            {
-                libraryDataSet.Tables.Clear();
-                foreach (DataTable dt in originalLibraryDataSet.Tables)
-                {
-                    libraryDataSet.Tables.Add(dt.Copy());
-                }
-            }
-        
             //Code picks up any changes to the loads database and loads them
             DataTable resultLoads = new DataTable();
-            nodeDataSet.AcceptChanges();
 
             var table = libraryDataSet.Tables["Loads"].Select("Selected = true");
             if (table.AsEnumerable().Any())
@@ -1357,70 +1339,9 @@ namespace VoltageDropCalculatorApplication
 
             nodeDataSet.Tables.Clear();
 
-            for (int i = 0; i<nodeCountInt; i++)
-            {
-                double lengthSum = 0;
-                double rT2L = 0;
-                double k1L = 0;
-                for (int x = 0; x<nodeDataHolder.Tables[i].Rows.Count; x++)
-                {
-                    lengthSum = lengthSum + Convert.ToDouble(nodeDataHolder.Tables[i].Rows[x]["Length"]);
-                }
-                decimal lengthSumDecimal = Convert.ToDecimal(lengthSum - lengthTol);
-                
-                string tableName = "node" + (i+1).ToString();
-                DataTable nodeDataTable = new DataTable(tableName);
-                List<string> headings = new List<string> { "Node", "Name", "Load/DG", "Red", "White", "Blue", "Alpha", "Beta", "Cb", "Length", "Cable", "Rp", "Rn", "Parent", "Children" };
-                for (int j = 0; j < headings.Count; j++)
-                {
-                    nodeDataTable.Columns.Add(headings[j]); //adds the headings to the nodeDataTable                 
-                }
-                //gets the correct cable parameters and calculates them for that particular table
-                for (int y = 0; y < libraryDataSet.Tables["Conductors"].Rows.Count; y++)
-                {
-                    if (Convert.ToString(libraryDataSet.Tables["Conductors"].Rows[y][0]) == Convert.ToString(nodeDataHolder.Tables[i].Rows[0]["Cable"]))
-                    {
-                        rT2L = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[y][1]) * (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[y][2]) + t2) / (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[y][2]) + 20.0);
-                        k1L = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[y][3]);
-                        break;
 
-                    }
-                }
 
-                //querires the datatables for the loads and gens where the user has selected. 
-                       
-
-                for (int k = 0; k < resultLoads.Rows.Count; k++)
-                {                                                  
-                    nodeDataTable.Rows.Add(nodeDataHolder.Tables[i].Rows[0]["Node"], nodeDataHolder.Tables[i].Rows[0]["Name"], resultLoads.Rows[k][0], 0.0, 0.0, 0.0, resultLoads.Rows[k]["alpha"], resultLoads.Rows[k]["beta"], resultLoads.Rows[k]["circuit breaker"], calculateLengths(lengthSumDecimal, k), nodeDataHolder.Tables[i].Rows[0]["Cable"], calculateRp(rT2L, calculateLengths(lengthSumDecimal, k)), calculateRn(rT2L, calculateLengths(lengthSumDecimal, k), k1L),((k==0)? nodeDataHolder.Tables[i].Rows[0]["Parent"] : ""), ((k==0)? nodeDataHolder.Tables[i].Rows[0]["Children"] :""));
-                }
-
-                //add the datatable into the nodeDataSet
-                nodeDataSet.Tables.Add(nodeDataTable);
-
-                //Populates the new nodeDataTable with the RWB customer numbers                        
-                               
-            }
-            for (int i = 0; i< nodeCountInt; i++)
-            {
-                for (int z = 0; z < nodeDataHolder.Tables[i].Rows.Count; z++)
-                {
-                    for (int a = 0; a < nodeDataSet.Tables[i].Rows.Count; a++)
-                    {
-                        if (Convert.ToString(nodeDataHolder.Tables[i].Rows[z]["Name"]) == Convert.ToString(nodeDataSet.Tables[i].Rows[a]["Name"]) && Convert.ToString(nodeDataHolder.Tables[i].Rows[z]["Load/DG"]) == Convert.ToString(nodeDataSet.Tables[i].Rows[a]["Load/DG"]))
-                        {
-                            nodeDataSet.Tables[i].Rows[a]["Red"] = nodeDataHolder.Tables[i].Rows[z]["Red"];
-                            nodeDataSet.Tables[i].Rows[a]["White"] = nodeDataHolder.Tables[i].Rows[z]["White"];
-                            nodeDataSet.Tables[i].Rows[a]["Blue"] = nodeDataHolder.Tables[i].Rows[z]["Blue"];                            
-                        }
-                    }
-
-                }
-            }
             
-
-            nodeDataHolder.Tables.Clear();
-            nodeDataGridView.DataSource = nodeDataSet.Tables["node" + nodeNumCombo.Text];            
         }
 
         private void generatorsToolStripMenuItem_Click(object sender, EventArgs e)
