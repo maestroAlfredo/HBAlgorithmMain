@@ -476,22 +476,29 @@ namespace VoltageDropCalculatorApplication
 
             }
 
-            mfNodeList.Clear();//Clears the main feeder node list
+            
             //mfNodeDictionary.Clear();
 
             if (selectEndNodeCombo.Text != "")
             {
-                drawArea.Clear(Color.White);
+                mfNodeList.Clear();//Clears the main feeder node list                
                 getMainFeederNodes(Convert.ToInt32(selectEndNodeCombo.Text), mfNodeList);
                 drawPoints(mfNodeList);
             }
+            else
+            {
+                drawPoints(mfNodeList);
+            }
+
+           
+
 
 
         }
 
         private void addNodeButton_Click(object sender, EventArgs e)
         {
-            editTable();
+            editTable();            
             if (ShownForm) changeFormTitle();
             //totalNodeNumberNumericUpDown.Value = totalNodeNumberNumericUpDown.Value + 1;
             nodeCountInt++;
@@ -580,7 +587,7 @@ namespace VoltageDropCalculatorApplication
             nodeNameCombo.SelectedIndex = nodeNameCombo.Items.Count - 1;
 
 
-
+            lengthNumericUpDown.Value = 100M;
             nodeDataGridView.DataSource = nodeDataSet.Tables[nodeCountInt - 1];//changes the datagrid view to display the new node.   
             closeTableEdits();
         }
@@ -728,6 +735,7 @@ namespace VoltageDropCalculatorApplication
         //method gets the nodes in a main feeder list and then calculates the positions of those nodes.
         private void drawPoints(List<int> mainfeederList)
         {
+            drawArea.Clear(Color.White);
             //SolidBrush sb = new SolidBrush(Color.SteelBlue);
             Pen myPen = new Pen(sb);
             double drawingSpace = (double)drawingPanel.Width - 30;
@@ -744,13 +752,21 @@ namespace VoltageDropCalculatorApplication
                 }
                 System.Drawing.Font drawFont = new System.Drawing.Font("Arial", 10);
                 System.Drawing.Font drawFont1 = new System.Drawing.Font("Arial", 8);
-                drawArea.FillEllipse(sb, 30 + (i * (int)nodespacing), y, 10, 10); //draws the circle
+                System.Drawing.Font drawFont2 = new System.Drawing.Font("Arial", 6);
+                drawArea.DrawEllipse(myPen, 0, y - 5, 20, 20);
+                drawArea.DrawEllipse(myPen, 10, y - 5, 20, 20);
+                drawArea.DrawLine(myPen, 30, y+5, 60, y+5);
+                drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[0].Rows[0][9]))) + "m", drawFont2, sb, 33, (float)y - 10);
+                
+                drawArea.FillEllipse(sb, 60 + (i * (int)nodespacing), y, 10, 10); //draws the circle
                 if (i != mainfeederList.Count - 1)
                 {
-                    drawArea.DrawLine(myPen, 30 + (i * (float)nodespacing), y + 5, 30 + ((i + 1) * (float)nodespacing), y + 5); //draws the lines
-                    drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[mainfeederList[i]].Rows[0][9]))) + "m", drawFont1, sb, (30 + (i * (float)nodespacing) + 30 + ((i + 1) * (float)nodespacing)) / 2, (float)y - 20); //draws the label
+                    drawArea.DrawLine(myPen, 60 + (i * (float)nodespacing), y + 5, 60 + ((i + 1) * (float)nodespacing), y + 5); //draws the lines
+                    drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[mainfeederList[i]].Rows[0][9]))) + "m", drawFont1, sb, (60 + (i * (float)nodespacing) + 60 + ((i + 1) * (float)nodespacing)) / 2, (float)y - 20); //draws the label
                 }
-                drawArea.DrawString(label, drawFont, sb, 30 + (i * (float)nodespacing), (float)y - 20); //draws the label
+                                
+                drawArea.DrawString(label, drawFont, sb, 60 + (i * (float)nodespacing), (float)y - 20);//draws the label
+                
             }
 
         }
@@ -1665,6 +1681,26 @@ namespace VoltageDropCalculatorApplication
         }
 
         private void nodeNameCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cableSelectCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel6_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void drawingPanel_Paint(object sender, PaintEventArgs e)
         {
 
         }
