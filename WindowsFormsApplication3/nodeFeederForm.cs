@@ -1394,7 +1394,7 @@ namespace VoltageDropCalculatorApplication
                 {
                     lengthSum = lengthSum + Convert.ToDouble(nodeDataHolder.Tables[i].Rows[x]["Length"]);
                 }
-                decimal lengthSumDecimal = Convert.ToDecimal(lengthSum - lengthTol);
+                decimal lengthSumDecimal = Convert.ToDecimal(lengthSum);
                 
                 string tableName = "node" + (i+1).ToString();
                 DataTable nodeDataTable = new DataTable(tableName);
@@ -1429,6 +1429,13 @@ namespace VoltageDropCalculatorApplication
                 //Populates the new nodeDataTable with the RWB customer numbers                        
                                
             }
+            tempTable = nodeDataSet.Tables[0].Copy();
+            tempTable.Rows[0][0] = "0";
+            foreach (DataRow dr in tempTable.Rows)
+            {
+                dr[3] = dr[4] = dr[5] = 0.0;
+            }
+
             for (int i = 0; i< nodeCountInt; i++)
             {
                 for (int z = 0; z < nodeDataHolder.Tables[i].Rows.Count; z++)
