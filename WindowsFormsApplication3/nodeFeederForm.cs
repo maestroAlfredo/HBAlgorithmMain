@@ -87,9 +87,6 @@ namespace VoltageDropCalculatorApplication
             //newProjectClicked = 0;
             projectName = "Untitled" + ".xml"; //creates a string in projectName that will contain the reference to the xml file
             this.Text = "Untitled";
-            //createNewProjectButton.Enabled = false;
-            //projectNameTextBox.Enabled = false;
-            //SolidBrush sb = new SolidBrush(Color.SteelBlue);
             nodeNameTextBox.Text = "node 1";
             tableLayoutPanel4.Enabled = true;
             proceedToVCalcButton.Enabled = true;

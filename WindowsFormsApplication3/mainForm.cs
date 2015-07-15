@@ -26,7 +26,6 @@ namespace VoltageDropCalculatorApplication
         {
             InitializeComponent();
             ofd = new OpenFileDialog();
-            //libraryDataSet.ReadXml("Libraries.xml");
         }
 
 

@@ -70,7 +70,6 @@ namespace VoltageDropCalculatorApplication
             //nodeVecDataSet.ReadXml(projectName);
             nodeVecDataSet = tempNodeDataSet; this.nodeDataGridView = nodeDataGridView;
             nodeNum = nodeVecDataSet.Tables[nodeVecDataSet.Tables.Count - 1].Rows.Count / (loadCount + genCount);
-            //projName = projectName;
             Vs = sourceVoltage;
             t_old = temperature;
             p = risk;

@@ -188,7 +188,6 @@
             this.tableLayoutPanel4.Controls.Add(this.bluePhaseVoltageText, 2, 1);
             this.tableLayoutPanel4.Controls.Add(this.numericUpDownVoltage, 3, 1);
             this.tableLayoutPanel4.Controls.Add(this.whitePhaseVoltageText, 1, 1);
-            this.tableLayoutPanel4.Controls.Add(this.label6, 5, 0);
             this.tableLayoutPanel4.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.label2, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.label3, 2, 0);
@@ -196,6 +195,7 @@
             this.tableLayoutPanel4.Controls.Add(this.label5, 4, 0);
             this.tableLayoutPanel4.Controls.Add(this.redPhaseVoltageText, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.tempNumUpDown, 4, 1);
+            this.tableLayoutPanel4.Controls.Add(this.label6, 5, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 620);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -281,11 +281,11 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(710, 21);
+            this.label6.Location = new System.Drawing.Point(712, 21);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(63, 18);
+            this.label6.Size = new System.Drawing.Size(59, 18);
             this.label6.TabIndex = 4;
-            this.label6.Text = "Risk [%]";
+            this.label6.Text = "Risk[%]";
             // 
             // label1
             // 

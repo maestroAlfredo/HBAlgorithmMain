@@ -269,11 +269,11 @@
             this.labelMainFormText.AutoSize = true;
             this.labelMainFormText.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelMainFormText.ForeColor = System.Drawing.Color.SteelBlue;
-            this.labelMainFormText.Location = new System.Drawing.Point(258, 524);
+            this.labelMainFormText.Location = new System.Drawing.Point(261, 524);
             this.labelMainFormText.Name = "labelMainFormText";
-            this.labelMainFormText.Size = new System.Drawing.Size(76, 29);
+            this.labelMainFormText.Size = new System.Drawing.Size(70, 29);
             this.labelMainFormText.TabIndex = 4;
-            this.labelMainFormText.Text = "Hello!";
+            this.labelMainFormText.Text = "Hello";
             // 
             // mainForm
             // 

@@ -12,9 +12,6 @@ namespace VoltageDropCalculatorApplication
 {
     public partial class libraryForm : Form
     {
-        //private int rowIndex = 0; //int that holds the row index of the load/DG
-        //private int addDGInt = 0; //int that tracks the number of DGs
-        //private int addLoadInt = 0; //int that tracks the number of loads
         private int addCableInt = 0; //int that tracks the number of Cables
         public bool cancel = false;
 
