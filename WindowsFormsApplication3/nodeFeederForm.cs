@@ -296,6 +296,14 @@ namespace VoltageDropCalculatorApplication
 
             nodeNameCombo.Text = Convert.ToString(nodeDataSet.Tables[Convert.ToString(projectDataSet.Tables["Parameter Table"].Rows[0]["Current Node"])].Rows[0]["Name"]);
             nodeDataGridView.DataSource = nodeDataSet.Tables[Convert.ToString(projectDataSet.Tables["Parameter Table"].Rows[0]["Current Node"])];
+            tempTable = nodeDataSet.Tables[0].Copy();
+            tempTable.Rows[0][0] = "0"; //makes the first entry zero .
+            foreach (DataRow dr in tempTable.Rows)
+            {
+                dr[3] = 0.0;
+                dr[4] = 0.0;
+                dr[5] = 0.0;
+            }
             nodeDataGridView.Columns[0].Visible = false;
             nodeDataGridView.Columns[9].Visible = false;
             nodeDataGridView.Columns[10].Visible = false;
@@ -415,7 +423,7 @@ namespace VoltageDropCalculatorApplication
                 //tempNodeDataSet.WriteXml(projectName);
 
                 //voltageCalculationForm frm = new voltageCalculationForm(projectName, p, t2, Vs, loadCount, genCount, mfNodeList, nodeDataSet);
-                voltageCalculationForm frm2 = new voltageCalculationForm(p, t2, Vs, loadCount, genCount, lengthTol, mfNodeList, nodeDataSet, tempNodeDataSet, nodeDataGridView);
+                voltageCalculationForm frm2 = new voltageCalculationForm(p, t2, Vs, loadCount, genCount, mfNodeList, nodeDataSet, tempNodeDataSet, nodeDataGridView, libraryDataSet);
                 frm2.ShowDialog();
             }
             else
@@ -1330,6 +1338,13 @@ namespace VoltageDropCalculatorApplication
                     libraryDataSet.Tables.Add(dt.Copy());
                 }
             }
+            else
+            {
+                //change the formtitle
+                changeFormTitle();
+            }
+
+            
         
             //Code picks up any changes to the loads database and loads them
             DataTable resultLoads = new DataTable();
@@ -1582,8 +1597,9 @@ namespace VoltageDropCalculatorApplication
                 // If the no button was pressed ... 
                 if (result == DialogResult.No)
                 {
-                    // cancel the closure of the form.
+                    // prompt to save and cancel the closure of the form.
                     saveToolStripMenuItem_Click(sender, e);
+                    e.Cancel = true;
                     
                 }
 
