@@ -55,7 +55,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.78723F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.21277F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 176F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 188F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 189F));
             this.tableLayoutPanel1.Controls.Add(this.selectLibraryLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.loadTypeCombo, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.resetLibrary, 3, 0);
@@ -100,7 +100,7 @@
             // 
             // addCableButton
             // 
-            this.addCableButton.Location = new System.Drawing.Point(495, 3);
+            this.addCableButton.Location = new System.Drawing.Point(494, 3);
             this.addCableButton.Name = "addCableButton";
             this.addCableButton.Size = new System.Drawing.Size(170, 23);
             this.addCableButton.TabIndex = 3;
@@ -161,7 +161,7 @@
             this.doneLoadDG.Name = "doneLoadDG";
             this.doneLoadDG.Size = new System.Drawing.Size(152, 25);
             this.doneLoadDG.TabIndex = 3;
-            this.doneLoadDG.Text = "Cancel";
+            this.doneLoadDG.Text = "Close";
             this.doneLoadDG.UseVisualStyleBackColor = true;
             this.doneLoadDG.Click += new System.EventHandler(this.doneLoadDG_Click);
             // 
