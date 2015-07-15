@@ -60,27 +60,31 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.menuStrip1.AutoSize = false;
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.helpToolStripMenuItem,
             this.languageToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(902, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(897, 112);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 108);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(71, 108);
             this.helpToolStripMenuItem.Text = "Language";
             // 
             // languageToolStripMenuItem
@@ -88,7 +92,7 @@
             this.languageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
-            this.languageToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.languageToolStripMenuItem.Size = new System.Drawing.Size(44, 108);
             this.languageToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
@@ -100,7 +104,8 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 24);
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -112,7 +117,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel2);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(902, 590);
+            this.splitContainer1.Size = new System.Drawing.Size(897, 566);
             this.splitContainer1.SplitterDistance = 300;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -134,18 +139,18 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(300, 590);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(300, 566);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // editLibraryButton
             // 
-            this.editLibraryButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.editLibraryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.editLibraryButton.BackColor = System.Drawing.Color.Transparent;
             this.editLibraryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editLibraryButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.editLibraryButton.Location = new System.Drawing.Point(10, 483);
+            this.editLibraryButton.Location = new System.Drawing.Point(4, 462);
             this.editLibraryButton.Name = "editLibraryButton";
-            this.editLibraryButton.Size = new System.Drawing.Size(280, 64);
+            this.editLibraryButton.Size = new System.Drawing.Size(292, 64);
             this.editLibraryButton.TabIndex = 0;
             this.editLibraryButton.Text = "Edit Existing Libraries";
             this.editLibraryButton.UseVisualStyleBackColor = false;
@@ -155,13 +160,13 @@
             // 
             // newConductorLibraryButton
             // 
-            this.newConductorLibraryButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.newConductorLibraryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.newConductorLibraryButton.BackColor = System.Drawing.Color.Transparent;
             this.newConductorLibraryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newConductorLibraryButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.newConductorLibraryButton.Location = new System.Drawing.Point(10, 336);
+            this.newConductorLibraryButton.Location = new System.Drawing.Point(4, 321);
             this.newConductorLibraryButton.Name = "newConductorLibraryButton";
-            this.newConductorLibraryButton.Size = new System.Drawing.Size(280, 64);
+            this.newConductorLibraryButton.Size = new System.Drawing.Size(292, 64);
             this.newConductorLibraryButton.TabIndex = 0;
             this.newConductorLibraryButton.Text = "Create New Libraries";
             this.newConductorLibraryButton.UseVisualStyleBackColor = false;
@@ -171,13 +176,13 @@
             // 
             // newFeederButton
             // 
-            this.newFeederButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.newFeederButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.newFeederButton.BackColor = System.Drawing.Color.Transparent;
             this.newFeederButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newFeederButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.newFeederButton.Location = new System.Drawing.Point(10, 42);
+            this.newFeederButton.Location = new System.Drawing.Point(4, 39);
             this.newFeederButton.Name = "newFeederButton";
-            this.newFeederButton.Size = new System.Drawing.Size(280, 64);
+            this.newFeederButton.Size = new System.Drawing.Size(292, 64);
             this.newFeederButton.TabIndex = 0;
             this.newFeederButton.Text = "New Feeder Design";
             this.newFeederButton.UseVisualStyleBackColor = false;
@@ -187,12 +192,12 @@
             // 
             // loadProjectButton
             // 
-            this.loadProjectButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.loadProjectButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.loadProjectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loadProjectButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.loadProjectButton.Location = new System.Drawing.Point(10, 189);
+            this.loadProjectButton.Location = new System.Drawing.Point(4, 180);
             this.loadProjectButton.Name = "loadProjectButton";
-            this.loadProjectButton.Size = new System.Drawing.Size(280, 64);
+            this.loadProjectButton.Size = new System.Drawing.Size(292, 64);
             this.loadProjectButton.TabIndex = 0;
             this.loadProjectButton.Text = "Load Previous Project";
             this.loadProjectButton.UseVisualStyleBackColor = true;
@@ -212,7 +217,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(598, 590);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(593, 566);
             this.tableLayoutPanel2.TabIndex = 0;
             this.tableLayoutPanel2.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel2_Paint);
             // 
@@ -232,7 +237,7 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(592, 584);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(587, 560);
             this.tableLayoutPanel4.TabIndex = 2;
             this.tableLayoutPanel4.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel4_Paint);
             // 
@@ -242,7 +247,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label1.Location = new System.Drawing.Point(22, 17);
+            this.label1.Location = new System.Drawing.Point(21, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(547, 55);
             this.label1.TabIndex = 3;
@@ -256,9 +261,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(5, 93);
+            this.pictureBox1.Location = new System.Drawing.Point(5, 89);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(582, 397);
+            this.pictureBox1.Size = new System.Drawing.Size(579, 380);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -269,25 +274,26 @@
             this.labelMainFormText.AutoSize = true;
             this.labelMainFormText.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelMainFormText.ForeColor = System.Drawing.Color.SteelBlue;
-            this.labelMainFormText.Location = new System.Drawing.Point(258, 524);
+            this.labelMainFormText.Location = new System.Drawing.Point(259, 501);
             this.labelMainFormText.Name = "labelMainFormText";
-            this.labelMainFormText.Size = new System.Drawing.Size(76, 29);
+            this.labelMainFormText.Size = new System.Drawing.Size(70, 29);
             this.labelMainFormText.TabIndex = 4;
-            this.labelMainFormText.Text = "Hello!";
+            this.labelMainFormText.Text = "Hello";
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(902, 614);
+            this.ClientSize = new System.Drawing.Size(897, 566);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1366, 768);
             this.Name = "mainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FeederVoltageCalc V1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

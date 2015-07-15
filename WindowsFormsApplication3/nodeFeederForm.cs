@@ -42,14 +42,12 @@ namespace VoltageDropCalculatorApplication
         DataSet parameters = new DataSet();
         DataTable paramDataTable = new DataTable("Parameter Table");
 
-
         DataTable tempTable = new DataTable();//temporary table that stores the node data to put in the main feederdataset
         DataSet libraryDataSet = new DataSet();
         BindingList<int> nodeNumList = new BindingList<int>();
         BindingList<string> nodeNameList = new BindingList<string>();
         TreeNode rootNode = new TreeNode();
         List<string> addList;
-
 
         public nodeFeederForm()
         {
@@ -89,9 +87,6 @@ namespace VoltageDropCalculatorApplication
             //newProjectClicked = 0;
             projectName = "Untitled" + ".xml"; //creates a string in projectName that will contain the reference to the xml file
             this.Text = "Untitled";
-            //createNewProjectButton.Enabled = false;
-            //projectNameTextBox.Enabled = false;
-            //SolidBrush sb = new SolidBrush(Color.SteelBlue);
             nodeNameTextBox.Text = "node 1";
             tableLayoutPanel4.Enabled = true;
             proceedToVCalcButton.Enabled = true;
@@ -417,16 +412,18 @@ namespace VoltageDropCalculatorApplication
                 }
                 //double[] voltageRowDouble = new double[35];
 
-                tempNodeDataSet.WriteXml(projectName);
+                //tempNodeDataSet.WriteXml(projectName);
 
-                voltageCalculationForm frm = new voltageCalculationForm(projectName, p, t2, Vs, loadCount, genCount, mfNodeList);
-                frm.ShowDialog();
+                //voltageCalculationForm frm = new voltageCalculationForm(projectName, p, t2, Vs, loadCount, genCount, mfNodeList, nodeDataSet);
+                voltageCalculationForm frm2 = new voltageCalculationForm(p, t2, Vs, loadCount, genCount, mfNodeList, nodeDataSet, tempNodeDataSet, nodeDataGridView);
+                frm2.ShowDialog();
             }
             else
             {
                 MessageBox.Show("Cannot Proceed without specifying Loads or DGs for each individual node! Please check that all nodes have at least one Load or Generator");
             }
         }
+
         private void cableSelectCombo_TextChanged(object sender, EventArgs e)
         {
             if (ShownForm) changeFormTitle();
@@ -442,8 +439,6 @@ namespace VoltageDropCalculatorApplication
                 }
             }
 
-
-
             if (nodeDataSet.Tables.Contains("node" + nodeNumCombo.Text))
             {
                 for (int i = 0; i < nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows.Count; i++)
@@ -454,8 +449,6 @@ namespace VoltageDropCalculatorApplication
                 }
 
             }
-
-
         }
 
         private void lengthNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -483,22 +476,29 @@ namespace VoltageDropCalculatorApplication
 
             }
 
-            mfNodeList.Clear();//Clears the main feeder node list
+            
             //mfNodeDictionary.Clear();
 
             if (selectEndNodeCombo.Text != "")
             {
-                drawArea.Clear(Color.White);
+                mfNodeList.Clear();//Clears the main feeder node list                
                 getMainFeederNodes(Convert.ToInt32(selectEndNodeCombo.Text), mfNodeList);
                 drawPoints(mfNodeList);
             }
+            else
+            {
+                drawPoints(mfNodeList);
+            }
+
+           
+
 
 
         }
 
         private void addNodeButton_Click(object sender, EventArgs e)
         {
-            editTable();
+            editTable();            
             if (ShownForm) changeFormTitle();
             //totalNodeNumberNumericUpDown.Value = totalNodeNumberNumericUpDown.Value + 1;
             nodeCountInt++;
@@ -587,7 +587,7 @@ namespace VoltageDropCalculatorApplication
             nodeNameCombo.SelectedIndex = nodeNameCombo.Items.Count - 1;
 
 
-
+            lengthNumericUpDown.Value = 100M;
             nodeDataGridView.DataSource = nodeDataSet.Tables[nodeCountInt - 1];//changes the datagrid view to display the new node.   
             closeTableEdits();
         }
@@ -735,6 +735,7 @@ namespace VoltageDropCalculatorApplication
         //method gets the nodes in a main feeder list and then calculates the positions of those nodes.
         private void drawPoints(List<int> mainfeederList)
         {
+            drawArea.Clear(Color.White);
             //SolidBrush sb = new SolidBrush(Color.SteelBlue);
             Pen myPen = new Pen(sb);
             double drawingSpace = (double)drawingPanel.Width - 30;
@@ -751,14 +752,21 @@ namespace VoltageDropCalculatorApplication
                 }
                 System.Drawing.Font drawFont = new System.Drawing.Font("Arial", 10);
                 System.Drawing.Font drawFont1 = new System.Drawing.Font("Arial", 8);
-                drawArea.FillEllipse(sb, 30 + (i * (int)nodespacing), y, 10, 10); //draws the circle
+                System.Drawing.Font drawFont2 = new System.Drawing.Font("Arial", 6);
+                drawArea.DrawEllipse(myPen, 0, y - 5, 20, 20);
+                drawArea.DrawEllipse(myPen, 10, y - 5, 20, 20);
+                drawArea.DrawLine(myPen, 30, y+5, 60, y+5);
+                drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[0].Rows[0][9]))) + "m", drawFont2, sb, 33, (float)y - 10);
+                
+                drawArea.FillEllipse(sb, 60 + (i * (int)nodespacing), y, 10, 10); //draws the circle
                 if (i != mainfeederList.Count - 1)
                 {
-                    drawArea.DrawLine(myPen, 30 + (i * (float)nodespacing), y + 5, 30 + ((i + 1) * (float)nodespacing), y + 5); //draws the lines
-                    drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[mainfeederList[i]].Rows[0][9]))) + "m", drawFont1, sb, (30 + (i * (float)nodespacing) + 30 + ((i + 1) * (float)nodespacing)) / 2, (float)y - 20); //draws the label
+                    drawArea.DrawLine(myPen, 60 + (i * (float)nodespacing), y + 5, 60 + ((i + 1) * (float)nodespacing), y + 5); //draws the lines
+                    drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[mainfeederList[i]].Rows[0][9]))) + "m", drawFont1, sb, (60 + (i * (float)nodespacing) + 60 + ((i + 1) * (float)nodespacing)) / 2, (float)y - 20); //draws the label
                 }
-                drawArea.DrawString(label, drawFont, sb, 30 + (i * (float)nodespacing), (float)y - 20); //draws the label
-
+                                
+                drawArea.DrawString(label, drawFont, sb, 60 + (i * (float)nodespacing), (float)y - 20);//draws the label
+                
             }
 
         }
@@ -1007,7 +1015,7 @@ namespace VoltageDropCalculatorApplication
         }
 
         //method calculates the length of the first row of the node datatable.
-        private double calculateLengths(decimal lengthInput, int rowIndex)
+        public double calculateLengths(decimal lengthInput, int rowIndex)
         {
             double calculatedLength = lengthTol;
             if ((rowIndex == 0) && (loadCount != 0))
@@ -1673,6 +1681,26 @@ namespace VoltageDropCalculatorApplication
         }
 
         private void nodeNameCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cableSelectCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel6_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void drawingPanel_Paint(object sender, PaintEventArgs e)
         {
 
         }
