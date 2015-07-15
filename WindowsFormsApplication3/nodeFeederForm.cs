@@ -415,7 +415,7 @@ namespace VoltageDropCalculatorApplication
                 //tempNodeDataSet.WriteXml(projectName);
 
                 //voltageCalculationForm frm = new voltageCalculationForm(projectName, p, t2, Vs, loadCount, genCount, mfNodeList, nodeDataSet);
-                voltageCalculationForm frm2 = new voltageCalculationForm(p, t2, Vs, loadCount, genCount, mfNodeList, nodeDataSet, tempNodeDataSet, nodeDataGridView);
+                voltageCalculationForm frm2 = new voltageCalculationForm(p, t2, Vs, loadCount, genCount, lengthTol, mfNodeList, nodeDataSet, tempNodeDataSet, nodeDataGridView);
                 frm2.ShowDialog();
             }
             else
