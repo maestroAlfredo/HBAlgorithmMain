@@ -22,6 +22,7 @@ namespace VoltageDropCalculatorApplication
         double loadCountInt;
         double genCountInt;
         int totalLoadsGens;
+        double lengthTol;
         DataTable nodeOverallDataTable = new DataTable();
         
         ErrorProvider errorProvider1;
@@ -31,7 +32,8 @@ namespace VoltageDropCalculatorApplication
         DataSet nodeDataSet = new DataSet(); //DataSet tempNodeDataSet = new DataSet();
         DataSet libraryDataSet = new DataSet();
         DataGridView nodeDataGridView = new DataGridView();
-        List<int> mfNodeList = new List<int>();
+        DataTable cableDT = new DataTable();
+        //DataRow dr;
 
         public voltageCalculationForm(string projectName, double risk, double temperature, double sourceVoltage, int loadCount, int genCount, List<int> mfNodeList)
         {
@@ -67,14 +69,14 @@ namespace VoltageDropCalculatorApplication
             voltCalculation();
         }
 
-        public voltageCalculationForm(double risk, double temperature, double sourceVoltage, int loadCount, int genCount, List<int> mfNodeList, DataSet nodeDataSet, DataSet tempNodeDataSet, DataGridView nodeDataGridView, DataSet libraryDataSet)
+        public voltageCalculationForm(double risk, double temperature, double sourceVoltage, int loadCount, int genCount, double lengthTol, List<int> mfNodeList, DataSet nodeDataSet, DataSet tempNodeDataSet, DataGridView nodeDataGridView, DataSet libraryDataSet)
         {
             InitializeComponent();
             //nodeVecDataSet.ReadXml(projectName);
             nodeVecDataSet = tempNodeDataSet; this.nodeDataGridView = nodeDataGridView;
             this.libraryDataSet = libraryDataSet;
             nodeNum = nodeVecDataSet.Tables[nodeVecDataSet.Tables.Count - 1].Rows.Count / (loadCount + genCount);
-            this.mfNodeList = mfNodeList;
+            //this.mfNodeList = mfNodeList;
 
             Vs = sourceVoltage;
             t_old = temperature;
@@ -89,6 +91,7 @@ namespace VoltageDropCalculatorApplication
             numericUpDownRisk.Value = Convert.ToDecimal(p);
             loadCountInt = loadCount;
             genCountInt = genCount;
+            this.lengthTol = lengthTol;
             totalLoadsGens = loadCount + genCount;
             this.nodeDataSet = nodeDataSet;
             nodeOverallDataTable = nodeVecDataSet.Tables[0].Copy();
@@ -890,9 +893,24 @@ namespace VoltageDropCalculatorApplication
 
         private void initDataGridViewLengths()
         {
-            //BindingSource bsDGVLengths = new BindingSource(List<int> mfNodeList);
-            //dataGridViewLengths.Columns[0] = mfNodeList;
-            dataGridViewLengths.DataSource = nodeOverallDataTable;
+            //dr = new DataRow(); 
+            cableDT.Columns.Add("Node",typeof(String));
+            cableDT.Columns.Add("Length", typeof(decimal));
+            cableDT.Columns.Add("Cable", typeof(String));
+            decimal cLength = 0; // cable length
+
+            int loadsGensNum = nodeDataSet.Tables[0].Rows.Count;
+            for (int x = 0; x < nodeOverallDataTable.Rows.Count; x++)
+            {
+
+                if (x % loadsGensNum == 0) 
+                {
+                    if (loadCountInt != 1) cLength = Convert.ToDecimal(nodeVecDataSet.Tables[0].Rows[x][8].ToString()) + (decimal)(loadCountInt - 1)* (decimal)lengthTol ;
+                    else if (loadCountInt == 1) cLength = Convert.ToDecimal(nodeVecDataSet.Tables[0].Rows[x][8].ToString()) + (decimal)loadCountInt * (decimal)lengthTol;
+                    cableDT.Rows.Add(nodeVecDataSet.Tables[0].Rows[x][0].ToString(), cLength, nodeVecDataSet.Tables[0].Rows[x][9].ToString());
+                }
+            }
+            dataGridViewLengths.DataSource = cableDT;
         }
     }
 }
