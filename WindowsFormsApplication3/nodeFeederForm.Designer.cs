@@ -272,7 +272,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(471, 9);
+            this.label2.Location = new System.Drawing.Point(204, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 13);
             this.label2.TabIndex = 1;
@@ -297,10 +297,11 @@
             this.nodeNumCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nodeNumCombo.Enabled = false;
             this.nodeNumCombo.FormattingEnabled = true;
-            this.nodeNumCombo.Location = new System.Drawing.Point(556, 5);
+            this.nodeNumCombo.Location = new System.Drawing.Point(609, 5);
             this.nodeNumCombo.Name = "nodeNumCombo";
-            this.nodeNumCombo.Size = new System.Drawing.Size(96, 21);
+            this.nodeNumCombo.Size = new System.Drawing.Size(77, 21);
             this.nodeNumCombo.TabIndex = 2;
+            this.nodeNumCombo.Visible = false;
             this.nodeNumCombo.TextChanged += new System.EventHandler(this.nodeNumCombo_TextChanged);
             // 
             // label7
@@ -457,7 +458,6 @@
             // 
             // tableLayoutPanel4
             // 
-            this.tableLayoutPanel4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tableLayoutPanel4.BackColor = System.Drawing.SystemColors.HighlightText;
             this.tableLayoutPanel4.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel4.ColumnCount = 8;
@@ -484,6 +484,7 @@
             this.tableLayoutPanel4.Controls.Add(this.label17, 7, 0);
             this.tableLayoutPanel4.Controls.Add(this.nodeCount, 7, 1);
             this.tableLayoutPanel4.Controls.Add(this.cableSelectCombo, 6, 1);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Enabled = false;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 72);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -643,10 +644,11 @@
             // 
             // detailsCheckBox
             // 
+            this.detailsCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.detailsCheckBox.AutoSize = true;
             this.detailsCheckBox.Enabled = false;
             this.detailsCheckBox.ForeColor = System.Drawing.Color.White;
-            this.detailsCheckBox.Location = new System.Drawing.Point(697, 3);
+            this.detailsCheckBox.Location = new System.Drawing.Point(804, 7);
             this.detailsCheckBox.Name = "detailsCheckBox";
             this.detailsCheckBox.Size = new System.Drawing.Size(84, 17);
             this.detailsCheckBox.TabIndex = 11;
@@ -792,18 +794,17 @@
             // 
             // tableLayoutPanel6
             // 
-            this.tableLayoutPanel6.ColumnCount = 6;
+            this.tableLayoutPanel6.ColumnCount = 5;
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 267F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 141F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 280F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 405F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 105F));
             this.tableLayoutPanel6.Controls.Add(this.label4, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.detailsCheckBox, 5, 0);
             this.tableLayoutPanel6.Controls.Add(this.searchTextBox, 1, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label2, 3, 0);
-            this.tableLayoutPanel6.Controls.Add(this.nodeNumCombo, 4, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label2, 2, 0);
+            this.tableLayoutPanel6.Controls.Add(this.nodeNumCombo, 3, 0);
+            this.tableLayoutPanel6.Controls.Add(this.detailsCheckBox, 4, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 152);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";

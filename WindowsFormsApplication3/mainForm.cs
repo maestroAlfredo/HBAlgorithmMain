@@ -293,6 +293,7 @@ namespace VoltageDropCalculatorApplication
 
                 bool enabled = true;
                 libraryForm frm = new libraryForm("Conductors", enabled, libraryDataSet);
+                frm.saveLibraryButton.Text = "Save";
                 frm.ShowDialog();
 
 
