@@ -69,7 +69,7 @@ namespace VoltageDropCalculatorApplication
             voltCalculation();
         }
 
-        public voltageCalculationForm(double risk, double temperature, double sourceVoltage, int loadCount, int genCount, double lengthTol, List<int> mfNodeList, DataSet nodeDataSet, DataSet tempNodeDataSet, DataGridView nodeDataGridView)
+        public voltageCalculationForm(double risk, double temperature, double sourceVoltage, int loadCount, int genCount, double lengthTol, List<int> mfNodeList, DataSet nodeDataSet, DataSet tempNodeDataSet, DataGridView nodeDataGridView, DataSet libraryDataSet)
         {
             InitializeComponent();
             //nodeVecDataSet.ReadXml(projectName);
