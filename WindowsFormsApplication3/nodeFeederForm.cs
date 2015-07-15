@@ -999,7 +999,7 @@ namespace VoltageDropCalculatorApplication
         }
 
         //method calculates the length of the first row of the node datatable.
-        private double calculateLengths(decimal lengthInput, int rowIndex)
+        public double calculateLengths(decimal lengthInput, int rowIndex)
         {
             double calculatedLength = lengthTol;
             if ((rowIndex == 0) && (loadCount != 0))

@@ -29,6 +29,7 @@ namespace VoltageDropCalculatorApplication
         DataSet nodeVecDataSet = new DataSet();
         DataSet nodeDataSet = new DataSet(); //DataSet tempNodeDataSet = new DataSet();
         DataGridView nodeDataGridView = new DataGridView();
+        List<int> mfNodeList = new List<int>();
 
         public voltageCalculationForm(string projectName, double risk, double temperature, double sourceVoltage, int loadCount, int genCount, List<int> mfNodeList)
         {
@@ -70,6 +71,8 @@ namespace VoltageDropCalculatorApplication
             //nodeVecDataSet.ReadXml(projectName);
             nodeVecDataSet = tempNodeDataSet; this.nodeDataGridView = nodeDataGridView;
             nodeNum = nodeVecDataSet.Tables[nodeVecDataSet.Tables.Count - 1].Rows.Count / (loadCount + genCount);
+            this.mfNodeList = mfNodeList;
+
             Vs = sourceVoltage;
             t_old = temperature;
             p = risk;
@@ -96,6 +99,8 @@ namespace VoltageDropCalculatorApplication
             nodeSummaryDataGridView.Columns[10].Visible = false;
             nodeSummaryDataGridView.Columns[11].Visible = false;
             closeTableEdits();
+
+            initDataGridViewLengths();
             voltCalculation();
         }
 
@@ -693,17 +698,6 @@ namespace VoltageDropCalculatorApplication
 
         private void voltageCalculationForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //DataSet ds = new DataSet();
-            //ds.ReadXml(projName);
-
-
-            //for (int i = ds.Tables.Count - 1; i >= 0; i--)
-            //{
-            //    ds.Tables.Remove(ds.Tables[i]);
-            //}
-
-            //ds.WriteXml(projName);
-
             nodeDataGridView.Update();
             nodeDataGridView.Refresh();
         }
@@ -889,6 +883,13 @@ namespace VoltageDropCalculatorApplication
                     nodeDataSet.Tables[i].Rows[x][4+1] = nodeVecDataSet.Tables[0].Rows[xx][4]; xx++;
                 }
             }
+        }
+
+        private void initDataGridViewLengths()
+        {
+            //BindingSource bsDGVLengths = new BindingSource(List<int> mfNodeList);
+            //dataGridViewLengths.Columns[0] = mfNodeList;
+            dataGridViewLengths.DataSource = nodeOverallDataTable;
         }
     }
 }
