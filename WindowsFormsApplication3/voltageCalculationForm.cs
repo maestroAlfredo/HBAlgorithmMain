@@ -23,11 +23,13 @@ namespace VoltageDropCalculatorApplication
         double genCountInt;
         int totalLoadsGens;
         DataTable nodeOverallDataTable = new DataTable();
+        
         ErrorProvider errorProvider1;
 
 
         DataSet nodeVecDataSet = new DataSet();
         DataSet nodeDataSet = new DataSet(); //DataSet tempNodeDataSet = new DataSet();
+        DataSet libraryDataSet = new DataSet();
         DataGridView nodeDataGridView = new DataGridView();
         List<int> mfNodeList = new List<int>();
 
@@ -65,11 +67,12 @@ namespace VoltageDropCalculatorApplication
             voltCalculation();
         }
 
-        public voltageCalculationForm(double risk, double temperature, double sourceVoltage, int loadCount, int genCount, List<int> mfNodeList, DataSet nodeDataSet, DataSet tempNodeDataSet, DataGridView nodeDataGridView)
+        public voltageCalculationForm(double risk, double temperature, double sourceVoltage, int loadCount, int genCount, List<int> mfNodeList, DataSet nodeDataSet, DataSet tempNodeDataSet, DataGridView nodeDataGridView, DataSet libraryDataSet)
         {
             InitializeComponent();
             //nodeVecDataSet.ReadXml(projectName);
             nodeVecDataSet = tempNodeDataSet; this.nodeDataGridView = nodeDataGridView;
+            this.libraryDataSet = libraryDataSet;
             nodeNum = nodeVecDataSet.Tables[nodeVecDataSet.Tables.Count - 1].Rows.Count / (loadCount + genCount);
             this.mfNodeList = mfNodeList;
 
@@ -851,15 +854,15 @@ namespace VoltageDropCalculatorApplication
         private void tempNumUpDown_ValueChanged(object sender, EventArgs e)
         {
             double t_new = Convert.ToDouble(tempNumUpDown.Value);
-            DataSet ds = new DataSet();
-            ds.ReadXml("Libraries.xml");
+            DataSet libraryDataSet = new DataSet();
+           
 
             for (int i = 0; i < nodeNum; i++)
             {
                 for (int rows = 0; rows < nodeVecDataSet.Tables[i].Rows.Count; rows++)
                 {
                     string cable = nodeVecDataSet.Tables[i].Rows[rows][9].ToString();
-                    DataRow dr = ds.Tables["Conductors"].AsEnumerable().SingleOrDefault(r => r.Field<string>("Code") == cable);
+                    DataRow dr = libraryDataSet.Tables["Conductors"].AsEnumerable().SingleOrDefault(r => r.Field<string>("Code") == cable);
                     double T = Convert.ToDouble(dr["T"]);
 
                     nodeVecDataSet.Tables[i].Rows[rows][10] = Convert.ToDouble(nodeVecDataSet.Tables[i].Rows[rows][10]) * (T + t_new) / (T + t_old);
