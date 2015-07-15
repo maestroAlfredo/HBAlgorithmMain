@@ -884,9 +884,9 @@ namespace VoltageDropCalculatorApplication
             {
                 for (int x = 0; x < loadsGensNum; x++)
                 {
+                    nodeDataSet.Tables[i].Rows[x][2+1] = nodeVecDataSet.Tables[0].Rows[xx][2]; 
                     nodeDataSet.Tables[i].Rows[x][3+1] = nodeVecDataSet.Tables[0].Rows[xx][3]; 
-                    nodeDataSet.Tables[i].Rows[x][4+1] = nodeVecDataSet.Tables[0].Rows[xx][4]; 
-                    nodeDataSet.Tables[i].Rows[x][5+1] = nodeVecDataSet.Tables[0].Rows[xx][5]; xx++;
+                    nodeDataSet.Tables[i].Rows[x][4+1] = nodeVecDataSet.Tables[0].Rows[xx][4]; xx++;
                 }
             }
         }
