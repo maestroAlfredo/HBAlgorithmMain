@@ -615,58 +615,76 @@ namespace VoltageDropCalculatorApplication
 
         private void deleteNodeButton_Click(object sender, EventArgs e)
         {
-            if (ShownForm) changeFormTitle();
-            editTable();
-            //removes the node from the children of the parent node by setting the children field to zero or null
-            string parentNode = Convert.ToString(nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows[0][13]);
-            if (Convert.ToString(nodeDataSet.Tables["node" + parentNode].Rows[0][14]).Length == 1)
+            const string message = "Clicking this button will delete the currently displayed node and ALL its child nodes. Do you want to proceed?";
+            const string caption = "Delete Node";
+            var result = MessageBox.Show(message, caption,
+                                         MessageBoxButtons.YesNo,
+                                         MessageBoxIcon.Exclamation);
+
+            // If the no button was pressed ... 
+            if (result == DialogResult.No)
             {
-                nodeDataSet.Tables["node" + parentNode].Rows[0][14] = "0"; //sets the children of the parent node to zero if there was only one child
+                //Do Nothing               
+
             }
             else
             {
-                string replacement = null;
-                string originalString = Convert.ToString(nodeDataSet.Tables["node" + parentNode].Rows[0][14]);
-                originalString = originalString.Replace(originalString.Contains(nodeNumCombo.Text + ";") ? nodeNumCombo.Text + ";" : nodeNumCombo.Text, replacement); //updates the children to null if there is more than one child
-                nodeDataSet.Tables["node" + parentNode].Rows[0][14] = originalString;
-            }
+                if (ShownForm) changeFormTitle();
+                editTable();
+                //removes the node from the children of the parent node by setting the children field to zero or null
+                string parentNode = Convert.ToString(nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows[0][13]);
+                if (Convert.ToString(nodeDataSet.Tables["node" + parentNode].Rows[0][14]).Length == 1)
+                {
+                    nodeDataSet.Tables["node" + parentNode].Rows[0][14] = "0"; //sets the children of the parent node to zero if there was only one child
+                }
+                else
+                {
+                    string replacement = null;
+                    string originalString = Convert.ToString(nodeDataSet.Tables["node" + parentNode].Rows[0][14]);
+                    originalString = originalString.Replace(originalString.Contains(nodeNumCombo.Text + ";") ? nodeNumCombo.Text + ";" : nodeNumCombo.Text, replacement); //updates the children to null if there is more than one child
+                    nodeDataSet.Tables["node" + parentNode].Rows[0][14] = originalString;
+                }
 
-            deleteNode("node" + nodeNumCombo.Text);
-            nodeCountInt = nodeDataSet.Tables.Count;
+                deleteNode("node" + nodeNumCombo.Text);
+                nodeCountInt = nodeDataSet.Tables.Count;
 
 
-            for (int i = 0; i < nodeDataSet.Tables.Count; i++)
-            {
-                string originalName = nodeDataSet.Tables[i].TableName;
-                //originalName = originalName.Remove(0, 4);
+                for (int i = 0; i < nodeDataSet.Tables.Count; i++)
+                {
+                    string originalName = nodeDataSet.Tables[i].TableName;
+                    //originalName = originalName.Remove(0, 4);
 
-                renameNode(originalName, "node" + (i + 1).ToString()); //renames the remaining nodes                              
+                    renameNode(originalName, "node" + (i + 1).ToString()); //renames the remaining nodes                              
 
-            }
-            for (int i = 0; i < nodeDataSet.Tables.Count; i++) nodeDataSet.Tables[i].TableName = "node" + (i + 1).ToString(); //renames the tables.
+                }
+                for (int i = 0; i < nodeDataSet.Tables.Count; i++) nodeDataSet.Tables[i].TableName = "node" + (i + 1).ToString(); //renames the tables.
 
-            for (int i = nodeNumList.Count - 1; i >= nodeDataSet.Tables.Count; i--)
-            {
-                nodeNumList.RemoveAt(i);
-            }
+                for (int i = nodeNumList.Count - 1; i >= nodeDataSet.Tables.Count; i--)
+                {
+                    nodeNumList.RemoveAt(i);
+                }
 
-            DataSet ds = new DataSet();//emptydataset to clear the  xml files of previous tables
-            ds.WriteXml(projectName);
-            nodeDataSet.WriteXml(projectName);
+                DataSet ds = new DataSet();//emptydataset to clear the  xml files of previous tables
+                ds.WriteXml(projectName);
+                nodeDataSet.WriteXml(projectName);
 
-            nodeCountInt = nodeDataSet.Tables.Count;
-            nodeCount.Text = Convert.ToString(nodeCountInt);
-            nodeNumCombo.DataSource = nodeNumList;
-            nodeNameCombo.DataSource = nodeNameList;
-            nodeNameCombo.Update();
-            nodeNumCombo.Update();
-            nodeNumCombo.SelectedIndex = nodeNumCombo.Items.Count - 1;
-            nodeNameCombo.SelectedIndex = nodeNameCombo.Items.Count - 1;
-            nodeNameTextBox.Text = nodeNameCombo.Text;
-            nodeDataGridView.DataSource = nodeDataSet.Tables[nodeDataSet.Tables.Count - 1];
-            drawArea.Clear(Color.White);
-            drawPoints(mfNodeList);
-            closeTableEdits();
+                nodeCountInt = nodeDataSet.Tables.Count;
+                nodeCount.Text = Convert.ToString(nodeCountInt);
+                nodeNumCombo.DataSource = nodeNumList;
+                nodeNameCombo.DataSource = nodeNameList;
+                nodeNameCombo.Update();
+                nodeNumCombo.Update();
+                nodeNumCombo.SelectedIndex = nodeNumCombo.Items.Count - 1;
+                nodeNameCombo.SelectedIndex = nodeNameCombo.Items.Count - 1;
+                nodeNameTextBox.Text = nodeNameCombo.Text;
+                nodeDataGridView.DataSource = nodeDataSet.Tables[nodeDataSet.Tables.Count - 1];
+                drawArea.Clear(Color.White);
+                drawPoints(mfNodeList);
+                closeTableEdits();
+
+            }            
+
+            
         }
 
         //recursive method that deletes a node as well as its children and their children etc
@@ -1243,6 +1261,19 @@ namespace VoltageDropCalculatorApplication
 
         private void nodeFeederForm_Load(object sender, EventArgs e)
         {
+            // Create the ToolTip and associate with the Form container.
+            ToolTip toolTip1 = new ToolTip();
+
+            // Set up the delays for the ToolTip.
+            toolTip1.AutoPopDelay = 5000;
+            toolTip1.InitialDelay = 1000;
+            toolTip1.ReshowDelay = 500;
+            // Force the ToolTip text to be displayed whether or not the form is active.
+            toolTip1.ShowAlways = true;
+
+            // Set up the ToolTip text for the Button and Checkbox.
+            toolTip1.SetToolTip(this.addNodeButton, "Clicking this button will add a node to the one that's currently shown.");
+            toolTip1.SetToolTip(this.deleteNodeButton, "Clicking this button will remove the currently shown node and all its child nodes.");
 
         }
 
@@ -1307,6 +1338,8 @@ namespace VoltageDropCalculatorApplication
 
         private void loadsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            int loadCountOld = loadCount;
+            int genCountOld = genCount;
             DataSet originalLibraryDataSet = new DataSet();
             
             foreach (DataTable dt in libraryDataSet.Tables)
@@ -1375,13 +1408,16 @@ namespace VoltageDropCalculatorApplication
             for (int i = 0; i<nodeCountInt; i++)
             {
                 double lengthSum = 0;
+                decimal lengthSumDecimal = 0.0M;
                 double rT2L = 0;
                 double k1L = 0;
                 for (int x = 0; x<nodeDataHolder.Tables[i].Rows.Count; x++)
                 {
                     lengthSum = lengthSum + Convert.ToDouble(nodeDataHolder.Tables[i].Rows[x]["Length"]);
+
                 }
-                decimal lengthSumDecimal = Convert.ToDecimal(lengthSum-lengthTol);
+                
+                lengthSumDecimal = Convert.ToDecimal(lengthSum - (double)genCountOld * lengthTol);
                 
                 string tableName = "node" + (i+1).ToString();
                 DataTable nodeDataTable = new DataTable(tableName);

@@ -381,6 +381,7 @@
             this.nodeDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.nodeDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.nodeDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.nodeDataGridView.BackgroundColor = System.Drawing.Color.Gainsboro;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.SteelBlue;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -412,7 +413,7 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.45647F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 242F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 243F));
             this.tableLayoutPanel5.Controls.Add(this.proceedToVCalcButton, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.selectEndNodeCombo, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.label18, 2, 0);
@@ -430,7 +431,7 @@
             // 
             this.proceedToVCalcButton.Enabled = false;
             this.proceedToVCalcButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.proceedToVCalcButton.Location = new System.Drawing.Point(651, 3);
+            this.proceedToVCalcButton.Location = new System.Drawing.Point(650, 3);
             this.proceedToVCalcButton.Name = "proceedToVCalcButton";
             this.proceedToVCalcButton.Size = new System.Drawing.Size(236, 31);
             this.proceedToVCalcButton.TabIndex = 0;
@@ -448,7 +449,7 @@
             this.selectEndNodeCombo.FormattingEnabled = true;
             this.selectEndNodeCombo.Location = new System.Drawing.Point(263, 7);
             this.selectEndNodeCombo.Name = "selectEndNodeCombo";
-            this.selectEndNodeCombo.Size = new System.Drawing.Size(137, 26);
+            this.selectEndNodeCombo.Size = new System.Drawing.Size(136, 26);
             this.selectEndNodeCombo.TabIndex = 6;
             this.selectEndNodeCombo.Visible = false;
             this.selectEndNodeCombo.SelectedIndexChanged += new System.EventHandler(this.selectEndNodeCombo_SelectedIndexChanged);
@@ -458,7 +459,7 @@
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(428, 13);
+            this.label18.Location = new System.Drawing.Point(427, 13);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(88, 13);
             this.label18.TabIndex = 5;
@@ -472,7 +473,7 @@
             this.endNodeCombo.ForeColor = System.Drawing.Color.SteelBlue;
             this.endNodeCombo.FormattingEnabled = true;
             this.endNodeCombo.ItemHeight = 20;
-            this.endNodeCombo.Location = new System.Drawing.Point(522, 3);
+            this.endNodeCombo.Location = new System.Drawing.Point(521, 3);
             this.endNodeCombo.Name = "endNodeCombo";
             this.endNodeCombo.Size = new System.Drawing.Size(123, 28);
             this.endNodeCombo.TabIndex = 6;
@@ -801,7 +802,7 @@
             // loadsToolStripMenuItem
             // 
             this.loadsToolStripMenuItem.Name = "loadsToolStripMenuItem";
-            this.loadsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadsToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.loadsToolStripMenuItem.Text = "Libraries";
             this.loadsToolStripMenuItem.Click += new System.EventHandler(this.loadsToolStripMenuItem_Click);
             // 
