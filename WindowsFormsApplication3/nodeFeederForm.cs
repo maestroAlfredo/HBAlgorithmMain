@@ -1381,7 +1381,7 @@ namespace VoltageDropCalculatorApplication
                 {
                     lengthSum = lengthSum + Convert.ToDouble(nodeDataHolder.Tables[i].Rows[x]["Length"]);
                 }
-                decimal lengthSumDecimal = Convert.ToDecimal(lengthSum);
+                decimal lengthSumDecimal = Convert.ToDecimal(lengthSum-lengthTol);
                 
                 string tableName = "node" + (i+1).ToString();
                 DataTable nodeDataTable = new DataTable(tableName);

@@ -36,8 +36,10 @@
             this.passiveRadio = new System.Windows.Forms.RadioButton();
             this.activeRadio = new System.Windows.Forms.RadioButton();
             this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.operatingTempNumUpDown = new System.Windows.Forms.NumericUpDown();
             this.sourceVoltageNumUpDown = new System.Windows.Forms.NumericUpDown();
+            this.nominalVoltageUpDown = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.lengthNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -49,11 +51,11 @@
             this.label8 = new System.Windows.Forms.Label();
             this.nodeDataGridView = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.cancelButton = new System.Windows.Forms.Button();
             this.proceedToVCalcButton = new System.Windows.Forms.Button();
             this.selectEndNodeCombo = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.endNodeCombo = new System.Windows.Forms.ComboBox();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.nodeNameTextBox = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -66,6 +68,8 @@
             this.label17 = new System.Windows.Forms.Label();
             this.nodeCount = new System.Windows.Forms.Label();
             this.drawingPanel = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.detailsCheckBox = new System.Windows.Forms.CheckBox();
             this.searchTextBox = new System.Windows.Forms.TextBox();
@@ -84,13 +88,10 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.nominalVoltageUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.operatingTempNumUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sourceVoltageNumUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nominalVoltageUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lengthNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nodeDataGridView)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
@@ -99,7 +100,6 @@
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nominalVoltageUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel2
@@ -179,6 +179,18 @@
             this.label10.TabIndex = 2;
             this.label10.Text = "Temperature[°C]";
             // 
+            // label11
+            // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.Location = new System.Drawing.Point(751, 9);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(100, 13);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "Nominal Voltage [V]";
+            this.label11.Click += new System.EventHandler(this.label6_Click);
+            // 
             // operatingTempNumUpDown
             // 
             this.operatingTempNumUpDown.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -222,6 +234,26 @@
             this.sourceVoltageNumUpDown.MouseClick += new System.Windows.Forms.MouseEventHandler(this.sourceVoltageNumUpDown_MouseClick);
             this.sourceVoltageNumUpDown.Validated += new System.EventHandler(this.sourceVoltageNumUpDown_Validated);
             // 
+            // nominalVoltageUpDown
+            // 
+            this.nominalVoltageUpDown.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.nominalVoltageUpDown.DecimalPlaces = 2;
+            this.nominalVoltageUpDown.Location = new System.Drawing.Point(746, 40);
+            this.nominalVoltageUpDown.Maximum = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
+            this.nominalVoltageUpDown.Name = "nominalVoltageUpDown";
+            this.nominalVoltageUpDown.Size = new System.Drawing.Size(110, 20);
+            this.nominalVoltageUpDown.TabIndex = 7;
+            this.nominalVoltageUpDown.Value = new decimal(new int[] {
+            230,
+            0,
+            0,
+            0});
+            this.nominalVoltageUpDown.ValueChanged += new System.EventHandler(this.nominalVoltageUpDown_ValueChanged);
+            // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -249,6 +281,7 @@
             // lengthNumericUpDown
             // 
             this.lengthNumericUpDown.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lengthNumericUpDown.DecimalPlaces = 2;
             this.lengthNumericUpDown.ForeColor = System.Drawing.Color.SteelBlue;
             this.lengthNumericUpDown.Location = new System.Drawing.Point(514, 44);
             this.lengthNumericUpDown.Minimum = new decimal(new int[] {
@@ -379,7 +412,7 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.45647F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 241F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 242F));
             this.tableLayoutPanel5.Controls.Add(this.proceedToVCalcButton, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.selectEndNodeCombo, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.label18, 2, 0);
@@ -393,22 +426,11 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(891, 40);
             this.tableLayoutPanel5.TabIndex = 5;
             // 
-            // cancelButton
-            // 
-            this.cancelButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.cancelButton.Location = new System.Drawing.Point(3, 3);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(255, 31);
-            this.cancelButton.TabIndex = 0;
-            this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
             // proceedToVCalcButton
             // 
             this.proceedToVCalcButton.Enabled = false;
             this.proceedToVCalcButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.proceedToVCalcButton.Location = new System.Drawing.Point(652, 3);
+            this.proceedToVCalcButton.Location = new System.Drawing.Point(651, 3);
             this.proceedToVCalcButton.Name = "proceedToVCalcButton";
             this.proceedToVCalcButton.Size = new System.Drawing.Size(236, 31);
             this.proceedToVCalcButton.TabIndex = 0;
@@ -424,7 +446,7 @@
             this.selectEndNodeCombo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectEndNodeCombo.ForeColor = System.Drawing.Color.SteelBlue;
             this.selectEndNodeCombo.FormattingEnabled = true;
-            this.selectEndNodeCombo.Location = new System.Drawing.Point(264, 7);
+            this.selectEndNodeCombo.Location = new System.Drawing.Point(263, 7);
             this.selectEndNodeCombo.Name = "selectEndNodeCombo";
             this.selectEndNodeCombo.Size = new System.Drawing.Size(137, 26);
             this.selectEndNodeCombo.TabIndex = 6;
@@ -436,7 +458,7 @@
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(429, 13);
+            this.label18.Location = new System.Drawing.Point(428, 13);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(88, 13);
             this.label18.TabIndex = 5;
@@ -450,11 +472,22 @@
             this.endNodeCombo.ForeColor = System.Drawing.Color.SteelBlue;
             this.endNodeCombo.FormattingEnabled = true;
             this.endNodeCombo.ItemHeight = 20;
-            this.endNodeCombo.Location = new System.Drawing.Point(523, 3);
+            this.endNodeCombo.Location = new System.Drawing.Point(522, 3);
             this.endNodeCombo.Name = "endNodeCombo";
             this.endNodeCombo.Size = new System.Drawing.Size(123, 28);
             this.endNodeCombo.TabIndex = 6;
             this.endNodeCombo.SelectedIndexChanged += new System.EventHandler(this.endNodeCombo_SelectedIndexChanged);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.ForeColor = System.Drawing.Color.SteelBlue;
+            this.cancelButton.Location = new System.Drawing.Point(3, 3);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(254, 31);
+            this.cancelButton.TabIndex = 0;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // tableLayoutPanel4
             // 
@@ -630,6 +663,26 @@
             this.drawingPanel.TabIndex = 8;
             this.drawingPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.drawingPanel_Paint);
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.ForeColor = System.Drawing.Color.SteelBlue;
+            this.label13.Location = new System.Drawing.Point(-2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(41, 13);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "Source";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.ForeColor = System.Drawing.Color.SteelBlue;
+            this.label12.Location = new System.Drawing.Point(-2, 13);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(33, 13);
+            this.label12.TabIndex = 2;
+            this.label12.Text = "Node";
+            // 
             // label19
             // 
             this.label19.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -704,37 +757,37 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(111, 6);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(111, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // helpToolStripMenuItem
@@ -748,7 +801,7 @@
             // loadsToolStripMenuItem
             // 
             this.loadsToolStripMenuItem.Name = "loadsToolStripMenuItem";
-            this.loadsToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.loadsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loadsToolStripMenuItem.Text = "Libraries";
             this.loadsToolStripMenuItem.Click += new System.EventHandler(this.loadsToolStripMenuItem_Click);
             // 
@@ -799,7 +852,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 405F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 105F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 202F));
             this.tableLayoutPanel6.Controls.Add(this.label4, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.searchTextBox, 1, 0);
             this.tableLayoutPanel6.Controls.Add(this.label2, 2, 0);
@@ -813,58 +866,6 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(891, 31);
             this.tableLayoutPanel6.TabIndex = 8;
             this.tableLayoutPanel6.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel6_Paint);
-            // 
-            // nominalVoltageUpDown
-            // 
-            this.nominalVoltageUpDown.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.nominalVoltageUpDown.DecimalPlaces = 2;
-            this.nominalVoltageUpDown.Location = new System.Drawing.Point(746, 40);
-            this.nominalVoltageUpDown.Maximum = new decimal(new int[] {
-            400,
-            0,
-            0,
-            0});
-            this.nominalVoltageUpDown.Name = "nominalVoltageUpDown";
-            this.nominalVoltageUpDown.Size = new System.Drawing.Size(110, 20);
-            this.nominalVoltageUpDown.TabIndex = 7;
-            this.nominalVoltageUpDown.Value = new decimal(new int[] {
-            230,
-            0,
-            0,
-            0});
-            this.nominalVoltageUpDown.ValueChanged += new System.EventHandler(this.nominalVoltageUpDown_ValueChanged);
-            // 
-            // label11
-            // 
-            this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label11.AutoSize = true;
-            this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(751, 9);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(100, 13);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "Nominal Voltage [V]";
-            this.label11.Click += new System.EventHandler(this.label6_Click);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label12.Location = new System.Drawing.Point(-2, 13);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(33, 13);
-            this.label12.TabIndex = 2;
-            this.label12.Text = "Node";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label13.Location = new System.Drawing.Point(-2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(41, 13);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Source";
             // 
             // nodeFeederForm
             // 
@@ -890,6 +891,7 @@
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.operatingTempNumUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sourceVoltageNumUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nominalVoltageUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lengthNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nodeDataGridView)).EndInit();
             this.tableLayoutPanel5.ResumeLayout(false);
@@ -904,7 +906,6 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nominalVoltageUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -66,8 +66,8 @@ namespace VoltageDropCalculatorApplication
             nodeSummaryDataGridView.Columns[5].Visible = false;
             nodeSummaryDataGridView.Columns[6].Visible = false;
             nodeSummaryDataGridView.Columns[7].Visible = false;
-            //nodeSummaryDataGridView.Columns[8].Visible = false;
-            //nodeSummaryDataGridView.Columns[9].Visible = false;
+            nodeSummaryDataGridView.Columns[8].Visible = false;
+            nodeSummaryDataGridView.Columns[9].Visible = false;
             nodeSummaryDataGridView.Columns[10].Visible = false;
             nodeSummaryDataGridView.Columns[11].Visible = false;
             closeTableEdits();
@@ -855,11 +855,32 @@ namespace VoltageDropCalculatorApplication
                     nodeDataSet.Tables[i].Rows[x][4+1] = nodeVecDataSet.Tables[0].Rows[xx][4]; xx++;
                 }
             }
+
+
+            xx = 0;
+            for (int x = 0; x < cableDT.Rows.Count; x++)
+            {
+                nodeVecDataSet.Tables[0].Rows[x * loadsGensNum][8] = Convert.ToDecimal(cableDT.Rows[x][1].ToString()) - (decimal)(loadCountInt * lengthTol - lengthTol);
+                if (loadCountInt != 1)
+                {
+                    for (int y = 0; y < loadCountInt; y++)
+                    {
+                        if (y % loadsGensNum != 0) nodeVecDataSet.Tables[0].Rows[(x * loadsGensNum) + y][8] = lengthTol;
+                    }
+                }
+            }
+            for (int i = 0; i < nodeNum; i++)
+            {
+                for (int x = 0; x < loadsGensNum; x++)
+                {
+                    nodeDataSet.Tables[i].Rows[x][8 + 1] = nodeVecDataSet.Tables[0].Rows[xx][8]; xx++;
+                }
+            }
         }
 
         private void initDataGridViewLengths()
         {
-            cableDT.Columns.Add("Node",typeof(String)); cableDT.Columns.Add("Length", typeof(decimal)); cableDT.Columns.Add("Cable", typeof(String));
+            cableDT.Columns.Add("Node", typeof(String)); cableDT.Columns.Add("Length", typeof(decimal)); cableDT.Columns.Add("Cable", typeof(String));
             decimal cLength = 0; // cable length
 
             int loadsGensNum = nodeDataSet.Tables[0].Rows.Count;
@@ -882,25 +903,6 @@ namespace VoltageDropCalculatorApplication
 
         private void buttonUpdateCables_Click(object sender, EventArgs e)
         {
-            int loadsGensNum = nodeDataSet.Tables[0].Rows.Count; int xx = 0;
-            for (int x = 0; x < cableDT.Rows.Count; x++)
-            {
-                nodeVecDataSet.Tables[0].Rows[x * loadsGensNum][8] = Convert.ToDecimal(cableDT.Rows[x][1].ToString()) - (decimal)(loadCountInt*lengthTol- lengthTol);
-                if (loadCountInt != 1)
-                {
-                    for (int y = 0; y < loadCountInt; y++) 
-                    {
-                        if (y % loadsGensNum != 0) nodeVecDataSet.Tables[0].Rows[(x * loadsGensNum) + y][8] = lengthTol; 
-                    }
-                }
-            }
-            for (int i = 0; i < nodeNum; i++)
-            {
-                for (int x = 0; x < loadsGensNum; x++)
-                {
-                    nodeDataSet.Tables[i].Rows[x][8 + 1] = nodeVecDataSet.Tables[0].Rows[xx][8]; xx++;
-                }
-            }
         }
 
         private void sidePanelPictureBox_Click(object sender, EventArgs e)
