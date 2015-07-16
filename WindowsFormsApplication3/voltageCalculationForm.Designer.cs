@@ -435,15 +435,15 @@
             // 
             // label8
             // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(89, 2);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(154, 24);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "Customer Chart";
+            //this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            //this.label8.AutoSize = true;
+            //this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            //this.label8.ForeColor = System.Drawing.Color.White;
+            //this.label8.Location = new System.Drawing.Point(89, 2);
+            //this.label8.Name = "label8";
+            //this.label8.Size = new System.Drawing.Size(154, 24);
+            //this.label8.TabIndex = 2;
+            //this.label8.Text = "Customer Chart";
             // 
             // nodeSummaryDataGridView
             // 
