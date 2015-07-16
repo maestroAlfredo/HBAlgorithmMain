@@ -83,6 +83,16 @@ namespace VoltageDropCalculatorApplication.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap classica_play_button_flat_rounded_square_white_on_blue_512x512 {
+            get {
+                object obj = ResourceManager.GetObject("classica_play-button_flat-rounded-square-white-on-blue_512x512", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap HBImage {
             get {
                 object obj = ResourceManager.GetObject("HBImage", resourceCulture);

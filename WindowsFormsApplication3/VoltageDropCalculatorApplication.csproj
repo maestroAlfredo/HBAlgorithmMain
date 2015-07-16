@@ -136,6 +136,7 @@
   <ItemGroup>
     <Content Include="HBlogo3.ico" />
     <Content Include="MetroFramework.txt" />
+    <None Include="Resources\classica_play-button_flat-rounded-square-white-on-blue_512x512.png" />
     <None Include="Resources\HBImage.jpg" />
     <None Include="Resources\Picture1.png" />
     <None Include="Resources\BackGround1.jpg" />

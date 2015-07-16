@@ -902,5 +902,28 @@ namespace VoltageDropCalculatorApplication
                 }
             }
         }
+
+        private void sidePanelPictureBox_Click(object sender, EventArgs e)
+        {
+            if(splitContainer1.Panel2Collapsed==false)
+            {
+                sidePanelPictureBox.BorderStyle = BorderStyle.None;
+                splitContainer1.Panel2Collapsed = true;
+                
+            }
+            else
+            {
+                sidePanelPictureBox.BorderStyle = BorderStyle.Fixed3D;
+                splitContainer1.Panel2Collapsed = false;
+                
+            }
+            
+
+        }
+
+        private void voltageProfileChart_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
