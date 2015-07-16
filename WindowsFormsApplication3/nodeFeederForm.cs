@@ -423,7 +423,7 @@ namespace VoltageDropCalculatorApplication
                 //tempNodeDataSet.WriteXml(projectName);
 
                 //voltageCalculationForm frm = new voltageCalculationForm(projectName, p, t2, Vs, loadCount, genCount, mfNodeList, nodeDataSet);
-                voltageCalculationForm frm2 = new voltageCalculationForm(p, t2, Vs, loadCount, genCount, lengthTol, mfNodeList, nodeDataSet, tempNodeDataSet, nodeDataGridView, libraryDataSet);
+                voltageCalculationForm frm2 = new voltageCalculationForm(p, t2, Vs, loadCount, genCount, lengthTol, mfNodeList, nodeDataSet, tempNodeDataSet, nodeDataGridView, libraryDataSet, k1);
                 frm2.ShowDialog();
             }
             else
@@ -1036,12 +1036,12 @@ namespace VoltageDropCalculatorApplication
             return calculatedLength;
         }
 
-        private string calculateRp(double rkm, double calculatedLength)
+        public string calculateRp(double rkm, double calculatedLength)
         {
             return ((rkm / 1000.0) * calculatedLength).ToString();
         }
 
-        private string calculateRn(double rKm, double caclulatedLength, double k1)
+        public string calculateRn(double rKm, double caclulatedLength, double k1)
         {
             return (rKm / 1000.0 * k1 * caclulatedLength).ToString();
         }
@@ -1398,7 +1398,6 @@ namespace VoltageDropCalculatorApplication
                         rT2L = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[y][1]) * (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[y][2]) + t2) / (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[y][2]) + 20.0);
                         k1L = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[y][3]);
                         break;
-
                     }
                 }
 
