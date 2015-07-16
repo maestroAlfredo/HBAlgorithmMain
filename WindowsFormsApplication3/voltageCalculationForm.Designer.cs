@@ -498,6 +498,7 @@
             this.dataGridViewLengths.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewLengths.Size = new System.Drawing.Size(327, 237);
             this.dataGridViewLengths.TabIndex = 4;
+            this.dataGridViewLengths.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLengths_CellEndEdit);
             // 
             // label7
             // 
