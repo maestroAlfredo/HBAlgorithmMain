@@ -41,6 +41,7 @@ namespace VoltageDropCalculatorApplication
         DataSet loadedDataSet = new DataSet(); //loaded dataset that will contain the tables from the saved .hba file
         DataSet parameters = new DataSet();
         DataTable paramDataTable = new DataTable("Parameter Table");
+        DataTable resultLoadsGens = new DataTable();
 
         DataTable tempTable = new DataTable();//temporary table that stores the node data to put in the main feederdataset
         DataSet libraryDataSet = new DataSet();
@@ -150,6 +151,7 @@ namespace VoltageDropCalculatorApplication
 
             }
 
+            resultLoadsGens = resultLoads.Copy();
             for (int i = 0; i < resultLoads.Rows.Count; i++)
             {
 
@@ -484,7 +486,7 @@ namespace VoltageDropCalculatorApplication
 
             }
 
-            
+
             //mfNodeDictionary.Clear();
 
             if (selectEndNodeCombo.Text != "")
@@ -498,7 +500,7 @@ namespace VoltageDropCalculatorApplication
                 drawPoints(mfNodeList);
             }
 
-           
+
 
 
 
@@ -506,7 +508,7 @@ namespace VoltageDropCalculatorApplication
 
         private void addNodeButton_Click(object sender, EventArgs e)
         {
-            editTable();            
+            editTable();
             if (ShownForm) changeFormTitle();
             //totalNodeNumberNumericUpDown.Value = totalNodeNumberNumericUpDown.Value + 1;
             nodeCountInt++;
@@ -549,12 +551,13 @@ namespace VoltageDropCalculatorApplication
                 else
                 {
                     resultLoads = resultGens.Copy();
+
                     break;
                 }
             }
 
 
-
+            resultLoadsGens = resultLoads.Copy();
 
             for (int i = 0; i < resultLoads.Rows.Count; i++)
             {
@@ -682,9 +685,9 @@ namespace VoltageDropCalculatorApplication
                 drawPoints(mfNodeList);
                 closeTableEdits();
 
-            }            
+            }
 
-            
+
         }
 
         //recursive method that deletes a node as well as its children and their children etc
@@ -779,20 +782,29 @@ namespace VoltageDropCalculatorApplication
                 System.Drawing.Font drawFont = new System.Drawing.Font("Arial", 10);
                 System.Drawing.Font drawFont1 = new System.Drawing.Font("Arial", 8);
                 System.Drawing.Font drawFont2 = new System.Drawing.Font("Arial", 6);
-                drawArea.DrawEllipse(myPen, 0, y - 5, 20, 20);
-                drawArea.DrawEllipse(myPen, 10, y - 5, 20, 20);
-                drawArea.DrawLine(myPen, 30, y+5, 60, y+5);
-                drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[0].Rows[0][9]))) + "m", drawFont2, sb, 33, (float)y - 10);
-                
+
+                if (i == 0)
+                {
+
+                    drawArea.DrawEllipse(myPen, 0, y - 5, 20, 20);
+                    drawArea.DrawEllipse(myPen, 10, y - 5, 20, 20);
+                    drawArea.DrawLine(myPen, 30, y + 5, 60, y + 5);
+                    drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[0].Rows[0][9]))) + "m", drawFont2, sb, 33, (float)y - 10);
+
+                }
                 drawArea.FillEllipse(sb, 60 + (i * (int)nodespacing), y, 10, 10); //draws the circle
                 if (i != mainfeederList.Count - 1)
                 {
-                    drawArea.DrawLine(myPen, 60 + (i * (float)nodespacing), y + 5, 60 + ((i + 1) * (float)nodespacing), y + 5); //draws the lines
-                    drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[mainfeederList[i]].Rows[0][9]))) + "m", drawFont1, sb, (60 + (i * (float)nodespacing) + 60 + ((i + 1) * (float)nodespacing)) / 2, (float)y - 20); //draws the label
+                    drawArea.DrawLine(myPen, 60 + (i * (float)nodespacing), y + 5, 60 + ((i + 1) * (float)nodespacing), y + 5); //draws the lines                      
                 }
-                                
+
+                if (nodeDataSet.Tables.Contains("node" + mainfeederList[i].ToString()))
+                {
+                    drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[mainfeederList[i] - 1].Rows[0][9]))) + "m", drawFont1, sb, (60 + ((i - 1) * (float)nodespacing) + 60 + ((i) * (float)nodespacing)) / 2, (float)y - 20); //draws the label
+                }
+
                 drawArea.DrawString(label, drawFont, sb, 60 + (i * (float)nodespacing), (float)y - 20);//draws the label
-                
+
             }
 
         }
@@ -1289,12 +1301,12 @@ namespace VoltageDropCalculatorApplication
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(projectSavedName!="")
+            if (projectSavedName != "")
             {
                 projectDataSet.Tables.Clear();
                 this.Text = Path.GetFileNameWithoutExtension(projectSavedName);
                 string fileName = Path.ChangeExtension(projectSavedName, ".xml");
-                
+
                 foreach (DataTable dt in libraryDataSet.Tables)
                 {
                     projectDataSet.Tables.Add(dt.Copy());
@@ -1341,13 +1353,13 @@ namespace VoltageDropCalculatorApplication
             int loadCountOld = loadCount;
             int genCountOld = genCount;
             DataSet originalLibraryDataSet = new DataSet();
-            
+
             foreach (DataTable dt in libraryDataSet.Tables)
             {
                 originalLibraryDataSet.Tables.Add(dt.Copy());
             }
             libraryForm frm = new libraryForm("Loads", true, libraryDataSet);
-            frm.saveToProject.Enabled = false;            
+            frm.saveToProject.Enabled = false;
             frm.ShowDialog();
 
             if (frm.cancel)
@@ -1364,8 +1376,8 @@ namespace VoltageDropCalculatorApplication
                 changeFormTitle();
             }
 
-            
-        
+
+
             //Code picks up any changes to the loads database and loads them
             DataTable resultLoads = new DataTable();
             nodeDataSet.AcceptChanges();
@@ -1393,10 +1405,11 @@ namespace VoltageDropCalculatorApplication
                 else
                 {
                     resultLoads = resultGens.Copy();
+
                     break;
                 }
             }
-
+            resultLoadsGens = resultLoads.Copy();
             DataSet nodeDataHolder = new DataSet(); //dataset that keeps the current datatables.
             foreach (DataTable dt in nodeDataSet.Tables)
             {
@@ -1405,21 +1418,21 @@ namespace VoltageDropCalculatorApplication
 
             nodeDataSet.Tables.Clear();
 
-            for (int i = 0; i<nodeCountInt; i++)
+            for (int i = 0; i < nodeCountInt; i++)
             {
                 double lengthSum = 0;
                 decimal lengthSumDecimal = 0.0M;
                 double rT2L = 0;
                 double k1L = 0;
-                for (int x = 0; x<nodeDataHolder.Tables[i].Rows.Count; x++)
+                for (int x = 0; x < nodeDataHolder.Tables[i].Rows.Count; x++)
                 {
                     lengthSum = lengthSum + Convert.ToDouble(nodeDataHolder.Tables[i].Rows[x]["Length"]);
 
                 }
-                
+
                 lengthSumDecimal = Convert.ToDecimal(lengthSum - (double)genCountOld * lengthTol);
-                
-                string tableName = "node" + (i+1).ToString();
+
+                string tableName = "node" + (i + 1).ToString();
                 DataTable nodeDataTable = new DataTable(tableName);
                 List<string> headings = new List<string> { "Node", "Name", "Load/DG", "Red", "White", "Blue", "Alpha", "Beta", "Cb", "Length", "Cable", "Rp", "Rn", "Parent", "Children" };
                 for (int j = 0; j < headings.Count; j++)
@@ -1438,18 +1451,18 @@ namespace VoltageDropCalculatorApplication
                 }
 
                 //querires the datatables for the loads and gens where the user has selected. 
-                       
+
 
                 for (int k = 0; k < resultLoads.Rows.Count; k++)
-                {                                                  
-                    nodeDataTable.Rows.Add(nodeDataHolder.Tables[i].Rows[0]["Node"], nodeDataHolder.Tables[i].Rows[0]["Name"], resultLoads.Rows[k][0], 0.0, 0.0, 0.0, resultLoads.Rows[k]["alpha"], resultLoads.Rows[k]["beta"], resultLoads.Rows[k]["circuit breaker"], calculateLengths(lengthSumDecimal, k), nodeDataHolder.Tables[i].Rows[0]["Cable"], calculateRp(rT2L, calculateLengths(lengthSumDecimal, k)), calculateRn(rT2L, calculateLengths(lengthSumDecimal, k), k1L),((k==0)? nodeDataHolder.Tables[i].Rows[0]["Parent"] : ""), ((k==0)? nodeDataHolder.Tables[i].Rows[0]["Children"] :""));
+                {
+                    nodeDataTable.Rows.Add(nodeDataHolder.Tables[i].Rows[0]["Node"], nodeDataHolder.Tables[i].Rows[0]["Name"], resultLoads.Rows[k][0], 0.0, 0.0, 0.0, resultLoads.Rows[k]["alpha"], resultLoads.Rows[k]["beta"], resultLoads.Rows[k]["circuit breaker"], calculateLengths(lengthSumDecimal, k), nodeDataHolder.Tables[i].Rows[0]["Cable"], calculateRp(rT2L, calculateLengths(lengthSumDecimal, k)), calculateRn(rT2L, calculateLengths(lengthSumDecimal, k), k1L), ((k == 0) ? nodeDataHolder.Tables[i].Rows[0]["Parent"] : ""), ((k == 0) ? nodeDataHolder.Tables[i].Rows[0]["Children"] : ""));
                 }
 
                 //add the datatable into the nodeDataSet
                 nodeDataSet.Tables.Add(nodeDataTable);
 
                 //Populates the new nodeDataTable with the RWB customer numbers                        
-                               
+
             }
             tempTable = nodeDataSet.Tables[0].Copy();
             tempTable.Rows[0][0] = "0";
@@ -1458,7 +1471,7 @@ namespace VoltageDropCalculatorApplication
                 dr[3] = dr[4] = dr[5] = 0.0;
             }
 
-            for (int i = 0; i< nodeCountInt; i++)
+            for (int i = 0; i < nodeCountInt; i++)
             {
                 for (int z = 0; z < nodeDataHolder.Tables[i].Rows.Count; z++)
                 {
@@ -1468,16 +1481,16 @@ namespace VoltageDropCalculatorApplication
                         {
                             nodeDataSet.Tables[i].Rows[a]["Red"] = nodeDataHolder.Tables[i].Rows[z]["Red"];
                             nodeDataSet.Tables[i].Rows[a]["White"] = nodeDataHolder.Tables[i].Rows[z]["White"];
-                            nodeDataSet.Tables[i].Rows[a]["Blue"] = nodeDataHolder.Tables[i].Rows[z]["Blue"];                            
+                            nodeDataSet.Tables[i].Rows[a]["Blue"] = nodeDataHolder.Tables[i].Rows[z]["Blue"];
                         }
                     }
 
                 }
             }
-            
+
 
             nodeDataHolder.Tables.Clear();
-            nodeDataGridView.DataSource = nodeDataSet.Tables["node" + nodeNumCombo.Text];            
+            nodeDataGridView.DataSource = nodeDataSet.Tables["node" + nodeNumCombo.Text];
         }
 
         private void generatorsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1492,6 +1505,18 @@ namespace VoltageDropCalculatorApplication
                 double d = double.Parse(e.Value.ToString());
                 e.Value = d.ToString("N2");
             }
+
+            if ((e.ColumnIndex >= 2) && (e.ColumnIndex <= 8))
+            {
+                var cell = nodeDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                // Set the Cell's ToolTipText.  In this case we're retrieving the value stored in 
+                // another cell in the same row (see my note below).
+                if (resultLoadsGens.Rows.Count > 0)
+                {
+                    cell.ToolTipText = resultLoadsGens.Rows[e.RowIndex]["description"].ToString();
+                }
+            }
+
         }
 
         private void operatingTemperatureText_TextChanged(object sender, EventArgs e)
@@ -1540,14 +1565,14 @@ namespace VoltageDropCalculatorApplication
         {
             Vs = Convert.ToDouble(sourceVoltageNumUpDown.Value);
             if (ShownForm) changeFormTitle();
-            
+
         }
 
         private void nodeFeederForm_Shown(object sender, EventArgs e)
         {
             drawArea.Clear(Color.White);
             this.ShownForm = true;
-           
+
             drawPoints(mfNodeList);
         }
 
@@ -1629,7 +1654,7 @@ namespace VoltageDropCalculatorApplication
                     // prompt to save and cancel the closure of the form.
                     saveToolStripMenuItem_Click(sender, e);
                     e.Cancel = true;
-                    
+
                 }
 
                 else if (result == DialogResult.Cancel)
@@ -1638,15 +1663,15 @@ namespace VoltageDropCalculatorApplication
                 }
 
                 else { }
-                
+
             }
-            
 
-            
 
-            
 
-            
+
+
+
+
         }
 
         private void addHandlers()
@@ -1669,13 +1694,13 @@ namespace VoltageDropCalculatorApplication
         {
             if (ContentChanged != null)
                 ContentChanged(this, new EventArgs());
-            
-            
+
+
         }
 
         private void nodeNameText_OnContentChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         public event EventHandler ContentChanged;
