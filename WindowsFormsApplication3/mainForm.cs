@@ -166,9 +166,9 @@ namespace VoltageDropCalculatorApplication
                 dtGens.TableName = "Generators";
 
                 DataColumn dc1 = new DataColumn("Generator", typeof(string)); //dreates the new datacolumn objects;
-                DataColumn dc2 = new DataColumn("alpha", typeof(int));
-                DataColumn dc3 = new DataColumn("beta", typeof(int));
-                DataColumn dc4 = new DataColumn("circuit breaker", typeof(int));
+                DataColumn dc2 = new DataColumn("alpha", typeof(double));
+                DataColumn dc3 = new DataColumn("beta", typeof(double));
+                DataColumn dc4 = new DataColumn("circuit breaker", typeof(double));
                 DataColumn dc5 = new DataColumn("description", typeof(string));
                 DataColumn dc6 = new DataColumn("Selected", typeof(bool));
 
@@ -336,9 +336,9 @@ namespace VoltageDropCalculatorApplication
             dtLoads.TableName = "Loads";
 
             DataColumn dc1 = new DataColumn("Load", typeof(string)); //dreates the new datacolumn objects;
-            DataColumn dc2 = new DataColumn("alpha", typeof(int));
-            DataColumn dc3 = new DataColumn("beta", typeof(int));
-            DataColumn dc4 = new DataColumn("circuit breaker", typeof(int));
+            DataColumn dc2 = new DataColumn("alpha", typeof(double));
+            DataColumn dc3 = new DataColumn("beta", typeof(double));
+            DataColumn dc4 = new DataColumn("circuit breaker", typeof(double));
             DataColumn dc5 = new DataColumn("description", typeof(string));
             DataColumn dc6 = new DataColumn("Selected", typeof(bool));
 
@@ -368,9 +368,9 @@ namespace VoltageDropCalculatorApplication
             dtGens.TableName = "Generators";
 
             DataColumn dcg1 = new DataColumn("Generator" , typeof(string)); //dreates the new datacolumn objects;
-            DataColumn dcg2 = new DataColumn("alpha", typeof(int));
-            DataColumn dcg3 = new DataColumn("beta", typeof(int));
-            DataColumn dcg4 = new DataColumn("circuit breaker", typeof(int));
+            DataColumn dcg2 = new DataColumn("alpha", typeof(double));
+            DataColumn dcg3 = new DataColumn("beta", typeof(double));
+            DataColumn dcg4 = new DataColumn("circuit breaker", typeof(double));
             DataColumn dcg5 = new DataColumn("description");
             DataColumn dcg6 = new DataColumn("Selected", typeof(bool));
 

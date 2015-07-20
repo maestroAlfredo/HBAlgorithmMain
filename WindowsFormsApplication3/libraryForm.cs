@@ -394,11 +394,11 @@ namespace VoltageDropCalculatorApplication
 
                     dtGens.TableName = "Generators";
 
-                    DataColumn dc1 = new DataColumn("Generator"); //dreates the new datacolumn objects;
-                    DataColumn dc2 = new DataColumn("alpha");
-                    DataColumn dc3 = new DataColumn("beta");
-                    DataColumn dc4 = new DataColumn("circuit breaker");
-                    DataColumn dc5 = new DataColumn("description");
+                    DataColumn dc1 = new DataColumn("Generator", typeof(string)); //dreates the new datacolumn objects;
+                    DataColumn dc2 = new DataColumn("alpha", typeof(double));
+                    DataColumn dc3 = new DataColumn("beta", typeof(double));
+                    DataColumn dc4 = new DataColumn("circuit breaker", typeof(double));
+                    DataColumn dc5 = new DataColumn("description", typeof(string));
                     DataColumn dc6 = new DataColumn("Selected", typeof(bool));
 
 
