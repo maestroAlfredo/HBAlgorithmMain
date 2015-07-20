@@ -41,6 +41,7 @@ namespace VoltageDropCalculatorApplication
         DataSet loadedDataSet = new DataSet(); //loaded dataset that will contain the tables from the saved .hba file
         DataSet parameters = new DataSet();
         DataTable paramDataTable = new DataTable("Parameter Table");
+        DataTable resultLoadsGens = new DataTable();
 
         DataTable tempTable = new DataTable();//temporary table that stores the node data to put in the main feederdataset
         DataSet libraryDataSet = new DataSet();
@@ -150,6 +151,7 @@ namespace VoltageDropCalculatorApplication
 
             }
 
+            resultLoadsGens = resultLoads.Copy();
             for (int i = 0; i < resultLoads.Rows.Count; i++)
             {
 
@@ -543,12 +545,13 @@ namespace VoltageDropCalculatorApplication
                 else
                 {
                     resultLoads = resultGens.Copy();
+
                     break;
                 }
             }
 
 
-
+            resultLoadsGens = resultLoads.Copy();
 
             for (int i = 0; i < resultLoads.Rows.Count; i++)
             {
@@ -675,7 +678,7 @@ namespace VoltageDropCalculatorApplication
                 drawArea.Clear(Color.White);
                 drawPoints(mfNodeList);
                 closeTableEdits();
-            }                       
+            }            
         }
 
         //recursive method that deletes a node as well as its children and their children etc
@@ -770,18 +773,27 @@ namespace VoltageDropCalculatorApplication
                 System.Drawing.Font drawFont = new System.Drawing.Font("Arial", 10);
                 System.Drawing.Font drawFont1 = new System.Drawing.Font("Arial", 8);
                 System.Drawing.Font drawFont2 = new System.Drawing.Font("Arial", 6);
+
+                if (i == 0)
+                {
+
                 drawArea.DrawEllipse(myPen, 0, y - 5, 20, 20);
                 drawArea.DrawEllipse(myPen, 10, y - 5, 20, 20);
-                drawArea.DrawLine(myPen, 30, y+5, 60, y+5);
+                    drawArea.DrawLine(myPen, 30, y + 5, 60, y + 5);
                 drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[0].Rows[0][9]))) + "m", drawFont2, sb, 33, (float)y - 10);
                 
+                }
                 drawArea.FillEllipse(sb, 60 + (i * (int)nodespacing), y, 10, 10); //draws the circle
                 if (i != mainfeederList.Count - 1)
                 {
                     drawArea.DrawLine(myPen, 60 + (i * (float)nodespacing), y + 5, 60 + ((i + 1) * (float)nodespacing), y + 5); //draws the lines
-                    drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[mainfeederList[i]].Rows[0][9]))) + "m", drawFont1, sb, (60 + (i * (float)nodespacing) + 60 + ((i + 1) * (float)nodespacing)) / 2, (float)y - 20); //draws the label
                 }
                                 
+                if (nodeDataSet.Tables.Contains("node" + mainfeederList[i].ToString()))
+                {
+                    drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[mainfeederList[i] - 1].Rows[0][9]))) + "m", drawFont1, sb, (60 + ((i - 1) * (float)nodespacing) + 60 + ((i) * (float)nodespacing)) / 2, (float)y - 20); //draws the label
+                }
+
                 drawArea.DrawString(label, drawFont, sb, 60 + (i * (float)nodespacing), (float)y - 20);//draws the label
                 
             }
@@ -1276,7 +1288,7 @@ namespace VoltageDropCalculatorApplication
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(projectSavedName!="")
+            if (projectSavedName != "")
             {
                 projectDataSet.Tables.Clear();
                 this.Text = Path.GetFileNameWithoutExtension(projectSavedName);
@@ -1380,10 +1392,11 @@ namespace VoltageDropCalculatorApplication
                 else
                 {
                     resultLoads = resultGens.Copy();
+
                     break;
                 }
             }
-
+            resultLoadsGens = resultLoads.Copy();
             DataSet nodeDataHolder = new DataSet(); //dataset that keeps the current datatables.
             foreach (DataTable dt in nodeDataSet.Tables)
             {
@@ -1392,13 +1405,13 @@ namespace VoltageDropCalculatorApplication
 
             nodeDataSet.Tables.Clear();
 
-            for (int i = 0; i<nodeCountInt; i++)
+            for (int i = 0; i < nodeCountInt; i++)
             {
                 double lengthSum = 0;
                 decimal lengthSumDecimal = 0.0M;
                 double rT2L = 0;
                 double k1L = 0;
-                for (int x = 0; x<nodeDataHolder.Tables[i].Rows.Count; x++)
+                for (int x = 0; x < nodeDataHolder.Tables[i].Rows.Count; x++)
                 {
                     lengthSum = lengthSum + Convert.ToDouble(nodeDataHolder.Tables[i].Rows[x]["Length"]);
 
@@ -1406,7 +1419,7 @@ namespace VoltageDropCalculatorApplication
                 
                 lengthSumDecimal = Convert.ToDecimal(lengthSum - (double)genCountOld * lengthTol);
                 
-                string tableName = "node" + (i+1).ToString();
+                string tableName = "node" + (i + 1).ToString();
                 DataTable nodeDataTable = new DataTable(tableName);
                 List<string> headings = new List<string> { "Node", "Name", "Load/DG", "Red", "White", "Blue", "Alpha", "Beta", "Cb", "Length", "Cable", "Rp", "Rn", "Parent", "Children" };
                 for (int j = 0; j < headings.Count; j++)
@@ -1429,7 +1442,7 @@ namespace VoltageDropCalculatorApplication
 
                 for (int k = 0; k < resultLoads.Rows.Count; k++)
                 {                                                  
-                    nodeDataTable.Rows.Add(nodeDataHolder.Tables[i].Rows[0]["Node"], nodeDataHolder.Tables[i].Rows[0]["Name"], resultLoads.Rows[k][0], 0.0, 0.0, 0.0, resultLoads.Rows[k]["alpha"], resultLoads.Rows[k]["beta"], resultLoads.Rows[k]["circuit breaker"], calculateLengths(lengthSumDecimal, k), nodeDataHolder.Tables[i].Rows[0]["Cable"], calculateRp(rT2L, calculateLengths(lengthSumDecimal, k)), calculateRn(rT2L, calculateLengths(lengthSumDecimal, k), k1L),((k==0)? nodeDataHolder.Tables[i].Rows[0]["Parent"] : ""), ((k==0)? nodeDataHolder.Tables[i].Rows[0]["Children"] :""));
+                    nodeDataTable.Rows.Add(nodeDataHolder.Tables[i].Rows[0]["Node"], nodeDataHolder.Tables[i].Rows[0]["Name"], resultLoads.Rows[k][0], 0.0, 0.0, 0.0, resultLoads.Rows[k]["alpha"], resultLoads.Rows[k]["beta"], resultLoads.Rows[k]["circuit breaker"], calculateLengths(lengthSumDecimal, k), nodeDataHolder.Tables[i].Rows[0]["Cable"], calculateRp(rT2L, calculateLengths(lengthSumDecimal, k)), calculateRn(rT2L, calculateLengths(lengthSumDecimal, k), k1L), ((k == 0) ? nodeDataHolder.Tables[i].Rows[0]["Parent"] : ""), ((k == 0) ? nodeDataHolder.Tables[i].Rows[0]["Children"] : ""));
                 }
 
                 //add the datatable into the nodeDataSet
@@ -1445,7 +1458,7 @@ namespace VoltageDropCalculatorApplication
                 dr[3] = dr[4] = dr[5] = 0.0;
             }
 
-            for (int i = 0; i< nodeCountInt; i++)
+            for (int i = 0; i < nodeCountInt; i++)
             {
                 for (int z = 0; z < nodeDataHolder.Tables[i].Rows.Count; z++)
                 {
@@ -1479,6 +1492,18 @@ namespace VoltageDropCalculatorApplication
                 double d = double.Parse(e.Value.ToString());
                 e.Value = d.ToString("N2");
             }
+
+            if ((e.ColumnIndex >= 2) && (e.ColumnIndex <= 8))
+            {
+                var cell = nodeDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                // Set the Cell's ToolTipText.  In this case we're retrieving the value stored in 
+                // another cell in the same row (see my note below).
+                if (resultLoadsGens.Rows.Count > 0)
+                {
+                    cell.ToolTipText = resultLoadsGens.Rows[e.RowIndex]["description"].ToString();
+                }
+            }
+
         }
 
         private void operatingTemperatureText_TextChanged(object sender, EventArgs e)
