@@ -16,7 +16,7 @@ namespace VoltageDropCalculatorApplication
         double Vs;
         double p;
         double t_old;
-        string projName;
+        //string projName;
         double[,] voltageProfileArray;
         int[] customerArray;
         double loadCountInt;
@@ -33,15 +33,19 @@ namespace VoltageDropCalculatorApplication
         DataSet libraryDataSet = new DataSet();
         DataGridView nodeDataGridView = new DataGridView();
         DataTable cableDT = new DataTable();
+        double t2;
+        double k1;
         //DataRow dr;
 
-        public voltageCalculationForm(double risk, double temperature, double sourceVoltage, int loadCount, int genCount, double lengthTol, List<int> mfNodeList, DataSet nodeDataSet, DataSet tempNodeDataSet, DataGridView nodeDataGridView, DataSet libraryDataSet)
+        public voltageCalculationForm(double risk, double temperature, double sourceVoltage, int loadCount, int genCount, double lengthTol, List<int> mfNodeList, DataSet nodeDataSet, DataSet tempNodeDataSet, DataGridView nodeDataGridView, DataSet libraryDataSet, double k1)
         {
             InitializeComponent();
             //nodeVecDataSet.ReadXml(projectName);
             nodeVecDataSet = tempNodeDataSet; this.nodeDataGridView = nodeDataGridView;
             this.libraryDataSet = libraryDataSet;
             nodeNum = nodeVecDataSet.Tables[nodeVecDataSet.Tables.Count - 1].Rows.Count / (loadCount + genCount);
+            t2 = temperature;
+            this.k1 = k1;
             //this.mfNodeList = mfNodeList;
 
             Vs = sourceVoltage;
@@ -845,6 +849,7 @@ namespace VoltageDropCalculatorApplication
 
         private void buttonUpdateNodeSumm_Click(object sender, EventArgs e)
         {
+            double rT2L = 0; double k1L = 0;
             int loadsGensNum = nodeDataSet.Tables[0].Rows.Count; int xx = 0;
             for (int i = 0; i < nodeNum; i++)
             {
@@ -855,7 +860,6 @@ namespace VoltageDropCalculatorApplication
                     nodeDataSet.Tables[i].Rows[x][4+1] = nodeVecDataSet.Tables[0].Rows[xx][4]; xx++;
                 }
             }
-
 
             xx = 0;
             for (int x = 0; x < cableDT.Rows.Count; x++)
@@ -869,6 +873,7 @@ namespace VoltageDropCalculatorApplication
                     }
                 }
             }
+            // update the nodeDataSet for the dgv's on the nodefeeder form
             for (int i = 0; i < nodeNum; i++)
             {
                 for (int x = 0; x < loadsGensNum; x++)
@@ -876,6 +881,32 @@ namespace VoltageDropCalculatorApplication
                     nodeDataSet.Tables[i].Rows[x][8 + 1] = nodeVecDataSet.Tables[0].Rows[xx][8]; xx++;
                 }
             }
+            //gets the correct cable parameters and calculates them for that particular table
+            for (int y = 0; y < libraryDataSet.Tables["Conductors"].Rows.Count; y++)
+            {
+                if (Convert.ToString(libraryDataSet.Tables["Conductors"].Rows[y][0]) == Convert.ToString(cableDT.Rows[0]["Cable"]))
+                {
+                    rT2L = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[y][1]) * (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[y][2]) + t2) / (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[y][2]) + 20.0);
+                    k1L = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[y][3]);
+                }
+            }
+            for (int x = 0; x < nodeVecDataSet.Tables[0].Rows.Count; x++)
+            {
+                //nodeVecDataSet.Tables[0].Rows[x][10] = calculateRp(rT2L, 99.99);
+                nodeVecDataSet.Tables[0].Rows[x][10] = calculateRp(rT2L, Convert.ToDouble(nodeVecDataSet.Tables[0].Rows[x][8].ToString()));
+                nodeVecDataSet.Tables[0].Rows[x][11] = calculateRn(rT2L, Convert.ToDouble(nodeVecDataSet.Tables[0].Rows[x][8].ToString()), k1L);
+            }
+                //update the other tables for the voltage profile in the nodeVecDataSet ( the lengths, and Rp and Rn)
+            for (int x = 0; x < nodeNum - 1; x++)
+            {
+                for (int y = 0; y < nodeVecDataSet.Tables[x + 1].Rows.Count; y++)
+                {
+                    nodeVecDataSet.Tables[x + 1].Rows[y][8] = nodeVecDataSet.Tables[x].Rows[y][8];
+                    nodeVecDataSet.Tables[x + 1].Rows[y][10] = nodeVecDataSet.Tables[x].Rows[y][10];
+                    nodeVecDataSet.Tables[x + 1].Rows[y][11] = nodeVecDataSet.Tables[x].Rows[y][11];
+                }
+            }
+            voltCalculation();
         }
 
         private void initDataGridViewLengths()
@@ -916,16 +947,49 @@ namespace VoltageDropCalculatorApplication
             else
             {
                 sidePanelPictureBox.BorderStyle = BorderStyle.Fixed3D;
-                splitContainer1.Panel2Collapsed = false;
-                
+                splitContainer1.Panel2Collapsed = false;                
             }
-            
-
         }
 
         private void voltageProfileChart_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void dataGridViewLengths_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            voltCalculation();
+        }
+
+        public string calculateRp(double rkm, double calculatedLength)
+        {
+            return ((rkm / 1000.0) * calculatedLength).ToString();
+        }
+
+        public string calculateRn(double rKm, double caclulatedLength, double k1)
+        {
+            return (rKm / 1000.0 * k1 * caclulatedLength).ToString();
+        }
+
+        public double calculateLengths(decimal lengthInput, int rowIndex)
+        {
+            double calculatedLength = lengthTol;
+            if ((rowIndex == 0) && (loadCountInt != 0))
+            {
+                calculatedLength = Convert.ToDouble(lengthInput) - (lengthTol * (Convert.ToDouble(loadCountInt) - 1.0));
+                return calculatedLength;
+            }
+            else if ((rowIndex == 0) && (genCountInt != 0))
+            {
+                calculatedLength = Convert.ToDouble(lengthInput) - (lengthTol * (Convert.ToDouble(genCountInt) - 1.0));
+                return calculatedLength;
+            }
+            else
+            {
+                calculatedLength = lengthTol;
+            }
+            return calculatedLength;
+        }
+
     }
 }
