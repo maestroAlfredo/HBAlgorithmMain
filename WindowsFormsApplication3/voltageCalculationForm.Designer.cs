@@ -64,6 +64,7 @@
             this.buttonUpdateNodeSumm = new System.Windows.Forms.Button();
             this.dataGridViewLengths = new System.Windows.Forms.DataGridView();
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -86,7 +87,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -101,7 +101,7 @@
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.SteelBlue;
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel3);
             this.splitContainer1.Panel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.splitContainer1.Panel2MinSize = 50;
+            this.splitContainer1.Panel2MinSize = 300;
             this.splitContainer1.Size = new System.Drawing.Size(978, 641);
             this.splitContainer1.SplitterDistance = 641;
             this.splitContainer1.TabIndex = 0;
@@ -420,6 +420,7 @@
             this.tableLayoutPanel3.Controls.Add(this.buttonUpdateNodeSumm, 0, 4);
             this.tableLayoutPanel3.Controls.Add(this.dataGridViewLengths, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.label7, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.label8, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
@@ -512,6 +513,18 @@
             this.label7.TabIndex = 2;
             this.label7.Text = "Node Summary Data";
             // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(55, 2);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(222, 24);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Cable and Length Data";
+            // 
             // voltageCalculationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -569,5 +582,6 @@
         private System.Windows.Forms.Button buttonUpdateNodeSumm;
         private System.Windows.Forms.DataGridView dataGridViewLengths;
         private System.Windows.Forms.PictureBox sidePanelPictureBox;
+        private System.Windows.Forms.Label label8;
     }
 }

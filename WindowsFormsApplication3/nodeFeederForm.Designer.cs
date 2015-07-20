@@ -413,7 +413,7 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.45647F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 243F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 244F));
             this.tableLayoutPanel5.Controls.Add(this.proceedToVCalcButton, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.selectEndNodeCombo, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.label18, 2, 0);
@@ -431,7 +431,7 @@
             // 
             this.proceedToVCalcButton.Enabled = false;
             this.proceedToVCalcButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.proceedToVCalcButton.Location = new System.Drawing.Point(650, 3);
+            this.proceedToVCalcButton.Location = new System.Drawing.Point(649, 3);
             this.proceedToVCalcButton.Name = "proceedToVCalcButton";
             this.proceedToVCalcButton.Size = new System.Drawing.Size(236, 31);
             this.proceedToVCalcButton.TabIndex = 0;
@@ -447,7 +447,7 @@
             this.selectEndNodeCombo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectEndNodeCombo.ForeColor = System.Drawing.Color.SteelBlue;
             this.selectEndNodeCombo.FormattingEnabled = true;
-            this.selectEndNodeCombo.Location = new System.Drawing.Point(263, 7);
+            this.selectEndNodeCombo.Location = new System.Drawing.Point(262, 7);
             this.selectEndNodeCombo.Name = "selectEndNodeCombo";
             this.selectEndNodeCombo.Size = new System.Drawing.Size(136, 26);
             this.selectEndNodeCombo.TabIndex = 6;
@@ -459,7 +459,7 @@
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(427, 13);
+            this.label18.Location = new System.Drawing.Point(426, 13);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(88, 13);
             this.label18.TabIndex = 5;
@@ -473,7 +473,7 @@
             this.endNodeCombo.ForeColor = System.Drawing.Color.SteelBlue;
             this.endNodeCombo.FormattingEnabled = true;
             this.endNodeCombo.ItemHeight = 20;
-            this.endNodeCombo.Location = new System.Drawing.Point(521, 3);
+            this.endNodeCombo.Location = new System.Drawing.Point(520, 3);
             this.endNodeCombo.Name = "endNodeCombo";
             this.endNodeCombo.Size = new System.Drawing.Size(123, 28);
             this.endNodeCombo.TabIndex = 6;
@@ -484,7 +484,7 @@
             this.cancelButton.ForeColor = System.Drawing.Color.SteelBlue;
             this.cancelButton.Location = new System.Drawing.Point(3, 3);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(254, 31);
+            this.cancelButton.Size = new System.Drawing.Size(253, 31);
             this.cancelButton.TabIndex = 0;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -880,6 +880,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1366, 768);
             this.MinimumSize = new System.Drawing.Size(917, 608);
             this.Name = "nodeFeederForm";

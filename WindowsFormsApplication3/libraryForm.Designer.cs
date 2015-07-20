@@ -55,7 +55,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.78723F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.21277F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 176F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 191F));
             this.tableLayoutPanel1.Controls.Add(this.selectLibraryLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.loadTypeCombo, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.resetLibrary, 3, 0);
@@ -81,7 +81,7 @@
             // 
             this.loadTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.loadTypeCombo.FormattingEnabled = true;
-            this.loadTypeCombo.Location = new System.Drawing.Point(149, 3);
+            this.loadTypeCombo.Location = new System.Drawing.Point(148, 3);
             this.loadTypeCombo.Name = "loadTypeCombo";
             this.loadTypeCombo.Size = new System.Drawing.Size(176, 21);
             this.loadTypeCombo.TabIndex = 0;
@@ -100,7 +100,7 @@
             // 
             // addCableButton
             // 
-            this.addCableButton.Location = new System.Drawing.Point(493, 3);
+            this.addCableButton.Location = new System.Drawing.Point(492, 3);
             this.addCableButton.Name = "addCableButton";
             this.addCableButton.Size = new System.Drawing.Size(170, 23);
             this.addCableButton.TabIndex = 3;
@@ -217,6 +217,7 @@
             this.Name = "libraryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Library Creator / Editor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.libraryForm_FormClosing);
             this.Load += new System.EventHandler(this.LibraryFormGenLoad_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

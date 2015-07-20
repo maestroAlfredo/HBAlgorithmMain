@@ -63,8 +63,28 @@ namespace VoltageDropCalculatorApplication
 
                 else
                 {
-                    nodeFeederForm frm = new nodeFeederForm();
-                    frm.ShowDialog();
+                    bool showform = false;
+                    foreach (DataRow dr in ds.Tables["Loads"].Rows)
+                    {
+                        if(Convert.ToBoolean(dr["selected"]) == true)
+                        {
+                            showform = true;
+                            break;
+                        }
+                    }
+                    if(showform)
+                    {
+                      nodeFeederForm frm = new nodeFeederForm();
+                      frm.ShowDialog();
+                    }
+                    else
+                    {
+                        string message = "You have not selected any loads to use for the project. Please go to edit libraries and select at least one load";
+                        string caption = "No Loads selected!";
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+                        DialogResult result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
+                    }
+                    
                 }
             }
 

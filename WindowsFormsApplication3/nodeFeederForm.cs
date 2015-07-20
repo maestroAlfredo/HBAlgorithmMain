@@ -154,9 +154,7 @@ namespace VoltageDropCalculatorApplication
             resultLoadsGens = resultLoads.Copy();
             for (int i = 0; i < resultLoads.Rows.Count; i++)
             {
-
                 nodeDataTable.Rows.Add("1", nodeNameTextBox.Text, resultLoads.Rows[i][0], 0.0, 0.0, 0.0, resultLoads.Rows[i]["alpha"], resultLoads.Rows[i]["beta"], resultLoads.Rows[i]["circuit breaker"], calculateLengths(lengthNumericUpDown.Value, i), cableSelectCombo.Text, calculateRp(rT2, calculateLengths(lengthNumericUpDown.Value, i)), calculateRn(rT2, calculateLengths(lengthNumericUpDown.Value, i), k1), 0, 0);
-
             }
             nodeDataTable.TableName = "node1";
             tempTable = nodeDataTable.Copy();
