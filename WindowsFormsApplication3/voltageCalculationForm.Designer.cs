@@ -60,6 +60,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.voltageProfileChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonDiscardNodeSum = new System.Windows.Forms.Button();
             this.nodeSummaryDataGridView = new System.Windows.Forms.DataGridView();
             this.buttonUpdateNodeSumm = new System.Windows.Forms.Button();
             this.dataGridViewLengths = new System.Windows.Forms.DataGridView();
@@ -416,6 +417,7 @@
             this.tableLayoutPanel3.BackColor = System.Drawing.Color.SteelBlue;
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.buttonDiscardNodeSum, 0, 5);
             this.tableLayoutPanel3.Controls.Add(this.nodeSummaryDataGridView, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.buttonUpdateNodeSumm, 0, 4);
             this.tableLayoutPanel3.Controls.Add(this.dataGridViewLengths, 0, 1);
@@ -433,6 +435,18 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(333, 641);
             this.tableLayoutPanel3.TabIndex = 1;
+            // 
+            // buttonDiscardNodeSum
+            // 
+            this.buttonDiscardNodeSum.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonDiscardNodeSum.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDiscardNodeSum.Location = new System.Drawing.Point(3, 550);
+            this.buttonDiscardNodeSum.Name = "buttonDiscardNodeSum";
+            this.buttonDiscardNodeSum.Size = new System.Drawing.Size(327, 88);
+            this.buttonDiscardNodeSum.TabIndex = 5;
+            this.buttonDiscardNodeSum.Text = "Discard";
+            this.buttonDiscardNodeSum.UseVisualStyleBackColor = true;
+            this.buttonDiscardNodeSum.Click += new System.EventHandler(this.buttonDiscardNodeSum_Click);
             // 
             // nodeSummaryDataGridView
             // 
@@ -466,6 +480,7 @@
             this.nodeSummaryDataGridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nodeSummaryDataGridView.Size = new System.Drawing.Size(327, 196);
             this.nodeSummaryDataGridView.TabIndex = 1;
+            this.nodeSummaryDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeSummaryDataGridView_CellContentClick);
             this.nodeSummaryDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeSummaryDataGridView_CellEndEdit);
             this.nodeSummaryDataGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.nodeSummaryDataGridView_EditingControlShowing);
             // 
@@ -499,6 +514,10 @@
             this.dataGridViewLengths.Size = new System.Drawing.Size(327, 237);
             this.dataGridViewLengths.TabIndex = 4;
             this.dataGridViewLengths.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLengths_CellEndEdit);
+            this.dataGridViewLengths.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridViewLengths_CellValidating);
+            this.dataGridViewLengths.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridViewLengths_DataError);
+            this.dataGridViewLengths.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewLengths_EditingControlShowing);
+            this.dataGridViewLengths.Validated += new System.EventHandler(this.dataGridViewLengths_Validated);
             // 
             // label7
             // 
@@ -569,5 +588,6 @@
         private System.Windows.Forms.Button buttonUpdateNodeSumm;
         private System.Windows.Forms.DataGridView dataGridViewLengths;
         private System.Windows.Forms.PictureBox sidePanelPictureBox;
+        private System.Windows.Forms.Button buttonDiscardNodeSum;
     }
 }

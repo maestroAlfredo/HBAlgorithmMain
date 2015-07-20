@@ -422,7 +422,7 @@ namespace VoltageDropCalculatorApplication
 
         private void newFeederButton_MouseHover(object sender, EventArgs e)
         {
-            labelMainFormText.Text = "Create a new feeder profile";
+            labelMainFormText.Text = "Create a new feeder profile.";
             labelMainFormText.Font = new Font(labelMainFormText.Font, FontStyle.Italic);
 
             // Make the text on the label bold
@@ -444,7 +444,7 @@ namespace VoltageDropCalculatorApplication
 
         private void loadProjectButton_MouseHover(object sender, EventArgs e)
         {
-            labelMainFormText.Text = "Work on a previously saved project";
+            labelMainFormText.Text = "Work on a previously saved project.";
             labelMainFormText.Font = new Font(labelMainFormText.Font, FontStyle.Italic);
 
             // Make the text on the label bold
@@ -465,7 +465,7 @@ namespace VoltageDropCalculatorApplication
 
         private void newConductorLibraryButton_MouseHover_1(object sender, EventArgs e)
         {
-            labelMainFormText.Text = "Work on a previously saved project";
+            labelMainFormText.Text = "Create a new library of Conductors, Loads and Generators.";
             labelMainFormText.Font = new Font(labelMainFormText.Font, FontStyle.Italic);
 
             // Make the text on the label bold
@@ -487,7 +487,7 @@ namespace VoltageDropCalculatorApplication
 
         private void editLibraryButton_MouseLeave(object sender, EventArgs e)
         {
-            labelMainFormText.Text = "Work on a previously saved project";
+            labelMainFormText.Text = "Edit existing Conductor, Load or Generator libraries.";
             labelMainFormText.Font = new Font(labelMainFormText.Font, FontStyle.Italic);
 
             // Make the text on the label bold

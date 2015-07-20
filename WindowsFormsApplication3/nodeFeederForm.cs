@@ -119,6 +119,10 @@ namespace VoltageDropCalculatorApplication
             for (int i = 0; i < headings.Count; i++)
             {
                 nodeDataTable.Columns.Add(headings[i]); //adds the headings to the nodeDataTable 
+                if ((i == 3) || (i == 4) || (i == 5))
+                {
+                    nodeDataTable.Columns[i].DataType = typeof(int);
+                }
             }
 
             //querires the datatables for the loads and gens where the user has selected
@@ -425,7 +429,7 @@ namespace VoltageDropCalculatorApplication
                 //tempNodeDataSet.WriteXml(projectName);
 
                 //voltageCalculationForm frm = new voltageCalculationForm(projectName, p, t2, Vs, loadCount, genCount, mfNodeList, nodeDataSet);
-                voltageCalculationForm frm2 = new voltageCalculationForm(p, t2, Vs, loadCount, genCount, lengthTol, mfNodeList, nodeDataSet, tempNodeDataSet, nodeDataGridView, libraryDataSet, k1);
+                voltageCalculationForm frm2 = new voltageCalculationForm(p, t2, Vs, loadCount, genCount, lengthTol, mfNodeList, nodeDataSet, tempNodeDataSet, nodeDataGridView, libraryDataSet, lengthNumericUpDown);
                 frm2.ShowDialog();
             }
             else
@@ -456,7 +460,6 @@ namespace VoltageDropCalculatorApplication
                     nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows[i][10] = cableSelectCombo.Text;
                     nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows[i][11] = calculateRp(rT2, calculateLengths(lengthNumericUpDown.Value, i));
                     nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows[i][12] = calculateRn(rT2, calculateLengths(lengthNumericUpDown.Value, i), k1);
-                    double a = calculateLengths(lengthNumericUpDown.Value, i);
                 }
             }
         }
@@ -515,7 +518,11 @@ namespace VoltageDropCalculatorApplication
             List<string> headings = new List<string> { "Node", "Name", "Load/DG", "Red", "White", "Blue", "Alpha", "Beta", "Cb", "Length", "Cable", "Rp", "Rn", "Parent", "Children" };
             for (int i = 0; i < headings.Count; i++)
             {
-                nodeDataTable.Columns.Add(headings[i]); //adds the headings to the nodeDataTable                 
+                nodeDataTable.Columns.Add(headings[i]); //adds the headings to the nodeDataTable  
+                if((i==3)||(i==4)||(i==5))
+                {
+                    nodeDataTable.Columns[i].DataType = typeof(int);
+                }
             }
 
             //querires the datatables for the loads and gens where the user has selected
@@ -1570,7 +1577,7 @@ namespace VoltageDropCalculatorApplication
 
         private void nodeDataGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
-
+           
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1754,6 +1761,16 @@ namespace VoltageDropCalculatorApplication
         private void drawingPanel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void nodeDataGridView_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void nodeDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            
         }
 
 

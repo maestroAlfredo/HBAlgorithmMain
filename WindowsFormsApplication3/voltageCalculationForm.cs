@@ -34,18 +34,21 @@ namespace VoltageDropCalculatorApplication
         DataGridView nodeDataGridView = new DataGridView();
         DataTable cableDT = new DataTable();
         double t2;
-        double k1;
+        NumericUpDown lengthNumericUpDown;
+   
+        //double k1;
         //DataRow dr;
 
-        public voltageCalculationForm(double risk, double temperature, double sourceVoltage, int loadCount, int genCount, double lengthTol, List<int> mfNodeList, DataSet nodeDataSet, DataSet tempNodeDataSet, DataGridView nodeDataGridView, DataSet libraryDataSet, double k1)
+        public voltageCalculationForm(double risk, double temperature, double sourceVoltage, int loadCount, int genCount, double lengthTol, List<int> mfNodeList, DataSet nodeDataSet, DataSet tempNodeDataSet, DataGridView nodeDataGridView, DataSet libraryDataSet, NumericUpDown lengthNumericUpDown)
         {
             InitializeComponent();
             //nodeVecDataSet.ReadXml(projectName);
-            nodeVecDataSet = tempNodeDataSet; this.nodeDataGridView = nodeDataGridView;
+            nodeVecDataSet = tempNodeDataSet; this.nodeDataGridView = nodeDataGridView; 
             this.libraryDataSet = libraryDataSet;
             nodeNum = nodeVecDataSet.Tables[nodeVecDataSet.Tables.Count - 1].Rows.Count / (loadCount + genCount);
+            this.lengthNumericUpDown = lengthNumericUpDown;
             t2 = temperature;
-            this.k1 = k1;
+            //this.k1 = k1;
             //this.mfNodeList = mfNodeList;
 
             Vs = sourceVoltage;
@@ -676,6 +679,7 @@ namespace VoltageDropCalculatorApplication
         {
             nodeDataGridView.Update();
             nodeDataGridView.Refresh();
+            lengthNumericUpDown.Value = Convert.ToDecimal(cableDT.Rows[cableDT.Rows.Count - 1][1]);
         }
 
         //creates an array of a nodevector given a nodevector datatable
@@ -760,6 +764,14 @@ namespace VoltageDropCalculatorApplication
         //method to check if the pressed value is a digit
         private void Column1_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)&&e.KeyChar!='.')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Column234_KeyPress(object sender, KeyPressEventArgs e)
+        {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
@@ -769,13 +781,13 @@ namespace VoltageDropCalculatorApplication
         //allows only digits to be entered in the customer section of the datagridview
         private void nodeSummaryDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            e.Control.KeyPress -= new KeyPressEventHandler(Column1_KeyPress);
+            e.Control.KeyPress -= new KeyPressEventHandler(Column234_KeyPress);
             if ((nodeSummaryDataGridView.CurrentCell.ColumnIndex > 1) || (nodeSummaryDataGridView.CurrentCell.ColumnIndex < 5))//Desired Columns
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
                 {
-                    tb.KeyPress += new KeyPressEventHandler(Column1_KeyPress);
+                    tb.KeyPress += new KeyPressEventHandler(Column234_KeyPress);
                 }
             }
         }
@@ -860,7 +872,7 @@ namespace VoltageDropCalculatorApplication
                     nodeDataSet.Tables[i].Rows[x][4+1] = nodeVecDataSet.Tables[0].Rows[xx][4]; xx++;
                 }
             }
-
+            // update the lengths in nodeVecDataSet
             xx = 0;
             for (int x = 0; x < cableDT.Rows.Count; x++)
             {
@@ -896,7 +908,7 @@ namespace VoltageDropCalculatorApplication
                 nodeVecDataSet.Tables[0].Rows[x][10] = calculateRp(rT2L, Convert.ToDouble(nodeVecDataSet.Tables[0].Rows[x][8].ToString()));
                 nodeVecDataSet.Tables[0].Rows[x][11] = calculateRn(rT2L, Convert.ToDouble(nodeVecDataSet.Tables[0].Rows[x][8].ToString()), k1L);
             }
-                //update the other tables for the voltage profile in the nodeVecDataSet ( the lengths, and Rp and Rn)
+            //update the other tables for the voltage profile in the nodeVecDataSet ( the lengths, and Rp and Rn)
             for (int x = 0; x < nodeNum - 1; x++)
             {
                 for (int y = 0; y < nodeVecDataSet.Tables[x + 1].Rows.Count; y++)
@@ -913,6 +925,8 @@ namespace VoltageDropCalculatorApplication
         {
             cableDT.Columns.Add("Node", typeof(String)); cableDT.Columns.Add("Length", typeof(decimal)); cableDT.Columns.Add("Cable", typeof(String));
             decimal cLength = 0; // cable length
+            //dataGridViewLengths.Columns[1].DefaultCellStyle.Format = "N2";
+            //dataGridViewLengths.Columns[1].DefaultCellStyle.Format = "0.00##";
 
             int loadsGensNum = nodeDataSet.Tables[0].Rows.Count;
             for (int x = 0; x < nodeOverallDataTable.Rows.Count; x++)
@@ -930,6 +944,7 @@ namespace VoltageDropCalculatorApplication
             dataGridViewLengths.DataSource = cableDT;
             editTable(dataGridViewLengths);
             dataGridViewLengths.Columns[0].ReadOnly = true; dataGridViewLengths.Columns[2].ReadOnly = true;
+            dataGridViewLengths.Columns[1].DefaultCellStyle.Format = "N2";
         }
 
         private void buttonUpdateCables_Click(object sender, EventArgs e)
@@ -958,6 +973,46 @@ namespace VoltageDropCalculatorApplication
 
         private void dataGridViewLengths_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            double a = Convert.ToDouble(dataGridViewLengths.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+            if (a > 100.00) dataGridViewLengths.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 100;
+            // update the lengths in nodeVecDataSet
+            double rT2L = 0; double k1L = 0; int loadsGensNum = nodeDataSet.Tables[0].Rows.Count; 
+            for (int x = 0; x < cableDT.Rows.Count; x++)
+            {
+                nodeVecDataSet.Tables[0].Rows[x * loadsGensNum][8] = Convert.ToDecimal(cableDT.Rows[x][1].ToString()) - (decimal)(loadCountInt * lengthTol - lengthTol);
+                if (loadCountInt != 1)
+                {
+                    for (int y = 0; y < loadCountInt; y++)
+                    {
+                        if (y % loadsGensNum != 0) nodeVecDataSet.Tables[0].Rows[(x * loadsGensNum) + y][8] = lengthTol;
+                    }
+                }
+            }
+            //gets the correct cable parameters and calculates them for that particular table
+            for (int y = 0; y < libraryDataSet.Tables["Conductors"].Rows.Count; y++)
+            {
+                if (Convert.ToString(libraryDataSet.Tables["Conductors"].Rows[y][0]) == Convert.ToString(cableDT.Rows[0]["Cable"]))
+                {
+                    rT2L = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[y][1]) * (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[y][2]) + t2) / (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[y][2]) + 20.0);
+                    k1L = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[y][3]);
+                }
+            }
+            for (int x = 0; x < nodeVecDataSet.Tables[0].Rows.Count; x++)
+            {
+                //nodeVecDataSet.Tables[0].Rows[x][10] = calculateRp(rT2L, 99.99);
+                nodeVecDataSet.Tables[0].Rows[x][10] = calculateRp(rT2L, Convert.ToDouble(nodeVecDataSet.Tables[0].Rows[x][8].ToString()));
+                nodeVecDataSet.Tables[0].Rows[x][11] = calculateRn(rT2L, Convert.ToDouble(nodeVecDataSet.Tables[0].Rows[x][8].ToString()), k1L);
+            }
+            //update the other tables for the voltage profile in the nodeVecDataSet ( the lengths, and Rp and Rn)
+            for (int x = 0; x < nodeNum - 1; x++)
+            {
+                for (int y = 0; y < nodeVecDataSet.Tables[x + 1].Rows.Count; y++)
+                {
+                    nodeVecDataSet.Tables[x + 1].Rows[y][8] = nodeVecDataSet.Tables[x].Rows[y][8];
+                    nodeVecDataSet.Tables[x + 1].Rows[y][10] = nodeVecDataSet.Tables[x].Rows[y][10];
+                    nodeVecDataSet.Tables[x + 1].Rows[y][11] = nodeVecDataSet.Tables[x].Rows[y][11];
+                }
+            }
             voltCalculation();
         }
 
@@ -991,5 +1046,82 @@ namespace VoltageDropCalculatorApplication
             return calculatedLength;
         }
 
+        private void buttonDiscardNodeSum_Click(object sender, EventArgs e)
+        {
+            int loadsGensNum = nodeDataSet.Tables[0].Rows.Count; int xx = 0;
+            for (int i = 0; i < nodeNum; i++)
+            {
+                for (int x = 0; x < loadsGensNum; x++)
+                {
+                    nodeVecDataSet.Tables[0].Rows[xx][2] = nodeDataSet.Tables[i].Rows[x][2 + 1];
+                    nodeVecDataSet.Tables[0].Rows[xx][3] = nodeDataSet.Tables[i].Rows[x][3 + 1];
+                    nodeVecDataSet.Tables[0].Rows[xx][4] = nodeDataSet.Tables[i].Rows[x][4 + 1]; xx++;
+                }
+            }
+            // update the nodeDataSet for the dgv's on the nodefeeder form
+            xx = 0;
+            for (int i = 0; i < nodeNum; i++)
+            {
+                for (int x = 0; x < loadsGensNum; x++)
+                {
+                    nodeVecDataSet.Tables[0].Rows[xx][8] = nodeDataSet.Tables[i].Rows[x][8 + 1]; xx++;
+                }
+            }
+            // update the lengths in the cableDT
+            xx = 0;
+            for (int x = 0; x < cableDT.Rows.Count; x++) cableDT.Rows[x][1] = Convert.ToDecimal(nodeVecDataSet.Tables[0].Rows[x * loadsGensNum][8]) + (decimal)(loadCountInt * lengthTol - lengthTol);
+            
+            //update the other tables for the voltage profile in the nodeVecDataSet ( the lengths, and Rp and Rn)
+            for (int x = 0; x < nodeNum - 1; x++)
+            {
+                for (int y = 0; y < nodeVecDataSet.Tables[x + 1].Rows.Count; y++)
+                {
+                    nodeVecDataSet.Tables[x + 1].Rows[y][8] = nodeVecDataSet.Tables[x].Rows[y][8];
+                    nodeVecDataSet.Tables[x + 1].Rows[y][10] = nodeVecDataSet.Tables[x].Rows[y][10];
+                    nodeVecDataSet.Tables[x + 1].Rows[y][11] = nodeVecDataSet.Tables[x].Rows[y][11];
+                }
+            }
+            nodeSummaryDataGridView.Refresh();
+            nodeSummaryDataGridView.DataSource = nodeVecDataSet.Tables[0];
+            dataGridViewLengths.Refresh();
+            dataGridViewLengths.Update();
+            dataGridViewLengths.DataSource = cableDT;
+            
+            voltCalculation();
+        }
+
+        private void dataGridViewLengths_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.Control.KeyPress -= new KeyPressEventHandler(Column1_KeyPress);
+            if ((nodeSummaryDataGridView.CurrentCell.ColumnIndex > 1) || (nodeSummaryDataGridView.CurrentCell.ColumnIndex < 5))//Desired Columns
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null) tb.KeyPress += new KeyPressEventHandler(Column1_KeyPress);
+            }
+        }
+
+        private void nodeSummaryDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridViewLengths_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            const string message = "Please check the format of the number entered. Only numerical values are allowed";
+            const string caption = "Format Error";
+            var result = MessageBox.Show(message, caption,
+                                         MessageBoxButtons.OK,
+                                         MessageBoxIcon.Exclamation);
+        }
+
+        private void dataGridViewLengths_Validated(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridViewLengths_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+                        
+        }
     }
 }
