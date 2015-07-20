@@ -192,6 +192,7 @@
             this.bluePhaseVoltageText.ForeColor = System.Drawing.Color.DodgerBlue;
             this.bluePhaseVoltageText.Location = new System.Drawing.Point(221, 47);
             this.bluePhaseVoltageText.Name = "bluePhaseVoltageText";
+            this.bluePhaseVoltageText.ReadOnly = true;
             this.bluePhaseVoltageText.Size = new System.Drawing.Size(100, 40);
             this.bluePhaseVoltageText.TabIndex = 1;
             this.bluePhaseVoltageText.Text = "230";
@@ -235,6 +236,7 @@
             this.whitePhaseVoltageText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.whitePhaseVoltageText.Location = new System.Drawing.Point(108, 47);
             this.whitePhaseVoltageText.Name = "whitePhaseVoltageText";
+            this.whitePhaseVoltageText.ReadOnly = true;
             this.whitePhaseVoltageText.Size = new System.Drawing.Size(106, 40);
             this.whitePhaseVoltageText.TabIndex = 1;
             this.whitePhaseVoltageText.Text = "230";
@@ -306,6 +308,7 @@
             this.redPhaseVoltageText.ForeColor = System.Drawing.Color.Red;
             this.redPhaseVoltageText.Location = new System.Drawing.Point(4, 47);
             this.redPhaseVoltageText.Name = "redPhaseVoltageText";
+            this.redPhaseVoltageText.ReadOnly = true;
             this.redPhaseVoltageText.Size = new System.Drawing.Size(97, 40);
             this.redPhaseVoltageText.TabIndex = 1;
             this.redPhaseVoltageText.Text = "230";
