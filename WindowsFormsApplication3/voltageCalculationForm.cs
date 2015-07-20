@@ -16,7 +16,7 @@ namespace VoltageDropCalculatorApplication
         double Vs;
         double p;
         double t_old;
-        string projName;
+        //string projName;
         double[,] voltageProfileArray;
         int[] customerArray;
         double loadCountInt;
@@ -892,19 +892,20 @@ namespace VoltageDropCalculatorApplication
             }
             for (int x = 0; x < nodeVecDataSet.Tables[0].Rows.Count; x++)
             {
+                //nodeVecDataSet.Tables[0].Rows[x][10] = calculateRp(rT2L, 99.99);
                 nodeVecDataSet.Tables[0].Rows[x][10] = calculateRp(rT2L, Convert.ToDouble(nodeVecDataSet.Tables[0].Rows[x][8].ToString()));
-                nodeVecDataSet.Tables[0].Rows[x][11] = calculateRn(k1L, Convert.ToDouble(nodeVecDataSet.Tables[0].Rows[x][8].ToString()), k1);
+                nodeVecDataSet.Tables[0].Rows[x][11] = calculateRn(rT2L, Convert.ToDouble(nodeVecDataSet.Tables[0].Rows[x][8].ToString()), k1L);
             }
                 //update the other tables for the voltage profile in the nodeVecDataSet ( the lengths, and Rp and Rn)
-                for (int x = 0; x < nodeNum - 1; x++)
+            for (int x = 0; x < nodeNum - 1; x++)
+            {
+                for (int y = 0; y < nodeVecDataSet.Tables[x + 1].Rows.Count; y++)
                 {
-                    for (int y = 0; y < nodeVecDataSet.Tables[x + 1].Rows.Count; y++)
-                    {
-                        nodeVecDataSet.Tables[x + 1].Rows[y][8] = nodeVecDataSet.Tables[x].Rows[y][8];
-                        nodeVecDataSet.Tables[x + 1].Rows[y][10] = nodeVecDataSet.Tables[x].Rows[y][10];
-                        nodeVecDataSet.Tables[x + 1].Rows[y][11] = nodeVecDataSet.Tables[x].Rows[y][11];
-                    }
+                    nodeVecDataSet.Tables[x + 1].Rows[y][8] = nodeVecDataSet.Tables[x].Rows[y][8];
+                    nodeVecDataSet.Tables[x + 1].Rows[y][10] = nodeVecDataSet.Tables[x].Rows[y][10];
+                    nodeVecDataSet.Tables[x + 1].Rows[y][11] = nodeVecDataSet.Tables[x].Rows[y][11];
                 }
+            }
             voltCalculation();
         }
 
@@ -946,11 +947,8 @@ namespace VoltageDropCalculatorApplication
             else
             {
                 sidePanelPictureBox.BorderStyle = BorderStyle.Fixed3D;
-                splitContainer1.Panel2Collapsed = false;
-                
+                splitContainer1.Panel2Collapsed = false;                
             }
-            
-
         }
 
         private void voltageProfileChart_Click(object sender, EventArgs e)
@@ -972,5 +970,26 @@ namespace VoltageDropCalculatorApplication
         {
             return (rKm / 1000.0 * k1 * caclulatedLength).ToString();
         }
+
+        public double calculateLengths(decimal lengthInput, int rowIndex)
+        {
+            double calculatedLength = lengthTol;
+            if ((rowIndex == 0) && (loadCountInt != 0))
+            {
+                calculatedLength = Convert.ToDouble(lengthInput) - (lengthTol * (Convert.ToDouble(loadCountInt) - 1.0));
+                return calculatedLength;
+            }
+            else if ((rowIndex == 0) && (genCountInt != 0))
+            {
+                calculatedLength = Convert.ToDouble(lengthInput) - (lengthTol * (Convert.ToDouble(genCountInt) - 1.0));
+                return calculatedLength;
+            }
+            else
+            {
+                calculatedLength = lengthTol;
+            }
+            return calculatedLength;
+        }
+
     }
 }

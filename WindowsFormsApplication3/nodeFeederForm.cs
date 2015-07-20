@@ -47,7 +47,7 @@ namespace VoltageDropCalculatorApplication
         BindingList<int> nodeNumList = new BindingList<int>();
         BindingList<string> nodeNameList = new BindingList<string>();
         TreeNode rootNode = new TreeNode();
-        List<string> addList;
+        //List<string> addList;
 
         public nodeFeederForm()
         {
@@ -440,10 +440,10 @@ namespace VoltageDropCalculatorApplication
             {
                 if (Convert.ToString(libraryDataSet.Tables["Conductors"].Rows[i][0]) == cableSelectCombo.Text)
                 {
+                    t2 = Convert.ToDouble(operatingTempNumUpDown.Value);
                     rT2 = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][1]) * (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][2]) + t2) / (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][2]) + 20.0);
                     k1 = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][3]);
                     break;
-
                 }
             }
 
@@ -454,8 +454,8 @@ namespace VoltageDropCalculatorApplication
                     nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows[i][10] = cableSelectCombo.Text;
                     nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows[i][11] = calculateRp(rT2, calculateLengths(lengthNumericUpDown.Value, i));
                     nodeDataSet.Tables["node" + nodeNumCombo.Text].Rows[i][12] = calculateRn(rT2, calculateLengths(lengthNumericUpDown.Value, i), k1);
+                    double a = calculateLengths(lengthNumericUpDown.Value, i);
                 }
-
             }
         }
 
@@ -469,7 +469,6 @@ namespace VoltageDropCalculatorApplication
                 {
                     rT2 = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][1]) * (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][2]) + t2) / (Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][2]) + 20.0);
                     k1 = Convert.ToDouble(libraryDataSet.Tables["Conductors"].Rows[i][3]);
-
                 }
             }
 
@@ -497,11 +496,6 @@ namespace VoltageDropCalculatorApplication
             {
                 drawPoints(mfNodeList);
             }
-
-           
-
-
-
         }
 
         private void addNodeButton_Click(object sender, EventArgs e)
@@ -681,10 +675,7 @@ namespace VoltageDropCalculatorApplication
                 drawArea.Clear(Color.White);
                 drawPoints(mfNodeList);
                 closeTableEdits();
-
-            }            
-
-            
+            }                       
         }
 
         //recursive method that deletes a node as well as its children and their children etc
@@ -841,7 +832,6 @@ namespace VoltageDropCalculatorApplication
                                 tempTable.Rows[rows][5] = Convert.ToDouble(tempTable.Rows[rows][5]) + Convert.ToDouble(nodeDataSet.Tables["node" + nodeNumber.ToString()].Rows[rows1][5]);
                                 break;
                             }
-
                         }
                     }
                 }
@@ -885,7 +875,6 @@ namespace VoltageDropCalculatorApplication
 
         private void clearTempTable()
         {
-
             for (int i = 0; i < tempTable.Rows.Count; i++)
             {
                 for (int j = 0; j < tempTable.Columns.Count; j++)
@@ -1151,8 +1140,6 @@ namespace VoltageDropCalculatorApplication
                                 {
                                     nodeVecDataTables[j].Rows[genStartInt - 1][cols - 1] = tempNodeDataSet.Tables[i].Rows[rows][cols].ToString();
                                 }
-
-
                             }
                         }
                     }
@@ -1640,12 +1627,6 @@ namespace VoltageDropCalculatorApplication
                 else { }
                 
             }
-            
-
-            
-
-            
-
             
         }
 
