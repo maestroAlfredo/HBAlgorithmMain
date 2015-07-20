@@ -165,11 +165,11 @@ namespace VoltageDropCalculatorApplication
 
                 dtGens.TableName = "Generators";
 
-                DataColumn dc1 = new DataColumn("Generator"); //dreates the new datacolumn objects;
-                DataColumn dc2 = new DataColumn("alpha");
-                DataColumn dc3 = new DataColumn("beta");
-                DataColumn dc4 = new DataColumn("circuit breaker");
-                DataColumn dc5 = new DataColumn("description");
+                DataColumn dc1 = new DataColumn("Generator", typeof(string)); //dreates the new datacolumn objects;
+                DataColumn dc2 = new DataColumn("alpha", typeof(int));
+                DataColumn dc3 = new DataColumn("beta", typeof(int));
+                DataColumn dc4 = new DataColumn("circuit breaker", typeof(int));
+                DataColumn dc5 = new DataColumn("description", typeof(string));
                 DataColumn dc6 = new DataColumn("Selected", typeof(bool));
 
                 dtGens.Columns.Add(dc1); //associates the columns to the dtLoads datatable
@@ -182,7 +182,7 @@ namespace VoltageDropCalculatorApplication
                 dtGens.PrimaryKey = new DataColumn[] { dtGens.Columns["Generator"] };
                 for (int i = 0; i < 25; i++)
                 {
-                    dtGens.Rows.Add("Gen " + (i + 1).ToString(), 0.0, 0.0, 0.0, "myGen", false);
+                    dtGens.Rows.Add("Gen " + (i + 1).ToString(), 0, 0, 0, "myGen", false);
 
                 }
 
@@ -277,7 +277,7 @@ namespace VoltageDropCalculatorApplication
                 conductorTable.TableName = "Conductors";
 
                 DataColumn dc1 = new DataColumn("Code", typeof(string)); //dreates the new datacolumn objects;
-                DataColumn dc2 = new DataColumn("R/km@T1", typeof(string));
+                DataColumn dc2 = new DataColumn("R/km@T1", typeof(double));
                 DataColumn dc3 = new DataColumn("T", typeof(double));
                 DataColumn dc4 = new DataColumn("k", typeof(double));
                 DataColumn dc5 = new DataColumn("Description", typeof(string));
@@ -336,9 +336,9 @@ namespace VoltageDropCalculatorApplication
             dtLoads.TableName = "Loads";
 
             DataColumn dc1 = new DataColumn("Load", typeof(string)); //dreates the new datacolumn objects;
-            DataColumn dc2 = new DataColumn("alpha", typeof(double));
-            DataColumn dc3 = new DataColumn("beta", typeof(double));
-            DataColumn dc4 = new DataColumn("circuit breaker", typeof(double));
+            DataColumn dc2 = new DataColumn("alpha", typeof(int));
+            DataColumn dc3 = new DataColumn("beta", typeof(int));
+            DataColumn dc4 = new DataColumn("circuit breaker", typeof(int));
             DataColumn dc5 = new DataColumn("description", typeof(string));
             DataColumn dc6 = new DataColumn("Selected", typeof(bool));
 
@@ -367,10 +367,10 @@ namespace VoltageDropCalculatorApplication
 
             dtGens.TableName = "Generators";
 
-            DataColumn dcg1 = new DataColumn("Generator"); //dreates the new datacolumn objects;
-            DataColumn dcg2 = new DataColumn("alpha");
-            DataColumn dcg3 = new DataColumn("beta");
-            DataColumn dcg4 = new DataColumn("circuit breaker");
+            DataColumn dcg1 = new DataColumn("Generator" , typeof(string)); //dreates the new datacolumn objects;
+            DataColumn dcg2 = new DataColumn("alpha", typeof(int));
+            DataColumn dcg3 = new DataColumn("beta", typeof(int));
+            DataColumn dcg4 = new DataColumn("circuit breaker", typeof(int));
             DataColumn dcg5 = new DataColumn("description");
             DataColumn dcg6 = new DataColumn("Selected", typeof(bool));
 
@@ -386,7 +386,7 @@ namespace VoltageDropCalculatorApplication
 
             for (int i = 0; i < 25; i++)
             {
-                dtGens.Rows.Add("Gen " + (i + 1).ToString(), 0.0, 0.0, 0.0, "myGen", false);
+                dtGens.Rows.Add("Gen " + (i + 1).ToString(), 0, 0, 0, "myGen", false);
 
             }
 

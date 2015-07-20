@@ -32,6 +32,7 @@ namespace VoltageDropCalculatorApplication
             this.libraryDataSet = libraryDataSet;
             loadTypeCombo.Text = selectedloadtype; //constructor to load library form depending on whether load or generator is selected
             loadTypeCombo.Enabled = enabled;
+            
             //libraryDataSet.ReadXml("Libraries.xml");
             List<string> LoadType = new List<string>();
 
@@ -462,7 +463,11 @@ namespace VoltageDropCalculatorApplication
 
         private void dataGridViewLoadsDGs_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            Console.Write("Error");
+            const string message = "Formatting error. Check that you've correctly entered the right format string or number in the cell before proceeding.";
+            const string caption = "HBAlgorithm";
+            var result = MessageBox.Show(message, caption,
+                                         MessageBoxButtons.OK,
+                                         MessageBoxIcon.Exclamation);
 
         }
 
@@ -494,17 +499,7 @@ namespace VoltageDropCalculatorApplication
 
         private void dataGridViewLoadsDGs_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            //string myString = Convert.ToString(dataGridViewLoadsDGs.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
-            //if (myString.Length >= 5)
-            //{
-            //    string subString = myString.Substring(0, 5);
-            //    if (subString == "Cable")
-            //    {
-            //        e.Cancel = true;
-            //    }
-            //}
-            //dataGridViewLoadsDGs.Rows[e.RowIndex].ErrorText = "invalid input";
-
+          
         }
 
 
@@ -522,18 +517,27 @@ namespace VoltageDropCalculatorApplication
 
         private void dataGridViewLoadsDGs_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            e.Control.KeyPress -= new KeyPressEventHandler(dataGridViewLoadsDGs_KeyPress);
-            //Check columns whatever you required
-            if (dataGridViewLoadsDGs.CurrentCell.ColumnIndex == 0)
+            e.Control.KeyPress -= new KeyPressEventHandler(Column234_KeyPress);
+            if ((dataGridViewLoadsDGs.CurrentCell.ColumnIndex > 0) && (dataGridViewLoadsDGs.CurrentCell.ColumnIndex < 3))//Desired Columns
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
                 {
-                    tb.KeyPress += new KeyPressEventHandler(dataGridViewLoadsDGs_KeyPress);
+                    tb.KeyPress += new KeyPressEventHandler(Column234_KeyPress);
                 }
-            }
+            }            
         }
 
+        private void Column234_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+               e.Handled = true;
+            }
+                
+        }
+
+        
         private void dataGridViewLoadsDGs_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -604,6 +608,21 @@ namespace VoltageDropCalculatorApplication
 
 
 
+        }
+
+        private void dataGridViewLoadsDGs_DataSourceChanged(object sender, EventArgs e)
+        {
+            if((loadTypeCombo.Text == "Loads")||(loadTypeCombo.Text == "Generators"))
+            {
+                dataGridViewLoadsDGs.Columns[0].ReadOnly = true;
+                dataGridViewLoadsDGs.Columns[dataGridViewLoadsDGs.Columns.Count - 1].Visible = true;
+
+            }
+            else
+            {
+                dataGridViewLoadsDGs.Columns[0].ReadOnly = false;
+                dataGridViewLoadsDGs.Columns[dataGridViewLoadsDGs.Columns.Count - 1].Visible = false;
+            }
         }
 
     }

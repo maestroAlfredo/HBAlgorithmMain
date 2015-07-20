@@ -129,6 +129,7 @@
             this.dataGridViewLoadsDGs.Name = "dataGridViewLoadsDGs";
             this.dataGridViewLoadsDGs.Size = new System.Drawing.Size(857, 406);
             this.dataGridViewLoadsDGs.TabIndex = 2;
+            this.dataGridViewLoadsDGs.DataSourceChanged += new System.EventHandler(this.dataGridViewLoadsDGs_DataSourceChanged);
             this.dataGridViewLoadsDGs.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewLoadsDGs_CellBeginEdit);
             this.dataGridViewLoadsDGs.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLoadsDGs_CellContentClick);
             this.dataGridViewLoadsDGs.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLoadsDGs_CellEndEdit);
