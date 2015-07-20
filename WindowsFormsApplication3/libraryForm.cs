@@ -32,16 +32,17 @@ namespace VoltageDropCalculatorApplication
             this.libraryDataSet = libraryDataSet;
             loadTypeCombo.Text = selectedloadtype; //constructor to load library form depending on whether load or generator is selected
             loadTypeCombo.Enabled = enabled;
+            
             //libraryDataSet.ReadXml("Libraries.xml");
             List<string> LoadType = new List<string>();
-           
+
             foreach (DataTable dt in libraryDataSet.Tables)
             {
                 LoadType.Add(dt.TableName);
             }
             loadTypeCombo.DataSource = LoadType;
 
-            
+
 
             if (loadTypeCombo.Text == "Loads")
             {
@@ -76,7 +77,7 @@ namespace VoltageDropCalculatorApplication
         //OnloadMethod loads the datagridview when the form is loaded which is either a load or a generator
         private void LibraryFormGenLoad_Load(object sender, EventArgs e)
         {
-            
+
 
         }
 
@@ -84,7 +85,7 @@ namespace VoltageDropCalculatorApplication
         private void loadTypeCombo_TextChanged(object sender, EventArgs e)
         {
             addCableButton.Visible = false;
-            
+
             //libraryDataSet1.ReadXml("Libraries.xml");
             if (loadTypeCombo.Text == "Loads")
             {
@@ -97,18 +98,18 @@ namespace VoltageDropCalculatorApplication
                 //    DialogResult result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
                 //}
 
-                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Loads"];                
+                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Loads"];
 
             }
 
             else if (loadTypeCombo.Text == "Generators")
             {
-                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Generators"]; 
+                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Generators"];
             }
             else
             {
                 addCableButton.Visible = true;
-                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Conductors"]; 
+                dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Conductors"];
             }
         }
 
@@ -145,7 +146,7 @@ namespace VoltageDropCalculatorApplication
             //            {                            
             //                feederProject.Tables[0].Rows[this.rowIndex + i][0] = "Gen "+ Convert.ToString(i+1);
             //            }
-                
+
             //        }
             //        feederProject.WriteXml("Generators.xml");
             //        dataGridViewLoadsDGs.DataSource = feederProject.Tables[0];
@@ -280,7 +281,7 @@ namespace VoltageDropCalculatorApplication
 
 
             }
-            
+
             loadDGType.WriteXml(selectedXMLType);
         }
 
@@ -393,11 +394,11 @@ namespace VoltageDropCalculatorApplication
 
                     dtGens.TableName = "Generators";
 
-                    DataColumn dc1 = new DataColumn("Generator"); //dreates the new datacolumn objects;
-                    DataColumn dc2 = new DataColumn("alpha");
-                    DataColumn dc3 = new DataColumn("beta");
-                    DataColumn dc4 = new DataColumn("circuit breaker");
-                    DataColumn dc5 = new DataColumn("description");
+                    DataColumn dc1 = new DataColumn("Generator", typeof(string)); //dreates the new datacolumn objects;
+                    DataColumn dc2 = new DataColumn("alpha", typeof(double));
+                    DataColumn dc3 = new DataColumn("beta", typeof(double));
+                    DataColumn dc4 = new DataColumn("circuit breaker", typeof(double));
+                    DataColumn dc5 = new DataColumn("description", typeof(string));
                     DataColumn dc6 = new DataColumn("Selected", typeof(bool));
 
 
@@ -433,7 +434,7 @@ namespace VoltageDropCalculatorApplication
 
         private void saveLibraryButton_Click(object sender, EventArgs e)
         {
-            if(saveLibraryButton.Text !="Save")
+            if (saveLibraryButton.Text != "Save")
             {
                 const string message = "Deselecting loads and generators that are used in the current project will cause you to lose their corresponding customer information. Would you like to Continue?";
                 const string caption = "HBAlgorithm";
@@ -454,15 +455,19 @@ namespace VoltageDropCalculatorApplication
                     this.Close();
                 }
             }
-            
-            libraryDataSet.WriteXml("Libraries.xml",XmlWriteMode.WriteSchema);
+
+            libraryDataSet.WriteXml("Libraries.xml", XmlWriteMode.WriteSchema);
             saveLibraryButton.Enabled = false;
-            
+
         }
 
         private void dataGridViewLoadsDGs_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            Console.Write("Error");
+            const string message = "Formatting error. Check that you've correctly entered the right format string or number in the cell before proceeding.";
+            const string caption = "HBAlgorithm";
+            var result = MessageBox.Show(message, caption,
+                                         MessageBoxButtons.OK,
+                                         MessageBoxIcon.Exclamation);
 
         }
 
@@ -473,19 +478,19 @@ namespace VoltageDropCalculatorApplication
                 saveLibraryButton.Enabled = false;
                 return;
             }
-            saveLibraryButton.Enabled = true;            
+            saveLibraryButton.Enabled = true;
             addCableInt = dataGridViewLoadsDGs.Rows.Count;
-            addCableInt++;          
-            
-            libraryDataSet.Tables["Conductors"].Rows.Add("Cable " + addCableInt.ToString(), 0.0, 0.0, 0.0, "description", false);          
-            
+            addCableInt++;
+
+            libraryDataSet.Tables["Conductors"].Rows.Add("Cable " + addCableInt.ToString(), 0.0, 0.0, 0.0, "description", false);
+
         }
-               
+
 
         private void dataGridViewLoadsDGs_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            saveLibraryButton.Enabled = true;            
-            if((e.ColumnIndex == 0)&&(loadTypeCombo.Text == "Conductors"))
+            saveLibraryButton.Enabled = true;
+            if ((e.ColumnIndex == 0) && (loadTypeCombo.Text == "Conductors"))
             {
                 dataGridViewLoadsDGs.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "CableCode";
 
@@ -494,46 +499,45 @@ namespace VoltageDropCalculatorApplication
 
         private void dataGridViewLoadsDGs_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            //string myString = Convert.ToString(dataGridViewLoadsDGs.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
-            //if (myString.Length >= 5)
-            //{
-            //    string subString = myString.Substring(0, 5);
-            //    if (subString == "Cable")
-            //    {
-            //        e.Cancel = true;
-            //    }
-            //}
-            //dataGridViewLoadsDGs.Rows[e.RowIndex].ErrorText = "invalid input";
-
+          
         }
 
-      
+
 
         private void dataGridViewLoadsDGs_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {       
+        {
             // Clear the row error in case the user presses ESC.   
             dataGridViewLoadsDGs.Rows[e.RowIndex].ErrorText = String.Empty;
         }
 
         private void dataGridViewLoadsDGs_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetterOrDigit(e.KeyChar)&&(e.KeyChar != (char)Keys.Back)) e.Handled = true;
+            if (!char.IsLetterOrDigit(e.KeyChar) && (e.KeyChar != (char)Keys.Back)) e.Handled = true;
         }
 
         private void dataGridViewLoadsDGs_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            e.Control.KeyPress -= new KeyPressEventHandler(dataGridViewLoadsDGs_KeyPress);
-            //Check columns whatever you required
-            if (dataGridViewLoadsDGs.CurrentCell.ColumnIndex == 0)
+            e.Control.KeyPress -= new KeyPressEventHandler(Column234_KeyPress);
+            if ((dataGridViewLoadsDGs.CurrentCell.ColumnIndex > 0) && (dataGridViewLoadsDGs.CurrentCell.ColumnIndex < 3))//Desired Columns
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
                 {
-                    tb.KeyPress += new KeyPressEventHandler(dataGridViewLoadsDGs_KeyPress);
+                    tb.KeyPress += new KeyPressEventHandler(Column234_KeyPress);
                 }
             }            
         }
 
+        private void Column234_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+               e.Handled = true;
+            }
+                
+        }
+
+        
         private void dataGridViewLoadsDGs_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -541,7 +545,7 @@ namespace VoltageDropCalculatorApplication
 
         private void saveToProject_Click(object sender, EventArgs e)
         {
-            
+
             const string message = "Deselecting loads and generators that are used in the current project will cause you to lose their corresponding customer information. Would you like to Continue?";
             const string caption = "HBAlgorithm";
             var result = MessageBox.Show(message, caption,
@@ -563,8 +567,8 @@ namespace VoltageDropCalculatorApplication
                 this.Close();
             }
 
-            
-            
+
+
         }
 
         private void saveLibraryButton_EnabledChanged(object sender, EventArgs e)
@@ -573,9 +577,52 @@ namespace VoltageDropCalculatorApplication
             {
                 saveToProject.Enabled = saveLibraryButton.Enabled;
             }
-            
-            
-            
+
+
+
+        }
+
+        private void libraryForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            bool exit = false;
+            //checks whether at least one load has been selected. Else prevent the user from closing the form.
+            foreach (DataRow dr in libraryDataSet.Tables["Loads"].Rows)
+            {
+                if (Convert.ToBoolean(dr["selected"]) == true)
+                {
+                    exit = true;
+                    break;
+                }
+            }
+
+            if (!exit)
+            {
+                const string message = "Cannot proceed without selecting at least one load.";
+                const string caption = "HBAlgorithm";
+                var result = MessageBox.Show(message, caption,
+                                             MessageBoxButtons.OK,
+                                             MessageBoxIcon.Exclamation);
+                
+                e.Cancel = true;
+            }
+
+
+
+        }
+
+        private void dataGridViewLoadsDGs_DataSourceChanged(object sender, EventArgs e)
+        {
+            if((loadTypeCombo.Text == "Loads")||(loadTypeCombo.Text == "Generators"))
+            {
+                dataGridViewLoadsDGs.Columns[0].ReadOnly = true;
+                dataGridViewLoadsDGs.Columns[dataGridViewLoadsDGs.Columns.Count - 1].Visible = true;
+
+            }
+            else
+            {
+                dataGridViewLoadsDGs.Columns[0].ReadOnly = false;
+                dataGridViewLoadsDGs.Columns[dataGridViewLoadsDGs.Columns.Count - 1].Visible = false;
+            }
         }
 
     }
