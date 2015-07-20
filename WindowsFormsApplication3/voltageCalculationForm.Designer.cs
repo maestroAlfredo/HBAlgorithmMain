@@ -421,7 +421,6 @@
             this.tableLayoutPanel3.Controls.Add(this.dataGridViewLengths, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.label7, 0, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 6;
@@ -449,7 +448,7 @@
             this.nodeSummaryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.SteelBlue;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -457,7 +456,6 @@
             this.nodeSummaryDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.nodeSummaryDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nodeSummaryDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.nodeSummaryDataGridView.EnableHeadersVisualStyles = false;
             this.nodeSummaryDataGridView.Location = new System.Drawing.Point(3, 312);
             this.nodeSummaryDataGridView.Name = "nodeSummaryDataGridView";
             this.nodeSummaryDataGridView.RowHeadersVisible = false;
@@ -490,7 +488,6 @@
             this.dataGridViewLengths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewLengths.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewLengths.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewLengths.EnableHeadersVisualStyles = false;
             this.dataGridViewLengths.Location = new System.Drawing.Point(3, 31);
             this.dataGridViewLengths.Name = "dataGridViewLengths";
             this.dataGridViewLengths.RowHeadersVisible = false;
@@ -498,7 +495,6 @@
             this.dataGridViewLengths.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewLengths.Size = new System.Drawing.Size(327, 237);
             this.dataGridViewLengths.TabIndex = 4;
-            this.dataGridViewLengths.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLengths_CellEndEdit);
             // 
             // label7
             // 
