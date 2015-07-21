@@ -434,9 +434,9 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 243F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 202F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(333, 641);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
@@ -444,9 +444,9 @@
             // 
             this.buttonDiscardNodeSum.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonDiscardNodeSum.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDiscardNodeSum.Location = new System.Drawing.Point(3, 550);
+            this.buttonDiscardNodeSum.Location = new System.Drawing.Point(3, 594);
             this.buttonDiscardNodeSum.Name = "buttonDiscardNodeSum";
-            this.buttonDiscardNodeSum.Size = new System.Drawing.Size(327, 88);
+            this.buttonDiscardNodeSum.Size = new System.Drawing.Size(327, 44);
             this.buttonDiscardNodeSum.TabIndex = 5;
             this.buttonDiscardNodeSum.Text = "Discard";
             this.buttonDiscardNodeSum.UseVisualStyleBackColor = true;
@@ -482,7 +482,7 @@
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nodeSummaryDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.nodeSummaryDataGridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nodeSummaryDataGridView.Size = new System.Drawing.Size(327, 196);
+            this.nodeSummaryDataGridView.Size = new System.Drawing.Size(327, 226);
             this.nodeSummaryDataGridView.TabIndex = 1;
             this.nodeSummaryDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeSummaryDataGridView_CellContentClick);
             this.nodeSummaryDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeSummaryDataGridView_CellEndEdit);
@@ -492,9 +492,9 @@
             // 
             this.buttonUpdateNodeSumm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonUpdateNodeSumm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonUpdateNodeSumm.Location = new System.Drawing.Point(3, 514);
+            this.buttonUpdateNodeSumm.Location = new System.Drawing.Point(3, 544);
             this.buttonUpdateNodeSumm.Name = "buttonUpdateNodeSumm";
-            this.buttonUpdateNodeSumm.Size = new System.Drawing.Size(327, 30);
+            this.buttonUpdateNodeSumm.Size = new System.Drawing.Size(327, 44);
             this.buttonUpdateNodeSumm.TabIndex = 3;
             this.buttonUpdateNodeSumm.Text = "Update";
             this.buttonUpdateNodeSumm.UseVisualStyleBackColor = true;

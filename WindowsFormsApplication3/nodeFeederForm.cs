@@ -285,6 +285,8 @@ namespace VoltageDropCalculatorApplication
                 nodeCountInt++;
             }
 
+            operatingTempNumUpDown.Value = Convert.ToDecimal(t2);
+            sourceVoltageNumUpDown.Value = Convert.ToDecimal(Vs);
             //activeRadio.Enabled = false;
             //passiveRadio.Enabled = false;
             nodeCount.Text = nodeCountInt.ToString();

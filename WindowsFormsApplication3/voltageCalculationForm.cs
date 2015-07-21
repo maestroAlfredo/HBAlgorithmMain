@@ -42,32 +42,40 @@ namespace VoltageDropCalculatorApplication
         public voltageCalculationForm(double risk, double temperature, double sourceVoltage, int loadCount, int genCount, double lengthTol, List<int> mfNodeList, DataSet nodeDataSet, DataSet tempNodeDataSet, DataGridView nodeDataGridView, DataSet libraryDataSet, NumericUpDown lengthNumericUpDown)
         {
             InitializeComponent();
-            //nodeVecDataSet.ReadXml(projectName);
+            
+            //---------------------KEEP THIS ORDER OF VARIABLES------------------------------//
             nodeVecDataSet = tempNodeDataSet; this.nodeDataGridView = nodeDataGridView; 
             this.libraryDataSet = libraryDataSet;
             nodeNum = nodeVecDataSet.Tables[nodeVecDataSet.Tables.Count - 1].Rows.Count / (loadCount + genCount);
             this.lengthNumericUpDown = lengthNumericUpDown;
             t2 = temperature;
-            //this.k1 = k1;
-            //this.mfNodeList = mfNodeList;
-
             Vs = sourceVoltage;
             t_old = temperature;
             p = risk;
+            loadCountInt = loadCount;
+            genCountInt = genCount;
+            totalLoadsGens = loadCount + genCount;
+            voltageProfileArray = new double[nodeNum + 1, 6];
+            this.lengthTol = lengthTol;
+
+            this.nodeDataSet = nodeDataSet;
+            nodeOverallDataTable = nodeVecDataSet.Tables[0].Copy();
+
+            //----additional variables to be initialized can be placed here
+
+
+
             numericUpDownRisk.Value = (decimal)p;
             numericUpDownVoltage.Value = (decimal)Vs;
             tempNumUpDown.Value = Convert.ToDecimal(t_old);
             errorProvider1 = new ErrorProvider();
-            voltageProfileArray = new double[nodeNum + 1, 6];
+         
+            
             //customerArray = new int[3];
             numericUpDownVoltage.Value = Convert.ToDecimal(Vs);
             numericUpDownRisk.Value = Convert.ToDecimal(p);
-            loadCountInt = loadCount;
-            genCountInt = genCount;
-            this.lengthTol = lengthTol;
-            totalLoadsGens = loadCount + genCount;
-            this.nodeDataSet = nodeDataSet;
-            nodeOverallDataTable = nodeVecDataSet.Tables[0].Copy();
+            
+            
             editTable(nodeSummaryDataGridView);
             nodeSummaryDataGridView.DataSource = nodeOverallDataTable;
             nodeSummaryDataGridView.Columns[5].Visible = false;
@@ -839,8 +847,7 @@ namespace VoltageDropCalculatorApplication
         private void tempNumUpDown_ValueChanged(object sender, EventArgs e)
         {
             double t_new = Convert.ToDouble(tempNumUpDown.Value);
-            DataSet libraryDataSet = new DataSet();
-           
+                      
 
             for (int i = 0; i < nodeNum; i++)
             {

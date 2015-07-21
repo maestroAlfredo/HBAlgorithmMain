@@ -585,6 +585,17 @@ namespace VoltageDropCalculatorApplication
         private void libraryForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             bool exit = false;
+            if(saveLibraryButton.Enabled == true || saveToProject.Enabled == true)
+            {
+                const string message = "Do you want to exit without saving the changes?";
+                const string caption = "HBAlgorithm";
+                var result = MessageBox.Show(message, caption,
+                                             MessageBoxButtons.YesNoCancel,
+                                             MessageBoxIcon.Exclamation);
+
+                if (result == System.Windows.Forms.DialogResult.No || result == System.Windows.Forms.DialogResult.Cancel) e.Cancel = true;                
+                
+            }
             //checks whether at least one load has been selected. Else prevent the user from closing the form.
             foreach (DataRow dr in libraryDataSet.Tables["Loads"].Rows)
             {
