@@ -1053,9 +1053,9 @@ namespace VoltageDropCalculatorApplication
             {
                 for (int x = 0; x < loadsGensNum; x++)
                 {
-                    nodeVecDataSet.Tables[0].Rows[xx][2] = nodeDataSet.Tables[i].Rows[x][2 + 1];
-                    nodeVecDataSet.Tables[0].Rows[xx][3] = nodeDataSet.Tables[i].Rows[x][3 + 1];
-                    nodeVecDataSet.Tables[0].Rows[xx][4] = nodeDataSet.Tables[i].Rows[x][4 + 1]; xx++;
+                    nodeOverallDataTable.Rows[xx][2] = nodeDataSet.Tables[i].Rows[x][2 + 1];
+                    nodeOverallDataTable.Rows[xx][3] = nodeDataSet.Tables[i].Rows[x][3 + 1];
+                    nodeOverallDataTable.Rows[xx][4] = nodeDataSet.Tables[i].Rows[x][4 + 1]; xx++;
                 }
             }
             // update the nodeDataSet for the dgv's on the nodefeeder form
@@ -1064,25 +1064,25 @@ namespace VoltageDropCalculatorApplication
             {
                 for (int x = 0; x < loadsGensNum; x++)
                 {
-                    nodeVecDataSet.Tables[0].Rows[xx][8] = nodeDataSet.Tables[i].Rows[x][8 + 1]; xx++;
+                    nodeOverallDataTable.Rows[xx][8] = nodeDataSet.Tables[i].Rows[x][8 + 1]; xx++;
                 }
             }
             // update the lengths in the cableDT
             xx = 0;
-            for (int x = 0; x < cableDT.Rows.Count; x++) cableDT.Rows[x][1] = Convert.ToDecimal(nodeVecDataSet.Tables[0].Rows[x * loadsGensNum][8]) + (decimal)(loadCountInt * lengthTol - lengthTol);
+            for (int x = 0; x < cableDT.Rows.Count; x++) cableDT.Rows[x][1] = Convert.ToDecimal(nodeOverallDataTable.Rows[x * loadsGensNum][8]) + (decimal)(loadCountInt * lengthTol - lengthTol);
             
             //update the other tables for the voltage profile in the nodeVecDataSet ( the lengths, and Rp and Rn)
             for (int x = 0; x < nodeNum - 1; x++)
             {
                 for (int y = 0; y < nodeVecDataSet.Tables[x + 1].Rows.Count; y++)
                 {
-                    nodeVecDataSet.Tables[x + 1].Rows[y][8] = nodeVecDataSet.Tables[x].Rows[y][8];
+                    nodeVecDataSet.Tables[x + 1].Rows[y][8]  = nodeVecDataSet.Tables[x].Rows[y][8];
                     nodeVecDataSet.Tables[x + 1].Rows[y][10] = nodeVecDataSet.Tables[x].Rows[y][10];
                     nodeVecDataSet.Tables[x + 1].Rows[y][11] = nodeVecDataSet.Tables[x].Rows[y][11];
                 }
             }
             nodeSummaryDataGridView.Refresh();
-            nodeSummaryDataGridView.DataSource = nodeVecDataSet.Tables[0];
+            nodeSummaryDataGridView.DataSource = nodeOverallDataTable;
             dataGridViewLengths.Refresh();
             dataGridViewLengths.Update();
             dataGridViewLengths.DataSource = cableDT;
