@@ -636,5 +636,9 @@ namespace VoltageDropCalculatorApplication
             }
         }
 
+        public void setLoadTypeComboBox(string text)
+        {
+            loadTypeCombo.Text = text;
+        }
     }
 }

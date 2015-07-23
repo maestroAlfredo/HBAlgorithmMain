@@ -55,7 +55,7 @@ namespace VoltageDropCalculatorApplication
                 ds.ReadXml("Libraries.xml");
                 if (!ds.Tables.Contains("Loads"))
                 {
-                    string message = "You do not have any Loads defined! Go to \"Edit Existing Libaries\" to define loads";
+                    string message = "You do not have any Loads defined! Go to \"Edit Existing Libaries\" and select at least one load.";
                     string caption = "No Loads defined!";
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
                     DialogResult result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
@@ -79,7 +79,7 @@ namespace VoltageDropCalculatorApplication
                     }
                     else
                     {
-                        string message = "You have not selected any loads to use for the project. Please go to edit libraries and select at least one load";
+                        string message = "You have not selected any loads to use for the project. Please go to \"Edit libraries\" and select at least one load.";
                         string caption = "No Loads selected!";
                         MessageBoxButtons buttons = MessageBoxButtons.OK;
                         DialogResult result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
@@ -90,10 +90,20 @@ namespace VoltageDropCalculatorApplication
 
             else
             {
-                string message = "You do not have a libary defined! Go to \"Libaries\" to create new libraries";
+                string message = "You do not have a libary defined! Would you like to create a new library?";
                 string caption = "No library available!";
-                MessageBoxButtons buttons = MessageBoxButtons.OK;
-                DialogResult result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    newConductorLibraryButton.PerformClick();
+                }
+
+                if (result == DialogResult.No)
+                {
+                   // do nothing
+                }
             }
         }
 
@@ -221,6 +231,7 @@ namespace VoltageDropCalculatorApplication
                     //DialogResult result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
                 }
 
+                //frm.setLoadTypeComboBox("Loads");
                 frm.ShowDialog();
 
             }
@@ -243,7 +254,7 @@ namespace VoltageDropCalculatorApplication
         private void editLibraryButton_MouseHover(object sender, EventArgs e)
         {
             //infoLabel.Text = "Click this button to edit the libraries that you may have predefined from previous projects";
-            labelMainFormText.Text = "Edit existing libraries";
+            labelMainFormText.Text = "Edit existing libraries of Loads, Conductors and Generators.";
             labelMainFormText.Font = new Font(labelMainFormText.Font, FontStyle.Italic);
 
             // Make the text on the label bold
@@ -454,7 +465,7 @@ namespace VoltageDropCalculatorApplication
 
         private void newFeederButton_MouseLeave(object sender, EventArgs e)
         {
-            labelMainFormText.Text = "";
+            labelMainFormText.Text = "What would you like to do?";
 
             // Make the text on the label regular
             var font = newFeederButton.Font;
@@ -475,7 +486,7 @@ namespace VoltageDropCalculatorApplication
 
         private void loadProjectButton_MouseLeave(object sender, EventArgs e)
         {
-            labelMainFormText.Text = "";
+            labelMainFormText.Text = "What would you like to do?";
 
             // Make the text on the label regular
             var font = loadProjectButton.Font;
@@ -496,7 +507,7 @@ namespace VoltageDropCalculatorApplication
 
         private void newConductorLibraryButton_MouseLeave(object sender, EventArgs e)
         {
-            labelMainFormText.Text = "";
+            labelMainFormText.Text = "What would you like to do?";
             labelMainFormText.Font = new Font(labelMainFormText.Font, FontStyle.Italic);
 
             // Make the text on the label bold
@@ -507,7 +518,7 @@ namespace VoltageDropCalculatorApplication
 
         private void editLibraryButton_MouseLeave(object sender, EventArgs e)
         {
-            labelMainFormText.Text = "Edit existing Conductor, Load or Generator libraries.";
+            labelMainFormText.Text = "What would you like to do?";
             labelMainFormText.Font = new Font(labelMainFormText.Font, FontStyle.Italic);
 
             // Make the text on the label bold

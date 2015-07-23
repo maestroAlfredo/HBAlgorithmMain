@@ -30,6 +30,7 @@ namespace VoltageDropCalculatorApplication
 
         DataSet nodeVecDataSet = new DataSet();
         DataSet nodeDataSet = new DataSet(); //DataSet tempNodeDataSet = new DataSet();
+        List<DataTable> nodeVecDataSetBackup = new List<DataTable>();
         DataSet libraryDataSet = new DataSet();
         DataGridView nodeDataGridView = new DataGridView();
         DataTable cableDT = new DataTable();
@@ -74,8 +75,16 @@ namespace VoltageDropCalculatorApplication
             //customerArray = new int[3];
             numericUpDownVoltage.Value = Convert.ToDecimal(Vs);
             numericUpDownRisk.Value = Convert.ToDecimal(p);
-            
-            
+
+            /*** loop to create a backup of the nodeVecDataSet ****/
+            for (int x = 0; x < nodeNum; x++)
+            {
+                nodeVecDataSetBackup.Add(nodeVecDataSet.Tables[x].Copy());
+            }
+
+            buttonDiscardNodeSum.Enabled = false;
+            buttonUpdateNodeSumm.Enabled = false;
+
             editTable(nodeSummaryDataGridView);
             nodeSummaryDataGridView.DataSource = nodeOverallDataTable;
             nodeSummaryDataGridView.Columns[5].Visible = false;
@@ -687,7 +696,38 @@ namespace VoltageDropCalculatorApplication
         {
             nodeDataGridView.Update();
             nodeDataGridView.Refresh();
-            lengthNumericUpDown.Value = Convert.ToDecimal(cableDT.Rows[cableDT.Rows.Count - 1][1]);
+            if (buttonDiscardNodeSum.Enabled == true) 
+            { 
+                
+                const string message = "Would you like to update the changes made to the node feeder profile?";
+                const string caption = "Update Changes?";
+                var result = MessageBox.Show(message, caption,
+                                             MessageBoxButtons.YesNoCancel,
+                                             MessageBoxIcon.Question);
+
+                // If the Yes button was pressed ... 
+                if (result == DialogResult.Yes)
+                {
+                    buttonUpdateNodeSumm_Click(sender, e);
+                    lengthNumericUpDown.Value = Convert.ToDecimal(cableDT.Rows[cableDT.Rows.Count - 1][1]);
+                    //e.Cancel = true;
+                }
+
+                else if (result == DialogResult.No)
+                {
+                    buttonDiscardNodeSum_Click(sender, e);
+                    lengthNumericUpDown.Value = Convert.ToDecimal(nodeVecDataSetBackup[0].Rows[(cableDT.Rows.Count - 1)*totalLoadsGens][8]) + Convert.ToDecimal(lengthTol*(totalLoadsGens-1));
+                }
+
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+            else
+            {
+                lengthNumericUpDown.Value = Convert.ToDecimal(cableDT.Rows[cableDT.Rows.Count - 1][1]);
+            }
         }
 
         //creates an array of a nodevector given a nodevector datatable
@@ -765,6 +805,7 @@ namespace VoltageDropCalculatorApplication
                     }
                 }
             }
+            buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true;
             //redo the calculation
             voltCalculation();
         }
@@ -897,7 +938,10 @@ namespace VoltageDropCalculatorApplication
             {
                 for (int x = 0; x < loadsGensNum; x++)
                 {
-                    nodeDataSet.Tables[i].Rows[x][8 + 1] = nodeVecDataSet.Tables[0].Rows[xx][8]; xx++;
+                    nodeDataSet.Tables[i].Rows[x][8 + 1] = nodeVecDataSet.Tables[0].Rows[xx][8];
+                    nodeDataSet.Tables[i].Rows[x][10 + 1] = nodeVecDataSet.Tables[0].Rows[xx][10];
+                    nodeDataSet.Tables[i].Rows[x][11 + 1] = nodeVecDataSet.Tables[0].Rows[xx][11]; 
+                    xx++;
                 }
             }
             //gets the correct cable parameters and calculates them for that particular table
@@ -915,16 +959,26 @@ namespace VoltageDropCalculatorApplication
                 nodeVecDataSet.Tables[0].Rows[x][10] = calculateRp(rT2L, Convert.ToDouble(nodeVecDataSet.Tables[0].Rows[x][8].ToString()));
                 nodeVecDataSet.Tables[0].Rows[x][11] = calculateRn(rT2L, Convert.ToDouble(nodeVecDataSet.Tables[0].Rows[x][8].ToString()), k1L);
             }
-            //update the other tables for the voltage profile in the nodeVecDataSet ( the lengths, and Rp and Rn)
-            for (int x = 0; x < nodeNum - 1; x++)
+            ////update the other tables for the voltage profile in the nodeVecDataSet ( the lengths, and Rp and Rn)
+            //for (int x = 0; x < nodeNum - 1; x++)
+            //{
+            //    for (int y = 0; y < nodeVecDataSet.Tables[x + 1].Rows.Count; y++)
+            //    {
+            //        nodeVecDataSet.Tables[x + 1].Rows[y][8] = nodeVecDataSet.Tables[x].Rows[y][8];
+            //        nodeVecDataSet.Tables[x + 1].Rows[y][10] = nodeVecDataSet.Tables[x].Rows[y][10];
+            //        nodeVecDataSet.Tables[x + 1].Rows[y][11] = nodeVecDataSet.Tables[x].Rows[y][11];
+            //    }
+            //}
+            nodeVecDataSetBackup.Clear();
+            /*** loop to create a backup of the nodeVecDataSet ****/
+            for (int x = 0; x < nodeNum; x++)
             {
-                for (int y = 0; y < nodeVecDataSet.Tables[x + 1].Rows.Count; y++)
-                {
-                    nodeVecDataSet.Tables[x + 1].Rows[y][8] = nodeVecDataSet.Tables[x].Rows[y][8];
-                    nodeVecDataSet.Tables[x + 1].Rows[y][10] = nodeVecDataSet.Tables[x].Rows[y][10];
-                    nodeVecDataSet.Tables[x + 1].Rows[y][11] = nodeVecDataSet.Tables[x].Rows[y][11];
-                }
+                nodeVecDataSetBackup.Add(nodeVecDataSet.Tables[x].Copy());
             }
+
+            buttonUpdateNodeSumm.Enabled = false;
+            buttonDiscardNodeSum.Enabled = false;
+
             voltCalculation();
         }
 
@@ -1020,6 +1074,9 @@ namespace VoltageDropCalculatorApplication
                     nodeVecDataSet.Tables[x + 1].Rows[y][11] = nodeVecDataSet.Tables[x].Rows[y][11];
                 }
             }
+
+            buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true;
+
             voltCalculation();
         }
 
@@ -1086,6 +1143,15 @@ namespace VoltageDropCalculatorApplication
                     nodeVecDataSet.Tables[x + 1].Rows[y][8]  = nodeVecDataSet.Tables[x].Rows[y][8];
                     nodeVecDataSet.Tables[x + 1].Rows[y][10] = nodeVecDataSet.Tables[x].Rows[y][10];
                     nodeVecDataSet.Tables[x + 1].Rows[y][11] = nodeVecDataSet.Tables[x].Rows[y][11];
+                }
+            }
+
+            /*** loop to update the nodeVecDataSet with the old data ****/
+            for (int x = 0; x < nodeNum; x++)
+            {
+                for (int i = 0; i < nodeVecDataSetBackup[x].Rows.Count; i++)
+                {
+                    for (int j = 0; j < nodeVecDataSetBackup[x].Columns.Count; j++ ) nodeVecDataSet.Tables[x].Rows[i][j] = nodeVecDataSetBackup[x].Rows[i][j];
                 }
             }
             nodeSummaryDataGridView.Refresh();

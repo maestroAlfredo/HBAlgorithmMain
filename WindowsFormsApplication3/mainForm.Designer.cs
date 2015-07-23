@@ -247,7 +247,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label1.Location = new System.Drawing.Point(21, 15);
+            this.label1.Location = new System.Drawing.Point(20, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(547, 55);
             this.label1.TabIndex = 3;
@@ -263,7 +263,7 @@
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
             this.pictureBox1.Location = new System.Drawing.Point(5, 89);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(579, 380);
+            this.pictureBox1.Size = new System.Drawing.Size(577, 380);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -274,11 +274,11 @@
             this.labelMainFormText.AutoSize = true;
             this.labelMainFormText.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelMainFormText.ForeColor = System.Drawing.Color.SteelBlue;
-            this.labelMainFormText.Location = new System.Drawing.Point(259, 501);
+            this.labelMainFormText.Location = new System.Drawing.Point(233, 501);
             this.labelMainFormText.Name = "labelMainFormText";
-            this.labelMainFormText.Size = new System.Drawing.Size(70, 29);
+            this.labelMainFormText.Size = new System.Drawing.Size(121, 29);
             this.labelMainFormText.TabIndex = 4;
-            this.labelMainFormText.Text = "Hello";
+            this.labelMainFormText.Text = "Welcome!";
             // 
             // mainForm
             // 
