@@ -55,7 +55,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.78723F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.21277F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 176F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 191F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
             this.tableLayoutPanel1.Controls.Add(this.selectLibraryLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.loadTypeCombo, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.resetLibrary, 3, 0);
@@ -100,7 +100,7 @@
             // 
             // addCableButton
             // 
-            this.addCableButton.Location = new System.Drawing.Point(492, 3);
+            this.addCableButton.Location = new System.Drawing.Point(491, 3);
             this.addCableButton.Name = "addCableButton";
             this.addCableButton.Size = new System.Drawing.Size(170, 23);
             this.addCableButton.TabIndex = 3;
@@ -127,6 +127,7 @@
             this.dataGridViewLoadsDGs.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewLoadsDGs.Location = new System.Drawing.Point(25, 152);
             this.dataGridViewLoadsDGs.Name = "dataGridViewLoadsDGs";
+            this.dataGridViewLoadsDGs.RowHeadersVisible = false;
             this.dataGridViewLoadsDGs.Size = new System.Drawing.Size(857, 406);
             this.dataGridViewLoadsDGs.TabIndex = 2;
             this.dataGridViewLoadsDGs.DataSourceChanged += new System.EventHandler(this.dataGridViewLoadsDGs_DataSourceChanged);
