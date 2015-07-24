@@ -36,6 +36,7 @@ namespace VoltageDropCalculatorApplication
         DataTable cableDT = new DataTable();
         double t2;
         NumericUpDown lengthNumericUpDown;
+        DataView dvOverall = new DataView();
    
         //double k1;
         //DataRow dr;
@@ -1159,7 +1160,7 @@ namespace VoltageDropCalculatorApplication
                 }
             }
             nodeSummaryDataGridView.Refresh();
-            nodeSummaryDataGridView.DataSource = nodeOverallDataTable;
+            nodeSummaryDataGridView.DataSource = dvOverall;
             dataGridViewLengths.Refresh();
             dataGridViewLengths.Update();
             dataGridViewLengths.DataSource = cableDT;
@@ -1205,6 +1206,7 @@ namespace VoltageDropCalculatorApplication
         {
             string filter = "[Node] LIKE '*" + comboBoxNodeSelect.Text + "*'";
             DataView dv = new DataView(nodeOverallDataTable, filter, string.Empty, DataViewRowState.CurrentRows);
+            dvOverall = dv;
             nodeSummaryDataGridView.DataSource = dv;
 
         }
