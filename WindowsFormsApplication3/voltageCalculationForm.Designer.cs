@@ -66,6 +66,9 @@
             this.dataGridViewLengths = new System.Windows.Forms.DataGridView();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBoxNodeSelect = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -80,6 +83,7 @@
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nodeSummaryDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLengths)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -417,26 +421,29 @@
             // 
             // tableLayoutPanel3
             // 
+            this.tableLayoutPanel3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.tableLayoutPanel3.BackColor = System.Drawing.Color.SteelBlue;
+            this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.buttonDiscardNodeSum, 0, 5);
-            this.tableLayoutPanel3.Controls.Add(this.buttonUpdateNodeSumm, 0, 4);
             this.tableLayoutPanel3.Controls.Add(this.dataGridViewLengths, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.label8, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.nodeSummaryDataGridView, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.comboBoxNodeSelect, 0, 2);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Controls.Add(this.buttonDiscardNodeSum, 0, 6);
+            this.tableLayoutPanel3.Controls.Add(this.buttonUpdateNodeSumm, 0, 5);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.label9, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.nodeSummaryDataGridView, 0, 4);
             this.tableLayoutPanel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 6;
+            this.tableLayoutPanel3.RowCount = 7;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 243F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 165F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(333, 641);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
@@ -444,9 +451,9 @@
             // 
             this.buttonDiscardNodeSum.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonDiscardNodeSum.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDiscardNodeSum.Location = new System.Drawing.Point(3, 594);
+            this.buttonDiscardNodeSum.Location = new System.Drawing.Point(4, 591);
             this.buttonDiscardNodeSum.Name = "buttonDiscardNodeSum";
-            this.buttonDiscardNodeSum.Size = new System.Drawing.Size(327, 44);
+            this.buttonDiscardNodeSum.Size = new System.Drawing.Size(325, 46);
             this.buttonDiscardNodeSum.TabIndex = 5;
             this.buttonDiscardNodeSum.Text = "Discard";
             this.buttonDiscardNodeSum.UseVisualStyleBackColor = true;
@@ -476,13 +483,13 @@
             this.nodeSummaryDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nodeSummaryDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.nodeSummaryDataGridView.EnableHeadersVisualStyles = false;
-            this.nodeSummaryDataGridView.Location = new System.Drawing.Point(3, 312);
+            this.nodeSummaryDataGridView.Location = new System.Drawing.Point(4, 260);
             this.nodeSummaryDataGridView.Name = "nodeSummaryDataGridView";
             this.nodeSummaryDataGridView.RowHeadersVisible = false;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nodeSummaryDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.nodeSummaryDataGridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nodeSummaryDataGridView.Size = new System.Drawing.Size(327, 226);
+            this.nodeSummaryDataGridView.Size = new System.Drawing.Size(325, 271);
             this.nodeSummaryDataGridView.TabIndex = 1;
             this.nodeSummaryDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeSummaryDataGridView_CellContentClick);
             this.nodeSummaryDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeSummaryDataGridView_CellEndEdit);
@@ -492,9 +499,9 @@
             // 
             this.buttonUpdateNodeSumm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonUpdateNodeSumm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonUpdateNodeSumm.Location = new System.Drawing.Point(3, 544);
+            this.buttonUpdateNodeSumm.Location = new System.Drawing.Point(4, 538);
             this.buttonUpdateNodeSumm.Name = "buttonUpdateNodeSumm";
-            this.buttonUpdateNodeSumm.Size = new System.Drawing.Size(327, 44);
+            this.buttonUpdateNodeSumm.Size = new System.Drawing.Size(325, 46);
             this.buttonUpdateNodeSumm.TabIndex = 3;
             this.buttonUpdateNodeSumm.Text = "Update";
             this.buttonUpdateNodeSumm.UseVisualStyleBackColor = true;
@@ -510,12 +517,12 @@
             this.dataGridViewLengths.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewLengths.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewLengths.EnableHeadersVisualStyles = false;
-            this.dataGridViewLengths.Location = new System.Drawing.Point(3, 31);
+            this.dataGridViewLengths.Location = new System.Drawing.Point(4, 33);
             this.dataGridViewLengths.Name = "dataGridViewLengths";
             this.dataGridViewLengths.RowHeadersVisible = false;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewLengths.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewLengths.Size = new System.Drawing.Size(327, 237);
+            this.dataGridViewLengths.Size = new System.Drawing.Size(325, 159);
             this.dataGridViewLengths.TabIndex = 4;
             this.dataGridViewLengths.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLengths_CellEndEdit);
             this.dataGridViewLengths.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridViewLengths_CellValidating);
@@ -529,7 +536,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(55, 2);
+            this.label8.Location = new System.Drawing.Point(55, 3);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(222, 24);
             this.label8.TabIndex = 2;
@@ -537,13 +544,52 @@
             // 
             // comboBoxNodeSelect
             // 
+            this.comboBoxNodeSelect.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxNodeSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxNodeSelect.FormattingEnabled = true;
-            this.comboBoxNodeSelect.Location = new System.Drawing.Point(3, 274);
+            this.comboBoxNodeSelect.Location = new System.Drawing.Point(165, 3);
             this.comboBoxNodeSelect.Name = "comboBoxNodeSelect";
-            this.comboBoxNodeSelect.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxNodeSelect.Size = new System.Drawing.Size(157, 21);
             this.comboBoxNodeSelect.TabIndex = 6;
             this.comboBoxNodeSelect.SelectedIndexChanged += new System.EventHandler(this.comboBoxNodeSelect_SelectedIndexChanged);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.comboBoxNodeSelect, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 228);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(325, 25);
+            this.tableLayoutPanel1.TabIndex = 7;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(55, 6);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(104, 13);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Select Node to View";
+            // 
+            // label9
+            // 
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(66, 198);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(201, 24);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "Node Summary Data";
             // 
             // voltageCalculationForm
             // 
@@ -574,6 +620,8 @@
             this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nodeSummaryDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLengths)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -604,5 +652,8 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button buttonDiscardNodeSum;
         private System.Windows.Forms.ComboBox comboBoxNodeSelect;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label9;
     }
 }
