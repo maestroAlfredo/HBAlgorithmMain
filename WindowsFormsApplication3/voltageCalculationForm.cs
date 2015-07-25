@@ -31,16 +31,19 @@ namespace VoltageDropCalculatorApplication
         DataSet nodeVecDataSet = new DataSet();
         DataSet nodeDataSet = new DataSet(); //DataSet tempNodeDataSet = new DataSet();
         List<DataTable> nodeVecDataSetBackup = new List<DataTable>();
+        decimal oldValue = 0; decimal newValue = 0; // variables used in the method to check that the value in the cell of dataGridViewLengths has changed.
         DataSet libraryDataSet = new DataSet();
         DataGridView nodeDataGridView = new DataGridView();
         DataTable cableDT = new DataTable();
         double t2;
-        NumericUpDown lengthNumericUpDown;
+        NumericUpDown lengthNumericUpDown; NumericUpDown sourceVoltageNumUpDown; NumericUpDown operatingTempNumUpDown;
+        /** Create copies of the risk, temperature, and sourceVoltage ***/
+        double riskBackup; double temperatureBackup; double sourceVoltageBackup; private nodeFeederForm frm;
    
         //double k1;
         //DataRow dr;
 
-        public voltageCalculationForm(double risk, double temperature, double sourceVoltage, int loadCount, int genCount, double lengthTol, List<int> mfNodeList, DataSet nodeDataSet, DataSet tempNodeDataSet, DataGridView nodeDataGridView, DataSet libraryDataSet, NumericUpDown lengthNumericUpDown)
+        public voltageCalculationForm(double risk, double temperature, double sourceVoltage, int loadCount, int genCount, double lengthTol, List<int> mfNodeList, DataSet nodeDataSet, DataSet tempNodeDataSet, DataGridView nodeDataGridView, DataSet libraryDataSet, NumericUpDown lengthNumericUpDown, NumericUpDown sourceVoltageNumUpDown, NumericUpDown operatingTempNumUpDown, nodeFeederForm frm)
         {
             InitializeComponent();
             
@@ -64,12 +67,16 @@ namespace VoltageDropCalculatorApplication
 
             //----additional variables to be initialized can be placed here
 
-
+            /** Create copies of the risk, temperature, and sourceVoltage ***/
+            riskBackup = risk; temperatureBackup = temperature; sourceVoltageBackup = sourceVoltage;
 
             numericUpDownRisk.Value = (decimal)p;
             numericUpDownVoltage.Value = (decimal)Vs;
             tempNumUpDown.Value = Convert.ToDecimal(t_old);
             errorProvider1 = new ErrorProvider();
+            this.operatingTempNumUpDown = operatingTempNumUpDown;
+            this.sourceVoltageNumUpDown = sourceVoltageNumUpDown;
+            this.frm = frm;
          
             
             //customerArray = new int[3];
@@ -82,8 +89,8 @@ namespace VoltageDropCalculatorApplication
                 nodeVecDataSetBackup.Add(nodeVecDataSet.Tables[x].Copy());
             }
 
-            buttonDiscardNodeSum.Enabled = false;
-            buttonUpdateNodeSumm.Enabled = false;
+
+            buttonDiscardNodeSum.Enabled = false; buttonUpdateNodeSumm.Enabled = false; // Disable the "Update" and "Discard" Buttons
 
             editTable(nodeSummaryDataGridView);
             nodeSummaryDataGridView.DataSource = nodeOverallDataTable;
@@ -672,6 +679,7 @@ namespace VoltageDropCalculatorApplication
 
         private void numericUpDownVoltage_ValueChanged(object sender, EventArgs e)
         {
+            buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true; // Enable the "Update" and "Discard" buttons.
             Vs = Convert.ToDouble(numericUpDownVoltage.Value);
             if (totalLoadsGens != 0) //if the form has been initialized(eliminates an exception where the totalLoadsGens int hasn't been initialized to a nonzero value
             {
@@ -683,6 +691,7 @@ namespace VoltageDropCalculatorApplication
         //recalculates the voltage drop as well as the voltage profile is a user changes the risk value
         private void numericUpDownRisk_ValueChanged(object sender, EventArgs e)
         {
+            buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true; // Enable the "Update" and "Discard" buttons.
             p = Convert.ToDouble(numericUpDownRisk.Value);
             if (totalLoadsGens != 0) //if the form has been initialized(eliminates an exception where the totalLoadsGens int hasn't been initialized to a nonzero value
             {
@@ -710,13 +719,15 @@ namespace VoltageDropCalculatorApplication
                 {
                     buttonUpdateNodeSumm_Click(sender, e);
                     lengthNumericUpDown.Value = Convert.ToDecimal(cableDT.Rows[cableDT.Rows.Count - 1][1]);
-                    //e.Cancel = true;
+                    frm.setOperatingTempNumUpDown(t2);
+                    frm.setSourceVoltageNumUpDown(Convert.ToDecimal(Vs));
                 }
 
                 else if (result == DialogResult.No)
                 {
                     buttonDiscardNodeSum_Click(sender, e);
                     lengthNumericUpDown.Value = Convert.ToDecimal(nodeVecDataSetBackup[0].Rows[(cableDT.Rows.Count - 1)*totalLoadsGens][8]) + Convert.ToDecimal(lengthTol*(totalLoadsGens-1));
+                    operatingTempNumUpDown.Value = Convert.ToDecimal(temperatureBackup); sourceVoltageNumUpDown.Value = Convert.ToDecimal(sourceVoltageBackup);
                 }
 
                 else
@@ -727,6 +738,8 @@ namespace VoltageDropCalculatorApplication
             else
             {
                 lengthNumericUpDown.Value = Convert.ToDecimal(cableDT.Rows[cableDT.Rows.Count - 1][1]);
+                frm.setOperatingTempNumUpDown(t2);
+                frm.setSourceVoltageNumUpDown(Convert.ToDecimal(Vs));
             }
         }
 
@@ -805,7 +818,7 @@ namespace VoltageDropCalculatorApplication
                     }
                 }
             }
-            buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true;
+            
             //redo the calculation
             voltCalculation();
         }
@@ -888,7 +901,7 @@ namespace VoltageDropCalculatorApplication
         private void tempNumUpDown_ValueChanged(object sender, EventArgs e)
         {
             double t_new = Convert.ToDouble(tempNumUpDown.Value);
-                      
+            buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true; // Enable the "Update" and "Discard" buttons.
 
             for (int i = 0; i < nodeNum; i++)
             {
@@ -933,17 +946,6 @@ namespace VoltageDropCalculatorApplication
                     }
                 }
             }
-            // update the nodeDataSet for the dgv's on the nodefeeder form
-            for (int i = 0; i < nodeNum; i++)
-            {
-                for (int x = 0; x < loadsGensNum; x++)
-                {
-                    nodeDataSet.Tables[i].Rows[x][8 + 1] = nodeVecDataSet.Tables[0].Rows[xx][8];
-                    nodeDataSet.Tables[i].Rows[x][10 + 1] = nodeVecDataSet.Tables[0].Rows[xx][10];
-                    nodeDataSet.Tables[i].Rows[x][11 + 1] = nodeVecDataSet.Tables[0].Rows[xx][11]; 
-                    xx++;
-                }
-            }
             //gets the correct cable parameters and calculates them for that particular table
             for (int y = 0; y < libraryDataSet.Tables["Conductors"].Rows.Count; y++)
             {
@@ -955,30 +957,31 @@ namespace VoltageDropCalculatorApplication
             }
             for (int x = 0; x < nodeVecDataSet.Tables[0].Rows.Count; x++)
             {
-                //nodeVecDataSet.Tables[0].Rows[x][10] = calculateRp(rT2L, 99.99);
                 nodeVecDataSet.Tables[0].Rows[x][10] = calculateRp(rT2L, Convert.ToDouble(nodeVecDataSet.Tables[0].Rows[x][8].ToString()));
                 nodeVecDataSet.Tables[0].Rows[x][11] = calculateRn(rT2L, Convert.ToDouble(nodeVecDataSet.Tables[0].Rows[x][8].ToString()), k1L);
             }
-            ////update the other tables for the voltage profile in the nodeVecDataSet ( the lengths, and Rp and Rn)
-            //for (int x = 0; x < nodeNum - 1; x++)
-            //{
-            //    for (int y = 0; y < nodeVecDataSet.Tables[x + 1].Rows.Count; y++)
-            //    {
-            //        nodeVecDataSet.Tables[x + 1].Rows[y][8] = nodeVecDataSet.Tables[x].Rows[y][8];
-            //        nodeVecDataSet.Tables[x + 1].Rows[y][10] = nodeVecDataSet.Tables[x].Rows[y][10];
-            //        nodeVecDataSet.Tables[x + 1].Rows[y][11] = nodeVecDataSet.Tables[x].Rows[y][11];
-            //    }
-            //}
-            nodeVecDataSetBackup.Clear();
+            // update the nodeDataSet for the dgv's on the nodefeeder form
+            for (int i = 0; i < nodeNum; i++)
+            {
+                for (int x = 0; x < loadsGensNum; x++)
+                {
+                    nodeDataSet.Tables[i].Rows[x][8 + 1] = nodeVecDataSet.Tables[0].Rows[xx][8];
+                    nodeDataSet.Tables[i].Rows[x][10 + 1] = nodeVecDataSet.Tables[0].Rows[xx][10];
+                    nodeDataSet.Tables[i].Rows[x][11 + 1] = nodeVecDataSet.Tables[0].Rows[xx][11];
+                    xx++;
+                }
+            }
             /*** loop to create a backup of the nodeVecDataSet ****/
+            nodeVecDataSetBackup.Clear();
             for (int x = 0; x < nodeNum; x++)
             {
                 nodeVecDataSetBackup.Add(nodeVecDataSet.Tables[x].Copy());
             }
-
-            buttonUpdateNodeSumm.Enabled = false;
-            buttonDiscardNodeSum.Enabled = false;
-
+            /*** Update the source voltage, risk, and temperature ***/
+            temperatureBackup = t2 = Convert.ToDouble(tempNumUpDown.Value); 
+            //temperatureBackup = t2; 
+            riskBackup = p; sourceVoltageBackup = Vs;
+            buttonUpdateNodeSumm.Enabled = false; buttonDiscardNodeSum.Enabled = false; // Disable the "Update" and "Discard" buttons.
             voltCalculation();
         }
 
@@ -1075,7 +1078,7 @@ namespace VoltageDropCalculatorApplication
                 }
             }
 
-            buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true;
+            //buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true; // Enable the "Update" and "Discard" buttons.
 
             voltCalculation();
         }
@@ -1146,6 +1149,9 @@ namespace VoltageDropCalculatorApplication
                 }
             }
 
+            t2 = temperatureBackup; p = riskBackup;  Vs = sourceVoltageBackup;
+            numericUpDownVoltage.Value = Convert.ToDecimal(Vs); tempNumUpDown.Value = Convert.ToDecimal(t2); numericUpDownRisk.Value = Convert.ToDecimal(p);
+
             /*** loop to update the nodeVecDataSet with the old data ****/
             for (int x = 0; x < nodeNum; x++)
             {
@@ -1159,6 +1165,8 @@ namespace VoltageDropCalculatorApplication
             dataGridViewLengths.Refresh();
             dataGridViewLengths.Update();
             dataGridViewLengths.DataSource = cableDT;
+
+            buttonUpdateNodeSumm.Enabled = false; buttonDiscardNodeSum.Enabled = false; // Disable the "Update" and "Discard" buttons.
             
             voltCalculation();
         }
@@ -1194,7 +1202,27 @@ namespace VoltageDropCalculatorApplication
 
         private void dataGridViewLengths_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-                        
+            if (dataGridViewLengths.Columns[e.ColumnIndex].Name == "Length")
+            {
+                oldValue = Convert.ToDecimal(dataGridViewLengths[e.ColumnIndex, e.RowIndex].Value);
+                newValue = Convert.ToDecimal(e.FormattedValue);
+
+                if (oldValue != newValue)
+                {
+                    buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true; // Enable "update" and "discard" buttons
+                }
+            }
+        }
+
+        private void nodeSummaryDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true; // Enable "update" and "discard" buttons
+        }
+
+        private void dataGridViewLengths_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+           
+            //buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true; // Enable "update" and "discard" buttons
         }
     }
 }
