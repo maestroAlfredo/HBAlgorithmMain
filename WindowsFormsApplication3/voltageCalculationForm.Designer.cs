@@ -493,7 +493,6 @@
             this.nodeSummaryDataGridView.TabIndex = 1;
             this.nodeSummaryDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeSummaryDataGridView_CellContentClick);
             this.nodeSummaryDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeSummaryDataGridView_CellEndEdit);
-            this.nodeSummaryDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeSummaryDataGridView_CellValueChanged);
             this.nodeSummaryDataGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.nodeSummaryDataGridView_EditingControlShowing);
             // 
             // buttonUpdateNodeSumm
@@ -527,7 +526,6 @@
             this.dataGridViewLengths.TabIndex = 4;
             this.dataGridViewLengths.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLengths_CellEndEdit);
             this.dataGridViewLengths.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridViewLengths_CellValidating);
-            this.dataGridViewLengths.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLengths_CellValueChanged);
             this.dataGridViewLengths.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridViewLengths_DataError);
             this.dataGridViewLengths.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewLengths_EditingControlShowing);
             this.dataGridViewLengths.Validated += new System.EventHandler(this.dataGridViewLengths_Validated);
