@@ -36,6 +36,8 @@ namespace VoltageDropCalculatorApplication
         DataGridView nodeDataGridView = new DataGridView();
         DataTable cableDT = new DataTable();
         double t2;
+        NumericUpDown lengthNumericUpDown;
+        DataView dvOverall = new DataView();
         NumericUpDown lengthNumericUpDown; NumericUpDown sourceVoltageNumUpDown; NumericUpDown operatingTempNumUpDown;
         /** Create copies of the risk, temperature, and sourceVoltage ***/
         double riskBackup; double temperatureBackup; double sourceVoltageBackup; private nodeFeederForm frm;
@@ -104,6 +106,8 @@ namespace VoltageDropCalculatorApplication
             closeTableEdits();
 
             initDataGridViewLengths();
+            List<string> nodeString = cableDT.AsEnumerable().Select(x => x[0].ToString()).ToList();
+            comboBoxNodeSelect.DataSource = nodeString;           
             voltCalculation();
         }
 
@@ -783,12 +787,14 @@ namespace VoltageDropCalculatorApplication
         private void nodeSummaryDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             //if the node datagrid view cell doesn't match the nodeVector table cell. i.e the user has changed a value in a particular cell
-            if (nodeOverallDataTable.Rows[e.RowIndex][e.ColumnIndex].ToString() != nodeVecDataSet.Tables[0].Rows[e.RowIndex][e.ColumnIndex].ToString())
+            nodeOverallDataTable.AcceptChanges();
+            int rowIndex = e.RowIndex + (comboBoxNodeSelect.SelectedIndex * totalLoadsGens);
+            if (nodeOverallDataTable.Rows[rowIndex][e.ColumnIndex].ToString() != nodeVecDataSet.Tables[0].Rows[rowIndex][e.ColumnIndex].ToString())
             {
-                double diff = Convert.ToDouble(nodeVecDataSet.Tables[0].Rows[e.RowIndex][e.ColumnIndex]) - Convert.ToDouble(nodeOverallDataTable.Rows[e.RowIndex][e.ColumnIndex]);
-                nodeVecDataSet.Tables[0].Rows[e.RowIndex][e.ColumnIndex] = nodeOverallDataTable.Rows[e.RowIndex][e.ColumnIndex].ToString();
-                string node = nodeOverallDataTable.Rows[e.RowIndex][0].ToString();
-                string load = nodeOverallDataTable.Rows[e.RowIndex][1].ToString();
+                double diff = Convert.ToDouble(nodeVecDataSet.Tables[0].Rows[rowIndex][e.ColumnIndex]) - Convert.ToDouble(nodeOverallDataTable.Rows[rowIndex][e.ColumnIndex]);
+                nodeVecDataSet.Tables[0].Rows[rowIndex][e.ColumnIndex] = nodeOverallDataTable.Rows[rowIndex][e.ColumnIndex].ToString();
+                string node = nodeOverallDataTable.Rows[rowIndex][0].ToString();
+                string load = nodeOverallDataTable.Rows[rowIndex][1].ToString();
                 for (int i = nodeNum - 1; i >= 1; i--)
                 {
                     bool containsNode = nodeVecDataSet.Tables[i].AsEnumerable().Any(row => node == row.Field<String>("Node"));
@@ -1161,11 +1167,11 @@ namespace VoltageDropCalculatorApplication
                 }
             }
             nodeSummaryDataGridView.Refresh();
-            nodeSummaryDataGridView.DataSource = nodeOverallDataTable;
+            nodeSummaryDataGridView.DataSource = dvOverall;
             dataGridViewLengths.Refresh();
             dataGridViewLengths.Update();
             dataGridViewLengths.DataSource = cableDT;
-
+            
             buttonUpdateNodeSumm.Enabled = false; buttonDiscardNodeSum.Enabled = false; // Disable the "Update" and "Discard" buttons.
             
             voltCalculation();
@@ -1202,11 +1208,20 @@ namespace VoltageDropCalculatorApplication
 
         private void dataGridViewLengths_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
+                        
+        }
+
+        private void comboBoxNodeSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string filter = "[Node] LIKE '*" + comboBoxNodeSelect.Text + "*'";
+            DataView dv = new DataView(nodeOverallDataTable, filter, string.Empty, DataViewRowState.CurrentRows);
+            dvOverall = dv;
+            nodeSummaryDataGridView.DataSource = dv;
             if (dataGridViewLengths.Columns[e.ColumnIndex].Name == "Length")
             {
                 oldValue = Convert.ToDecimal(dataGridViewLengths[e.ColumnIndex, e.RowIndex].Value);
                 newValue = Convert.ToDecimal(e.FormattedValue);
-
+                        
                 if (oldValue != newValue)
                 {
                     buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true; // Enable "update" and "discard" buttons

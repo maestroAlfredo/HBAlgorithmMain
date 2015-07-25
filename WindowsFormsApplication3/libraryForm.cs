@@ -436,6 +436,8 @@ namespace VoltageDropCalculatorApplication
         {
             if (saveLibraryButton.Text != "Save")
             {
+                saveLibraryButton.Enabled = false;
+                saveToProject.Enabled = false;
                 const string message = "Deselecting loads and generators that are used in the current project will cause you to lose their corresponding customer information. Would you like to Continue?";
                 const string caption = "HBAlgorithm";
                 var result = MessageBox.Show(message, caption,
@@ -545,7 +547,8 @@ namespace VoltageDropCalculatorApplication
 
         private void saveToProject_Click(object sender, EventArgs e)
         {
-
+            saveToProject.Enabled = false;
+            saveLibraryButton.Enabled = false;
             const string message = "Deselecting loads and generators that are used in the current project will cause you to lose their corresponding customer information. Would you like to Continue?";
             const string caption = "HBAlgorithm";
             var result = MessageBox.Show(message, caption,
