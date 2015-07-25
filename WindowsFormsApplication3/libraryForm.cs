@@ -639,7 +639,6 @@ namespace VoltageDropCalculatorApplication
             }
         }
 
-        // accessor methods for the loadTypeComboBox
         public void setLoadTypeComboBox(string text)
         {
             loadTypeCombo.Text = text;

@@ -36,11 +36,11 @@
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(voltageCalculationForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.sidePanelPictureBox = new System.Windows.Forms.PictureBox();
@@ -60,15 +60,15 @@
             this.label6 = new System.Windows.Forms.Label();
             this.voltageProfileChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.buttonDiscardNodeSum = new System.Windows.Forms.Button();
-            this.nodeSummaryDataGridView = new System.Windows.Forms.DataGridView();
-            this.buttonUpdateNodeSumm = new System.Windows.Forms.Button();
             this.dataGridViewLengths = new System.Windows.Forms.DataGridView();
             this.label8 = new System.Windows.Forms.Label();
-            this.comboBoxNodeSelect = new System.Windows.Forms.ComboBox();
+            this.buttonDiscardNodeSum = new System.Windows.Forms.Button();
+            this.buttonUpdateNodeSumm = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
+            this.comboBoxNodeSelect = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.nodeSummaryDataGridView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -81,9 +81,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.tempNumUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.voltageProfileChart)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nodeSummaryDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLengths)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nodeSummaryDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -447,6 +447,41 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(333, 641);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
+            // dataGridViewLengths
+            // 
+            this.dataGridViewLengths.AllowUserToAddRows = false;
+            this.dataGridViewLengths.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewLengths.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewLengths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewLengths.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridViewLengths.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewLengths.EnableHeadersVisualStyles = false;
+            this.dataGridViewLengths.Location = new System.Drawing.Point(4, 33);
+            this.dataGridViewLengths.Name = "dataGridViewLengths";
+            this.dataGridViewLengths.RowHeadersVisible = false;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewLengths.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewLengths.Size = new System.Drawing.Size(325, 159);
+            this.dataGridViewLengths.TabIndex = 4;
+            this.dataGridViewLengths.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLengths_CellEndEdit);
+            this.dataGridViewLengths.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridViewLengths_CellValidating);
+            this.dataGridViewLengths.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridViewLengths_DataError);
+            this.dataGridViewLengths.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewLengths_EditingControlShowing);
+            this.dataGridViewLengths.Validated += new System.EventHandler(this.dataGridViewLengths_Validated);
+            // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(55, 3);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(222, 24);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Cable and Length Data";
+            // 
             // buttonDiscardNodeSum
             // 
             this.buttonDiscardNodeSum.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -458,6 +493,67 @@
             this.buttonDiscardNodeSum.Text = "Discard";
             this.buttonDiscardNodeSum.UseVisualStyleBackColor = true;
             this.buttonDiscardNodeSum.Click += new System.EventHandler(this.buttonDiscardNodeSum_Click);
+            // 
+            // buttonUpdateNodeSumm
+            // 
+            this.buttonUpdateNodeSumm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonUpdateNodeSumm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonUpdateNodeSumm.Location = new System.Drawing.Point(4, 538);
+            this.buttonUpdateNodeSumm.Name = "buttonUpdateNodeSumm";
+            this.buttonUpdateNodeSumm.Size = new System.Drawing.Size(325, 46);
+            this.buttonUpdateNodeSumm.TabIndex = 3;
+            this.buttonUpdateNodeSumm.Text = "Update";
+            this.buttonUpdateNodeSumm.UseVisualStyleBackColor = true;
+            this.buttonUpdateNodeSumm.Click += new System.EventHandler(this.buttonUpdateNodeSumm_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.comboBoxNodeSelect, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 228);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(325, 25);
+            this.tableLayoutPanel1.TabIndex = 7;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(55, 6);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(104, 13);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Select Node to View";
+            // 
+            // comboBoxNodeSelect
+            // 
+            this.comboBoxNodeSelect.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBoxNodeSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxNodeSelect.FormattingEnabled = true;
+            this.comboBoxNodeSelect.Location = new System.Drawing.Point(165, 3);
+            this.comboBoxNodeSelect.Name = "comboBoxNodeSelect";
+            this.comboBoxNodeSelect.Size = new System.Drawing.Size(157, 21);
+            this.comboBoxNodeSelect.TabIndex = 6;
+            this.comboBoxNodeSelect.SelectedIndexChanged += new System.EventHandler(this.comboBoxNodeSelect_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(66, 198);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(201, 24);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "Node Summary Data";
             // 
             // nodeSummaryDataGridView
             // 
@@ -493,105 +589,7 @@
             this.nodeSummaryDataGridView.TabIndex = 1;
             this.nodeSummaryDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeSummaryDataGridView_CellContentClick);
             this.nodeSummaryDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeSummaryDataGridView_CellEndEdit);
-            this.nodeSummaryDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeSummaryDataGridView_CellValueChanged);
             this.nodeSummaryDataGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.nodeSummaryDataGridView_EditingControlShowing);
-            // 
-            // buttonUpdateNodeSumm
-            // 
-            this.buttonUpdateNodeSumm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonUpdateNodeSumm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonUpdateNodeSumm.Location = new System.Drawing.Point(4, 538);
-            this.buttonUpdateNodeSumm.Name = "buttonUpdateNodeSumm";
-            this.buttonUpdateNodeSumm.Size = new System.Drawing.Size(325, 46);
-            this.buttonUpdateNodeSumm.TabIndex = 3;
-            this.buttonUpdateNodeSumm.Text = "Update";
-            this.buttonUpdateNodeSumm.UseVisualStyleBackColor = true;
-            this.buttonUpdateNodeSumm.Click += new System.EventHandler(this.buttonUpdateNodeSumm_Click);
-            // 
-            // dataGridViewLengths
-            // 
-            this.dataGridViewLengths.AllowUserToAddRows = false;
-            this.dataGridViewLengths.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewLengths.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewLengths.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewLengths.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridViewLengths.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewLengths.EnableHeadersVisualStyles = false;
-            this.dataGridViewLengths.Location = new System.Drawing.Point(4, 33);
-            this.dataGridViewLengths.Name = "dataGridViewLengths";
-            this.dataGridViewLengths.RowHeadersVisible = false;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewLengths.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewLengths.Size = new System.Drawing.Size(325, 159);
-            this.dataGridViewLengths.TabIndex = 4;
-            this.dataGridViewLengths.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLengths_CellEndEdit);
-            this.dataGridViewLengths.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridViewLengths_CellValidating);
-            this.dataGridViewLengths.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLengths_CellValueChanged);
-            this.dataGridViewLengths.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridViewLengths_DataError);
-            this.dataGridViewLengths.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewLengths_EditingControlShowing);
-            this.dataGridViewLengths.Validated += new System.EventHandler(this.dataGridViewLengths_Validated);
-            // 
-            // label8
-            // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(55, 3);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(222, 24);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "Cable and Length Data";
-            // 
-            // comboBoxNodeSelect
-            // 
-            this.comboBoxNodeSelect.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBoxNodeSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxNodeSelect.FormattingEnabled = true;
-            this.comboBoxNodeSelect.Location = new System.Drawing.Point(165, 3);
-            this.comboBoxNodeSelect.Name = "comboBoxNodeSelect";
-            this.comboBoxNodeSelect.Size = new System.Drawing.Size(157, 21);
-            this.comboBoxNodeSelect.TabIndex = 6;
-            this.comboBoxNodeSelect.SelectedIndexChanged += new System.EventHandler(this.comboBoxNodeSelect_SelectedIndexChanged);
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.comboBoxNodeSelect, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 228);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(325, 25);
-            this.tableLayoutPanel1.TabIndex = 7;
-            // 
-            // label7
-            // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(55, 6);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(104, 13);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Select Node to View";
-            // 
-            // label9
-            // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(66, 198);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(201, 24);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "Node Summary Data";
             // 
             // voltageCalculationForm
             // 
@@ -620,10 +618,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.voltageProfileChart)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nodeSummaryDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLengths)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nodeSummaryDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }

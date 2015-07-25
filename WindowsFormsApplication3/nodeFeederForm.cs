@@ -429,7 +429,7 @@ namespace VoltageDropCalculatorApplication
                 //tempNodeDataSet.WriteXml(projectName);
 
                 //voltageCalculationForm frm = new voltageCalculationForm(projectName, p, t2, Vs, loadCount, genCount, mfNodeList, nodeDataSet);
-                voltageCalculationForm frm2 = new voltageCalculationForm(p, t2, Vs, loadCount, genCount, lengthTol, mfNodeList, nodeDataSet, tempNodeDataSet, nodeDataGridView, libraryDataSet, lengthNumericUpDown, sourceVoltageNumUpDown, operatingTempNumUpDown, this);
+                voltageCalculationForm frm2 = new voltageCalculationForm(p, t2, Vs, loadCount, genCount, lengthTol, mfNodeList, nodeDataSet, tempNodeDataSet, nodeDataGridView, libraryDataSet, lengthNumericUpDown, this);
                 frm2.ShowDialog();
             }
             else
@@ -488,7 +488,7 @@ namespace VoltageDropCalculatorApplication
 
             }
 
-
+            
             //mfNodeDictionary.Clear();
 
             if (selectEndNodeCombo.Text != "")
@@ -505,7 +505,7 @@ namespace VoltageDropCalculatorApplication
 
         private void addNodeButton_Click(object sender, EventArgs e)
         {
-            editTable();
+            editTable();            
             if (ShownForm) changeFormTitle();
             //totalNodeNumberNumericUpDown.Value = totalNodeNumberNumericUpDown.Value + 1;
             nodeCountInt++;
@@ -519,7 +519,7 @@ namespace VoltageDropCalculatorApplication
             for (int i = 0; i < headings.Count; i++)
             {
                 nodeDataTable.Columns.Add(headings[i]); //adds the headings to the nodeDataTable  
-                if ((i == 3) || (i == 4) || (i == 5))
+                if((i==3)||(i==4)||(i==5))
                 {
                     nodeDataTable.Columns[i].DataType = typeof(int);
                 }
@@ -685,7 +685,7 @@ namespace VoltageDropCalculatorApplication
                 drawArea.Clear(Color.White);
                 drawPoints(mfNodeList);
                 closeTableEdits();
-            }
+            }            
         }
 
         //recursive method that deletes a node as well as its children and their children etc
@@ -784,25 +784,25 @@ namespace VoltageDropCalculatorApplication
                 if (i == 0)
                 {
 
-                    drawArea.DrawEllipse(myPen, 0, y - 5, 20, 20);
-                    drawArea.DrawEllipse(myPen, 10, y - 5, 20, 20);
+                drawArea.DrawEllipse(myPen, 0, y - 5, 20, 20);
+                drawArea.DrawEllipse(myPen, 10, y - 5, 20, 20);
                     drawArea.DrawLine(myPen, 30, y + 5, 60, y + 5);
-                    drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[0].Rows[0][9]))) + "m", drawFont2, sb, 33, (float)y - 10);
-
+                drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[0].Rows[0][9]))) + "m", drawFont2, sb, 33, (float)y - 10);
+                
                 }
                 drawArea.FillEllipse(sb, 60 + (i * (int)nodespacing), y, 10, 10); //draws the circle
                 if (i != mainfeederList.Count - 1)
                 {
                     drawArea.DrawLine(myPen, 60 + (i * (float)nodespacing), y + 5, 60 + ((i + 1) * (float)nodespacing), y + 5); //draws the lines
                 }
-
+                                
                 if (nodeDataSet.Tables.Contains("node" + mainfeederList[i].ToString()))
                 {
                     drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[mainfeederList[i] - 1].Rows[0][9]))) + "m", drawFont1, sb, (60 + ((i - 1) * (float)nodespacing) + 60 + ((i) * (float)nodespacing)) / 2, (float)y - 20); //draws the label
                 }
 
                 drawArea.DrawString(label, drawFont, sb, 60 + (i * (float)nodespacing), (float)y - 20);//draws the label
-
+                
             }
 
         }
@@ -1300,7 +1300,7 @@ namespace VoltageDropCalculatorApplication
                 projectDataSet.Tables.Clear();
                 this.Text = Path.GetFileNameWithoutExtension(projectSavedName);
                 string fileName = Path.ChangeExtension(projectSavedName, ".xml");
-
+                
                 foreach (DataTable dt in libraryDataSet.Tables)
                 {
                     projectDataSet.Tables.Add(dt.Copy());
@@ -1347,13 +1347,13 @@ namespace VoltageDropCalculatorApplication
             int loadCountOld = loadCount;
             int genCountOld = genCount;
             DataSet originalLibraryDataSet = new DataSet();
-
+            
             foreach (DataTable dt in libraryDataSet.Tables)
             {
                 originalLibraryDataSet.Tables.Add(dt.Copy());
             }
             libraryForm frm = new libraryForm("Loads", true, libraryDataSet);
-            frm.saveToProject.Enabled = false;
+            frm.saveToProject.Enabled = false;            
             frm.ShowDialog();
 
             if (frm.cancel)
@@ -1370,8 +1370,8 @@ namespace VoltageDropCalculatorApplication
                 changeFormTitle();
             }
 
-
-
+            
+        
             //Code picks up any changes to the loads database and loads them
             DataTable resultLoads = new DataTable();
             nodeDataSet.AcceptChanges();
@@ -1423,9 +1423,9 @@ namespace VoltageDropCalculatorApplication
                     lengthSum = lengthSum + Convert.ToDouble(nodeDataHolder.Tables[i].Rows[x]["Length"]);
 
                 }
-
+                
                 lengthSumDecimal = Convert.ToDecimal(lengthSum - (double)genCountOld * lengthTol);
-
+                
                 string tableName = "node" + (i + 1).ToString();
                 DataTable nodeDataTable = new DataTable(tableName);
                 List<string> headings = new List<string> { "Node", "Name", "Load/DG", "Red", "White", "Blue", "Alpha", "Beta", "Cb", "Length", "Cable", "Rp", "Rn", "Parent", "Children" };
@@ -1445,10 +1445,10 @@ namespace VoltageDropCalculatorApplication
                 }
 
                 //querires the datatables for the loads and gens where the user has selected. 
-
+                       
 
                 for (int k = 0; k < resultLoads.Rows.Count; k++)
-                {
+                {                                                  
                     nodeDataTable.Rows.Add(nodeDataHolder.Tables[i].Rows[0]["Node"], nodeDataHolder.Tables[i].Rows[0]["Name"], resultLoads.Rows[k][0], 0.0, 0.0, 0.0, resultLoads.Rows[k]["alpha"], resultLoads.Rows[k]["beta"], resultLoads.Rows[k]["circuit breaker"], calculateLengths(lengthSumDecimal, k), nodeDataHolder.Tables[i].Rows[0]["Cable"], calculateRp(rT2L, calculateLengths(lengthSumDecimal, k)), calculateRn(rT2L, calculateLengths(lengthSumDecimal, k), k1L), ((k == 0) ? nodeDataHolder.Tables[i].Rows[0]["Parent"] : ""), ((k == 0) ? nodeDataHolder.Tables[i].Rows[0]["Children"] : ""));
                 }
 
@@ -1456,7 +1456,7 @@ namespace VoltageDropCalculatorApplication
                 nodeDataSet.Tables.Add(nodeDataTable);
 
                 //Populates the new nodeDataTable with the RWB customer numbers                        
-
+                               
             }
             tempTable = nodeDataSet.Tables[0].Copy();
             tempTable.Rows[0][0] = "0";
@@ -1475,16 +1475,16 @@ namespace VoltageDropCalculatorApplication
                         {
                             nodeDataSet.Tables[i].Rows[a]["Red"] = nodeDataHolder.Tables[i].Rows[z]["Red"];
                             nodeDataSet.Tables[i].Rows[a]["White"] = nodeDataHolder.Tables[i].Rows[z]["White"];
-                            nodeDataSet.Tables[i].Rows[a]["Blue"] = nodeDataHolder.Tables[i].Rows[z]["Blue"];
+                            nodeDataSet.Tables[i].Rows[a]["Blue"] = nodeDataHolder.Tables[i].Rows[z]["Blue"];                            
                         }
                     }
 
                 }
             }
-
+            
 
             nodeDataHolder.Tables.Clear();
-            nodeDataGridView.DataSource = nodeDataSet.Tables["node" + nodeNumCombo.Text];
+            nodeDataGridView.DataSource = nodeDataSet.Tables["node" + nodeNumCombo.Text];            
         }
 
         private void generatorsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1559,14 +1559,14 @@ namespace VoltageDropCalculatorApplication
         {
             Vs = Convert.ToDouble(sourceVoltageNumUpDown.Value);
             if (ShownForm) changeFormTitle();
-
+            
         }
 
         private void nodeFeederForm_Shown(object sender, EventArgs e)
         {
             drawArea.Clear(Color.White);
             this.ShownForm = true;
-
+           
             drawPoints(mfNodeList);
         }
 
@@ -1577,7 +1577,7 @@ namespace VoltageDropCalculatorApplication
 
         private void nodeDataGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
-
+           
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1648,7 +1648,7 @@ namespace VoltageDropCalculatorApplication
                     // prompt to save and cancel the closure of the form.
                     saveToolStripMenuItem_Click(sender, e);
                     e.Cancel = true;
-
+                    
                 }
 
                 else if (result == DialogResult.Cancel)
@@ -1657,9 +1657,9 @@ namespace VoltageDropCalculatorApplication
                 }
 
                 else { }
-
+                
             }
-
+            
         }
 
         private void addHandlers()
@@ -1682,13 +1682,13 @@ namespace VoltageDropCalculatorApplication
         {
             if (ContentChanged != null)
                 ContentChanged(this, new EventArgs());
-
-
+            
+            
         }
 
         private void nodeNameText_OnContentChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         public event EventHandler ContentChanged;
@@ -1770,16 +1770,14 @@ namespace VoltageDropCalculatorApplication
 
         private void nodeDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-
+            
         }
 
-        // accessor methods for sourceVoltageNumUpDown
-        public void setSourceVoltageNumUpDown(decimal number) // sets the sourceVoltageNumUpDown.Value
+        public void setSourceVoltageNumUpDown(double number)
         {
-            sourceVoltageNumUpDown.Value = number;
+            sourceVoltageNumUpDown.Value = Convert.ToDecimal(number);
         }
 
-        // accessor methods for operatingTempNumUpDown
         public void setOperatingTempNumUpDown(double number)
         {
             operatingTempNumUpDown.Value = Convert.ToDecimal(number);
