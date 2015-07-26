@@ -24,6 +24,7 @@ namespace VoltageDropCalculatorApplication
         int totalLoadsGens;
         double lengthTol;
         DataTable nodeOverallDataTable = new DataTable();
+        List<string> nodeNameString;
         
         ErrorProvider errorProvider1;
 
@@ -35,6 +36,7 @@ namespace VoltageDropCalculatorApplication
         DataGridView nodeDataGridView = new DataGridView();
         DataTable cableDT = new DataTable();
         double t2;
+        List<string> nodeString;
         //NumericUpDown lengthNumericUpDown;
         NumericUpDown lengthNumericUpDown;
         DataView dvOverall = new DataView();
@@ -64,12 +66,18 @@ namespace VoltageDropCalculatorApplication
             totalLoadsGens = loadCount + genCount;
             voltageProfileArray = new double[nodeNum + 1, 6];
             this.lengthTol = lengthTol;
+            nodeNameString = new List<string>();
 
             this.nodeDataSet = nodeDataSet;
             nodeOverallDataTable = nodeVecDataSet.Tables[0].Copy();
 
-            //----additional variables to be initialized can be placed here
-
+            
+                //----additional variables to be initialized can be placed here
+            //put the main feeder table names into a list
+            for (int i = 0; i < mfNodeList.Count; i++ )
+            {
+                nodeNameString.Add("node" + mfNodeList[i].ToString());
+            }
 
 
             numericUpDownRisk.Value = (decimal)p;
@@ -106,7 +114,7 @@ namespace VoltageDropCalculatorApplication
             closeTableEdits();
 
             initDataGridViewLengths();
-            List<string> nodeString = cableDT.AsEnumerable().Select(x => x[0].ToString()).ToList();
+            nodeString = cableDT.AsEnumerable().Select(x => x[0].ToString()).ToList();
             comboBoxNodeSelect.DataSource = nodeString;           
             voltCalculation();
         }
@@ -684,10 +692,11 @@ namespace VoltageDropCalculatorApplication
         private void numericUpDownVoltage_ValueChanged(object sender, EventArgs e)
         {
             buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true; // Enable "update" and "discard" buttons
-            if (Vs == sourceVoltageBackup) 
-            {
-                buttonUpdateNodeSumm.Enabled = false; buttonDiscardNodeSum.Enabled = false; ; // Enable "update" and "discard" buttons
-            }
+            //Vs = Convert.ToDouble(numericUpDownVoltage.Value);
+            //if (Vs == sourceVoltageBackup) 
+            //{
+            //    buttonUpdateNodeSumm.Enabled = false; buttonDiscardNodeSum.Enabled = false; ; // Enable "update" and "discard" buttons
+            //}
             Vs = Convert.ToDouble(numericUpDownVoltage.Value);
             if (totalLoadsGens != 0) //if the form has been initialized(eliminates an exception where the totalLoadsGens int hasn't been initialized to a nonzero value
             {
@@ -700,10 +709,11 @@ namespace VoltageDropCalculatorApplication
         private void numericUpDownRisk_ValueChanged(object sender, EventArgs e)
         {
             buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true; // Enable "update" and "discard" buttons
-            if (p == riskBackup)
-            {
-                buttonUpdateNodeSumm.Enabled = false; buttonDiscardNodeSum.Enabled = false; // Enable "update" and "discard" buttons
-            }
+            //p = Convert.ToDouble(numericUpDownRisk.Value);
+            //if (p == riskBackup)
+            //{
+            //    buttonUpdateNodeSumm.Enabled = false; buttonDiscardNodeSum.Enabled = false; // Enable "update" and "discard" buttons
+            //}
             p = Convert.ToDouble(numericUpDownRisk.Value);
             if (totalLoadsGens != 0) //if the form has been initialized(eliminates an exception where the totalLoadsGens int hasn't been initialized to a nonzero value
             {
@@ -833,7 +843,7 @@ namespace VoltageDropCalculatorApplication
                     }
                 }
             }
-            buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true;
+            //buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true;
             //redo the calculation
             voltCalculation();
         }
@@ -943,9 +953,9 @@ namespace VoltageDropCalculatorApplication
             {
                 for (int x = 0; x < loadsGensNum; x++)
                 {
-                    nodeDataSet.Tables[i].Rows[x][2+1] = nodeVecDataSet.Tables[0].Rows[xx][2]; 
-                    nodeDataSet.Tables[i].Rows[x][3+1] = nodeVecDataSet.Tables[0].Rows[xx][3]; 
-                    nodeDataSet.Tables[i].Rows[x][4+1] = nodeVecDataSet.Tables[0].Rows[xx][4]; xx++;
+                    nodeDataSet.Tables[nodeNameString[i]].Rows[x][2 + 1] = nodeVecDataSet.Tables[0].Rows[xx][2];
+                    nodeDataSet.Tables[nodeNameString[i]].Rows[x][3 + 1] = nodeVecDataSet.Tables[0].Rows[xx][3];
+                    nodeDataSet.Tables[nodeNameString[i]].Rows[x][4 + 1] = nodeVecDataSet.Tables[0].Rows[xx][4]; xx++;
                 }
             }
             // update the lengths in nodeVecDataSet
@@ -960,15 +970,16 @@ namespace VoltageDropCalculatorApplication
                         if (y % loadsGensNum != 0) nodeVecDataSet.Tables[0].Rows[(x * loadsGensNum) + y][8] = lengthTol;
                     }
                 }
+                
             }
             // update the nodeDataSet for the dgv's on the nodefeeder form
             for (int i = 0; i < nodeNum; i++)
             {
                 for (int x = 0; x < loadsGensNum; x++)
                 {
-                    nodeDataSet.Tables[i].Rows[x][8 + 1] = nodeVecDataSet.Tables[0].Rows[xx][8];
-                    nodeDataSet.Tables[i].Rows[x][10 + 1] = nodeVecDataSet.Tables[0].Rows[xx][10];
-                    nodeDataSet.Tables[i].Rows[x][11 + 1] = nodeVecDataSet.Tables[0].Rows[xx][11]; 
+                    nodeDataSet.Tables[nodeNameString[i]].Rows[x][8 + 1] = nodeVecDataSet.Tables[0].Rows[xx][8];
+                    nodeDataSet.Tables[nodeNameString[i]].Rows[x][10 + 1] = nodeVecDataSet.Tables[0].Rows[xx][10];
+                    nodeDataSet.Tables[nodeNameString[i]].Rows[x][11 + 1] = nodeVecDataSet.Tables[0].Rows[xx][11]; 
                     xx++;
                 }
             }
@@ -1148,9 +1159,9 @@ namespace VoltageDropCalculatorApplication
             {
                 for (int x = 0; x < loadsGensNum; x++)
                 {
-                    nodeOverallDataTable.Rows[xx][2] = nodeDataSet.Tables[i].Rows[x][2 + 1];
-                    nodeOverallDataTable.Rows[xx][3] = nodeDataSet.Tables[i].Rows[x][3 + 1];
-                    nodeOverallDataTable.Rows[xx][4] = nodeDataSet.Tables[i].Rows[x][4 + 1]; xx++;
+                    nodeOverallDataTable.Rows[xx][2] = nodeDataSet.Tables[nodeNameString[i]].Rows[x][2 + 1];
+                    nodeOverallDataTable.Rows[xx][3] = nodeDataSet.Tables[nodeNameString[i]].Rows[x][3 + 1];
+                    nodeOverallDataTable.Rows[xx][4] = nodeDataSet.Tables[nodeNameString[i]].Rows[x][4 + 1]; xx++;
                 }
             }
             // update the nodeDataSet for the dgv's on the nodefeeder form
@@ -1159,7 +1170,7 @@ namespace VoltageDropCalculatorApplication
             {
                 for (int x = 0; x < loadsGensNum; x++)
                 {
-                    nodeOverallDataTable.Rows[xx][8] = nodeDataSet.Tables[i].Rows[x][8 + 1]; xx++;
+                    nodeOverallDataTable.Rows[xx][8] = nodeDataSet.Tables[nodeNameString[i]].Rows[x][8 + 1]; xx++;
                 }
             }
             // update the lengths in the cableDT
@@ -1251,12 +1262,41 @@ namespace VoltageDropCalculatorApplication
 
         private void nodeSummaryDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true; // Enable "update" and "discard" buttons
+            //buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true; // Enable "update" and "discard" buttons
         }
 
         private void dataGridViewLengths_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
            
+        }
+
+        private void nodeSummaryDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (e.ColumnIndex == 2 || e.ColumnIndex == 3 || e.ColumnIndex == 4)
+            {
+                oldValue = Convert.ToDecimal(nodeSummaryDataGridView[e.ColumnIndex, e.RowIndex].Value);
+                newValue = Convert.ToDecimal(e.FormattedValue);
+
+                if (oldValue != newValue)
+                {
+                    buttonUpdateNodeSumm.Enabled = true; buttonDiscardNodeSum.Enabled = true;
+                }
+            }  
+        }
+
+        private void buttonUpdateNodeSumm_EnabledChanged(object sender, EventArgs e)
+        {
+            buttonDiscardNodeSum.Enabled = buttonUpdateNodeSumm.Enabled;
+        }
+
+        private void buttonDiscardNodeSum_EnabledChanged(object sender, EventArgs e)
+        {
+            buttonUpdateNodeSumm.Enabled = buttonDiscardNodeSum.Enabled;
+        }
+
+        private void numericUpDownVoltage_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
         }
     }
 }

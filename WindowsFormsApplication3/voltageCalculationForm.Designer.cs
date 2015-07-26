@@ -224,7 +224,6 @@
             0,
             0});
             this.numericUpDownVoltage.Name = "numericUpDownVoltage";
-            this.numericUpDownVoltage.ReadOnly = true;
             this.numericUpDownVoltage.Size = new System.Drawing.Size(90, 26);
             this.numericUpDownVoltage.TabIndex = 6;
             this.numericUpDownVoltage.Value = new decimal(new int[] {
@@ -233,6 +232,7 @@
             0,
             0});
             this.numericUpDownVoltage.ValueChanged += new System.EventHandler(this.numericUpDownVoltage_ValueChanged);
+            this.numericUpDownVoltage.Validating += new System.ComponentModel.CancelEventHandler(this.numericUpDownVoltage_Validating);
             // 
             // whitePhaseVoltageText
             // 
@@ -492,6 +492,7 @@
             this.buttonDiscardNodeSum.TabIndex = 5;
             this.buttonDiscardNodeSum.Text = "Discard";
             this.buttonDiscardNodeSum.UseVisualStyleBackColor = true;
+            this.buttonDiscardNodeSum.EnabledChanged += new System.EventHandler(this.buttonDiscardNodeSum_EnabledChanged);
             this.buttonDiscardNodeSum.Click += new System.EventHandler(this.buttonDiscardNodeSum_Click);
             // 
             // buttonUpdateNodeSumm
@@ -504,6 +505,7 @@
             this.buttonUpdateNodeSumm.TabIndex = 3;
             this.buttonUpdateNodeSumm.Text = "Update";
             this.buttonUpdateNodeSumm.UseVisualStyleBackColor = true;
+            this.buttonUpdateNodeSumm.EnabledChanged += new System.EventHandler(this.buttonUpdateNodeSumm_EnabledChanged);
             this.buttonUpdateNodeSumm.Click += new System.EventHandler(this.buttonUpdateNodeSumm_Click);
             // 
             // tableLayoutPanel1
@@ -589,6 +591,7 @@
             this.nodeSummaryDataGridView.TabIndex = 1;
             this.nodeSummaryDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeSummaryDataGridView_CellContentClick);
             this.nodeSummaryDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.nodeSummaryDataGridView_CellEndEdit);
+            this.nodeSummaryDataGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.nodeSummaryDataGridView_CellValidating);
             this.nodeSummaryDataGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.nodeSummaryDataGridView_EditingControlShowing);
             // 
             // voltageCalculationForm
