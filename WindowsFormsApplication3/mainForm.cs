@@ -17,6 +17,7 @@ namespace VoltageDropCalculatorApplication
     {
         public static int loadclick = 1;
         public static int genclick = 1;
+        private string fileNameAppData;
 
         OpenFileDialog ofd;
 
@@ -25,7 +26,13 @@ namespace VoltageDropCalculatorApplication
         public mainForm()
         {
             InitializeComponent();
+
+            //initialises the program to write the library file in the Appdata\HBAlgorithm folder
+            System.IO.FileInfo file = new System.IO.FileInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+"\\HBAlgorithm\\");
+            file.Directory.Create(); // If the directory already exists, this method does nothing.
+            fileNameAppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\HBAlgorithm\\", "Libraries.xml");
             ofd = new OpenFileDialog();
+           
         }
 
 
@@ -49,10 +56,10 @@ namespace VoltageDropCalculatorApplication
         private void button2_Click(object sender, EventArgs e)
         {
             // Check if Libraries.xml exists, if it doesn't tell the user to create a library.
-            if (File.Exists("Libraries.xml"))
+            if (File.Exists(fileNameAppData))
             {
                 DataSet ds = new DataSet();
-                ds.ReadXml("Libraries.xml");
+                ds.ReadXml(fileNameAppData);
                 if (!ds.Tables.Contains("Loads"))
                 {
                     string message = "You do not have any Loads defined! Go to \"Edit Existing Libaries\" and select at least one load.";
@@ -148,7 +155,8 @@ namespace VoltageDropCalculatorApplication
 
 
                 libraryDataSet.Tables.Add(dtLoads);
-                libraryDataSet.WriteXml("Libraries.xml", XmlWriteMode.WriteSchema);
+                //var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Libraries.xml");
+                libraryDataSet.WriteXml(fileNameAppData, XmlWriteMode.WriteSchema);
                 loadclick = 0;
                 bool enabled = false;
                 libraryForm frm = new libraryForm("Loads", enabled, libraryDataSet);
@@ -199,7 +207,8 @@ namespace VoltageDropCalculatorApplication
 
                 if (libraryDataSet.Tables.Contains("Generators")) libraryDataSet.Tables.Remove("Generators");//remove any previously existing table from the dataset
                 libraryDataSet.Tables.Add(dtGens);
-                libraryDataSet.WriteXml("Libraries.xml", XmlWriteMode.WriteSchema);
+                //var fileNameAppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Libraries.xml");
+                libraryDataSet.WriteXml(fileNameAppData, XmlWriteMode.WriteSchema);
                 //genclick = 0;
                 bool enabled = false;
                 libraryForm frm = new libraryForm("Generators", enabled, libraryDataSet);
@@ -215,10 +224,10 @@ namespace VoltageDropCalculatorApplication
         private void editLibraryButton_Click(object sender, EventArgs e)
         {
             // Check if Libraries.xml exists, if it doesn't tell the user to create a library.
-            if (File.Exists("Libraries.xml"))
+            if (File.Exists(fileNameAppData))
             {
                 DataSet ds = new DataSet();
-                ds.ReadXml("Libraries.xml");
+                ds.ReadXml(fileNameAppData);
                 bool enabled = true;
                 libraryForm frm = new libraryForm("Loads", enabled, ds);
                 frm.saveLibraryButton.Text = "Save";
@@ -317,7 +326,8 @@ namespace VoltageDropCalculatorApplication
                 if (libraryDataSet.Tables.Contains("Conductors")) libraryDataSet.Tables.Remove("Conductors");//remove any previously existing table from the dataset
 
                 libraryDataSet.Tables.Add(conductorTable);
-                libraryDataSet.WriteXml("Libraries.xml", XmlWriteMode.WriteSchema);
+                //var fileNameAppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Libraries.xml");
+                libraryDataSet.WriteXml(fileNameAppData, XmlWriteMode.WriteSchema);
 
                 /* Then reset the loads & DG's*/
                 resetLoadsGens(libraryDataSet);
@@ -371,7 +381,8 @@ namespace VoltageDropCalculatorApplication
 
 
             libraryDataSet.Tables.Add(dtLoads);
-            libraryDataSet.WriteXml("Libraries.xml", XmlWriteMode.WriteSchema);
+            //var fileNameAppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Libraries.xml");
+            libraryDataSet.WriteXml(fileNameAppData, XmlWriteMode.WriteSchema);
             //dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Loads"];
 
             DataTable dtGens = new DataTable(); //creates a new Datatable object for the loads
@@ -404,7 +415,8 @@ namespace VoltageDropCalculatorApplication
 
             if (libraryDataSet.Tables.Contains("Generators")) libraryDataSet.Tables.Remove("Generators");//remove any previously existing table from the dataset
             libraryDataSet.Tables.Add(dtGens);
-            libraryDataSet.WriteXml("Libraries.xml", XmlWriteMode.WriteSchema);
+            //var fileNameAppDatar = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Libraries.xml");
+            libraryDataSet.WriteXml(fileNameAppData, XmlWriteMode.WriteSchema);
             //dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Generators"];
 
         }

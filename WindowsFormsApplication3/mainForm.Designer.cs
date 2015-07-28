@@ -294,7 +294,7 @@
             this.MaximumSize = new System.Drawing.Size(1366, 768);
             this.Name = "mainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FeederVoltageCalc V1";
+            this.Text = "HBAlgorithm(Developer Version)";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);

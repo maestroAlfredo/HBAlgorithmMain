@@ -50,13 +50,16 @@ namespace VoltageDropCalculatorApplication
         TreeNode rootNode = new TreeNode();
         //List<string> addList;
 
+         string fileNameAppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\HBAlgorithm\\", "Libraries.xml");
+         string originalfileNameAppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\HBAlgorithm\\", "Untitled.xml"); //original xml fileName
+
         public nodeFeederForm()
         {
             InitializeComponent();
             addHandlers();
             sb = new SolidBrush(Color.SteelBlue);
 
-            libraryDataSet.ReadXml("Libraries.xml"); //read the  library xml  
+            libraryDataSet.ReadXml(fileNameAppData); //read the  library xml  
             List<string> cableString = libraryDataSet.Tables["Conductors"].AsEnumerable().Select(x => x[0].ToString()).ToList();
             cableSelectCombo.DataSource = cableString;
 
@@ -86,8 +89,9 @@ namespace VoltageDropCalculatorApplication
             paramDataTable.Rows.Add(false, true, Vs, t2, "node1");
 
             //newProjectClicked = 0;
-            projectName = "Untitled" + ".xml"; //creates a string in projectName that will contain the reference to the xml file
+            //projectName = "Untitled" + ".xml"; //creates a string in projectName that will contain the reference to the xml file
             this.Text = "Untitled";
+            projectName = originalfileNameAppData;
             nodeNameTextBox.Text = "node 1";
             tableLayoutPanel4.Enabled = true;
             proceedToVCalcButton.Enabled = true;
@@ -1525,7 +1529,7 @@ namespace VoltageDropCalculatorApplication
             DataSet ds = new DataSet();
             if (!projectDataSet.Tables.Contains("Conductors"))
             {
-                ds.ReadXml("Libraries.xml");
+                ds.ReadXml(fileNameAppData);
             }
             else
             {

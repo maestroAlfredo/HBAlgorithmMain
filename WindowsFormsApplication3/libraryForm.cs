@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
 namespace VoltageDropCalculatorApplication
 {
     public partial class libraryForm : Form
@@ -16,6 +17,7 @@ namespace VoltageDropCalculatorApplication
         public bool cancel = false;
 
         DataSet libraryDataSet = new DataSet();
+        string fileNameAppData;
 
         public libraryForm()
         {
@@ -32,6 +34,9 @@ namespace VoltageDropCalculatorApplication
             this.libraryDataSet = libraryDataSet;
             loadTypeCombo.Text = selectedloadtype; //constructor to load library form depending on whether load or generator is selected
             loadTypeCombo.Enabled = enabled;
+
+            //initialises the program to write the library file in the Appdata\HBAlgorithm folder
+            fileNameAppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\HBAlgorithm\\", "Libraries.xml");
             
             //libraryDataSet.ReadXml("Libraries.xml");
             List<string> LoadType = new List<string>();
@@ -346,7 +351,7 @@ namespace VoltageDropCalculatorApplication
                     if (libraryDataSet.Tables.Contains("Conductors")) libraryDataSet.Tables.Remove("Conductors");//remove any previously existing table from the dataset
 
                     libraryDataSet.Tables.Add(conductorTable);
-                    libraryDataSet.WriteXml("Libraries.xml", XmlWriteMode.WriteSchema);
+                    libraryDataSet.WriteXml(fileNameAppData, XmlWriteMode.WriteSchema);
                     dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Conductors"];
 
                 }
@@ -383,7 +388,7 @@ namespace VoltageDropCalculatorApplication
 
 
                     libraryDataSet.Tables.Add(dtLoads);
-                    libraryDataSet.WriteXml("Libraries.xml", XmlWriteMode.WriteSchema);
+                    libraryDataSet.WriteXml(fileNameAppData, XmlWriteMode.WriteSchema);
                     dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Loads"];
 
 
@@ -420,7 +425,7 @@ namespace VoltageDropCalculatorApplication
 
                     if (libraryDataSet.Tables.Contains("Generators")) libraryDataSet.Tables.Remove("Generators");//remove any previously existing table from the dataset
                     libraryDataSet.Tables.Add(dtGens);
-                    libraryDataSet.WriteXml("Libraries.xml", XmlWriteMode.WriteSchema);
+                    libraryDataSet.WriteXml(fileNameAppData, XmlWriteMode.WriteSchema);
                     dataGridViewLoadsDGs.DataSource = libraryDataSet.Tables["Generators"];
                 }
 
@@ -458,7 +463,7 @@ namespace VoltageDropCalculatorApplication
                 }
             }
 
-            libraryDataSet.WriteXml("Libraries.xml", XmlWriteMode.WriteSchema);
+            libraryDataSet.WriteXml(fileNameAppData, XmlWriteMode.WriteSchema);
             saveLibraryButton.Enabled = false;
 
         }
