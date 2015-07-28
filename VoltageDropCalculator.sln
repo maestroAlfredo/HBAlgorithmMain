@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\..\myHBalgorithm\mainform pics\newFeederPic.PNG = ..\..\myHBalgorithm\mainform pics\newFeederPic.PNG
 	EndProjectSection
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HBAlgorithmSetup", "C:\Users\AlfredHome\Documents\Visual Studio 2013\Projects\HBAsetup\HBAsetup\HBAsetup.vdproj", "{A55D2859-B2F7-4B2A-8FCE-7220831B7813}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HBAlgorithmSetup", "HBAlgorithmSetUp\HBAlgorithmSetUp.vdproj", "{744C4612-13C7-4996-B2E0-84A86BF0F9B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{3ED4E9B6-0A57-4E5A-A142-28D8A2D8ACE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3ED4E9B6-0A57-4E5A-A142-28D8A2D8ACE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3ED4E9B6-0A57-4E5A-A142-28D8A2D8ACE8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A55D2859-B2F7-4B2A-8FCE-7220831B7813}.Debug|Any CPU.ActiveCfg = Debug
-		{A55D2859-B2F7-4B2A-8FCE-7220831B7813}.Debug|Any CPU.Build.0 = Debug
-		{A55D2859-B2F7-4B2A-8FCE-7220831B7813}.Release|Any CPU.ActiveCfg = Release
-		{A55D2859-B2F7-4B2A-8FCE-7220831B7813}.Release|Any CPU.Build.0 = Release
+		{744C4612-13C7-4996-B2E0-84A86BF0F9B7}.Debug|Any CPU.ActiveCfg = Debug
+		{744C4612-13C7-4996-B2E0-84A86BF0F9B7}.Debug|Any CPU.Build.0 = Debug
+		{744C4612-13C7-4996-B2E0-84A86BF0F9B7}.Debug|Any CPU.Deploy.0 = Debug
+		{744C4612-13C7-4996-B2E0-84A86BF0F9B7}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
