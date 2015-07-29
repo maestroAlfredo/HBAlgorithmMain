@@ -15,7 +15,6 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HBAlgorithmSetup", "HBAlgor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4A773BD2-A973-47BC-8D38-5C32272A0435}"
 	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
 		packages.xsd = packages.xsd
 	EndProjectSection
 EndProject
