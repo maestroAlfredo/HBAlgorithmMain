@@ -506,7 +506,12 @@ namespace VoltageDropCalculatorApplication
 
         private void dataGridViewLoadsDGs_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-          
+            if (String.IsNullOrEmpty(e.FormattedValue.ToString()))
+            {
+                dataGridViewLoadsDGs.Rows[e.RowIndex].ErrorText =
+                    "Cells cannnot be empty";
+                e.Cancel = true;
+            }
         }
 
 

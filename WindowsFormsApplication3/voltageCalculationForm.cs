@@ -1240,7 +1240,14 @@ namespace VoltageDropCalculatorApplication
 
         private void dataGridViewLengths_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            if (dataGridViewLengths.Columns[e.ColumnIndex].Name == "Length")
+            if (String.IsNullOrEmpty(e.FormattedValue.ToString()))
+            {
+                dataGridViewLengths.Rows[e.RowIndex].ErrorText =
+                    "Cells cannnot be empty";
+                e.Cancel = true;
+            }
+
+            if ((dataGridViewLengths.Columns[e.ColumnIndex].Name == "Length")&&!e.Cancel)
             {
                 oldValue = Convert.ToDecimal(dataGridViewLengths[e.ColumnIndex, e.RowIndex].Value);
                 newValue = Convert.ToDecimal(e.FormattedValue);
@@ -1254,7 +1261,7 @@ namespace VoltageDropCalculatorApplication
 
         private void comboBoxNodeSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string filter = "[Node] LIKE '*" + comboBoxNodeSelect.Text + "*'";
+            string filter = "[Node] = '" + comboBoxNodeSelect.Text + "'";
             DataView dv = new DataView(nodeOverallDataTable, filter, string.Empty, DataViewRowState.CurrentRows);
             dvOverall = dv;
             nodeSummaryDataGridView.DataSource = dv;
@@ -1272,7 +1279,14 @@ namespace VoltageDropCalculatorApplication
 
         private void nodeSummaryDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            if (e.ColumnIndex == 2 || e.ColumnIndex == 3 || e.ColumnIndex == 4)
+            if (String.IsNullOrEmpty(e.FormattedValue.ToString()))
+            {
+                dataGridViewLengths.Rows[e.RowIndex].ErrorText =
+                    "Cells cannnot be empty";
+                e.Cancel = true;
+            }
+
+            if ((e.ColumnIndex == 2 || e.ColumnIndex == 3 || e.ColumnIndex == 4) && !e.Cancel)
             {
                 oldValue = Convert.ToDecimal(nodeSummaryDataGridView[e.ColumnIndex, e.RowIndex].Value);
                 newValue = Convert.ToDecimal(e.FormattedValue);
