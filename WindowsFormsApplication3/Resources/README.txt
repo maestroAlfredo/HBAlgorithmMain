@@ -1,1 +1,115 @@
-﻿
+﻿________________________________________________________
+
+HBAlgorithm
+________________________________________________________
+Thank you for installing HBAlgorithm.
+
+Version: Developer Version.
+
+This version includes:
+- Three-phase DG
+
+ReadMe.txt
+
+________________________________________________________
+
+IMPORTANT
+________________________________________________________
+
+
+.. BLAH BLAH BLAH.... [eula] Creative Commons license???
+
+*************************LIABILITY:********************** 
+The authors/programmers accept NO liabiility for how the program is used, and accept no responsibility for results or applications based on the results.
+
+________________________________________________________
+
+CONTENTS
+________________________________________________________
+
+1) SYSTEM REQUIREMENTS
+
+2) INSTALLATION INSTRUCTIONS
+
+3) LINKS
+
+4) SUPPORT INFORMATION
+
+5) REFERENCES
+
+6) DEVELOPMENT
+
+________________________________________________________
+
+1) SYSTEM REQUIREMENTS
+________________________________________________________
+
+Tested on laptops and desktops running:
+Windows 8.1 64 Bit, Windows 8 64 Bit, Windows 7 64 Bit Service Pack 1.
+
+Processor: Intel(R) Core(TM)2 Quad CPU Q6600  @ 2.40GHz (4 CPUs) / AMD Phenom(TM) 9850 Quad-Core Processor (4 CPUs) @ 2.5GHz
+
+RAM: 4 GB.
+
+Additional software requirements:
+.NET Framework
+
+________________________________________________________
+
+2) INSTALLATION INSTRUCTIONS
+________________________________________________________
+
+.. BLAH BLAH BLAH....
+________________________________________________________
+
+3) LINKS
+________________________________________________________
+
+Download the .NET Framework from http://www.microsoft.com/en-us/download/details.aspx?id=30653
+
+________________________________________________________
+
+4) SUPPORT INFORMATION
+________________________________________________________
+The authors/programmers provide no online support. 
+
+Courses in the use and application of the approach can be arranged with the authors.
+Dr. Ron Herman		hermantek@mweb.co.za
+Dr. Trevor Gaunt	ct.gaunt@uct.ac.za
+
+Technical difficulties may be addressed to the authors/programmers. We do not offer support, but welcome your feedback to help us improve the program.
+
+Dr. Ron Herman		hermantek@mweb.co.za
+Dr. Trevor Gaunt	ct.gaunt@uct.ac.za
+Mr. Emma Namanya	namzynk1@gmail.com
+Mr. Alfred Waligo	wlgalf001@myuct.ac.za
+Mr. Andrew Ipurale	iprand001@myuct.ac.za
+
+________________________________________________________
+
+5) REFERENCES
+________________________________________________________
+R Herman, CT Gaunt, “A practical probabilistic design procedure for LV residential distribution								
+	 systems”. IEEE Trans on Power Delivery, vol 23, no 4, Oct 2008, 2247-2254							
+IA Ferguson, CT Gaunt, "LV network sizing in electrification projects - Replacing a deterministic 								
+	method with a statistical method".  Paper 5-68, CIRED, Barcelona, May 2003							
+CT Gaunt, R Herman, M Dekenah, RL Sellick, SW Heunis, “Data collection, load modelling and								
+	 probabilistic analysis for LV domestic electrification”. International Conference on 							
+	Electricity Distribution (CIRED), Nice, 1999.							
+R Herman, CT Gaunt, SW Heunis, “Benchmark tests and results for the evaluation of LV								
+	 distribution voltage drop calculation procedures”.  Trans SA Institute of Electrical 							
+	Engineers, vol 90, no 2, p 54, June, 1999. 							
+R Herman, SW Heunis, “A general probabilistic voltage drop calculation method for LV								
+	 distribution networks based on a Beta pdf load model”. Electric Power Systems							
+	 Research, vol 46 (1998) p45-49. 							
+
+________________________________________________________
+
+6) DEVELOPMENT
+________________________________________________________
+Original algorithm						R Herman						1995	Public domain	
+Superposition, multiple nodes			S Heunis						1997	Public domain	
+Beta estimator							R Heman							2008	Public domain	
+DG and profiles							CT Gaunt						2010	CreativeCommons	
+Corrected formulae of DG calc			E Namanya						2013	CreativeCommons	
+Windows application						A Waligo, A Ipurale, E Namanya	2015	CreativeCommons??
