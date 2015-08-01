@@ -45,7 +45,7 @@ ________________________________________________________
 ________________________________________________________
 
 Tested on laptops and desktops running:
-Windows 8.1 64 Bit, Windows 8 64 Bit, Windows 7 64 Bit Service Pack 1, Windows 7 32 Bit Service Pack 1
+Windows 8.1 64 Bit, Windows 8 64 Bit, Windows 7 64 Bit Service Pack 1.
 
 Processor: Intel(R) Core(TM)2 Quad CPU Q6600  @ 2.40GHz (4 CPUs) / AMD Phenom(TM) 9850 Quad-Core Processor (4 CPUs) @ 2.5GHz
 

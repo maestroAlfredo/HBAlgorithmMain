@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:adx="http://schemas.add-in-express.com/wixdesigner">
-  <Product Id="*" Name="HBAlgorithm" Language="1033" Version="1.0.0.0" Manufacturer="AWI Technologies" UpgradeCode="82d47b94-4965-42eb-92b0-073420d5fd3c">
+  <Product Id="*" Name="HBAlgorithm" Language="1033" Version="1.0.0.0" Manufacturer="AWI Technologies" UpgradeCode="82d47b94-4965-42eb-92b0-073420d5fd3c" Codepage="UTF-8">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" InstallPrivileges="elevated" Manufacturer="A.Waligo;A.Ipurale" Comments="Voltage Drop Calculator Application" Description="HBAlgorithm" />
     <Binary Id="InstallUtil" SourceFile="Resources\Binary\InstallUtil" />
     <Binary Id="ADXDPCADLL" SourceFile="Resources\Binary\adxdpca.dll" />
