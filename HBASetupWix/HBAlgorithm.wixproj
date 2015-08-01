@@ -43,6 +43,7 @@
     <Folder Include="XSLT\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="HBAlgorithm_usermanual.pdf" />
     <Content Include="Resources\Binary\adxdpca.dll" />
     <Content Include="Resources\Binary\InstallUtil" />
     <Content Include="Resources\Binary\InstallUtilConfig" />
