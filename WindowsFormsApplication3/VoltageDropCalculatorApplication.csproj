@@ -130,6 +130,7 @@
     <Content Include="HBlogo3.ico" />
     <Content Include="Resources\classica_play_button_flat_rounded_square_white_on_blue_512x512.png" />
     <Content Include="Resources\playButton.png" />
+    <None Include="Resources\HBAlgorithm_usermanual.pdf" />
     <None Include="Resources\HBImage.jpg" />
     <None Include="Resources\Picture1.png" />
     <None Include="Resources\BackGround1.jpg" />
