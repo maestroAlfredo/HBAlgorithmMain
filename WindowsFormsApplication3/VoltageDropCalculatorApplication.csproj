@@ -74,6 +74,11 @@
     <Compile Include="nodeFeederForm.Designer.cs">
       <DependentUpon>nodeFeederForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="TreeNode.cs" />
     <Compile Include="TreeNodeList.cs" />
     <Compile Include="voltageCalculationForm.cs">
@@ -98,14 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -116,6 +116,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="Resources\README.rtf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -125,10 +128,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="HBlogo3.ico" />
-    <Content Include="Resources\README.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="Resources\classica_play-button_flat-rounded-square-white-on-blue_512x512.png" />
+    <Content Include="Resources\classica_play_button_flat_rounded_square_white_on_blue_512x512.png" />
+    <Content Include="Resources\playButton.png" />
     <None Include="Resources\HBImage.jpg" />
     <None Include="Resources\Picture1.png" />
     <None Include="Resources\BackGround1.jpg" />

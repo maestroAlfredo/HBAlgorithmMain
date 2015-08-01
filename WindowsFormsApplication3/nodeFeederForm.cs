@@ -770,44 +770,93 @@ namespace VoltageDropCalculatorApplication
             //SolidBrush sb = new SolidBrush(Color.SteelBlue);
             Pen myPen = new Pen(sb);
             double drawingSpace = (double)drawingPanel.Width - 30;
-            double nodespacing = drawingSpace / mainfeederList.Count;
+            
 
             int y = drawingPanel.Height / 2;
 
-            for (int i = 0; i < mainfeederList.Count; i++)
+            if(mainfeederList.Count<=5)
             {
-                string label = "node 1";
-                if (nodeDataSet.Tables.Contains("node" + mainfeederList[i].ToString()))
+                double nodespacing = drawingSpace / mainfeederList.Count;
+                for (int i = 0; i < mainfeederList.Count; i++)
                 {
-                    label = nodeDataSet.Tables["node" + mainfeederList[i].ToString()].Rows[0][1].ToString();
-                }
-                System.Drawing.Font drawFont = new System.Drawing.Font("Arial", 10);
-                System.Drawing.Font drawFont1 = new System.Drawing.Font("Arial", 8);
-                System.Drawing.Font drawFont2 = new System.Drawing.Font("Arial", 6);
+                    string label = "node 1";
+                    if (nodeDataSet.Tables.Contains("node" + mainfeederList[i].ToString()))
+                    {
+                        label = nodeDataSet.Tables["node" + mainfeederList[i].ToString()].Rows[0][1].ToString();
+                    }
+                    System.Drawing.Font drawFont = new System.Drawing.Font("Arial", 10);
+                    System.Drawing.Font drawFont1 = new System.Drawing.Font("Arial", 8);
+                    System.Drawing.Font drawFont2 = new System.Drawing.Font("Arial", 6);
 
-                if (i == 0)
-                {
+                    if (i == 0)
+                    {
 
-                drawArea.DrawEllipse(myPen, 0, y - 5, 20, 20);
-                drawArea.DrawEllipse(myPen, 10, y - 5, 20, 20);
-                    drawArea.DrawLine(myPen, 30, y + 5, 60, y + 5);
-                drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[0].Rows[0][9]))) + "m", drawFont2, sb, 33, (float)y - 10);
-                
-                }
-                drawArea.FillEllipse(sb, 60 + (i * (int)nodespacing), y, 10, 10); //draws the circle
-                if (i != mainfeederList.Count - 1)
-                {
-                    drawArea.DrawLine(myPen, 60 + (i * (float)nodespacing), y + 5, 60 + ((i + 1) * (float)nodespacing), y + 5); //draws the lines
-                }
-                                
-                if (nodeDataSet.Tables.Contains("node" + mainfeederList[i].ToString()))
-                {
-                    drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[mainfeederList[i] - 1].Rows[0][9]))) + "m", drawFont1, sb, (60 + ((i - 1) * (float)nodespacing) + 60 + ((i) * (float)nodespacing)) / 2, (float)y - 20); //draws the label
+                        drawArea.DrawEllipse(myPen, 0, y - 5, 20, 20);
+                        drawArea.DrawEllipse(myPen, 10, y - 5, 20, 20);
+                        drawArea.DrawLine(myPen, 30, y + 5, 60, y + 5);
+                        drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[0].Rows[0][9]))) + "m", drawFont2, sb, 33, (float)y - 10);
+
+                    }
+                    drawArea.FillEllipse(sb, 60 + (i * (int)nodespacing), y, 10, 10); //draws the circle
+                    if (i != mainfeederList.Count - 1)
+                    {
+                        drawArea.DrawLine(myPen, 60 + (i * (float)nodespacing), y + 5, 60 + ((i + 1) * (float)nodespacing), y + 5); //draws the lines
+                    }
+
+                    if (nodeDataSet.Tables.Contains("node" + mainfeederList[i].ToString()))
+                    {
+                        drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[mainfeederList[i] - 1].Rows[0][9]))) + "m", drawFont1, sb, (60 + ((i - 1) * (float)nodespacing) + 60 + ((i) * (float)nodespacing)) / 2, (float)y - 20); //draws the label
+                    }
+
+                    drawArea.DrawString(label, drawFont, sb, 60 + (i * (float)nodespacing), (float)y - 20);//draws the label
+
                 }
 
-                drawArea.DrawString(label, drawFont, sb, 60 + (i * (float)nodespacing), (float)y - 20);//draws the label
-                
             }
+            else //only display the last 6 nodes
+            {
+                double nodespacing = drawingSpace / 6;
+                for (int i = 0; i < 6; i++)
+                {
+                    string label = "node 1";
+                    if (nodeDataSet.Tables.Contains("node" + mainfeederList[mainfeederList.Count() - (6 - i)].ToString()))
+                    {
+                        label = nodeDataSet.Tables["node" + mainfeederList[mainfeederList.Count() - (6 - i)].ToString()].Rows[0][1].ToString(); //captures the label
+                    }
+                    System.Drawing.Font drawFont = new System.Drawing.Font("Arial", 10);
+                    System.Drawing.Font drawFont1 = new System.Drawing.Font("Arial", 8);
+                    System.Drawing.Font drawFont2 = new System.Drawing.Font("Arial", 6);
+
+                    if (i == 0)
+                    {
+                        float[] dashValues = { 5, 2, 5, 2 };
+                        Pen dashedPen = new Pen(Color.SteelBlue, 2);
+                        dashedPen.DashPattern = dashValues;
+                        drawArea.DrawEllipse(myPen, 0, y - 5, 20, 20);
+                        drawArea.DrawEllipse(myPen, 10, y - 5, 20, 20);
+                        drawArea.DrawLine(dashedPen, 30, y + 5, 60, y + 5);
+                        //drawArea.DrawLine()
+                        //drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[0].Rows[0][9]))) + "m", drawFont2, sb, 33, (float)y - 10);
+
+                    }
+                    drawArea.FillEllipse(sb, 60 + (i * (int)nodespacing), y, 10, 10); //draws the circle
+                    if (i != 6 - 1)
+                    {
+                        drawArea.DrawLine(myPen, 60 + (i * (float)nodespacing), y + 5, 60 + ((i + 1) * (float)nodespacing), y + 5); //draws the lines
+                    }
+
+                    if (nodeDataSet.Tables.Contains("node" + mainfeederList[mainfeederList.Count()-(6-i)].ToString())) 
+                    {
+                        if(i!=0) drawArea.DrawString(Convert.ToInt16(Math.Round(Convert.ToDouble(nodeDataSet.Tables[mainfeederList[mainfeederList.Count() - (6 - i)] - 1].Rows[0][9]))) + "m", drawFont1, sb, (60 + ((i - 1) * (float)nodespacing) + 60 + ((i) * (float)nodespacing)) / 2, (float)y - 20); //draws the label
+                    }
+
+                    drawArea.DrawString(label, drawFont, sb, 60 + (i * (float)nodespacing), (float)y - 20);//draws the label                    
+
+                }
+
+
+            }
+            
 
         }
         //recursive method gets the nodes in the main feeder based on what the user specifies as the last node.
@@ -1775,6 +1824,13 @@ namespace VoltageDropCalculatorApplication
         private void nodeDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             
+                if (String.IsNullOrEmpty(e.FormattedValue.ToString()))
+                {
+                    nodeDataGridView.Rows[e.RowIndex].ErrorText =
+                        "Cells cannnot be empty";
+                    e.Cancel = true;
+                }
+            
         }
 
         public void setSourceVoltageNumUpDown(double number)
@@ -1785,6 +1841,23 @@ namespace VoltageDropCalculatorApplication
         public void setOperatingTempNumUpDown(double number)
         {
             operatingTempNumUpDown.Value = Convert.ToDecimal(number);
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "HBA file(*.hba)|*.hba";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                
+                
+                string fileName = Path.ChangeExtension(ofd.FileName, ".xml");                
+                //this.Hide();
+                nodeFeederForm nff = new nodeFeederForm(fileName);
+                nff.ShowDialog();
+            }
+
         }
     }
 }
