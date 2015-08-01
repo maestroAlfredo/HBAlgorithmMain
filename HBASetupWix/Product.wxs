@@ -22,7 +22,8 @@
       <ComponentRef Id="comp_dir_205B1E16_5AF6_4444_8688_F2E18C9E50C7" />
       <ComponentGroupRef Id="RegistryGroup" />
       <ComponentGroupRef Id="VoltageDropCalculatorApplication.Content" />
-      <ComponentGroupRef Id="VoltageDropCalculatorApplication.Documents" />
+      <ComponentRef Id="comp_A4F61E44_DAA4_4EA4_9C7F_46274054A59E" />
+      <ComponentRef Id="comp_69DE1481_2C47_45EC_8768_738CEA3A8C9B" />
     </Feature>
     <InstallExecuteSequence>
       <Custom Action="CA_CreateConfig" Sequence="1" />
@@ -319,7 +320,7 @@
           <Condition Action="show"><![CDATA[REMOVE<>""]]></Condition>
           <Condition Action="hide"><![CDATA[REMOVE=""]]></Condition>
         </Control>
-        <Control Id="UpdateText" Type="Text" X="9" Y="216" Width="354" Height="36" Text="{\VSI_MS_Sans_Serif13.0_0_0}Please use Windows Update to check for any critical updates to the .NET Framework." TabSkip="yes" NoPrefix="yes">
+        <Control Id="UpdateText" Type="Text" X="9" Y="216" Width="354" Height="36" Text="{\VSI_MS_Sans_Serif13.0_0_0}Please use Windows Update to check for any critical updates to the .NET framework." TabSkip="yes" NoPrefix="yes">
           <Condition Action="show"><![CDATA[REMOVE=""]]></Condition>
           <Condition Action="hide"><![CDATA[REMOVE<>""]]></Condition>
         </Control>
@@ -338,6 +339,9 @@
       <Component Id="comp_100734DE_9B4B_4FEF_981E_6C2367ABB548" Guid="5C799E6A-9749-48AD-BB8F-216DD937F315" Permanent="no" SharedDllRefCount="no" Transitive="no">
         <File Id="_097C8864_AEBF_4302_8F56_79A79FADEF7C" DiskId="1" Hidden="no" ReadOnly="no" TrueType="no" System="no" Vital="yes" Name="HBAlogo.ico" Source="C:\Users\AlfredHome\Downloads\ProjectImages\HBAlogo.ico" KeyPath="yes" />
       </Component>
+      <Component Id="comp_A4F61E44_DAA4_4EA4_9C7F_46274054A59E" Guid="A609BEF9-FA84-4360-9FDB-EE7C5F23B458" Permanent="no" SharedDllRefCount="no" Transitive="no">
+        <File Id="_5F010994_6DF6_4730_B303_1683ED471C48" DiskId="1" Hidden="no" ReadOnly="no" TrueType="no" System="no" Vital="yes" Name="HBAlgorithm_usermanual.pdf" Source="..\WindowsFormsApplication3\Resources\HBAlgorithm_usermanual.pdf" KeyPath="yes" />
+      </Component>
       <Directory Id="VoltageDropCalculatorApplication.Binaries" />
       <Directory Id="DesktopFolder">
         <Component Id="comp_0A4E7F8C_3FCF_4847_9F3C_96B68DF47769" Guid="10981EA2-7675-41C7-A5C3-09CFB22888FB" Permanent="no" SharedDllRefCount="no" Transitive="no">
@@ -355,10 +359,15 @@
             <Shortcut Id="_4E801825_6A16_48CE_A5B4_994B00BAF415" Directory="dir_205B1E16_5AF6_4444_8688_F2E18C9E50C7" Name="HBAlgorithm" Show="normal" Target="[TARGETDIR]VoltageDropFeederApplication.exe" WorkingDirectory="dir_205B1E16_5AF6_4444_8688_F2E18C9E50C7" Icon="_84D2E7F855C1" />
             <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]\Installer" Name="comp_214FA47D_C94A_4E13_BC39_B7C44E9BB8F4" Type="string" Value="HBAlgorithm directory" KeyPath="yes" />
           </Component>
+          <Component Id="comp_69DE1481_2C47_45EC_8768_738CEA3A8C9B" Guid="B329E019-B5EB-4BCD-BFF3-5264131F3FBF" Permanent="no" SharedDllRefCount="no" Transitive="no">
+            <Shortcut Id="_E4038D05_70BF_40C2_B59A_1EF23BDB6EA1" Directory="dir_205B1E16_5AF6_4444_8688_F2E18C9E50C7" Name="HBAManual" Show="normal" Target="[TARGETDIR]HBAlgorithm_usermanual.pdf" WorkingDirectory="dir_205B1E16_5AF6_4444_8688_F2E18C9E50C7">
+              <Icon Id="_6C689EF4A38B" SourceFile="C:\Users\AlfredHome\Downloads\ProjectImages\Contents-of-MS-Office.ico" />
+            </Shortcut>
+            <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]\Installer" Name="comp_69DE1481_2C47_45EC_8768_738CEA3A8C9B" Type="string" Value="HBAlgorithm directory" KeyPath="yes" />
+          </Component>
         </Directory>
       </Directory>
       <Directory Id="VoltageDropCalculatorApplication.Content" />
-      <Directory Id="VoltageDropCalculatorApplication.Documents" />
     </Directory>
     <ComponentGroup Id="RegistryGroup">
       <Component Id="_458C82B1_1102_46C7_A78D_1C6A08F2A280" Guid="A6A5EDB7-5B79-4714-9164-31204350C15E" Transitive="no" Directory="TARGETDIR">

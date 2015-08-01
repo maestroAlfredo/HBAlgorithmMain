@@ -617,17 +617,12 @@ namespace VoltageDropCalculatorApplication
                     exit = true;
                     break;
                 }
+                
             }
 
             if (!exit)
             {
-                const string message = "Cannot proceed without selecting at least one load.";
-                const string caption = "HBAlgorithm";
-                var result = MessageBox.Show(message, caption,
-                                             MessageBoxButtons.OK,
-                                             MessageBoxIcon.Exclamation);
-                
-                e.Cancel = true;
+                libraryDataSet.Tables["Loads"].Rows[0]["selected"] = true;                
             }
 
 

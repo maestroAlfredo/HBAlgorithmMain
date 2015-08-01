@@ -1228,10 +1228,10 @@ namespace VoltageDropCalculatorApplication
             if (detailsCheckBox.Checked == true)
             {
                 //nodeDataGridView.Columns[0].Visible = true;
-                nodeDataGridView.Columns[9].Visible = !false;
+                //nodeDataGridView.Columns[9].Visible = !false;
                 nodeDataGridView.Columns[10].Visible = !false;
-                nodeDataGridView.Columns[11].Visible = !false;
-                nodeDataGridView.Columns[12].Visible = !false;
+                //nodeDataGridView.Columns[11].Visible = !false;
+                //nodeDataGridView.Columns[12].Visible = !false;
                 nodeDataGridView.Columns[13].Visible = !false;
                 nodeDataGridView.Columns[14].Visible = !false;
                 nodeDataGridView.Columns[11].DefaultCellStyle.Format = "N3";
@@ -1858,6 +1858,17 @@ namespace VoltageDropCalculatorApplication
                 nff.ShowDialog();
             }
 
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 abBox = new AboutBox1();
+            abBox.ShowDialog();
         }
     }
 }

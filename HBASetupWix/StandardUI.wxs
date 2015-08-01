@@ -87,6 +87,9 @@
     </InstallUISequence>
   </Fragment>
   <Fragment Id="ReadmeDlg">
+    <InstallUISequence>
+      <Show Dialog="ReadmeForm" Sequence="1301"><![CDATA[Installed="" AND NOT RESUME]]></Show>
+    </InstallUISequence>
     <UI Id="ReadmeDlg">
       <Dialog Id="ReadmeForm" X="50" Y="50" Width="373" Height="287" Title="[ProductName]">
         <Control Id="NextButton" Type="PushButton" X="300" Y="261" Width="66" Height="18" Text="{\VSI_MS_Sans_Serif13.0_0_0}&amp;Next &gt;" TabSkip="no" Default="yes">
@@ -110,8 +113,7 @@
         <Control Id="Line2" Type="Line" X="0" Y="252" Width="375" Height="6" Text="{\VSI_MS_Sans_Serif13.0_0_0}MsiHorizontalLine" TabSkip="yes" Disabled="yes" />
       </Dialog>
     </UI>
-    <InstallUISequence>
-      <Show Dialog="ReadmeForm" Sequence="1301"><![CDATA[Installed="" AND NOT RESUME]]></Show>
-    </InstallUISequence>
+  </Fragment>
+  <Fragment Id="CustomCheck1Dlg">
   </Fragment>
 </Wix>

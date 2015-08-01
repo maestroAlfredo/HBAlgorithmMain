@@ -18,6 +18,7 @@ namespace VoltageDropCalculatorApplication
         public static int loadclick = 1;
         public static int genclick = 1;
         private string fileNameAppData;
+        bool mformEdit;
 
         OpenFileDialog ofd;
 
@@ -223,6 +224,7 @@ namespace VoltageDropCalculatorApplication
 
         private void editLibraryButton_Click(object sender, EventArgs e)
         {
+            mformEdit = true;
             // Check if Libraries.xml exists, if it doesn't tell the user to create a library.
             if (File.Exists(fileNameAppData))
             {
