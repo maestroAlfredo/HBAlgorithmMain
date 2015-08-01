@@ -55,7 +55,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.78723F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.21277F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 176F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 193F));
             this.tableLayoutPanel1.Controls.Add(this.selectLibraryLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.loadTypeCombo, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.resetLibrary, 3, 0);
@@ -100,7 +100,7 @@
             // 
             // addCableButton
             // 
-            this.addCableButton.Location = new System.Drawing.Point(491, 3);
+            this.addCableButton.Location = new System.Drawing.Point(490, 3);
             this.addCableButton.Name = "addCableButton";
             this.addCableButton.Size = new System.Drawing.Size(170, 23);
             this.addCableButton.TabIndex = 3;
@@ -175,7 +175,7 @@
             this.saveLibraryButton.Name = "saveLibraryButton";
             this.saveLibraryButton.Size = new System.Drawing.Size(208, 25);
             this.saveLibraryButton.TabIndex = 4;
-            this.saveLibraryButton.Text = "Save and Overite Existing Libraries";
+            this.saveLibraryButton.Text = "Save and Overwrite Existing Libraries";
             this.saveLibraryButton.UseVisualStyleBackColor = true;
             this.saveLibraryButton.EnabledChanged += new System.EventHandler(this.saveLibraryButton_EnabledChanged);
             this.saveLibraryButton.Click += new System.EventHandler(this.saveLibraryButton_Click);
