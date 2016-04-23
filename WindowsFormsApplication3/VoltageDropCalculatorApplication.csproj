@@ -52,21 +52,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutBox1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AboutBox1.Designer.cs">
-      <DependentUpon>AboutBox1.cs</DependentUpon>
-    </Compile>
+    <Compile Include="AppConstants.cs" />
     <Compile Include="Class1.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ComponentDets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComponentDets.Designer.cs">
+      <DependentUpon>ComponentDets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DefaultsClass.cs" />
+    <Compile Include="AppInterfaces.cs" />
     <Compile Include="ITreeNodeAware.cs" />
     <Compile Include="libraryForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="libraryForm.Designer.cs">
       <DependentUpon>libraryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LibraryFormVault.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LibraryFormVault.Designer.cs">
+      <DependentUpon>LibraryFormVault.cs</DependentUpon>
     </Compile>
     <Compile Include="mainForm.cs">
       <SubType>Form</SubType>
@@ -80,6 +89,8 @@
     <Compile Include="nodeFeederForm.Designer.cs">
       <DependentUpon>nodeFeederForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProjectClasses.cs" />
+    <Compile Include="ProjectExceptions.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -95,11 +106,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AboutBox1.resx">
-      <DependentUpon>AboutBox1.cs</DependentUpon>
+    <EmbeddedResource Include="ComponentDets.resx">
+      <DependentUpon>ComponentDets.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="libraryForm.resx">
       <DependentUpon>libraryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LibraryFormVault.resx">
+      <DependentUpon>LibraryFormVault.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="mainForm.resx">
       <DependentUpon>mainForm.cs</DependentUpon>

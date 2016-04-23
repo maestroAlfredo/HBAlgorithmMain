@@ -38,7 +38,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.editLibraryButton = new System.Windows.Forms.Button();
-            this.newConductorLibraryButton = new System.Windows.Forms.Button();
+            this.loadLibraryButton = new System.Windows.Forms.Button();
             this.newFeederButton = new System.Windows.Forms.Button();
             this.loadProjectButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -128,7 +128,7 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.editLibraryButton, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.newConductorLibraryButton, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.loadLibraryButton, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.newFeederButton, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.loadProjectButton, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -158,21 +158,21 @@
             this.editLibraryButton.MouseLeave += new System.EventHandler(this.editLibraryButton_MouseLeave);
             this.editLibraryButton.MouseHover += new System.EventHandler(this.editLibraryButton_MouseHover);
             // 
-            // newConductorLibraryButton
+            // loadLibraryButton
             // 
-            this.newConductorLibraryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.newConductorLibraryButton.BackColor = System.Drawing.Color.Transparent;
-            this.newConductorLibraryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newConductorLibraryButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.newConductorLibraryButton.Location = new System.Drawing.Point(4, 321);
-            this.newConductorLibraryButton.Name = "newConductorLibraryButton";
-            this.newConductorLibraryButton.Size = new System.Drawing.Size(292, 64);
-            this.newConductorLibraryButton.TabIndex = 0;
-            this.newConductorLibraryButton.Text = "Create New Libraries";
-            this.newConductorLibraryButton.UseVisualStyleBackColor = false;
-            this.newConductorLibraryButton.Click += new System.EventHandler(this.newConductorLibraryButton_Click);
-            this.newConductorLibraryButton.MouseLeave += new System.EventHandler(this.newConductorLibraryButton_MouseLeave);
-            this.newConductorLibraryButton.MouseHover += new System.EventHandler(this.newConductorLibraryButton_MouseHover_1);
+            this.loadLibraryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.loadLibraryButton.BackColor = System.Drawing.Color.Transparent;
+            this.loadLibraryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadLibraryButton.ForeColor = System.Drawing.Color.SteelBlue;
+            this.loadLibraryButton.Location = new System.Drawing.Point(4, 321);
+            this.loadLibraryButton.Name = "loadLibraryButton";
+            this.loadLibraryButton.Size = new System.Drawing.Size(292, 64);
+            this.loadLibraryButton.TabIndex = 0;
+            this.loadLibraryButton.Text = "Loads";
+            this.loadLibraryButton.UseVisualStyleBackColor = false;
+            this.loadLibraryButton.Click += new System.EventHandler(this.loadLibraryButton_Click);
+            this.loadLibraryButton.MouseLeave += new System.EventHandler(this.newConductorLibraryButton_MouseLeave);
+            this.loadLibraryButton.MouseHover += new System.EventHandler(this.newConductorLibraryButton_MouseHover_1);
             // 
             // newFeederButton
             // 
@@ -321,7 +321,7 @@
         private System.Windows.Forms.Button newFeederButton;
         private System.Windows.Forms.Button loadProjectButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button newConductorLibraryButton;
+        private System.Windows.Forms.Button loadLibraryButton;
         private System.Windows.Forms.Button editLibraryButton;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTipEdit;

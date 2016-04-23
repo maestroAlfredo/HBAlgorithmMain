@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.IO;
 
 
+
 namespace VoltageDropCalculatorApplication
 {
     public partial class mainForm : Form
@@ -105,7 +106,7 @@ namespace VoltageDropCalculatorApplication
 
                 if (result == DialogResult.Yes)
                 {
-                    newConductorLibraryButton.PerformClick();
+                    loadLibraryButton.PerformClick();
                 }
 
                 if (result == DialogResult.No)
@@ -254,7 +255,7 @@ namespace VoltageDropCalculatorApplication
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 DialogResult result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
 
-                if (result == System.Windows.Forms.DialogResult.Yes) newConductorLibraryButton.PerformClick();
+                if (result == System.Windows.Forms.DialogResult.Yes) loadLibraryButton.PerformClick();
                 else
                 {
                     // do nothing.
@@ -284,7 +285,7 @@ namespace VoltageDropCalculatorApplication
             //infoLabel.Text = "Click this button to create a new generator library.Note: Doing this will overite any existing generator library";
         }
 
-        private void newConductorLibraryButton_Click(object sender, EventArgs e)
+        private void loadLibraryButton_Click(object sender, EventArgs e)
         {
             // Warn the user that old libraries will be erased.
             string message = "This will erase any existing libraries. If there are currently no libraries available or you would like to create a new library, you may continue.";
@@ -294,50 +295,56 @@ namespace VoltageDropCalculatorApplication
 
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                DataTable conductorTable = new DataTable(); //creates a new Datatable object for the loads        
 
-                conductorTable.TableName = "Conductors";
+                LibraryFormVault libraryForm = new LibraryFormVault();
+                if(libraryForm.ShowDialog().Equals(DialogResult.OK))
+                {
 
-                DataColumn dc1 = new DataColumn("Code", typeof(string)); //dreates the new datacolumn objects;
-                DataColumn dc2 = new DataColumn("R/km@T1", typeof(double));
-                DataColumn dc3 = new DataColumn("T", typeof(double));
-                DataColumn dc4 = new DataColumn("k", typeof(double));
-                DataColumn dc5 = new DataColumn("Description", typeof(string));
-                DataColumn dc6 = new DataColumn("Selected", typeof(bool));
+                }
+                //DataTable conductorTable = new DataTable(); //creates a new Datatable object for the loads        
 
-                conductorTable.Columns.Add(dc1); //associates the columns to the dtLoads datatable
-                conductorTable.Columns.Add(dc2);
-                conductorTable.Columns.Add(dc3);
-                conductorTable.Columns.Add(dc4);
-                conductorTable.Columns.Add(dc5);
-                conductorTable.Columns.Add(dc6);
+                //conductorTable.TableName = "Conductors";
 
-                conductorTable.PrimaryKey = new DataColumn[] { conductorTable.Columns["Code"] };
+                //DataColumn dc1 = new DataColumn("Code", typeof(string)); //dreates the new datacolumn objects;
+                //DataColumn dc2 = new DataColumn("R/km@T1", typeof(double));
+                //DataColumn dc3 = new DataColumn("T", typeof(double));
+                //DataColumn dc4 = new DataColumn("k", typeof(double));
+                //DataColumn dc5 = new DataColumn("Description", typeof(string));
+                //DataColumn dc6 = new DataColumn("Selected", typeof(bool));
 
-                conductorTable.Rows.Add("ABC25", 1.20000000000073, 228.0, 0.5, "25 mm2 Al French std", false);
-                conductorTable.Rows.Add("ABC35", 0.8689000000000393, 228.0, 0.7, "35 mm2 Al French std", false);
-                conductorTable.Rows.Add("ABC50", 0.640999999999622, 228, 1.0, "50 mm2 Al French std", false);
-                conductorTable.Rows.Add("ABC70", 0.443000000000211, 228, 1.4, "70 mm2 Al French std", false);
-                conductorTable.Rows.Add("ABC95", 0.320000000000164, 228, 1.9, "95 mm2 Al French std", false);
-                conductorTable.Rows.Add("A10", 1.88999999999942, 241, 1, "Cu", false);
-                conductorTable.Rows.Add("35mmCu", 0.524, 241, 1, "35 mm2 Copper", false);
-                conductorTable.Rows.Add("50mmCu", 0.387, 241, 1, "50 mm2 Copper", false);
-                conductorTable.Rows.Add("70mmCu", 0.268, 241, 1, "70 mm2 Copper", false);
-                conductorTable.Rows.Add("95mmCu", 0.193, 241, 1, "95 mm2 Copper", false);
+                //conductorTable.Columns.Add(dc1); //associates the columns to the dtLoads datatable
+                //conductorTable.Columns.Add(dc2);
+                //conductorTable.Columns.Add(dc3);
+                //conductorTable.Columns.Add(dc4);
+                //conductorTable.Columns.Add(dc5);
+                //conductorTable.Columns.Add(dc6);
 
-                if (libraryDataSet.Tables.Contains("Conductors")) libraryDataSet.Tables.Remove("Conductors");//remove any previously existing table from the dataset
+                //conductorTable.PrimaryKey = new DataColumn[] { conductorTable.Columns["Code"] };
 
-                libraryDataSet.Tables.Add(conductorTable);
-                //var fileNameAppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Libraries.xml");
-                libraryDataSet.WriteXml(fileNameAppData, XmlWriteMode.WriteSchema);
+                //conductorTable.Rows.Add("ABC25", 1.20000000000073, 228.0, 0.5, "25 mm2 Al French std", false);
+                //conductorTable.Rows.Add("ABC35", 0.8689000000000393, 228.0, 0.7, "35 mm2 Al French std", false);
+                //conductorTable.Rows.Add("ABC50", 0.640999999999622, 228, 1.0, "50 mm2 Al French std", false);
+                //conductorTable.Rows.Add("ABC70", 0.443000000000211, 228, 1.4, "70 mm2 Al French std", false);
+                //conductorTable.Rows.Add("ABC95", 0.320000000000164, 228, 1.9, "95 mm2 Al French std", false);
+                //conductorTable.Rows.Add("A10", 1.88999999999942, 241, 1, "Cu", false);
+                //conductorTable.Rows.Add("35mmCu", 0.524, 241, 1, "35 mm2 Copper", false);
+                //conductorTable.Rows.Add("50mmCu", 0.387, 241, 1, "50 mm2 Copper", false);
+                //conductorTable.Rows.Add("70mmCu", 0.268, 241, 1, "70 mm2 Copper", false);
+                //conductorTable.Rows.Add("95mmCu", 0.193, 241, 1, "95 mm2 Copper", false);
 
-                /* Then reset the loads & DG's*/
-                resetLoadsGens(libraryDataSet);
+                //if (libraryDataSet.Tables.Contains("Conductors")) libraryDataSet.Tables.Remove("Conductors");//remove any previously existing table from the dataset
 
-                bool enabled = true;
-                libraryForm frm = new libraryForm("Conductors", enabled, libraryDataSet);
-                frm.saveLibraryButton.Text = "Save";
-                frm.ShowDialog();
+                //libraryDataSet.Tables.Add(conductorTable);
+                ////var fileNameAppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Libraries.xml");
+                //libraryDataSet.WriteXml(fileNameAppData, XmlWriteMode.WriteSchema);
+
+                ///* Then reset the loads & DG's*/
+                //resetLoadsGens(libraryDataSet);
+
+                //bool enabled = true;
+                //libraryForm frm = new libraryForm("Conductors", enabled, libraryDataSet);
+                //frm.saveLibraryButton.Text = "Save";
+                //frm.ShowDialog();
 
 
 
@@ -514,8 +521,8 @@ namespace VoltageDropCalculatorApplication
             labelMainFormText.Font = new Font(labelMainFormText.Font, FontStyle.Italic);
 
             // Make the text on the label bold
-            var font = newConductorLibraryButton.Font;
-            newConductorLibraryButton.Font = new Font(font, FontStyle.Bold);
+            var font = loadLibraryButton.Font;
+            loadLibraryButton.Font = new Font(font, FontStyle.Bold);
             font.Dispose();
         }
 
@@ -525,8 +532,8 @@ namespace VoltageDropCalculatorApplication
             labelMainFormText.Font = new Font(labelMainFormText.Font, FontStyle.Italic);
 
             // Make the text on the label bold
-            var font = newConductorLibraryButton.Font;
-            newConductorLibraryButton.Font = new Font(font, FontStyle.Regular);
+            var font = loadLibraryButton.Font;
+            loadLibraryButton.Font = new Font(font, FontStyle.Regular);
             font.Dispose();
         }
 

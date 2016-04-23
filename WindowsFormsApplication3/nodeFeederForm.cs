@@ -1867,8 +1867,7 @@ namespace VoltageDropCalculatorApplication
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutBox1 abBox = new AboutBox1();
-            abBox.ShowDialog();
+          
         }
     }
 }
