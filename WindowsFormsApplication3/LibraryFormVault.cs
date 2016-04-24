@@ -123,7 +123,7 @@ namespace VoltageDropCalculatorApplication
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form componentDets = new ComponentDets(new Load());
+            Form componentDets = new ComponentDets(new Load(), m_Library);
             //Form componentDets = new ComponentDets();
             componentDets.Show();     
         }
@@ -188,13 +188,13 @@ namespace VoltageDropCalculatorApplication
 
         private void generatorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form componentDets = new ComponentDets(new Load());
+            Form componentDets = new ComponentDets(new Load(), m_Library);
             componentDets.Show();
         }
 
         private void conductorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form componentDets = new ComponentDets(new Conductor());
+            Form componentDets = new ComponentDets(new Conductor(), m_Library);
             componentDets.Show();
         }
     }
