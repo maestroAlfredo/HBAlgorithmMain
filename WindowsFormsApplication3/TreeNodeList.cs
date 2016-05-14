@@ -15,10 +15,11 @@ namespace VoltageDropCalculatorApplication
         this.Parent = Parent;
     }
  
-    public new TreeNode<T> Add(TreeNode<T> Node)
+    //hides/overides the behaviour of the list.Add(TreeNode) method
+    public  new TreeNode<T> Add(TreeNode<T> Node)
     {
-        base.Add(Node);
-        Node.Parent = Parent;
+        base.Add(Node); //adds the object to the list
+        Node.Parent = Parent; //makes the Parent of the node
         return Node;
     }
  

@@ -10,35 +10,51 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
 using System.Xml;
+using System.Runtime.Serialization;
 
 namespace VoltageDropCalculatorApplication
 {
     public partial class LibraryFormVault : Form
     {
 
-        public Library m_Library { get; set; }
+        private static Library m_Library;
         public List<Library> LibraryList { get; set; }
         private List<string> _vaultNames;
         private DataTable _componentTable;
+        private FileInfo _file;
+
+        public static Library CurrentLibrary
+        {
+            get
+            {
+                return m_Library;
+            }
+            set
+            {
+                m_Library = value;
+            }
+        }
 
         public LibraryFormVault()
         {
+            _file = GenerateFile();                    
             InitializeComponent();
             InitializeLibraries();
             SetVaultNames();
             SetDataGridView();
+            
 
         }
 
         private void SetVaultNames()
         {
-            vaultComboBox.DataSource = m_Library.ListOfVaults.Select(vault => vault.VaultName).ToList();
+            vaultComboBox.DataSource = CurrentLibrary.ListOfVaults.Select(vault => vault.VaultName).ToList();
         }
 
         private void SetDataGridView()
         {
             //Gets the first IVaultComponent in the Library vault list to be used to set up the datatable columns
-            VaultComponent component = m_Library.ListOfVaults[0].ComponentList[0];
+            VaultComponent component = CurrentLibrary.ListOfVaults[0].ComponentList[0];
             PropertyInfo[] propertyInfo = component.GetType().GetProperties();
 
             //add the corresponding IVaultComponent properties as columns in the datatable
@@ -53,12 +69,13 @@ namespace VoltageDropCalculatorApplication
 
             //makes the first column a primary key of the component table. 
             DataColumn[] key = new DataColumn[1];
-            key[0] = _componentTable.Columns[0];
+            key[0] = _componentTable.Columns["Name"];
             _componentTable.PrimaryKey = key;
+            _componentTable.Columns["Name"].SetOrdinal(0);
 
 
             //Populate the datatable with the values in the vault corresponding to displayed text in the vaultComboBox
-            Vault vault = m_Library.ListOfVaults.Find(vaultItem => vaultItem.VaultName.Equals(vaultComboBox.Text));
+            Vault vault = CurrentLibrary.ListOfVaults.Find(vaultItem => vaultItem.VaultName.Equals(vaultComboBox.Text));
 
             foreach (VaultComponent vaultComponent in vault.ComponentList)
             {
@@ -76,6 +93,11 @@ namespace VoltageDropCalculatorApplication
             componentDataGridView.DataSource = _componentTable.AsDataView();
         }
 
+        public void RefreshDataGridView()
+        {
+            SetDataGridView();
+        }
+
         private void _componentTable_TableNewRow(object sender, DataTableNewRowEventArgs e)
         {
             e.Row[AppConstants.VaultColumnName] = vaultComboBox.Text;
@@ -84,13 +106,13 @@ namespace VoltageDropCalculatorApplication
         private void InitializeVaultNames()
         {
             _vaultNames = new List<string>();
-            foreach (Vault vault in m_Library.ListOfVaults)
+            foreach (Vault vault in CurrentLibrary.ListOfVaults)
             {
                 _vaultNames.Add(vault.VaultName);
             }
 
             //gets the list of vault names to use for the vaultCombobox
-            vaultComboBox.DataSource = m_Library.ListOfVaults.Select(vaultName => vaultName.VaultName).ToList();
+            vaultComboBox.DataSource = CurrentLibrary.ListOfVaults.Select(vaultName => vaultName.VaultName).ToList();
 
         }
 
@@ -115,7 +137,7 @@ namespace VoltageDropCalculatorApplication
             generatorLibrary.Add(DefaultVaults.GetGeneratorVaults());
             LibraryList.Add(generatorLibrary);
 
-            m_Library = LibraryList[0]; //gets the first library in the library list to use as the m_Library;            
+            CurrentLibrary = LibraryList[0]; //gets the first library in the library list to use as the m_Library;            
 
             //adds the librarynames to the conductors combobox as a datasource
             libraryTypeComboBox.DataSource = LibraryList.Select(item => item.LibraryName).ToList();
@@ -123,7 +145,7 @@ namespace VoltageDropCalculatorApplication
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form componentDets = new ComponentDets(new Load(), m_Library);
+            Form componentDets = new ComponentDets(new Load(LoadType.Load), this);
             //Form componentDets = new ComponentDets();
             componentDets.Show();     
         }
@@ -135,13 +157,14 @@ namespace VoltageDropCalculatorApplication
 
         private void vaultComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             SetDataGridView();
 
         }
 
         private void libraryTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            m_Library = LibraryList.Find(item => item.LibraryName.Equals(libraryTypeComboBox.Text));
+            CurrentLibrary = LibraryList.Find(item => item.LibraryName.Equals(libraryTypeComboBox.Text));
             SetVaultNames();
             SetDataGridView();
         }
@@ -149,12 +172,12 @@ namespace VoltageDropCalculatorApplication
         private void okButton_Click(object sender, EventArgs e)
         {
             //if the user is Ok with the new changes, add the components to the list of vault components in the vault
-            Vault vaultToAddTo = m_Library.ListOfVaults.Find(vaultItem => vaultItem.VaultName.Equals(vaultComboBox.Text)); //find the vault that matches the vault name in the library       
+            Vault vaultToAddTo = CurrentLibrary.ListOfVaults.Find(vaultItem => vaultItem.VaultName.Equals(vaultComboBox.Text)); //find the vault that matches the vault name in the library       
             vaultToAddTo.ComponentList.Clear();
             foreach (DataRow componentRow in _componentTable.Rows)
             {
 
-                switch (m_Library.LibraryType)
+                switch (CurrentLibrary.LibraryType)
                 {
                     case LibraryType.Conductor:
                         new Conductor(componentRow, vaultToAddTo);
@@ -173,29 +196,84 @@ namespace VoltageDropCalculatorApplication
 
 
 
-            var writer = new System.Xml.Serialization.XmlSerializer(typeof(Library), new Type[] { typeof(ConductorLibrary), typeof(LoadLibrary), typeof(GeneratorLibary), typeof(ConductorVault), typeof(LoadVault), typeof(GeneratorVault), typeof(Conductor), typeof(Load)});
+            var writer = new System.Xml.Serialization.XmlSerializer(typeof(Library), new Type[] { typeof(ConductorLibrary), typeof(LoadLibrary), typeof(GeneratorLibary), typeof(ConductorVault), typeof(LoadVault), typeof(GeneratorVault), typeof(Conductor), typeof(Load) });
+            WriteObject(_file.FullName);
 
-            System.IO.FileInfo file = new System.IO.FileInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "HBAlgorithmLibraries", "libraries.xml"));
-            file.Directory.Create(); // If the directory already exists, this method does nothing.          
-
-            using (FileStream filestream = File.Create(file.FullName))
-            {
-                writer.Serialize(filestream, m_Library);
-            }
+            Vault result;
+            ReadObject(_file.FullName, out result);
+            Console.WriteLine("Vault Written Successfully");
+            //ReadObject(_file.FullName);
+            //using (FileStream filestream = File.Create(file.FullName))
+            //{
+            //    writer.Serialize(filestream, CurrentLibrary);
+            //}
 
 
         }
 
+        private static FileInfo GenerateFile()
+        {
+            System.IO.FileInfo file = new System.IO.FileInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "HBAlgorithmLibrariesTest", "libraries.xml"));
+            file.Directory.Create(); // If the directory already exists, this method does nothing.          
+            return file;
+        }
+
+        public static void WriteObject(string path)
+        {
+
+            FileStream fs = new FileStream(path,
+            FileMode.Create);
+            XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(fs);
+            DataContractSerializer ser =
+                new DataContractSerializer(typeof(Library), new Type[] { typeof(ConductorLibrary), typeof(LoadLibrary), typeof(GeneratorLibary), typeof(ConductorVault), typeof(LoadVault), typeof(GeneratorVault), typeof(Conductor), typeof(Load) });
+            ser.WriteObject(writer, CurrentLibrary.ListOfVaults[0]);
+            Console.WriteLine("Finished writing object.");
+            writer.Close();
+
+            fs.Close();
+        }
+
+        public static void ReadObject(string path, out Vault result)
+        {
+            // Deserialize an instance of the Person class 
+            // from an XML file. First create an instance of the 
+            // XmlDictionaryReader.
+            FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
+            XmlDictionaryReader reader =
+                XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
+
+            // Create the DataContractSerializer instance.
+            DataContractSerializer ser =
+                new DataContractSerializer(typeof(Library), new Type[] { typeof(ConductorLibrary), typeof(LoadLibrary), typeof(GeneratorLibary), typeof(ConductorVault), typeof(LoadVault), typeof(GeneratorVault), typeof(Conductor), typeof(Load) });
+
+            // Deserialize the data and read it from the instance.
+            Console.WriteLine("Reading this object:");
+
+            result =  (Vault)ser.ReadObject(reader);
+            fs.Close();
+
+        }
+
+
         private void generatorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form componentDets = new ComponentDets(new Load(), m_Library);
-            componentDets.Show();
+          
         }
 
         private void conductorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form componentDets = new ComponentDets(new Conductor(), m_Library);
+            Form componentDets = new ComponentDets(new Conductor(), this);
             componentDets.Show();
+        }
+
+        private void componentToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

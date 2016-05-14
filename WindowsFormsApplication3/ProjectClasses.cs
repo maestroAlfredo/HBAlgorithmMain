@@ -6,41 +6,152 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 namespace VoltageDropCalculatorApplication
 {
+    static class PropertyInfoExtensions
+    {
+        private static int PropertyOrder(this PropertyInfo propInfo)
+        {
+            int output;
+            var orderAttr = (OrderPropertiesAttribute)propInfo.GetCustomAttributes(typeof(OrderPropertiesAttribute), true).SingleOrDefault();
+            output = orderAttr != null ? orderAttr.Order : Int32.MaxValue;
+            return output;
+        }
+    }
+
+    public class OrderPropertiesAttribute : Attribute
+    {
+        public int Order { get; private set; }
+        public OrderPropertiesAttribute(int order)
+        {
+            Order = order;
+        }
+    }
+
+    public class DistributionKiosk : ITreeNodeAware<DistributionKiosk>, IDisposable
+    {
+
+        /// <summary>
+        /// The cable that connects the feeder node to the previous node
+        /// </summary>
+        public Conductor Cable { get; set; }
+        /// <summary>
+        /// The distance to the previous Node
+        /// </summary>
+        public double DistanceToPreviousNode { get; set; }
+        /// <summary>
+        /// The reference to the tree node structure used to build the tree of nodes
+        /// </summary>
+        public TreeNode<DistributionKiosk> Node { get; set; }
+        /// <summary>
+        /// The list of loads or generators connected to the load.
+        /// </summary>
+        public List<Load> loadList { get; set; }
+        /// <summary>
+        /// creates a feeder node
+        /// </summary>
+        /// <param name="cable">The cable that connects the feeder node to the previous node</param>
+        /// <param name="distance">The distance to the previous Node</param>
+        /// <param name="parent">The parent Node if supplied</param>
+        public DistributionKiosk(Conductor cable, double distance)
+        {
+            Cable = cable;
+            DistanceToPreviousNode = distance;
+            loadList = new List<Load>();
+            Node = new TreeNode<DistributionKiosk>(this);
+        }
+        /// <summary>
+        /// Adds this node to the Parent node
+        /// </summary>
+        /// <param name="Parent"></param>
+        public void Add(DistributionKiosk nodeToAdd)
+        {
+
+            //add a Treenode<FeederNode> to this FeederNode's TreeNode<FeederNode> Node Property
+            nodeToAdd.Node.Parent = this.Node;
+        }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects).
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        // ~FeederNode() {
+        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //   Dispose(false);
+        // }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
+
+
+    }
+
+
     public enum LibraryType
     {
         Conductor = 0,
-        Generator = 1,
-        Load = 2
+        Load = 1,
+        Generator = 2
     }
 
     public enum VaultType
     {
         Conductor = 0,
-        Generator = 1,
-        Load = 2
+        Load = 1,
+        Generator = 2
     }
 
     public enum LoadType
-    {
-        Generator = 1,
-        Load = 2
+    {       
+        Load = 1,
+        Generator = 2
     }
 
     public enum ComponentType
     {
         Conductor = 0,
-        Load = 2
+        Load = 1,
+        Generator = 2
     }
 
-    [XmlRoot("VaultComponent", Namespace = "VoltageDropCalculatorApplication", IsNullable = false)]
+
+    [DataContract(Name = "Component", Namespace = "VoltageDropCalculatorApplication")]
     public abstract class VaultComponent
     {
-        public string Description { get; set; }        
+        [DataMember]
+        public string Name { get; set; }
+        [DataMember]
+        public string Description { get; set; }
+        [DataMember]
         private ComponentType _componentType;
+        [DataMember]
         public string VaultName { get; set; }
+        [DataMember]
         private Vault _vault;
 
         public VaultComponent()
@@ -59,6 +170,10 @@ namespace VoltageDropCalculatorApplication
             _componentType = componentType;
         }
 
+       
+
+        
+
         public ComponentType GetComponentType()
         {
             return _componentType;
@@ -72,14 +187,33 @@ namespace VoltageDropCalculatorApplication
         public void SetVault(Vault vault)
         {
             _vault = vault;
+            VaultName = vault.VaultName;
         }
+
+        public static implicit operator VaultType(VaultComponent component)
+        {
+            VaultType vaultType = VaultType.Generator;
+            switch (component.GetComponentType())
+            {
+                case ComponentType.Conductor:
+                    vaultType = VaultType.Conductor;
+                    break;
+                case ComponentType.Load:
+                    vaultType = VaultType.Load;
+                    break;
+                default:
+                    break;
+            }
+            return vaultType;
+        }
+
+       
     }
 
     [XmlInclude(typeof(VaultComponent))]
     [Serializable]
     public class Conductor : VaultComponent
-    {
-        public string ConductorName { get; set; }
+    {        
         public double Diameter { get; set; }
         public double Rkmt1 { get; set; }
         public double T { get; set; }
@@ -87,12 +221,12 @@ namespace VoltageDropCalculatorApplication
 
         public Conductor()
         {
-
+            SetComponentType(ComponentType.Conductor);
         }
 
         public Conductor(Vault vault, string name, double diameter, double rKmT1, double t, double kparam = 1, string description = "") : base(vault)
         {
-            ConductorName = name;
+            Name = name;
             Diameter = diameter;
             Rkmt1 = rKmT1;
             T = t;
@@ -104,7 +238,7 @@ namespace VoltageDropCalculatorApplication
         public Conductor(DataRow row, Vault vault) : base(vault)
         {
             PropertyInfo[] properties = this.GetType().GetProperties();
-            ConductorName = row[properties.Where(item => item.Name.Equals("ConductorName")).First().Name].ToString();
+            Name = row[properties.Where(item => item.Name.Equals("Name")).First().Name].ToString();
             Diameter = Convert.ToDouble(row[properties.Where(item => item.Name.Equals("Diameter")).First().Name]);
             Rkmt1 = Convert.ToDouble(row[properties.Where(item => item.Name.Equals("Rkmt1")).First().Name]);
             T = Convert.ToDouble(row[properties.Where(item => item.Name.Equals("T")).First().Name]);
@@ -117,12 +251,11 @@ namespace VoltageDropCalculatorApplication
     /// <summary>
     /// A class that can describe a load based on its properties
     /// </summary>
-    
+
     [XmlInclude(typeof(VaultComponent))]
     [Serializable]
     public class Load : VaultComponent
-    {
-        public string LoadDGName { get; set; }
+    {       
         public LoadType LoadType { get; set; }
         public double Alpha { get; set; }
         public double Beta { get; set; }
@@ -131,8 +264,17 @@ namespace VoltageDropCalculatorApplication
 
         public Load()
         {
+            
 
         }
+
+        public Load(LoadType loadType)
+        {
+            LoadType = loadType;
+            SetComponentType(loadType == LoadType.Load ? ComponentType.Load : ComponentType.Generator);
+
+        }
+
 
         /// <summary>
         /// Constructor that accepts the parameters of the load as values 
@@ -146,12 +288,13 @@ namespace VoltageDropCalculatorApplication
         /// <param name="description">Personal description of the load/generator </param>
         public Load(Vault vault, string loadDGName, LoadType loadType, double alpha, double beta, double cb, string description = "") : base(vault)
         {
-            LoadDGName = loadDGName;
+            Name = loadDGName;
             LoadType = loadType;
             Alpha = alpha;
             Beta = beta;
             Cb = cb;
             Description = description;
+            SetComponentType(loadType == LoadType.Load ? ComponentType.Load : ComponentType.Generator);
         }
 
         /// <summary>
@@ -163,24 +306,29 @@ namespace VoltageDropCalculatorApplication
         public Load(DataRow row, LoadType loadType, Vault vault) : base(vault)
         {
             PropertyInfo[] properties = this.GetType().GetProperties();
-            LoadDGName = row[properties.Where(item => item.Name.Equals("LoadDGName")).First().Name].ToString();
+            Name = row[properties.Where(item => item.Name.Equals("Name")).First().Name].ToString();
             Alpha = Convert.ToDouble(row[properties.Where(item => item.Name.Equals("Alpha")).First().Name]);
             Beta = Convert.ToDouble(row[properties.Where(item => item.Name.Equals("Beta")).First().Name]);
             Cb = Convert.ToDouble(row[properties.Where(item => item.Name.Equals("Cb")).First().Name]);
             Description = row[properties.Where(item => item.Name.Equals("Description")).First().Name].ToString();
             LoadType = loadType;
+            SetComponentType(loadType == LoadType.Load ? ComponentType.Load : ComponentType.Generator);
         }
 
     }
 
     [XmlRoot("Vault", Namespace = "VoltageDropCalculatorApplication", IsNullable = false)]
+    [DataContract(IsReference =true)]
     public abstract class Vault
     {
+        [DataMember]
         public string VaultName { get; set; }
+        [DataMember]
         public List<VaultComponent> ComponentList { get; set; }
-        public Library Library{get;set;}
+        [DataMember]
+        public Library Library { get; set; }
+        [DataMember]
         public VaultType VaultType { get; set; }
-
         public Vault()
         {
 
@@ -188,7 +336,7 @@ namespace VoltageDropCalculatorApplication
 
         public Vault(string vaultName, Library library)
         {
-            VaultName = vaultName;                       
+            VaultName = vaultName;
             ComponentList = new List<VaultComponent>();
             Library = library;
             Library.Add(this);
@@ -202,7 +350,7 @@ namespace VoltageDropCalculatorApplication
 
         public void Add(VaultComponent vaultComponent)
         {
-            if(this.VaultType!=vaultComponent.GetVault().VaultType)
+            if (this.VaultType != vaultComponent.GetVault().VaultType)
             {
                 throw new ComponentMismatchException(AppConstants.ComponentMismatchExceptionString);
             }
@@ -211,7 +359,7 @@ namespace VoltageDropCalculatorApplication
                 vaultComponent.SetVault(this); //makes the current Vault the vault which the component belongs.
                 ComponentList.Add(vaultComponent);
             }
-            
+
 
         }
 
@@ -238,7 +386,7 @@ namespace VoltageDropCalculatorApplication
             VaultType = VaultType.Conductor;
         }
 
-        public ConductorVault(string vaultName):base(vaultName)
+        public ConductorVault(string vaultName) : base(vaultName)
         {
             VaultType = VaultType.Conductor;
         }
@@ -288,25 +436,31 @@ namespace VoltageDropCalculatorApplication
     /// A library class
     /// </summary>
     [XmlRoot("Library", Namespace = "VoltageDropCalculatorApplication", IsNullable = false)]
+    [DataContract(IsReference = true, Name = "Library", Namespace = "VoltageDropCalculatorApplication")]
     public abstract class Library
     {
         /// <summary>
         /// The type of the vaults in the library
         /// </summary>
+        [DataMember]
         public VaultType VaultType { get; set; }
         /// <summary>
         /// The name of the Library
         /// </summary>
+        [DataMember]
         public string LibraryName { get; set; }
         /// <summary>
         /// The type of the Library
         /// </summary>
+        /// 
+        [DataMember]
         public LibraryType LibraryType { get; set; }
         /// <summary>
         /// The list of Vaults that the Library will contain
         /// </summary>
         /// 
-        [XmlArray("ListOfVaults"), XmlArrayItem("Vault", typeof(Vault))]
+        //[XmlArray("ListOfVaults"), XmlArrayItem("Vault", typeof(Vault))]
+        [DataMember]
         public List<Vault> ListOfVaults { get; set; }
 
         /// <summary>
@@ -321,16 +475,16 @@ namespace VoltageDropCalculatorApplication
 
         public void Add(Vault vault)
         {
-            if(VaultType!=vault.VaultType)
+            if (VaultType != vault.VaultType)
             {
                 VaultMismatchException ex = new VaultMismatchException("Cannot add a vault of type " + vault.Library.LibraryType.ToString() + " to type " + LibraryType.ToString());
-                throw ex;              
+                throw ex;
             }
             else
             {
                 vault.Library = this; //changes the Library to which the vault was added to the current Library.
                 ListOfVaults.Add(vault); //adds the vault to the list of vaults in the library
-            }           
+            }
         }
 
         public void Add(List<Vault> vaultList)
@@ -354,7 +508,7 @@ namespace VoltageDropCalculatorApplication
     {
         private ConductorLibrary()
         {
-           
+
         }
         public ConductorLibrary(string libraryName) : base(libraryName)
         {
@@ -370,7 +524,7 @@ namespace VoltageDropCalculatorApplication
     {
         private LoadLibrary()
         {
-            
+
         }
 
         public LoadLibrary(string libraryName) : base(libraryName)
@@ -384,10 +538,10 @@ namespace VoltageDropCalculatorApplication
     [XmlInclude(typeof(Library))]
     [Serializable]
     public class GeneratorLibary : Library
-    {        
+    {
         private GeneratorLibary()
         {
-            
+
         }
 
         public GeneratorLibary(string libraryName) : base(libraryName)
@@ -397,6 +551,11 @@ namespace VoltageDropCalculatorApplication
         }
 
 
+    }
+
+    public class LibrarySet
+    {
+        public LoadLibrary LoadLibrary { get; set; }
     }
 
 

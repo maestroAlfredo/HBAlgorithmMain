@@ -24,8 +24,8 @@ namespace VoltageDropCalculatorApplication
 
             //creates two new instances of conductor vaults
             _conductorVaultList = new List<Vault>();
-            ConductorVault conductorVault1 = new ConductorVault(AppConstants.Vault1Name);
-            ConductorVault conductorVault2 = new ConductorVault(AppConstants.Vault2Name);
+            ConductorVault conductorVault1 = new ConductorVault("Vconductor1");
+            ConductorVault conductorVault2 = new ConductorVault("Vconductor2");
 
             //adds the conductor vaults to the conductor vault list
             _conductorVaultList.Add(conductorVault1);
@@ -41,11 +41,9 @@ namespace VoltageDropCalculatorApplication
                 new Conductor(vault, "ABC50", 50, 0.64, 228, 1, "ABC 50sq.mm Al French Standard");
             }
 
-
-
             _loadVaultList = new List<Vault>();
-            LoadVault loadVault1 = new LoadVault(AppConstants.Vault1Name);
-            LoadVault loadVault2 = new LoadVault(AppConstants.Vault2Name);
+            LoadVault loadVault1 = new LoadVault("VLoad1");
+            LoadVault loadVault2 = new LoadVault("VLoad2");
 
             _loadVaultList.Add(loadVault1);
             _loadVaultList.Add(loadVault2);
@@ -58,8 +56,8 @@ namespace VoltageDropCalculatorApplication
 
             _generatorVaultList = new List<Vault>();
 
-            GeneratorVault genVault1 = new GeneratorVault(AppConstants.Vault1Name);
-            GeneratorVault genVault2 = new GeneratorVault(AppConstants.Vault2Name);
+            GeneratorVault genVault1 = new GeneratorVault("VGen1");
+            GeneratorVault genVault2 = new GeneratorVault("VGen2");
 
             _generatorVaultList.Add(genVault1);
             _generatorVaultList.Add(genVault2);

@@ -25,6 +25,7 @@ namespace VoltageDropCalculatorApplication
             this.Value = Value;
             this.Parent = Parent;
             Children = new TreeNodeList<T>(this);
+            
         }
 
         private TreeNode<T> _Parent;
@@ -33,21 +34,25 @@ namespace VoltageDropCalculatorApplication
             get { return _Parent; }
             set
             {
+                //if the node is the parent return
                 if (value == _Parent)
                 {
                     return;
                 }
 
+                //if this node we're trying to create a parent for already has another parent, remove it from that parents child list. 
                 if (_Parent != null)
                 {
                     _Parent.Children.Remove(this);
                 }
 
+                //if the value isn't null and the value's children list doesn't contain this object, then add the value to the child list
                 if (value != null && !value.Children.Contains(this))
                 {
                     value.Children.Add(this);
                 }
 
+                //set the parent to the node specified
                 _Parent = value;
             }
         }
