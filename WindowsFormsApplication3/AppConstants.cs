@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VoltageDropCalculatorApplication
 {
-    class AppConstants
+    public class AppConstants
     {
 
         #region LibraryNames

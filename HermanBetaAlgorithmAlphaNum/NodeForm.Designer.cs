@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.lengthNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
@@ -64,7 +64,6 @@
             this.nodeDataGridView = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.proceedToVCalcButton = new System.Windows.Forms.Button();
-            this.selectEndNodeCombo = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.endNodeCombo = new System.Windows.Forms.ComboBox();
             this.cancelButton = new System.Windows.Forms.Button();
@@ -130,13 +129,13 @@
             this.tableLayoutPanel4.Controls.Add(this.cableSelectCombo, 6, 1);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Enabled = false;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 76);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 72);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.3871F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.6129F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(1135, 70);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(1135, 74);
             this.tableLayoutPanel4.TabIndex = 7;
             // 
             // lengthNumericUpDown
@@ -144,7 +143,7 @@
             this.lengthNumericUpDown.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lengthNumericUpDown.DecimalPlaces = 2;
             this.lengthNumericUpDown.ForeColor = System.Drawing.Color.SteelBlue;
-            this.lengthNumericUpDown.Location = new System.Drawing.Point(653, 41);
+            this.lengthNumericUpDown.Location = new System.Drawing.Point(653, 44);
             this.lengthNumericUpDown.Minimum = new decimal(new int[] {
             2,
             0,
@@ -158,13 +157,14 @@
             0,
             0,
             0});
+            this.lengthNumericUpDown.ValueChanged += new System.EventHandler(this.lengthNumericUpDown_ValueChanged);
             // 
             // label7
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label7.Location = new System.Drawing.Point(673, 10);
+            this.label7.Location = new System.Drawing.Point(673, 11);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(119, 13);
             this.label7.TabIndex = 1;
@@ -174,7 +174,7 @@
             // 
             this.nodeNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nodeNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nodeNameTextBox.Location = new System.Drawing.Point(4, 40);
+            this.nodeNameTextBox.Location = new System.Drawing.Point(4, 43);
             this.nodeNameTextBox.MaxLength = 8;
             this.nodeNameTextBox.Name = "nodeNameTextBox";
             this.nodeNameTextBox.Size = new System.Drawing.Size(103, 22);
@@ -185,7 +185,7 @@
             this.label20.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label20.AutoSize = true;
             this.label20.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label20.Location = new System.Drawing.Point(38, 10);
+            this.label20.Location = new System.Drawing.Point(38, 11);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(64, 13);
             this.label20.TabIndex = 1;
@@ -196,9 +196,9 @@
             this.deleteNodeButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.deleteNodeButton.Enabled = false;
             this.deleteNodeButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.deleteNodeButton.Location = new System.Drawing.Point(144, 37);
+            this.deleteNodeButton.Location = new System.Drawing.Point(144, 39);
             this.deleteNodeButton.Name = "deleteNodeButton";
-            this.deleteNodeButton.Size = new System.Drawing.Size(133, 29);
+            this.deleteNodeButton.Size = new System.Drawing.Size(133, 31);
             this.deleteNodeButton.TabIndex = 4;
             this.deleteNodeButton.Text = "Delete Node";
             this.deleteNodeButton.UseVisualStyleBackColor = true;
@@ -208,7 +208,7 @@
             this.label16.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label16.AutoSize = true;
             this.label16.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label16.Location = new System.Drawing.Point(177, 10);
+            this.label16.Location = new System.Drawing.Point(177, 11);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(67, 13);
             this.label16.TabIndex = 1;
@@ -220,7 +220,7 @@
             this.label22.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label22.AutoSize = true;
             this.label22.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label22.Location = new System.Drawing.Point(546, 10);
+            this.label22.Location = new System.Drawing.Point(546, 11);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(66, 13);
             this.label22.TabIndex = 1;
@@ -233,7 +233,7 @@
             this.nodeNameCombo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nodeNameCombo.ForeColor = System.Drawing.Color.SteelBlue;
             this.nodeNameCombo.FormattingEnabled = true;
-            this.nodeNameCombo.Location = new System.Drawing.Point(512, 41);
+            this.nodeNameCombo.Location = new System.Drawing.Point(512, 44);
             this.nodeNameCombo.Name = "nodeNameCombo";
             this.nodeNameCombo.Size = new System.Drawing.Size(104, 21);
             this.nodeNameCombo.TabIndex = 7;
@@ -244,7 +244,7 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label3.Location = new System.Drawing.Point(323, 10);
+            this.label3.Location = new System.Drawing.Point(323, 11);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 1;
@@ -256,9 +256,9 @@
             this.addNodeButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.addNodeButton.Enabled = false;
             this.addNodeButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.addNodeButton.Location = new System.Drawing.Point(284, 37);
+            this.addNodeButton.Location = new System.Drawing.Point(284, 39);
             this.addNodeButton.Name = "addNodeButton";
-            this.addNodeButton.Size = new System.Drawing.Size(133, 29);
+            this.addNodeButton.Size = new System.Drawing.Size(133, 31);
             this.addNodeButton.TabIndex = 4;
             this.addNodeButton.Text = "Add Node";
             this.addNodeButton.UseVisualStyleBackColor = true;
@@ -269,7 +269,7 @@
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label5.Location = new System.Drawing.Point(424, 45);
+            this.label5.Location = new System.Drawing.Point(424, 48);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(23, 13);
             this.label5.TabIndex = 1;
@@ -280,7 +280,7 @@
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label8.Location = new System.Drawing.Point(860, 10);
+            this.label8.Location = new System.Drawing.Point(860, 11);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(34, 13);
             this.label8.TabIndex = 1;
@@ -291,7 +291,7 @@
             this.label17.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label17.AutoSize = true;
             this.label17.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label17.Location = new System.Drawing.Point(978, 10);
+            this.label17.Location = new System.Drawing.Point(978, 11);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(117, 13);
             this.label17.TabIndex = 5;
@@ -302,7 +302,7 @@
             this.nodeCount.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.nodeCount.AutoSize = true;
             this.nodeCount.ForeColor = System.Drawing.Color.SteelBlue;
-            this.nodeCount.Location = new System.Drawing.Point(1030, 45);
+            this.nodeCount.Location = new System.Drawing.Point(1030, 48);
             this.nodeCount.Name = "nodeCount";
             this.nodeCount.Size = new System.Drawing.Size(13, 13);
             this.nodeCount.TabIndex = 5;
@@ -315,10 +315,11 @@
             this.cableSelectCombo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cableSelectCombo.ForeColor = System.Drawing.Color.SteelBlue;
             this.cableSelectCombo.FormattingEnabled = true;
-            this.cableSelectCombo.Location = new System.Drawing.Point(819, 41);
+            this.cableSelectCombo.Location = new System.Drawing.Point(819, 44);
             this.cableSelectCombo.Name = "cableSelectCombo";
             this.cableSelectCombo.Size = new System.Drawing.Size(90, 21);
             this.cableSelectCombo.TabIndex = 2;
+            this.cableSelectCombo.SelectedIndexChanged += new System.EventHandler(this.cableSelectCombo_SelectedIndexChanged);
             // 
             // tableLayoutPanel1
             // 
@@ -331,17 +332,18 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel5, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel6, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label19, 0, 5);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 60);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 73F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 69F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1141, 504);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1141, 540);
             this.tableLayoutPanel1.TabIndex = 17;
             // 
             // drawingPanel
@@ -352,9 +354,9 @@
             this.drawingPanel.Controls.Add(this.label13);
             this.drawingPanel.Controls.Add(this.label12);
             this.drawingPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.drawingPanel.Location = new System.Drawing.Point(3, 432);
+            this.drawingPanel.Location = new System.Drawing.Point(3, 458);
             this.drawingPanel.Name = "drawingPanel";
-            this.drawingPanel.Size = new System.Drawing.Size(1135, 69);
+            this.drawingPanel.Size = new System.Drawing.Size(1135, 79);
             this.drawingPanel.TabIndex = 8;
             // 
             // label13
@@ -547,19 +549,19 @@
             this.nodeDataGridView.AllowUserToDeleteRows = false;
             this.nodeDataGridView.AllowUserToResizeColumns = false;
             this.nodeDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.nodeDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.nodeDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.nodeDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.nodeDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.nodeDataGridView.BackgroundColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.nodeDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.nodeDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.nodeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.nodeDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nodeDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -567,7 +569,7 @@
             this.nodeDataGridView.Location = new System.Drawing.Point(3, 189);
             this.nodeDataGridView.Name = "nodeDataGridView";
             this.nodeDataGridView.RowHeadersVisible = false;
-            this.nodeDataGridView.Size = new System.Drawing.Size(1135, 166);
+            this.nodeDataGridView.Size = new System.Drawing.Size(1135, 192);
             this.nodeDataGridView.TabIndex = 4;
             // 
             // tableLayoutPanel5
@@ -577,14 +579,13 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.45647F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 248F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 249F));
             this.tableLayoutPanel5.Controls.Add(this.proceedToVCalcButton, 4, 0);
-            this.tableLayoutPanel5.Controls.Add(this.selectEndNodeCombo, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.label18, 2, 0);
             this.tableLayoutPanel5.Controls.Add(this.endNodeCombo, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.cancelButton, 0, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 361);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 387);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -595,33 +596,19 @@
             // 
             this.proceedToVCalcButton.Enabled = false;
             this.proceedToVCalcButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.proceedToVCalcButton.Location = new System.Drawing.Point(889, 3);
+            this.proceedToVCalcButton.Location = new System.Drawing.Point(888, 3);
             this.proceedToVCalcButton.Name = "proceedToVCalcButton";
             this.proceedToVCalcButton.Size = new System.Drawing.Size(236, 31);
             this.proceedToVCalcButton.TabIndex = 0;
             this.proceedToVCalcButton.Text = "Proceed to Voltage Drop Calculation";
             this.proceedToVCalcButton.UseVisualStyleBackColor = true;
             // 
-            // selectEndNodeCombo
-            // 
-            this.selectEndNodeCombo.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.selectEndNodeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.selectEndNodeCombo.Enabled = false;
-            this.selectEndNodeCombo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectEndNodeCombo.ForeColor = System.Drawing.Color.SteelBlue;
-            this.selectEndNodeCombo.FormattingEnabled = true;
-            this.selectEndNodeCombo.Location = new System.Drawing.Point(417, 7);
-            this.selectEndNodeCombo.Name = "selectEndNodeCombo";
-            this.selectEndNodeCombo.Size = new System.Drawing.Size(135, 26);
-            this.selectEndNodeCombo.TabIndex = 6;
-            this.selectEndNodeCombo.Visible = false;
-            // 
             // label18
             // 
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(666, 13);
+            this.label18.Location = new System.Drawing.Point(665, 13);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(88, 13);
             this.label18.TabIndex = 5;
@@ -635,7 +622,7 @@
             this.endNodeCombo.ForeColor = System.Drawing.Color.SteelBlue;
             this.endNodeCombo.FormattingEnabled = true;
             this.endNodeCombo.ItemHeight = 20;
-            this.endNodeCombo.Location = new System.Drawing.Point(760, 3);
+            this.endNodeCombo.Location = new System.Drawing.Point(759, 3);
             this.endNodeCombo.Name = "endNodeCombo";
             this.endNodeCombo.Size = new System.Drawing.Size(123, 28);
             this.endNodeCombo.TabIndex = 6;
@@ -661,8 +648,8 @@
             this.tableLayoutPanel6.Controls.Add(this.label4, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.searchTextBox, 1, 0);
             this.tableLayoutPanel6.Controls.Add(this.label2, 2, 0);
-            this.tableLayoutPanel6.Controls.Add(this.nodeNumCombo, 3, 0);
             this.tableLayoutPanel6.Controls.Add(this.detailsCheckBox, 4, 0);
+            this.tableLayoutPanel6.Controls.Add(this.nodeNumCombo, 3, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 152);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
@@ -732,7 +719,7 @@
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.Color.White;
-            this.label19.Location = new System.Drawing.Point(459, 404);
+            this.label19.Location = new System.Drawing.Point(459, 430);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(223, 24);
             this.label19.TabIndex = 3;
@@ -891,7 +878,6 @@
         private System.Windows.Forms.DataGridView nodeDataGridView;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Button proceedToVCalcButton;
-        private System.Windows.Forms.ComboBox selectEndNodeCombo;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ComboBox endNodeCombo;
         private System.Windows.Forms.Button cancelButton;

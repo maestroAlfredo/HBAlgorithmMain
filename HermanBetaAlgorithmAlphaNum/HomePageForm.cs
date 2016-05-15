@@ -7,19 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VoltageDropCalculatorApplication;
 
 namespace HermanBetaAlgorithmAlphaNum
 {
     public partial class HomePageForm : Form
     {
-        public HomePageForm()
+        public LibrarySet ProjectLibraries { get; private set; }
+
+        public HomePageForm(LibrarySet libraries)
         {
             InitializeComponent();
+            ProjectLibraries = libraries;
+
         }
 
         private void newFeederButton_Click(object sender, EventArgs e)
         {
             this.Visible = false;
+
+
             new NodeForm().ShowDialog();
         }
 
