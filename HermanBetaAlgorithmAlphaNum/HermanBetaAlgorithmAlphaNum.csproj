@@ -49,6 +49,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddCustomersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddCustomersForm.Designer.cs">
+      <DependentUpon>AddCustomersForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CopyrightForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +67,12 @@
     <Compile Include="HomePageForm.Designer.cs">
       <DependentUpon>HomePageForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoadSelectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadSelectForm.Designer.cs">
+      <DependentUpon>LoadSelectForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="NodeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,11 +81,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AddCustomersForm.resx">
+      <DependentUpon>AddCustomersForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CopyrightForm.resx">
       <DependentUpon>CopyrightForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HomePageForm.resx">
       <DependentUpon>HomePageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadSelectForm.resx">
+      <DependentUpon>LoadSelectForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NodeForm.resx">
       <DependentUpon>NodeForm.cs</DependentUpon>

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
+using System.IO;
+using System.Xml;
 
 namespace VoltageDropCalculatorApplication
 {
@@ -32,7 +34,10 @@ namespace VoltageDropCalculatorApplication
 
     public class DistributionKiosk : ITreeNodeAware<DistributionKiosk>, IDisposable
     {
-
+        /// <summary>
+        /// The name of the distribution kiosk
+        /// </summary>
+        public string Name { get; set; }
         /// <summary>
         /// The cable that connects the feeder node to the previous node
         /// </summary>
@@ -48,7 +53,12 @@ namespace VoltageDropCalculatorApplication
         /// <summary>
         /// The list of loads or generators connected to the load.
         /// </summary>
-        public List<Load> loadList { get; set; }
+        public List<Load> loadList { get; set; }       
+
+        /// <summary>
+        /// the List of customers that are connected to the different loads.
+        /// </summary>
+        public List<CustomerGroup> customerList { get; set; }   
         /// <summary>
         /// creates a feeder node
         /// </summary>
@@ -117,6 +127,38 @@ namespace VoltageDropCalculatorApplication
         Conductor = 0,
         Load = 1,
         Generator = 2
+    }
+
+    public class CustomerGroup
+    {
+        public int RedPhase { get; set; }
+        public int BluePhase { get; set; }
+        public int WhitePhase { get; set; }
+        public double Distance { get; set; }
+
+        private Load _customerLoad;
+        public Load CustomerLoad
+        {
+            get { return _customerLoad; }
+            set
+            {
+                _customerLoad = value;
+            }
+        }
+
+        public CustomerGroup(int redPhase, int bluePhase, int whitePhase, Load load, double distance)
+        {
+            RedPhase = redPhase;
+            BluePhase = bluePhase;
+            WhitePhase = whitePhase;
+            CustomerLoad = load;
+            Distance = distance;
+        }
+
+        public CustomerGroup()
+        {
+            
+        }
     }
 
     public enum VaultType
@@ -549,13 +591,75 @@ namespace VoltageDropCalculatorApplication
             LibraryType = LibraryType.Generator;
             VaultType = VaultType.Generator;
         }
-
-
     }
 
+    [DataContract(IsReference = true, Name = "LibrarySet", Namespace = "VoltageDropCalculatorApplication")]
     public class LibrarySet
     {
-        public LoadLibrary LoadLibrary { get; set; }
+        [DataMember]
+        public LoadLibrary LoadLibrary { get; private set; }
+
+        [DataMember]
+        public GeneratorLibary GeneratorLibrary { get; private set; }
+
+        [DataMember]
+        public ConductorLibrary ConductorLibrary { get; private set; }
+
+        public LibrarySet(LoadLibrary loads, GeneratorLibary generators, ConductorLibrary conductors)
+        {
+            LoadLibrary = loads;
+            GeneratorLibrary = generators;
+            ConductorLibrary = conductors;
+        }
+    }
+
+    /// <summary>
+    /// This class provides basic read and write functionality for the types in the project.
+    /// </summary>
+    public static class FileHandlers
+    {
+        public static FileInfo GenerateFile()
+        {
+            System.IO.FileInfo file = new System.IO.FileInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "HBAlgorithmLibrariesTest", "libraries.xml"));
+            file.Directory.Create(); // If the directory already exists, this method does nothing.          
+            return file;
+        }
+
+        public static void WriteObject(string path, LibrarySet libraries)
+        {
+
+            FileStream fs = new FileStream(path,
+            FileMode.Create);
+            XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(fs);
+            DataContractSerializer ser =
+                new DataContractSerializer(typeof(LibrarySet), new Type[] { typeof(Library), typeof(ConductorLibrary), typeof(LoadLibrary), typeof(GeneratorLibary), typeof(ConductorVault), typeof(LoadVault), typeof(GeneratorVault), typeof(Conductor), typeof(Load) });
+            ser.WriteObject(writer, libraries);
+            Console.WriteLine("Finished writing object.");
+            writer.Close();
+            fs.Close();
+        }
+
+        public static void ReadObject(string path, out LibrarySet result)
+        {
+            // Deserialize an instance of the Person class 
+            // from an XML file. First create an instance of the 
+            // XmlDictionaryReader.
+            FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
+            XmlDictionaryReader reader =
+                XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
+
+            // Create the DataContractSerializer instance.
+            DataContractSerializer ser =
+                new DataContractSerializer(typeof(LibrarySet), new Type[] { typeof(Library), typeof(ConductorLibrary), typeof(LoadLibrary), typeof(GeneratorLibary), typeof(ConductorVault), typeof(LoadVault), typeof(GeneratorVault), typeof(Conductor), typeof(Load) });
+
+            // Deserialize the data and read it from the instance.
+            Console.WriteLine("Reading this object:");
+
+            result = (LibrarySet)ser.ReadObject(reader);
+            fs.Close();
+
+        }
+
     }
 
 
