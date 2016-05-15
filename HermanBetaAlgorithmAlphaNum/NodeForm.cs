@@ -93,31 +93,6 @@ namespace HermanBetaAlgorithmAlphaNum
 
 
         private DataView _loadsView;
-        public DataView LoadsViewa
-        {
-            get
-            {
-                //create datatable of the load type
-
-                PropertyInfo[] properties = new VoltageDropCalculatorApplication.Load().GetType().GetProperties();
-                foreach(var prop in properties)
-                {
-                    loadData.Columns.Add(prop.Name, prop.PropertyType);
-                }
-                //populate the loaddata table with the loadlist values of the feedernode.
-                foreach(Load load in DistributionKiosk.loadList)
-                {
-                    DataRow row = loadData.NewRow();
-                    foreach(var prop in properties)
-                    {
-                        row[prop.Name] = load.GetType().GetProperty(prop.Name).GetValue(load);
-                    }
-                }
-
-                //create dataview of the datatable
-                return new DataView(loadData);
-            }
-        }
 
         
         

@@ -163,7 +163,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="HBlogo3.ico" />
+    <None Include="Resources\resistor.ico" />
+    <None Include="Resources\Box-29-Electricity-icon.ico" />
     <Content Include="Resources\classica_play_button_flat_rounded_square_white_on_blue_512x512.png" />
+    <None Include="Resources\new_project_icon.png" />
+    <None Include="Resources\new_project_icon.ico" />
+    <None Include="Resources\load_project_icon.ico" />
+    <None Include="Resources\import_vaults_icon.ico" />
+    <None Include="Resources\loads.ico" />
+    <None Include="Resources\conductor.ico" />
     <Content Include="Resources\playButton.png" />
     <Content Include="Resources\HBAlgorithm_usermanual.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

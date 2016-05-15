@@ -275,5 +275,177 @@ namespace VoltageDropCalculatorApplication
         {
 
         }
+
+        private void tableLayoutPanelIcon_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBoxNewProj_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBoxVault_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBoxNewProj_MouseHover(object sender, EventArgs e)
+        {
+            //ToolTip tt = new ToolTip();
+            //tt.SetToolTip(this.pictureBox1, "n p");
+            new ToolTip().SetToolTip(this.pictureBoxNewProj, "Create New Project");
+        }
+
+        private void pictureBoxLoadProj_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void pictureBoxLoadProj_MouseHover(object sender, EventArgs e)
+        {
+            new ToolTip().SetToolTip(this.pictureBoxLoadProj, "Load Previous Project");
+        }
+
+        private void pictureBoxVault_MouseHover(object sender, EventArgs e)
+        {
+            new ToolTip().SetToolTip(this.pictureBoxVault, "Create New Vault");
+        }
+
+        private void pictureBoxImportVault_MouseHover(object sender, EventArgs e)
+        {
+            new ToolTip().SetToolTip(this.pictureBoxImportVault, "Import exist vault");
+        }
+
+        private void pictureBoxConductor_MouseHover(object sender, EventArgs e)
+        {
+            new ToolTip().SetToolTip(this.pictureBoxConductor, "Create a new conductor");
+        }
+
+        private void pictureBox1_MouseHover(object sender, EventArgs e)
+        {
+            new ToolTip().SetToolTip(this.pictureBoxLoad, "Create new Load");
+        }
+
+        private void pictureBoxGen_MouseHover(object sender, EventArgs e)
+        {
+            new ToolTip().SetToolTip(this.pictureBoxGen, "Create new DG");
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void toolStripContainer1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void libraryLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void removeComponentButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void componentDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void vaultToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void componentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void importToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void vaultToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void vaultToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void componentToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBoxConductor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBoxImportVault_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBoxLoad_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBoxGen_Click(object sender, EventArgs e)
+        {
+
+        }     
     }
 }

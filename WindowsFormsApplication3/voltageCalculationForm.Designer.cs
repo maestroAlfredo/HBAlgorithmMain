@@ -42,7 +42,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.sidePanelPictureBox = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.numericUpDownRisk = new System.Windows.Forms.NumericUpDown();
@@ -68,11 +67,11 @@
             this.comboBoxNodeSelect = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.nodeSummaryDataGridView = new System.Windows.Forms.DataGridView();
+            this.sidePanelPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sidePanelPictureBox)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRisk)).BeginInit();
@@ -83,6 +82,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLengths)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nodeSummaryDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sidePanelPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -109,19 +109,6 @@
             this.splitContainer1.Size = new System.Drawing.Size(978, 641);
             this.splitContainer1.SplitterDistance = 641;
             this.splitContainer1.TabIndex = 0;
-            // 
-            // sidePanelPictureBox
-            // 
-            this.sidePanelPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sidePanelPictureBox.Image = global::VoltageDropCalculatorApplication.Properties.Resources.playButton;
-            this.sidePanelPictureBox.Location = new System.Drawing.Point(610, 187);
-            this.sidePanelPictureBox.Name = "sidePanelPictureBox";
-            this.sidePanelPictureBox.Size = new System.Drawing.Size(24, 71);
-            this.sidePanelPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sidePanelPictureBox.TabIndex = 5;
-            this.sidePanelPictureBox.TabStop = false;
-            this.sidePanelPictureBox.Click += new System.EventHandler(this.sidePanelPictureBox_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -593,6 +580,19 @@
             this.nodeSummaryDataGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.nodeSummaryDataGridView_CellValidating);
             this.nodeSummaryDataGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.nodeSummaryDataGridView_EditingControlShowing);
             // 
+            // sidePanelPictureBox
+            // 
+            this.sidePanelPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sidePanelPictureBox.Image = global::VoltageDropCalculatorApplication.Properties.Resources.playButton;
+            this.sidePanelPictureBox.Location = new System.Drawing.Point(610, 187);
+            this.sidePanelPictureBox.Name = "sidePanelPictureBox";
+            this.sidePanelPictureBox.Size = new System.Drawing.Size(24, 71);
+            this.sidePanelPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.sidePanelPictureBox.TabIndex = 5;
+            this.sidePanelPictureBox.TabStop = false;
+            this.sidePanelPictureBox.Click += new System.EventHandler(this.sidePanelPictureBox_Click);
+            // 
             // voltageCalculationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -609,7 +609,6 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.sidePanelPictureBox)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
@@ -623,6 +622,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nodeSummaryDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sidePanelPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }

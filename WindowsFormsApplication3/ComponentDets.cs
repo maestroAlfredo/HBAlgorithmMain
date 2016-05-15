@@ -18,7 +18,7 @@ namespace VoltageDropCalculatorApplication
         private PropertyInfo[] componentProperties;
         private TableLayoutPanel formTableLayoutPanel;
         private List<Vault> listOfVaults;
-        private Library library;
+        private Library Lib;
         private ComboBox vaultNameComboBox;
         private ErrorProvider _errorProvider;
 
@@ -58,7 +58,7 @@ namespace VoltageDropCalculatorApplication
 
             componentProperties.Switch(componentProperties.Length - 3, 0);
             listOfVaults = parent.LibraryList.Where(library => library.VaultType == vaultComponent).First().ListOfVaults;
-            library = parent.LibraryList.Where(library => library.VaultType == vaultComponent).First();
+            Lib = parent.LibraryList.Where(library => library.VaultType == vaultComponent).First();
 
 
 
