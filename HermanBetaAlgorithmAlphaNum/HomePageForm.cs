@@ -25,9 +25,7 @@ namespace HermanBetaAlgorithmAlphaNum
         private void newFeederButton_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-
-
-            new NodeForm().ShowDialog();
+            new LoadSelectForm(ProjectLibraries);
         }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)

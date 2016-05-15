@@ -30,22 +30,22 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.comboBoxLoadVaultSelect = new System.Windows.Forms.ComboBox();
             this.checkedListBoxLoads = new System.Windows.Forms.CheckedListBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.checkedListBoxGenerators = new System.Windows.Forms.CheckedListBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBoxGenVaultSelect = new System.Windows.Forms.ComboBox();
             this.dataGridViewSelectedLoads = new System.Windows.Forms.DataGridView();
             this.dataGridViewSelectedGenerators = new System.Windows.Forms.DataGridView();
-            this.comboBoxLoadVaultSelect = new System.Windows.Forms.ComboBox();
-            this.comboBoxGenVaultSelect = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSelectedLoads)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSelectedGenerators)).BeginInit();
             this.SuspendLayout();
@@ -83,6 +83,48 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(454, 251);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 2;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.94643F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.05357F));
+            this.tableLayoutPanel5.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.comboBoxLoadVaultSelect, 1, 0);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 1;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(448, 25);
+            this.tableLayoutPanel5.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(69, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Select Loads";
+            // 
+            // comboBoxLoadVaultSelect
+            // 
+            this.comboBoxLoadVaultSelect.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBoxLoadVaultSelect.FormattingEnabled = true;
+            this.comboBoxLoadVaultSelect.Location = new System.Drawing.Point(173, 3);
+            this.comboBoxLoadVaultSelect.Name = "comboBoxLoadVaultSelect";
+            this.comboBoxLoadVaultSelect.Size = new System.Drawing.Size(272, 21);
+            this.comboBoxLoadVaultSelect.TabIndex = 1;
+            // 
+            // checkedListBoxLoads
+            // 
+            this.checkedListBoxLoads.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkedListBoxLoads.FormattingEnabled = true;
+            this.checkedListBoxLoads.Location = new System.Drawing.Point(3, 34);
+            this.checkedListBoxLoads.Name = "checkedListBoxLoads";
+            this.checkedListBoxLoads.Size = new System.Drawing.Size(448, 214);
+            this.checkedListBoxLoads.TabIndex = 2;
+            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
@@ -98,6 +140,15 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(454, 244);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
+            // checkedListBoxGenerators
+            // 
+            this.checkedListBoxGenerators.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkedListBoxGenerators.FormattingEnabled = true;
+            this.checkedListBoxGenerators.Location = new System.Drawing.Point(3, 35);
+            this.checkedListBoxGenerators.Name = "checkedListBoxGenerators";
+            this.checkedListBoxGenerators.Size = new System.Drawing.Size(448, 206);
+            this.checkedListBoxGenerators.TabIndex = 3;
+            // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 2;
@@ -110,32 +161,8 @@
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(448, 27);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(448, 26);
             this.tableLayoutPanel4.TabIndex = 0;
-            // 
-            // tableLayoutPanel5
-            // 
-            this.tableLayoutPanel5.ColumnCount = 2;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.94643F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.05357F));
-            this.tableLayoutPanel5.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.comboBoxLoadVaultSelect, 1, 0);
-            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 1;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(448, 26);
-            this.tableLayoutPanel5.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Select Loads";
             // 
             // label2
             // 
@@ -146,23 +173,14 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Select Generators";
             // 
-            // checkedListBoxLoads
+            // comboBoxGenVaultSelect
             // 
-            this.checkedListBoxLoads.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkedListBoxLoads.FormattingEnabled = true;
-            this.checkedListBoxLoads.Location = new System.Drawing.Point(3, 35);
-            this.checkedListBoxLoads.Name = "checkedListBoxLoads";
-            this.checkedListBoxLoads.Size = new System.Drawing.Size(448, 213);
-            this.checkedListBoxLoads.TabIndex = 2;
-            // 
-            // checkedListBoxGenerators
-            // 
-            this.checkedListBoxGenerators.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkedListBoxGenerators.FormattingEnabled = true;
-            this.checkedListBoxGenerators.Location = new System.Drawing.Point(3, 36);
-            this.checkedListBoxGenerators.Name = "checkedListBoxGenerators";
-            this.checkedListBoxGenerators.Size = new System.Drawing.Size(448, 205);
-            this.checkedListBoxGenerators.TabIndex = 3;
+            this.comboBoxGenVaultSelect.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBoxGenVaultSelect.FormattingEnabled = true;
+            this.comboBoxGenVaultSelect.Location = new System.Drawing.Point(179, 3);
+            this.comboBoxGenVaultSelect.Name = "comboBoxGenVaultSelect";
+            this.comboBoxGenVaultSelect.Size = new System.Drawing.Size(266, 21);
+            this.comboBoxGenVaultSelect.TabIndex = 1;
             // 
             // dataGridViewSelectedLoads
             // 
@@ -184,24 +202,6 @@
             this.dataGridViewSelectedGenerators.Size = new System.Drawing.Size(487, 244);
             this.dataGridViewSelectedGenerators.TabIndex = 2;
             // 
-            // comboBoxLoadVaultSelect
-            // 
-            this.comboBoxLoadVaultSelect.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBoxLoadVaultSelect.FormattingEnabled = true;
-            this.comboBoxLoadVaultSelect.Location = new System.Drawing.Point(173, 3);
-            this.comboBoxLoadVaultSelect.Name = "comboBoxLoadVaultSelect";
-            this.comboBoxLoadVaultSelect.Size = new System.Drawing.Size(272, 21);
-            this.comboBoxLoadVaultSelect.TabIndex = 1;
-            // 
-            // comboBoxGenVaultSelect
-            // 
-            this.comboBoxGenVaultSelect.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBoxGenVaultSelect.FormattingEnabled = true;
-            this.comboBoxGenVaultSelect.Location = new System.Drawing.Point(179, 3);
-            this.comboBoxGenVaultSelect.Name = "comboBoxGenVaultSelect";
-            this.comboBoxGenVaultSelect.Size = new System.Drawing.Size(266, 21);
-            this.comboBoxGenVaultSelect.TabIndex = 1;
-            // 
             // LoadSelectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -212,11 +212,11 @@
             this.Text = "LoadSelectForm";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSelectedLoads)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSelectedGenerators)).EndInit();
             this.ResumeLayout(false);

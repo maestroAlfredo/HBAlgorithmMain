@@ -13,9 +13,12 @@ namespace HermanBetaAlgorithmAlphaNum
 {
     public partial class LoadSelectForm : Form
     {
-        public LoadSelectForm()
+        LibrarySet _libraries;
+        public LoadSelectForm(LibrarySet library)
         {
             InitializeComponent();
+            _libraries = library;
+
         }
     }
 }

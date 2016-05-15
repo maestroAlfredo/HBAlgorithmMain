@@ -49,7 +49,7 @@ namespace HermanBetaAlgorithmAlphaNum
                 FileHandlers.ReadObject(FileHandlers.GenerateFile().FullName, out lib);
             }
 
-            new HomePageForm(lib);
+            new HomePageForm(lib).ShowDialog();
 
         }
 
