@@ -56,6 +56,12 @@
     <Compile Include="AddCustomersForm.Designer.cs">
       <DependentUpon>AddCustomersForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ComponentDets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComponentDets.Designer.cs">
+      <DependentUpon>ComponentDets.cs</DependentUpon>
+    </Compile>
     <Compile Include="CopyrightForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +73,12 @@
     </Compile>
     <Compile Include="HomePageForm.Designer.cs">
       <DependentUpon>HomePageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LibraryFormVault.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LibraryFormVault.Designer.cs">
+      <DependentUpon>LibraryFormVault.cs</DependentUpon>
     </Compile>
     <Compile Include="LoadSelectForm.cs">
       <SubType>Form</SubType>
@@ -85,11 +97,17 @@
     <EmbeddedResource Include="AddCustomersForm.resx">
       <DependentUpon>AddCustomersForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ComponentDets.resx">
+      <DependentUpon>ComponentDets.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CopyrightForm.resx">
       <DependentUpon>CopyrightForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HomePageForm.resx">
       <DependentUpon>HomePageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LibraryFormVault.resx">
+      <DependentUpon>LibraryFormVault.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoadSelectForm.resx">
       <DependentUpon>LoadSelectForm.cs</DependentUpon>
@@ -119,6 +137,45 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BackGround.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BackGround1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Box-29-Electricity-icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\conductor1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HBImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\import_vaults_icon1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\load_project_icon1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loads1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new_project_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new_project_icon1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Picture1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\playButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\resistor.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

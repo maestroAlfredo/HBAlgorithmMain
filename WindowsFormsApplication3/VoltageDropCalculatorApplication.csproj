@@ -57,14 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConstants.cs" />
+    <Compile Include="AppExtensions.cs" />
     <Compile Include="Class1.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ComponentDets.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ComponentDets.Designer.cs">
-      <DependentUpon>ComponentDets.cs</DependentUpon>
     </Compile>
     <Compile Include="DefaultsClass.cs" />
     <Compile Include="AppInterfaces.cs" />
@@ -80,12 +75,6 @@
     </Compile>
     <Compile Include="libraryForm.Designer.cs">
       <DependentUpon>libraryForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LibraryFormVault.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LibraryFormVault.Designer.cs">
-      <DependentUpon>LibraryFormVault.cs</DependentUpon>
     </Compile>
     <Compile Include="mainForm.cs">
       <SubType>Form</SubType>
@@ -117,17 +106,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ComponentDets.resx">
-      <DependentUpon>ComponentDets.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Export.resx">
       <DependentUpon>Export.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="libraryForm.resx">
       <DependentUpon>libraryForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LibraryFormVault.resx">
-      <DependentUpon>LibraryFormVault.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="mainForm.resx">
       <DependentUpon>mainForm.cs</DependentUpon>

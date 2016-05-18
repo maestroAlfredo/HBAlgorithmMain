@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using VoltageDropCalculatorApplication;
+using HermanBetaAlgorithmAlphaNum;
 using System.IO;
 
 namespace HermanBetaAlgorithmAlphaNum
@@ -49,7 +49,7 @@ namespace HermanBetaAlgorithmAlphaNum
                 FileHandlers.ReadObject(FileHandlers.GenerateFile().FullName, out lib);
             }
 
-            new HomePageForm(lib);
+            new HomePageForm(lib).ShowDialog();
 
         }
 

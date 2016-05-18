@@ -37,8 +37,8 @@
             this.numericUpDownBlue = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownWhite = new System.Windows.Forms.NumericUpDown();
             this.comboBoxLoadGen = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.comboBoxDistributionKiosk = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
@@ -116,21 +116,21 @@
             // 
             // numericUpDownRed
             // 
-            this.numericUpDownRed.Location = new System.Drawing.Point(141, 42);
+            this.numericUpDownRed.Location = new System.Drawing.Point(140, 42);
             this.numericUpDownRed.Name = "numericUpDownRed";
             this.numericUpDownRed.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownRed.TabIndex = 1;
             // 
             // numericUpDownBlue
             // 
-            this.numericUpDownBlue.Location = new System.Drawing.Point(141, 68);
+            this.numericUpDownBlue.Location = new System.Drawing.Point(140, 68);
             this.numericUpDownBlue.Name = "numericUpDownBlue";
             this.numericUpDownBlue.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownBlue.TabIndex = 1;
             // 
             // numericUpDownWhite
             // 
-            this.numericUpDownWhite.Location = new System.Drawing.Point(141, 94);
+            this.numericUpDownWhite.Location = new System.Drawing.Point(140, 94);
             this.numericUpDownWhite.Name = "numericUpDownWhite";
             this.numericUpDownWhite.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownWhite.TabIndex = 1;
@@ -138,25 +138,15 @@
             // comboBoxLoadGen
             // 
             this.comboBoxLoadGen.FormattingEnabled = true;
-            this.comboBoxLoadGen.Location = new System.Drawing.Point(141, 126);
+            this.comboBoxLoadGen.Location = new System.Drawing.Point(140, 126);
             this.comboBoxLoadGen.Name = "comboBoxLoadGen";
             this.comboBoxLoadGen.Size = new System.Drawing.Size(121, 21);
             this.comboBoxLoadGen.TabIndex = 2;
             this.comboBoxLoadGen.SelectedIndexChanged += new System.EventHandler(this.comboBoxLoadGen_SelectedIndexChanged);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(3, 232);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(132, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "OK";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.OKButton_Click);
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(141, 232);
+            this.button2.Location = new System.Drawing.Point(140, 232);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(136, 23);
             this.button2.TabIndex = 3;
@@ -164,10 +154,20 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(3, 232);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(131, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "OK";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.OKButton_Click);
+            // 
             // comboBoxDistributionKiosk
             // 
             this.comboBoxDistributionKiosk.FormattingEnabled = true;
-            this.comboBoxDistributionKiosk.Location = new System.Drawing.Point(141, 155);
+            this.comboBoxDistributionKiosk.Location = new System.Drawing.Point(140, 155);
             this.comboBoxDistributionKiosk.Name = "comboBoxDistributionKiosk";
             this.comboBoxDistributionKiosk.Size = new System.Drawing.Size(121, 21);
             this.comboBoxDistributionKiosk.TabIndex = 4;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml;
 
-namespace VoltageDropCalculatorApplication
+namespace HermanBetaAlgorithmAlphaNum
 {
     public class ProjDataset : System.Data.DataSet
     {

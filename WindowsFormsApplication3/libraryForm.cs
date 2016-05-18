@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
-namespace VoltageDropCalculatorApplication
+namespace HermanBetaAlgorithmAlphaNum
 {
     public partial class libraryForm : Form
     {
