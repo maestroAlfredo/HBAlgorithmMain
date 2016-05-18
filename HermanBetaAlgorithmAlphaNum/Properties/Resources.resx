@@ -121,6 +121,12 @@
   <data name="Vault1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Vault1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="gens" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gens.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NewProject" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NewProject.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="conductor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\conductor.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -139,7 +145,7 @@
   <data name="new_project_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\new_project_icon.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="gens" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\gens.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LoadProject" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LoadProject.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

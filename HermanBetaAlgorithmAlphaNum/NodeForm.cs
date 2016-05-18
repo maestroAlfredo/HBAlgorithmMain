@@ -207,6 +207,21 @@ namespace HermanBetaAlgorithmAlphaNum
         {
             DistributionKiosk.DistanceToPreviousNode = (double)lengthNumericUpDown.Value;
         }
+
+        private void pictureBoxAddConductor_MouseHover(object sender, EventArgs e)
+        {
+            new ToolTip().SetToolTip(this.pictureBoxAddConductor, "Add new conductor");
+        }
+
+        private void pictureBoxAddLoad_MouseHover(object sender, EventArgs e)
+        {
+            new ToolTip().SetToolTip(this.pictureBoxAddLoad, "Add a load");
+        }
+
+        private void pictureBoxAddGen_MouseHover(object sender, EventArgs e)
+        {
+            new ToolTip().SetToolTip(this.pictureBoxAddGen, "Add new generator");
+        }
     }
 
     /// <summary>

@@ -180,6 +180,7 @@
             this.editLibraryButton.TabIndex = 0;
             this.editLibraryButton.Text = "Libraries";
             this.editLibraryButton.UseVisualStyleBackColor = false;
+            this.editLibraryButton.Click += new System.EventHandler(this.editLibraryButton_Click);
             // 
             // loadLibraryButton
             // 
@@ -193,6 +194,7 @@
             this.loadLibraryButton.TabIndex = 0;
             this.loadLibraryButton.Text = "Loads";
             this.loadLibraryButton.UseVisualStyleBackColor = false;
+            this.loadLibraryButton.Click += new System.EventHandler(this.loadLibraryButton_Click);
             // 
             // newFeederButton
             // 

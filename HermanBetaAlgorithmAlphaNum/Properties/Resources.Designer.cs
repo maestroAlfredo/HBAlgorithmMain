@@ -103,6 +103,16 @@ namespace HermanBetaAlgorithmAlphaNum.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LoadProject {
+            get {
+                object obj = ResourceManager.GetObject("LoadProject", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap loads {
             get {
                 object obj = ResourceManager.GetObject("loads", resourceCulture);
@@ -116,6 +126,16 @@ namespace HermanBetaAlgorithmAlphaNum.Properties {
         internal static System.Drawing.Bitmap new_project_icon {
             get {
                 object obj = ResourceManager.GetObject("new_project_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NewProject {
+            get {
+                object obj = ResourceManager.GetObject("NewProject", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

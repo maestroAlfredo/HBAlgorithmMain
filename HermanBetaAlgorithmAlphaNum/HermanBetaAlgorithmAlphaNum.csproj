@@ -68,6 +68,12 @@
     <Compile Include="HomePageForm.Designer.cs">
       <DependentUpon>HomePageForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LibrariesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LibrariesForm.Designer.cs">
+      <DependentUpon>LibrariesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoadSelectForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HomePageForm.resx">
       <DependentUpon>HomePageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LibrariesForm.resx">
+      <DependentUpon>LibrariesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoadSelectForm.resx">
       <DependentUpon>LoadSelectForm.cs</DependentUpon>
@@ -119,6 +128,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NewProject.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LoadProject.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
