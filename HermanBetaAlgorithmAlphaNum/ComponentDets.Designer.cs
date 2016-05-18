@@ -1,4 +1,4 @@
-﻿namespace VoltageDropCalculatorApplication
+﻿namespace HermanBetaAlgorithmAlphaNum
 {
     partial class ComponentDets
     {

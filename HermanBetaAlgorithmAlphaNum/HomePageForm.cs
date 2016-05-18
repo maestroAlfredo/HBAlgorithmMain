@@ -7,25 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using VoltageDropCalculatorApplication;
+using VoltageDropFeederApplicationw
 
 namespace HermanBetaAlgorithmAlphaNum
 {
     public partial class HomePageForm : Form
     {
-        public LibrarySet ProjectLibraries { get; private set; }
+        private LibrarySet _libSet;
 
         public HomePageForm(LibrarySet libraries)
         {
             InitializeComponent();
-            ProjectLibraries = libraries;
+            _libSet = libraries;
 
         }
 
         private void newFeederButton_Click(object sender, EventArgs e)
         {
-            this.Visible = false;
-            new LoadSelectForm(ProjectLibraries);
+            new LoadSelectForm(_libSet).ShowDialog();
         }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
@@ -38,14 +37,19 @@ namespace HermanBetaAlgorithmAlphaNum
 
         }
 
+        private void editLibraryButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void loadLibraryButton_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void editLibraryButton_Click(object sender, EventArgs e)
+        private void buttonVaults_Click(object sender, EventArgs e)
         {
-            new LibrariesForm().ShowDialog();
+            new LibraryFormVault(_libSet).ShowDialog();
         }
     }
 }

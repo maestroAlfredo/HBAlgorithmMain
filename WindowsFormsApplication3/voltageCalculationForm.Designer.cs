@@ -1,4 +1,4 @@
-﻿namespace VoltageDropCalculatorApplication
+﻿namespace HermanBetaAlgorithmAlphaNum
 {
     partial class voltageCalculationForm
     {
@@ -114,7 +114,7 @@
             // 
             this.sidePanelPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.sidePanelPictureBox.Image = global::VoltageDropCalculatorApplication.Properties.Resources.playButton;
+            this.sidePanelPictureBox.Image = global::HermanBetaAlgorithmAlphaNum.Properties.Resources.playButton;
             this.sidePanelPictureBox.Location = new System.Drawing.Point(610, 187);
             this.sidePanelPictureBox.Name = "sidePanelPictureBox";
             this.sidePanelPictureBox.Size = new System.Drawing.Size(24, 71);
