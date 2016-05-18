@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HermanBetaAlgorithmAlphaNum.Properties {
+namespace VoltageDropCalculatorApplication.Properties {
     using System;
     
     

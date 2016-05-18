@@ -9,36 +9,42 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HermanBetaAlgorithmAlphaNum
+namespace VoltageDropCalculatorApplication
 {
     public partial class ComponentDets : Form
     {
-        private LibrarySet _libSet;
-        private VaultComponent vaultComponent;
+        public VaultComponent VaultComponent { get; set; }
         private LibraryFormVault parent;
         private PropertyInfo[] componentProperties;
         private TableLayoutPanel formTableLayoutPanel;
         private List<Vault> listOfVaults;
+        private Library Lib;
         private ComboBox vaultNameComboBox;
         private ErrorProvider _errorProvider;
 
-        public ComponentDets(LibrarySet libSet, Type vaultType)
+        public ErrorProvider ErrorProvider
+        {
+            get { return _errorProvider; }
+
+            set { _errorProvider = value; }
+        }
+
+        
+
+
+
+
+
+        public ComponentDets(VaultComponent vaultComponent, LibraryFormVault parentApplication)
         {
             InitializeComponent();
-            _libSet = libSet;
+            parent = parentApplication;
             this.AutoSize = true;
-            _errorProvider = new ErrorProvider();
-
-            if(vaultType==typeof(Conductor))
-            {
-                vaultComponent = new Conductor();
-            }
-            else
-            {
-                vaultComponent = new Load(LoadType.Load);
-            }
-
-            componentProperties = vaultType.GetProperties();
+            VaultComponent = vaultComponent;
+            ErrorProvider = new ErrorProvider();     
+            
+            
+            componentProperties = vaultComponent.GetType().GetProperties();
             formTableLayoutPanel = new TableLayoutPanel();
             formTableLayoutPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
             formTableLayoutPanel.AutoSizeMode = AutoSizeMode.GrowOnly;
@@ -50,8 +56,11 @@ namespace HermanBetaAlgorithmAlphaNum
             formTableLayoutPanel.Dock = DockStyle.Fill;
             formTableLayoutPanel.Anchor = AnchorStyles.None;
 
-           
-            listOfVaults = _libSet.LibraryCollection.Where(library => library.VaultType == vaultComponent).First().ListOfVaults;
+            componentProperties.Switch(componentProperties.Length - 3, 0);
+            listOfVaults = parent.LibraryList.Where(library => library.VaultType == vaultComponent).First().ListOfVaults;
+            Lib = parent.LibraryList.Where(library => library.VaultType == vaultComponent).First();
+
+
 
             for (int row = 0; row < componentProperties.Length; row++)
             {
@@ -68,7 +77,7 @@ namespace HermanBetaAlgorithmAlphaNum
                         DropDownStyle = ComboBoxStyle.DropDownList
                     });
                     vaultNameComboBox.Dock = DockStyle.Fill;
-                    this.vaultComponent.SetVault(listOfVaults.First());
+                    VaultComponent.SetVault(listOfVaults.First());
                     vaultNameComboBox.SelectedIndexChanged += VaultNameCombo_SelectedIndexChanged;
 
                 }
@@ -125,15 +134,15 @@ namespace HermanBetaAlgorithmAlphaNum
 
         private void ControlTextBox_Validating(object sender, CancelEventArgs e)
         {
-           if(vaultComponent.GetVault().ComponentList.FindIndex(item=>item.GetName().Equals((sender as TextBox).Text))!=-1)
+           if(VaultComponent.GetVault().ComponentList.FindIndex(item=>item.Name.Equals((sender as TextBox).Text))!=-1)
             {
                 e.Cancel = true;
                 
                 TextBox textbox = sender as TextBox;
                 textbox.Select(0, textbox.Text.Length);
-                string errorMsg = "A component with the Name: " + textbox.Text + " exists in the Vault: " + vaultComponent.GetVault().VaultName + ". Please choose another name or edit existing component.";
-                _errorProvider.SetIconAlignment(formTableLayoutPanel, ErrorIconAlignment.TopRight);
-                _errorProvider.SetError(formTableLayoutPanel, errorMsg);
+                string errorMsg = "A component with the Name: " + textbox.Text + " exists in the Vault: " + VaultComponent.GetVault().VaultName + ". Please choose another name or edit existing component.";
+                ErrorProvider.SetIconAlignment(formTableLayoutPanel, ErrorIconAlignment.TopRight);
+                ErrorProvider.SetError(formTableLayoutPanel, errorMsg);
             }
            
         }
@@ -141,20 +150,20 @@ namespace HermanBetaAlgorithmAlphaNum
         private void NumUpDown_Validated(object sender, EventArgs e)
         {
             NumericUpDown numUpDown = sender as NumericUpDown;
-            vaultComponent.GetType().GetProperty(numUpDown.Name).SetValue(vaultComponent, Convert.ToDouble(numUpDown.Value));
+            VaultComponent.GetType().GetProperty(numUpDown.Name).SetValue(VaultComponent, Convert.ToDouble(numUpDown.Value));
         }
 
         private void ControlTextBox_Validated(object sender, EventArgs e)
         {                      
             TextBox textBoxInput = sender as TextBox;
-            _errorProvider.SetError(formTableLayoutPanel, "");
-            vaultComponent.GetType().GetProperty(textBoxInput.Name).SetValue(vaultComponent, textBoxInput.Text);
+            ErrorProvider.SetError(formTableLayoutPanel, "");
+            VaultComponent.GetType().GetProperty(textBoxInput.Name).SetValue(VaultComponent, textBoxInput.Text);
         }
 
         private void LoadTypeCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            vaultComponent.GetType().GetProperty((sender as ComboBox).Name).SetValue(vaultComponent, (LoadType)Enum.Parse(typeof(LoadType), (sender as ComboBox).Text));
-            var myLoad = vaultComponent as Load;
+            VaultComponent.GetType().GetProperty((sender as ComboBox).Name).SetValue(VaultComponent, (LoadType)Enum.Parse(typeof(LoadType), (sender as ComboBox).Text));
+            var myLoad = VaultComponent as Load;
             switch (myLoad.LoadType)
             {
                 case LoadType.Load:
@@ -166,7 +175,7 @@ namespace HermanBetaAlgorithmAlphaNum
                 default:
                     break;
             }
-            listOfVaults = _libSet.LibraryCollection.Where(item => item.VaultType == vaultComponent).First().ListOfVaults;
+            listOfVaults = parent.LibraryList.Where(item => item.VaultType == VaultComponent).First().ListOfVaults;
             vaultNameComboBox.DataSource = listOfVaults.Select(vault => vault.VaultName).ToList();
             
         }
@@ -174,7 +183,7 @@ namespace HermanBetaAlgorithmAlphaNum
         private void VaultNameCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox vaultNameCombo = sender as ComboBox;
-            vaultComponent.SetVault(listOfVaults.Where(vault => vault.VaultName == vaultNameCombo.Text).First());
+            VaultComponent.SetVault(listOfVaults.Where(vault => vault.VaultName == vaultNameCombo.Text).First());
         }
 
         private void ComponentDets_Shown(object sender, EventArgs e)
@@ -184,8 +193,8 @@ namespace HermanBetaAlgorithmAlphaNum
 
         private void inputOKButton_Click(object sender, EventArgs e)
         {
-            vaultComponent.GetVault().Add(vaultComponent); //adds the component to the vault
-            //parent.RefreshDataGridView(); //refreshes the datagridview in the parent form
+            VaultComponent.GetVault().Add(VaultComponent); //adds the component to the vault
+            parent.RefreshDataGridView(); //refreshes the datagridview in the parent form
             this.Close();
         }
     }

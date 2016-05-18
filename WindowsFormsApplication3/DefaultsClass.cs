@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HermanBetaAlgorithmAlphaNum
+namespace VoltageDropCalculatorApplication
 {
     /// <summary>
     /// This class creates default Vaults as well as components. The components are added to the vaults. Ultimately the vaults are added to lists which can then be added to Libraries. 
@@ -64,8 +64,8 @@ namespace HermanBetaAlgorithmAlphaNum
 
             foreach (GeneratorVault vault in _generatorVaultList)
             {
-                new Load(vault, AppConstants.Gen1Name, LoadType.Generator, 1.5, 4, 60);
-                new Load(vault, AppConstants.Gen2Name, LoadType.Generator, 4, 1.5, 60);
+                new Load(vault, AppConstants.Gen1Name, LoadType.Load, 1.5, 4, 60);
+                new Load(vault, AppConstants.Gen2Name, LoadType.Load, 4, 1.5, 60);
             }        
         }
 

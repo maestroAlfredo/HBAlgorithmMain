@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using VoltageDropFeederApplicationw
+using VoltageDropCalculatorApplication;
 
 namespace HermanBetaAlgorithmAlphaNum
 {
@@ -49,7 +49,7 @@ namespace HermanBetaAlgorithmAlphaNum
 
         private void buttonVaults_Click(object sender, EventArgs e)
         {
-            new LibraryFormVault(_libSet).ShowDialog();
+            //new LibraryFormVault(_libSet).ShowDialog();
         }
     }
 }

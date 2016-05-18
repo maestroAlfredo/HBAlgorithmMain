@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HermanBetaAlgorithmAlphaNum;
+using VoltageDropCalculatorApplication;
 using System.Reflection;
 using System.IO;
 using System.Xml;

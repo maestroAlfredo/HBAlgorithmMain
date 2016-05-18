@@ -12,7 +12,7 @@ using System.IO;
 
 
 
-namespace HermanBetaAlgorithmAlphaNum
+namespace VoltageDropCalculatorApplication
 {
     public partial class mainForm : Form
     {
@@ -296,7 +296,7 @@ namespace HermanBetaAlgorithmAlphaNum
             if (result == System.Windows.Forms.DialogResult.OK)
             {
 
-                libraryForm libraryForm = new libraryForm();
+                LibraryFormVault libraryForm = new LibraryFormVault();
                 if(libraryForm.ShowDialog().Equals(DialogResult.OK))
                 {
 

@@ -1,4 +1,4 @@
-﻿namespace HermanBetaAlgorithmAlphaNum
+﻿namespace VoltageDropCalculatorApplication
 {
     partial class libraryForm
     {

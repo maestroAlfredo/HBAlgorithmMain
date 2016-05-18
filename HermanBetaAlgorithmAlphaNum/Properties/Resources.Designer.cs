@@ -22,7 +22,7 @@ namespace HermanBetaAlgorithmAlphaNum.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace HermanBetaAlgorithmAlphaNum.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("HermanBetaAlgorithmAlphaNum.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace HermanBetaAlgorithmAlphaNum.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,9 +63,9 @@ namespace HermanBetaAlgorithmAlphaNum.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap BackGround {
+        public static System.Drawing.Bitmap conductor {
             get {
-                object obj = ResourceManager.GetObject("BackGround", resourceCulture);
+                object obj = ResourceManager.GetObject("conductor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace HermanBetaAlgorithmAlphaNum.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap BackGround1 {
+        public static System.Drawing.Bitmap gens {
             get {
-                object obj = ResourceManager.GetObject("BackGround1", resourceCulture);
+                object obj = ResourceManager.GetObject("gens", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace HermanBetaAlgorithmAlphaNum.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Box_29_Electricity_icon {
+        public static System.Drawing.Bitmap import_vaults_icon {
             get {
-                object obj = ResourceManager.GetObject("Box-29-Electricity-icon", resourceCulture);
+                object obj = ResourceManager.GetObject("import_vaults_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace HermanBetaAlgorithmAlphaNum.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap conductor1 {
+        public static System.Drawing.Bitmap load_project_icon {
             get {
-                object obj = ResourceManager.GetObject("conductor1", resourceCulture);
+                object obj = ResourceManager.GetObject("load_project_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace HermanBetaAlgorithmAlphaNum.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap HBImage {
+        public static System.Drawing.Bitmap loads {
             get {
-                object obj = ResourceManager.GetObject("HBImage", resourceCulture);
+                object obj = ResourceManager.GetObject("loads", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,37 +113,7 @@ namespace HermanBetaAlgorithmAlphaNum.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap import_vaults_icon1 {
-            get {
-                object obj = ResourceManager.GetObject("import_vaults_icon1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap load_project_icon1 {
-            get {
-                object obj = ResourceManager.GetObject("load_project_icon1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap loads1 {
-            get {
-                object obj = ResourceManager.GetObject("loads1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap new_project_icon {
+        public static System.Drawing.Bitmap new_project_icon {
             get {
                 object obj = ResourceManager.GetObject("new_project_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -153,9 +123,9 @@ namespace HermanBetaAlgorithmAlphaNum.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap new_project_icon1 {
+        public static System.Drawing.Bitmap Vault {
             get {
-                object obj = ResourceManager.GetObject("new_project_icon1", resourceCulture);
+                object obj = ResourceManager.GetObject("Vault", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,29 +133,9 @@ namespace HermanBetaAlgorithmAlphaNum.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Picture1 {
+        public static System.Drawing.Bitmap Vault1 {
             get {
-                object obj = ResourceManager.GetObject("Picture1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap playButton {
-            get {
-                object obj = ResourceManager.GetObject("playButton", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap resistor {
-            get {
-                object obj = ResourceManager.GetObject("resistor", resourceCulture);
+                object obj = ResourceManager.GetObject("Vault1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

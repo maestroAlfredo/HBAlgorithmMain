@@ -7,7 +7,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.IO;
 
-namespace HermanBetaAlgorithmAlphaNum
+namespace VoltageDropCalculatorApplication
 {
     public partial class nodeFeederForm : Form
     {

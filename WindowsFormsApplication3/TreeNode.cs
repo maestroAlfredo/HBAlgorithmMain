@@ -8,7 +8,7 @@ using System.Data;
 using System.Drawing;
 
 
-namespace HermanBetaAlgorithmAlphaNum
+namespace VoltageDropCalculatorApplication
 {
     public class TreeNode<T> : IDisposable
     {

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.lengthNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
@@ -75,9 +75,6 @@
             this.nodeNumCombo = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBoxAddGen = new System.Windows.Forms.PictureBox();
-            this.pictureBoxAddLoad = new System.Windows.Forms.PictureBox();
-            this.pictureBoxAddConductor = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -89,6 +86,9 @@
             this.loadsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBoxAddGen = new System.Windows.Forms.PictureBox();
+            this.pictureBoxAddLoad = new System.Windows.Forms.PictureBox();
+            this.pictureBoxAddConductor = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lengthNumericUpDown)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -101,10 +101,10 @@
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAddGen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAddLoad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAddConductor)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel4
@@ -559,19 +559,19 @@
             this.nodeDataGridView.AllowUserToDeleteRows = false;
             this.nodeDataGridView.AllowUserToResizeColumns = false;
             this.nodeDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.nodeDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.nodeDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.nodeDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.nodeDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.nodeDataGridView.BackgroundColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.nodeDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.nodeDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.nodeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.nodeDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nodeDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -589,7 +589,7 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.45647F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 251F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 253F));
             this.tableLayoutPanel5.Controls.Add(this.proceedToVCalcButton, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.label18, 2, 0);
             this.tableLayoutPanel5.Controls.Add(this.endNodeCombo, 3, 0);
@@ -606,7 +606,7 @@
             // 
             this.proceedToVCalcButton.Enabled = false;
             this.proceedToVCalcButton.ForeColor = System.Drawing.Color.SteelBlue;
-            this.proceedToVCalcButton.Location = new System.Drawing.Point(886, 3);
+            this.proceedToVCalcButton.Location = new System.Drawing.Point(884, 3);
             this.proceedToVCalcButton.Name = "proceedToVCalcButton";
             this.proceedToVCalcButton.Size = new System.Drawing.Size(236, 31);
             this.proceedToVCalcButton.TabIndex = 0;
@@ -618,7 +618,7 @@
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(663, 13);
+            this.label18.Location = new System.Drawing.Point(661, 13);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(88, 13);
             this.label18.TabIndex = 5;
@@ -632,7 +632,7 @@
             this.endNodeCombo.ForeColor = System.Drawing.Color.SteelBlue;
             this.endNodeCombo.FormattingEnabled = true;
             this.endNodeCombo.ItemHeight = 20;
-            this.endNodeCombo.Location = new System.Drawing.Point(757, 3);
+            this.endNodeCombo.Location = new System.Drawing.Point(755, 3);
             this.endNodeCombo.Name = "endNodeCombo";
             this.endNodeCombo.Size = new System.Drawing.Size(123, 28);
             this.endNodeCombo.TabIndex = 6;
@@ -754,36 +754,6 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(1135, 34);
             this.tableLayoutPanel3.TabIndex = 9;
             // 
-            // pictureBoxAddGen
-            // 
-            this.pictureBoxAddGen.Image = global::HermanBetaAlgorithmAlphaNum.Properties.Resources.gens;
-            this.pictureBoxAddGen.Location = new System.Drawing.Point(457, 3);
-            this.pictureBoxAddGen.Name = "pictureBoxAddGen";
-            this.pictureBoxAddGen.Size = new System.Drawing.Size(100, 28);
-            this.pictureBoxAddGen.TabIndex = 7;
-            this.pictureBoxAddGen.TabStop = false;
-            this.pictureBoxAddGen.MouseHover += new System.EventHandler(this.pictureBoxAddGen_MouseHover);
-            // 
-            // pictureBoxAddLoad
-            // 
-            this.pictureBoxAddLoad.Image = global::HermanBetaAlgorithmAlphaNum.Properties.Resources.loads;
-            this.pictureBoxAddLoad.Location = new System.Drawing.Point(230, 3);
-            this.pictureBoxAddLoad.Name = "pictureBoxAddLoad";
-            this.pictureBoxAddLoad.Size = new System.Drawing.Size(100, 28);
-            this.pictureBoxAddLoad.TabIndex = 6;
-            this.pictureBoxAddLoad.TabStop = false;
-            this.pictureBoxAddLoad.MouseHover += new System.EventHandler(this.pictureBoxAddLoad_MouseHover);
-            // 
-            // pictureBoxAddConductor
-            // 
-            this.pictureBoxAddConductor.Image = global::HermanBetaAlgorithmAlphaNum.Properties.Resources.conductor;
-            this.pictureBoxAddConductor.Location = new System.Drawing.Point(3, 3);
-            this.pictureBoxAddConductor.Name = "pictureBoxAddConductor";
-            this.pictureBoxAddConductor.Size = new System.Drawing.Size(100, 28);
-            this.pictureBoxAddConductor.TabIndex = 5;
-            this.pictureBoxAddConductor.TabStop = false;
-            this.pictureBoxAddConductor.MouseHover += new System.EventHandler(this.pictureBoxAddConductor_MouseHover);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -868,6 +838,36 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
+            // pictureBoxAddGen
+            // 
+            this.pictureBoxAddGen.Image = global::HermanBetaAlgorithmAlphaNum.Properties.Resources.gens;
+            this.pictureBoxAddGen.Location = new System.Drawing.Point(457, 3);
+            this.pictureBoxAddGen.Name = "pictureBoxAddGen";
+            this.pictureBoxAddGen.Size = new System.Drawing.Size(100, 28);
+            this.pictureBoxAddGen.TabIndex = 7;
+            this.pictureBoxAddGen.TabStop = false;
+            this.pictureBoxAddGen.MouseHover += new System.EventHandler(this.pictureBoxAddGen_MouseHover);
+            // 
+            // pictureBoxAddLoad
+            // 
+            this.pictureBoxAddLoad.Image = global::HermanBetaAlgorithmAlphaNum.Properties.Resources.loads;
+            this.pictureBoxAddLoad.Location = new System.Drawing.Point(230, 3);
+            this.pictureBoxAddLoad.Name = "pictureBoxAddLoad";
+            this.pictureBoxAddLoad.Size = new System.Drawing.Size(100, 28);
+            this.pictureBoxAddLoad.TabIndex = 6;
+            this.pictureBoxAddLoad.TabStop = false;
+            this.pictureBoxAddLoad.MouseHover += new System.EventHandler(this.pictureBoxAddLoad_MouseHover);
+            // 
+            // pictureBoxAddConductor
+            // 
+            this.pictureBoxAddConductor.Image = global::HermanBetaAlgorithmAlphaNum.Properties.Resources.conductor;
+            this.pictureBoxAddConductor.Location = new System.Drawing.Point(3, 3);
+            this.pictureBoxAddConductor.Name = "pictureBoxAddConductor";
+            this.pictureBoxAddConductor.Size = new System.Drawing.Size(100, 28);
+            this.pictureBoxAddConductor.TabIndex = 5;
+            this.pictureBoxAddConductor.TabStop = false;
+            this.pictureBoxAddConductor.MouseHover += new System.EventHandler(this.pictureBoxAddConductor_MouseHover);
+            // 
             // NodeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -895,11 +895,11 @@
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAddGen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAddLoad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAddConductor)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

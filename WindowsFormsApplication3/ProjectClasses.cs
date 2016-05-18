@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 using System.IO;
 using System.Xml;
 
-namespace HermanBetaAlgorithmAlphaNum
+namespace VoltageDropCalculatorApplication
 {
     static class PropertyInfoExtensions
     {
@@ -186,6 +186,8 @@ namespace HermanBetaAlgorithmAlphaNum
     public abstract class VaultComponent
     {
         [DataMember]
+        public string Name { get; set; }
+        [DataMember]
         public string Description { get; set; }
         [DataMember]
         private ComponentType _componentType;
@@ -208,22 +210,6 @@ namespace HermanBetaAlgorithmAlphaNum
         public void SetComponentType(ComponentType componentType)
         {
             _componentType = componentType;
-        }
-
-        public string GetName()
-        {
-            if(_componentType.Equals(ComponentType.Load))
-            {
-                return (this as Load).Name;
-            }
-            else if(_componentType.Equals(ComponentType.Generator))
-            {
-                return (this as Load).Name;
-            }
-            else
-            {
-                return (this as Conductor).Name;
-            }
         }
 
        
@@ -263,16 +249,13 @@ namespace HermanBetaAlgorithmAlphaNum
             return vaultType;
         }
 
-     
-
-
+       
     }
 
     [XmlInclude(typeof(VaultComponent))]
     [Serializable]
     public class Conductor : VaultComponent
-    {
-        public string Name { get; set; }     
+    {        
         public double Diameter { get; set; }
         public double Rkmt1 { get; set; }
         public double T { get; set; }
@@ -314,8 +297,7 @@ namespace HermanBetaAlgorithmAlphaNum
     [XmlInclude(typeof(VaultComponent))]
     [Serializable]
     public class Load : VaultComponent
-    {
-        public string Name { get; set; }    
+    {       
         public LoadType LoadType { get; set; }
         public double Alpha { get; set; }
         public double Beta { get; set; }
@@ -628,16 +610,6 @@ namespace HermanBetaAlgorithmAlphaNum
             LoadLibrary = loads;
             GeneratorLibrary = generators;
             ConductorLibrary = conductors;
-        }
-
-        public IEnumerable<Library> LibraryCollection
-        {
-            get
-            {
-                yield return LoadLibrary;
-                yield return GeneratorLibrary;
-                yield return ConductorLibrary;
-            }
         }
     }
 

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace HermanBetaAlgorithmAlphaNum
 {
-    public partial class LibrariesForm : Form
+    public partial class LibrariesFormVault : Form
     {
-        public LibrariesForm()
+        public LibrariesFormVault()
         {
             InitializeComponent();
         }

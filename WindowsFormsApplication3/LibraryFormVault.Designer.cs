@@ -1,4 +1,4 @@
-﻿namespace HermanBetaAlgorithmAlphaNum
+﻿namespace VoltageDropCalculatorApplication
 {
     partial class LibraryFormVault
     {
@@ -30,13 +30,6 @@
         {
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.tableLayoutPanelIcon = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBoxNewProj = new System.Windows.Forms.PictureBox();
-            this.pictureBoxConductor = new System.Windows.Forms.PictureBox();
-            this.pictureBoxLoadProj = new System.Windows.Forms.PictureBox();
-            this.pictureBoxImportVault = new System.Windows.Forms.PictureBox();
-            this.pictureBoxVault = new System.Windows.Forms.PictureBox();
-            this.pictureBoxLoad = new System.Windows.Forms.PictureBox();
-            this.pictureBoxGen = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.libraryTypeComboBox = new System.Windows.Forms.ComboBox();
@@ -63,10 +56,23 @@
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vaultToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.componentToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBoxNewProj = new System.Windows.Forms.PictureBox();
+            this.pictureBoxConductor = new System.Windows.Forms.PictureBox();
+            this.pictureBoxLoadProj = new System.Windows.Forms.PictureBox();
+            this.pictureBoxImportVault = new System.Windows.Forms.PictureBox();
+            this.pictureBoxVault = new System.Windows.Forms.PictureBox();
+            this.pictureBoxLoad = new System.Windows.Forms.PictureBox();
+            this.pictureBoxGen = new System.Windows.Forms.PictureBox();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.tableLayoutPanelIcon.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.componentDataGridView)).BeginInit();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxNewProj)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxConductor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadProj)).BeginInit();
@@ -74,12 +80,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVault)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGen)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.componentDataGridView)).BeginInit();
-            this.tableLayoutPanel4.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripContainer1
@@ -89,7 +89,7 @@
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.tableLayoutPanelIcon);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.tableLayoutPanel1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(758, 391);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(758, 416);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
@@ -120,91 +120,13 @@
             this.tableLayoutPanelIcon.Controls.Add(this.pictureBoxVault, 2, 0);
             this.tableLayoutPanelIcon.Controls.Add(this.pictureBoxLoad, 5, 0);
             this.tableLayoutPanelIcon.Controls.Add(this.pictureBoxGen, 6, 0);
-            this.tableLayoutPanelIcon.Location = new System.Drawing.Point(37, -13);
+            this.tableLayoutPanelIcon.Location = new System.Drawing.Point(37, 0);
             this.tableLayoutPanelIcon.Name = "tableLayoutPanelIcon";
             this.tableLayoutPanelIcon.RowCount = 1;
             this.tableLayoutPanelIcon.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelIcon.Size = new System.Drawing.Size(526, 40);
             this.tableLayoutPanelIcon.TabIndex = 1;
             this.tableLayoutPanelIcon.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanelIcon_Paint);
-            // 
-            // pictureBoxNewProj
-            // 
-            this.pictureBoxNewProj.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBoxNewProj.Image = global::HermanBetaAlgorithmAlphaNum.Properties.Resources.new_project_icon1;
-            this.pictureBoxNewProj.Location = new System.Drawing.Point(3, 3);
-            this.pictureBoxNewProj.Name = "pictureBoxNewProj";
-            this.pictureBoxNewProj.Size = new System.Drawing.Size(69, 34);
-            this.pictureBoxNewProj.TabIndex = 1;
-            this.pictureBoxNewProj.TabStop = false;
-            this.pictureBoxNewProj.Click += new System.EventHandler(this.pictureBoxNewProj_Click);
-            this.pictureBoxNewProj.MouseHover += new System.EventHandler(this.pictureBoxNewProj_MouseHover);
-            // 
-            // pictureBoxConductor
-            // 
-            this.pictureBoxConductor.Image = global::HermanBetaAlgorithmAlphaNum.Properties.Resources.conductor1;
-            this.pictureBoxConductor.Location = new System.Drawing.Point(303, 3);
-            this.pictureBoxConductor.Name = "pictureBoxConductor";
-            this.pictureBoxConductor.Size = new System.Drawing.Size(69, 34);
-            this.pictureBoxConductor.TabIndex = 5;
-            this.pictureBoxConductor.TabStop = false;
-            this.pictureBoxConductor.Click += new System.EventHandler(this.pictureBoxConductor_Click);
-            this.pictureBoxConductor.MouseHover += new System.EventHandler(this.pictureBoxConductor_MouseHover);
-            // 
-            // pictureBoxLoadProj
-            // 
-            this.pictureBoxLoadProj.Image = global::HermanBetaAlgorithmAlphaNum.Properties.Resources.load_project_icon1;
-            this.pictureBoxLoadProj.Location = new System.Drawing.Point(78, 3);
-            this.pictureBoxLoadProj.Name = "pictureBoxLoadProj";
-            this.pictureBoxLoadProj.Size = new System.Drawing.Size(69, 34);
-            this.pictureBoxLoadProj.TabIndex = 2;
-            this.pictureBoxLoadProj.TabStop = false;
-            this.pictureBoxLoadProj.Click += new System.EventHandler(this.pictureBoxLoadProj_Click);
-            this.pictureBoxLoadProj.MouseHover += new System.EventHandler(this.pictureBoxLoadProj_MouseHover);
-            // 
-            // pictureBoxImportVault
-            // 
-            this.pictureBoxImportVault.Image = global::HermanBetaAlgorithmAlphaNum.Properties.Resources.import_vaults_icon1;
-            this.pictureBoxImportVault.Location = new System.Drawing.Point(228, 3);
-            this.pictureBoxImportVault.Name = "pictureBoxImportVault";
-            this.pictureBoxImportVault.Size = new System.Drawing.Size(69, 34);
-            this.pictureBoxImportVault.TabIndex = 3;
-            this.pictureBoxImportVault.TabStop = false;
-            this.pictureBoxImportVault.Click += new System.EventHandler(this.pictureBoxImportVault_Click);
-            this.pictureBoxImportVault.MouseHover += new System.EventHandler(this.pictureBoxImportVault_MouseHover);
-            // 
-            // pictureBoxVault
-            // 
-            this.pictureBoxVault.Image = global::HermanBetaAlgorithmAlphaNum.Properties.Resources.Box_29_Electricity_icon;
-            this.pictureBoxVault.Location = new System.Drawing.Point(153, 3);
-            this.pictureBoxVault.Name = "pictureBoxVault";
-            this.pictureBoxVault.Size = new System.Drawing.Size(69, 34);
-            this.pictureBoxVault.TabIndex = 0;
-            this.pictureBoxVault.TabStop = false;
-            this.pictureBoxVault.Click += new System.EventHandler(this.pictureBoxVault_Click);
-            this.pictureBoxVault.MouseHover += new System.EventHandler(this.pictureBoxVault_MouseHover);
-            // 
-            // pictureBoxLoad
-            // 
-            this.pictureBoxLoad.Image = global::HermanBetaAlgorithmAlphaNum.Properties.Resources.resistor;
-            this.pictureBoxLoad.Location = new System.Drawing.Point(378, 3);
-            this.pictureBoxLoad.Name = "pictureBoxLoad";
-            this.pictureBoxLoad.Size = new System.Drawing.Size(69, 34);
-            this.pictureBoxLoad.TabIndex = 6;
-            this.pictureBoxLoad.TabStop = false;
-            this.pictureBoxLoad.Click += new System.EventHandler(this.pictureBoxLoad_Click);
-            this.pictureBoxLoad.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
-            // 
-            // pictureBoxGen
-            // 
-            this.pictureBoxGen.Image = global::HermanBetaAlgorithmAlphaNum.Properties.Resources.loads1;
-            this.pictureBoxGen.Location = new System.Drawing.Point(453, 3);
-            this.pictureBoxGen.Name = "pictureBoxGen";
-            this.pictureBoxGen.Size = new System.Drawing.Size(69, 34);
-            this.pictureBoxGen.TabIndex = 4;
-            this.pictureBoxGen.TabStop = false;
-            this.pictureBoxGen.Click += new System.EventHandler(this.pictureBoxGen_Click);
-            this.pictureBoxGen.MouseHover += new System.EventHandler(this.pictureBoxGen_MouseHover);
             // 
             // tableLayoutPanel1
             // 
@@ -213,7 +135,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 33);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 46);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.72638F));
@@ -228,7 +150,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.30702F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 89.69299F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 224F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 223F));
             this.tableLayoutPanel2.Controls.Add(this.libraryTypeComboBox, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.vaultComboBox, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.libraryLabel, 0, 0);
@@ -258,7 +180,7 @@
             this.vaultComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.vaultComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.vaultComboBox.FormattingEnabled = true;
-            this.vaultComboBox.Location = new System.Drawing.Point(530, 8);
+            this.vaultComboBox.Location = new System.Drawing.Point(531, 8);
             this.vaultComboBox.Name = "vaultComboBox";
             this.vaultComboBox.Size = new System.Drawing.Size(194, 21);
             this.vaultComboBox.TabIndex = 0;
@@ -280,7 +202,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(493, 12);
+            this.label2.Location = new System.Drawing.Point(494, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 1;
@@ -321,7 +243,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.55556F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 406F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 103F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 102F));
             this.tableLayoutPanel4.Controls.Add(this.Add, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.removeComponentButton, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.okButton, 3, 1);
@@ -350,7 +272,7 @@
             // 
             this.removeComponentButton.Location = new System.Drawing.Point(71, 3);
             this.removeComponentButton.Name = "removeComponentButton";
-            this.removeComponentButton.Size = new System.Drawing.Size(79, 20);
+            this.removeComponentButton.Size = new System.Drawing.Size(80, 20);
             this.removeComponentButton.TabIndex = 0;
             this.removeComponentButton.Text = "Remove";
             this.removeComponentButton.UseVisualStyleBackColor = true;
@@ -359,7 +281,7 @@
             // okButton
             // 
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(562, 29);
+            this.okButton.Location = new System.Drawing.Point(563, 29);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 1;
@@ -370,7 +292,7 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(645, 29);
+            this.cancelButton.Location = new System.Drawing.Point(646, 29);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(73, 23);
             this.cancelButton.TabIndex = 1;
@@ -407,14 +329,14 @@
             this.vaultToolStripMenuItem,
             this.componentToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // vaultToolStripMenuItem
             // 
             this.vaultToolStripMenuItem.Name = "vaultToolStripMenuItem";
-            this.vaultToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.vaultToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.vaultToolStripMenuItem.Text = "Vault";
             this.vaultToolStripMenuItem.Click += new System.EventHandler(this.vaultToolStripMenuItem_Click);
             // 
@@ -424,7 +346,7 @@
             this.loadToolStripMenuItem,
             this.conductorToolStripMenuItem});
             this.componentToolStripMenuItem.Name = "componentToolStripMenuItem";
-            this.componentToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.componentToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.componentToolStripMenuItem.Text = "Component";
             this.componentToolStripMenuItem.Click += new System.EventHandler(this.componentToolStripMenuItem_Click);
             // 
@@ -448,7 +370,7 @@
             this.vaultToolStripMenuItem1,
             this.componentToolStripMenuItem1});
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.importToolStripMenuItem.Text = "Import";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
@@ -472,7 +394,7 @@
             this.vaultToolStripMenuItem2,
             this.componentToolStripMenuItem2});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.exportToolStripMenuItem.Text = "Export";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
@@ -490,6 +412,84 @@
             this.componentToolStripMenuItem2.Text = "Component";
             this.componentToolStripMenuItem2.Click += new System.EventHandler(this.componentToolStripMenuItem2_Click);
             // 
+            // pictureBoxNewProj
+            // 
+            this.pictureBoxNewProj.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxNewProj.Image = global::VoltageDropCalculatorApplication.Properties.Resources.new_project_icon1;
+            this.pictureBoxNewProj.Location = new System.Drawing.Point(3, 3);
+            this.pictureBoxNewProj.Name = "pictureBoxNewProj";
+            this.pictureBoxNewProj.Size = new System.Drawing.Size(69, 34);
+            this.pictureBoxNewProj.TabIndex = 1;
+            this.pictureBoxNewProj.TabStop = false;
+            this.pictureBoxNewProj.Click += new System.EventHandler(this.pictureBoxNewProj_Click);
+            this.pictureBoxNewProj.MouseHover += new System.EventHandler(this.pictureBoxNewProj_MouseHover);
+            // 
+            // pictureBoxConductor
+            // 
+            this.pictureBoxConductor.Image = global::VoltageDropCalculatorApplication.Properties.Resources.conductor;
+            this.pictureBoxConductor.Location = new System.Drawing.Point(303, 3);
+            this.pictureBoxConductor.Name = "pictureBoxConductor";
+            this.pictureBoxConductor.Size = new System.Drawing.Size(69, 34);
+            this.pictureBoxConductor.TabIndex = 5;
+            this.pictureBoxConductor.TabStop = false;
+            this.pictureBoxConductor.Click += new System.EventHandler(this.pictureBoxConductor_Click);
+            this.pictureBoxConductor.MouseHover += new System.EventHandler(this.pictureBoxConductor_MouseHover);
+            // 
+            // pictureBoxLoadProj
+            // 
+            this.pictureBoxLoadProj.Image = global::VoltageDropCalculatorApplication.Properties.Resources.load_project_icon;
+            this.pictureBoxLoadProj.Location = new System.Drawing.Point(78, 3);
+            this.pictureBoxLoadProj.Name = "pictureBoxLoadProj";
+            this.pictureBoxLoadProj.Size = new System.Drawing.Size(69, 34);
+            this.pictureBoxLoadProj.TabIndex = 2;
+            this.pictureBoxLoadProj.TabStop = false;
+            this.pictureBoxLoadProj.Click += new System.EventHandler(this.pictureBoxLoadProj_Click);
+            this.pictureBoxLoadProj.MouseHover += new System.EventHandler(this.pictureBoxLoadProj_MouseHover);
+            // 
+            // pictureBoxImportVault
+            // 
+            this.pictureBoxImportVault.Image = global::VoltageDropCalculatorApplication.Properties.Resources.import_vaults_icon;
+            this.pictureBoxImportVault.Location = new System.Drawing.Point(228, 3);
+            this.pictureBoxImportVault.Name = "pictureBoxImportVault";
+            this.pictureBoxImportVault.Size = new System.Drawing.Size(69, 34);
+            this.pictureBoxImportVault.TabIndex = 3;
+            this.pictureBoxImportVault.TabStop = false;
+            this.pictureBoxImportVault.Click += new System.EventHandler(this.pictureBoxImportVault_Click);
+            this.pictureBoxImportVault.MouseHover += new System.EventHandler(this.pictureBoxImportVault_MouseHover);
+            // 
+            // pictureBoxVault
+            // 
+            this.pictureBoxVault.Image = global::VoltageDropCalculatorApplication.Properties.Resources.Box_29_Electricity_icon;
+            this.pictureBoxVault.Location = new System.Drawing.Point(153, 3);
+            this.pictureBoxVault.Name = "pictureBoxVault";
+            this.pictureBoxVault.Size = new System.Drawing.Size(69, 34);
+            this.pictureBoxVault.TabIndex = 0;
+            this.pictureBoxVault.TabStop = false;
+            this.pictureBoxVault.Click += new System.EventHandler(this.pictureBoxVault_Click);
+            this.pictureBoxVault.MouseHover += new System.EventHandler(this.pictureBoxVault_MouseHover);
+            // 
+            // pictureBoxLoad
+            // 
+            this.pictureBoxLoad.Image = global::VoltageDropCalculatorApplication.Properties.Resources.resistor;
+            this.pictureBoxLoad.Location = new System.Drawing.Point(378, 3);
+            this.pictureBoxLoad.Name = "pictureBoxLoad";
+            this.pictureBoxLoad.Size = new System.Drawing.Size(69, 34);
+            this.pictureBoxLoad.TabIndex = 6;
+            this.pictureBoxLoad.TabStop = false;
+            this.pictureBoxLoad.Click += new System.EventHandler(this.pictureBoxLoad_Click);
+            this.pictureBoxLoad.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
+            // 
+            // pictureBoxGen
+            // 
+            this.pictureBoxGen.Image = global::VoltageDropCalculatorApplication.Properties.Resources.loads;
+            this.pictureBoxGen.Location = new System.Drawing.Point(453, 3);
+            this.pictureBoxGen.Name = "pictureBoxGen";
+            this.pictureBoxGen.Size = new System.Drawing.Size(69, 34);
+            this.pictureBoxGen.TabIndex = 4;
+            this.pictureBoxGen.TabStop = false;
+            this.pictureBoxGen.Click += new System.EventHandler(this.pictureBoxGen_Click);
+            this.pictureBoxGen.MouseHover += new System.EventHandler(this.pictureBoxGen_MouseHover);
+            // 
             // LibraryFormVault
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -505,13 +505,6 @@
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
             this.tableLayoutPanelIcon.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxNewProj)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxConductor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadProj)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImportVault)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVault)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoad)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGen)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
@@ -520,6 +513,13 @@
             this.tableLayoutPanel4.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxNewProj)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxConductor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadProj)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImportVault)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVault)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGen)).EndInit();
             this.ResumeLayout(false);
 
         }
