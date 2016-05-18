@@ -49,7 +49,7 @@ namespace HermanBetaAlgorithmAlphaNum
 
         private void buttonVaults_Click(object sender, EventArgs e)
         {
-            //new LibraryFormVault(_libSet).ShowDialog();
+            new LibrariesFormVault(_libSet).ShowDialog();
         }
     }
 }

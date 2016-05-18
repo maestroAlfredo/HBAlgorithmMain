@@ -7,14 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VoltageDropCalculatorApplication;
 
 namespace HermanBetaAlgorithmAlphaNum
 {
     public partial class LibrariesFormVault : Form
     {
-        public LibrariesFormVault()
+        private LibrarySet _libSet;
+        public LibrariesFormVault(LibrarySet librarySet)
         {
             InitializeComponent();
+            _libSet = librarySet;
         }
 
         private void okButton_Click(object sender, EventArgs e)
