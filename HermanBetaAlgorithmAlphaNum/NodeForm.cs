@@ -252,6 +252,11 @@ namespace HermanBetaAlgorithmAlphaNum
         {
 
         }
+
+        private void addNodeButton_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 
     /// <summary>

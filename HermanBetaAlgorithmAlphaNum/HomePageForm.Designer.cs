@@ -167,7 +167,7 @@
             this.buttonVaults.TabIndex = 1;
             this.buttonVaults.Text = "Vaults";
             this.buttonVaults.UseVisualStyleBackColor = false;
-            this.buttonVaults.Click += new System.EventHandler(this.buttonVaults_Click_1);
+            this.buttonVaults.Click += new System.EventHandler(this.buttonVaults_Click);
             // 
             // editLibraryButton
             // 
@@ -181,7 +181,7 @@
             this.editLibraryButton.TabIndex = 0;
             this.editLibraryButton.Text = "Libraries";
             this.editLibraryButton.UseVisualStyleBackColor = false;
-            this.editLibraryButton.Click += new System.EventHandler(this.editLibraryButton_Click_1);
+            this.editLibraryButton.Click += new System.EventHandler(this.editLibraryButton_Click);
             // 
             // loadLibraryButton
             // 
