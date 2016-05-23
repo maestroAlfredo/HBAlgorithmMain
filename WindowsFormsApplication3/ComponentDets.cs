@@ -134,7 +134,7 @@ namespace VoltageDropCalculatorApplication
 
         private void ControlTextBox_Validating(object sender, CancelEventArgs e)
         {
-           if(VaultComponent.GetVault().ComponentList.FindIndex(item=>item.Name.Equals((sender as TextBox).Text))!=-1)
+           if(VaultComponent.GetVault().ComponentList.FindIndex(item=>item.GetName().Equals((sender as TextBox).Text))!=-1)
             {
                 e.Cancel = true;
                 

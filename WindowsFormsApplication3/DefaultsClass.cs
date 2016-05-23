@@ -64,8 +64,8 @@ namespace VoltageDropCalculatorApplication
 
             foreach (GeneratorVault vault in _generatorVaultList)
             {
-                new Load(vault, AppConstants.Gen1Name, LoadType.Load, 1.5, 4, 60);
-                new Load(vault, AppConstants.Gen2Name, LoadType.Load, 4, 1.5, 60);
+                new Load(vault, AppConstants.Gen1Name, LoadType.Generator, 1.5, 4, 60);
+                new Load(vault, AppConstants.Gen2Name, LoadType.Generator, 4, 1.5, 60);
             }        
         }
 

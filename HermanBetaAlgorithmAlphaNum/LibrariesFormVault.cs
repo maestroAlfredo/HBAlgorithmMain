@@ -105,6 +105,16 @@ namespace HermanBetaAlgorithmAlphaNum
 
         }
 
+        private void okButton_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void libraryTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         //private void pictureBoxNewProj_MouseHover_1(object sender, EventArgs e)
         //{
         //    new ToolTip().SetToolTip(this.pictureBoxNewProj, "Create New Project");

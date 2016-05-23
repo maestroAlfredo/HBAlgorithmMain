@@ -186,8 +186,6 @@ namespace VoltageDropCalculatorApplication
     public abstract class VaultComponent
     {
         [DataMember]
-        public string Name { get; set; }
-        [DataMember]
         public string Description { get; set; }
         [DataMember]
         private ComponentType _componentType;
@@ -212,7 +210,10 @@ namespace VoltageDropCalculatorApplication
             _componentType = componentType;
         }
 
-       
+       public string GetName()
+        {
+            return this._componentType.Equals(ComponentType.Conductor) ? (this as Conductor).Name : (this as Load).Name;
+        }
 
         
 
@@ -255,7 +256,8 @@ namespace VoltageDropCalculatorApplication
     [XmlInclude(typeof(VaultComponent))]
     [Serializable]
     public class Conductor : VaultComponent
-    {        
+    {
+        public string Name { get; set; }     
         public double Diameter { get; set; }
         public double Rkmt1 { get; set; }
         public double T { get; set; }
@@ -297,12 +299,12 @@ namespace VoltageDropCalculatorApplication
     [XmlInclude(typeof(VaultComponent))]
     [Serializable]
     public class Load : VaultComponent
-    {       
+    {
+        public string Name { get;  set; }
         public LoadType LoadType { get; set; }
         public double Alpha { get; set; }
         public double Beta { get; set; }
         public double Cb { get; set; }
-
 
         public Load()
         {
@@ -383,6 +385,8 @@ namespace VoltageDropCalculatorApplication
             Library = library;
             Library.Add(this);
         }
+
+      
 
         public Vault(string vaultName)
         {
@@ -610,6 +614,16 @@ namespace VoltageDropCalculatorApplication
             LoadLibrary = loads;
             GeneratorLibrary = generators;
             ConductorLibrary = conductors;
+        }
+
+        public IEnumerable<Library> LibraryCollection
+        {
+            get
+            {
+                yield return LoadLibrary;
+                yield return GeneratorLibrary;
+                yield return ConductorLibrary;
+            }
         }
     }
 
