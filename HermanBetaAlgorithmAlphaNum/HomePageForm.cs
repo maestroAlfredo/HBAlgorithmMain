@@ -51,5 +51,15 @@ namespace HermanBetaAlgorithmAlphaNum
         {
             new LibrariesFormVault(_libSet).ShowDialog();
         }
+
+        private void editLibraryButton_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonVaults_Click_1(object sender, EventArgs e)
+        {
+            new LibrariesFormVault(_libSet).ShowDialog();
+        }
     }
 }

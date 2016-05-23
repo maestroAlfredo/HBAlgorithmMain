@@ -85,6 +85,7 @@
             // 
             // tableLayoutPanel5
             // 
+            this.tableLayoutPanel5.BackColor = System.Drawing.Color.SteelBlue;
             this.tableLayoutPanel5.ColumnCount = 2;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.94643F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.05357F));
@@ -100,16 +101,20 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(44, 6);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 13);
+            this.label1.Size = new System.Drawing.Size(81, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Select Loads";
             // 
             // comboBoxLoadVaultSelect
             // 
-            this.comboBoxLoadVaultSelect.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBoxLoadVaultSelect.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.comboBoxLoadVaultSelect.ForeColor = System.Drawing.SystemColors.Highlight;
             this.comboBoxLoadVaultSelect.FormattingEnabled = true;
             this.comboBoxLoadVaultSelect.Location = new System.Drawing.Point(173, 3);
             this.comboBoxLoadVaultSelect.Name = "comboBoxLoadVaultSelect";
@@ -151,6 +156,7 @@
             // 
             // tableLayoutPanel4
             // 
+            this.tableLayoutPanel4.BackColor = System.Drawing.Color.SteelBlue;
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39.32039F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60.67961F));
@@ -166,16 +172,21 @@
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.BackColor = System.Drawing.Color.SteelBlue;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(33, 6);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 13);
+            this.label2.Size = new System.Drawing.Size(109, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Select Generators";
             // 
             // comboBoxGenVaultSelect
             // 
-            this.comboBoxGenVaultSelect.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBoxGenVaultSelect.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.comboBoxGenVaultSelect.ForeColor = System.Drawing.SystemColors.Highlight;
             this.comboBoxGenVaultSelect.FormattingEnabled = true;
             this.comboBoxGenVaultSelect.Location = new System.Drawing.Point(179, 3);
             this.comboBoxGenVaultSelect.Name = "comboBoxGenVaultSelect";
@@ -185,6 +196,7 @@
             // dataGridViewSelectedLoads
             // 
             this.dataGridViewSelectedLoads.AllowUserToAddRows = false;
+            this.dataGridViewSelectedLoads.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewSelectedLoads.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSelectedLoads.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewSelectedLoads.Location = new System.Drawing.Point(463, 3);
@@ -195,6 +207,7 @@
             // dataGridViewSelectedGenerators
             // 
             this.dataGridViewSelectedGenerators.AllowUserToAddRows = false;
+            this.dataGridViewSelectedGenerators.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewSelectedGenerators.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSelectedGenerators.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewSelectedGenerators.Location = new System.Drawing.Point(463, 260);
