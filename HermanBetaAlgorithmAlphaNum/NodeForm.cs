@@ -210,17 +210,52 @@ namespace HermanBetaAlgorithmAlphaNum
 
         private void pictureBoxAddConductor_MouseHover(object sender, EventArgs e)
         {
-            new ToolTip().SetToolTip(this.pictureBoxAddConductor, "Add new conductor");
+            //new ToolTip().SetToolTip(this.pictureBoxAddConductor, "Add new conductor");
         }
 
         private void pictureBoxAddLoad_MouseHover(object sender, EventArgs e)
         {
-            new ToolTip().SetToolTip(this.pictureBoxAddLoad, "Add a load");
+            //new ToolTip().SetToolTip(this.pictureBoxAddLoad, "Add a load");
         }
 
         private void pictureBoxAddGen_MouseHover(object sender, EventArgs e)
         {
-            new ToolTip().SetToolTip(this.pictureBoxAddGen, "Add new generator");
+            //new ToolTip().SetToolTip(this.pictureBoxAddGen, "Add new generator");
+        }
+
+        private void label20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addNodeButton_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 

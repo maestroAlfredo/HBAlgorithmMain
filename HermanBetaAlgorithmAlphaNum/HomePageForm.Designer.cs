@@ -134,7 +134,7 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.SteelBlue;
+            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.HotTrack;
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -158,7 +158,7 @@
             // buttonVaults
             // 
             this.buttonVaults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonVaults.BackColor = System.Drawing.Color.Transparent;
+            this.buttonVaults.BackColor = System.Drawing.Color.White;
             this.buttonVaults.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonVaults.ForeColor = System.Drawing.Color.SteelBlue;
             this.buttonVaults.Location = new System.Drawing.Point(4, 330);
@@ -167,11 +167,12 @@
             this.buttonVaults.TabIndex = 1;
             this.buttonVaults.Text = "Vaults";
             this.buttonVaults.UseVisualStyleBackColor = false;
+            this.buttonVaults.Click += new System.EventHandler(this.buttonVaults_Click);
             // 
             // editLibraryButton
             // 
             this.editLibraryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.editLibraryButton.BackColor = System.Drawing.Color.Transparent;
+            this.editLibraryButton.BackColor = System.Drawing.Color.White;
             this.editLibraryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editLibraryButton.ForeColor = System.Drawing.Color.SteelBlue;
             this.editLibraryButton.Location = new System.Drawing.Point(4, 248);
@@ -180,11 +181,12 @@
             this.editLibraryButton.TabIndex = 0;
             this.editLibraryButton.Text = "Libraries";
             this.editLibraryButton.UseVisualStyleBackColor = false;
+            this.editLibraryButton.Click += new System.EventHandler(this.editLibraryButton_Click);
             // 
             // loadLibraryButton
             // 
             this.loadLibraryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.loadLibraryButton.BackColor = System.Drawing.Color.Transparent;
+            this.loadLibraryButton.BackColor = System.Drawing.Color.White;
             this.loadLibraryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loadLibraryButton.ForeColor = System.Drawing.Color.SteelBlue;
             this.loadLibraryButton.Location = new System.Drawing.Point(4, 168);
@@ -197,7 +199,7 @@
             // newFeederButton
             // 
             this.newFeederButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.newFeederButton.BackColor = System.Drawing.Color.Transparent;
+            this.newFeederButton.BackColor = System.Drawing.Color.White;
             this.newFeederButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newFeederButton.ForeColor = System.Drawing.Color.SteelBlue;
             this.newFeederButton.Location = new System.Drawing.Point(4, 8);
@@ -211,6 +213,7 @@
             // loadProjectButton
             // 
             this.loadProjectButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.loadProjectButton.BackColor = System.Drawing.Color.White;
             this.loadProjectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loadProjectButton.ForeColor = System.Drawing.Color.SteelBlue;
             this.loadProjectButton.Location = new System.Drawing.Point(4, 88);
@@ -218,7 +221,7 @@
             this.loadProjectButton.Size = new System.Drawing.Size(292, 64);
             this.loadProjectButton.TabIndex = 0;
             this.loadProjectButton.Text = "Load Previous Project";
-            this.loadProjectButton.UseVisualStyleBackColor = true;
+            this.loadProjectButton.UseVisualStyleBackColor = false;
             // 
             // aboutToolStripMenuItem
             // 

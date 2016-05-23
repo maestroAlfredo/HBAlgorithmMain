@@ -105,12 +105,12 @@ namespace HermanBetaAlgorithmAlphaNum
 
         }
 
-        private void okButton_Click_1(object sender, EventArgs e)
+        private void cancelButton_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void libraryTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void libraryLabel_Click(object sender, EventArgs e)
         {
 
         }
